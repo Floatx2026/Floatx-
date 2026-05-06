@@ -61,17 +61,17 @@ const opportunities: Opportunity[] = [
   {
     name: "ANAHAD",
     initials: "AH",
-    tags: ["Capital Raising", "Fintech"],
+    tags: ["Company Investment", "Fintech"],
     blurb: "Australian fintech raising primary capital through FloatX.",
-    href: "/investments/capital-raising",
+    href: "/investments/company-investment",
     region: "AU",
   },
   {
     name: "Oxygen Health Clinics",
     initials: "OX",
-    tags: ["Capital Raising", "Health"],
+    tags: ["Company Investment", "Health"],
     blurb: "Australian health-services group raising primary capital through FloatX.",
-    href: "/investments/capital-raising",
+    href: "/investments/company-investment",
     region: "AU",
   },
 ];
@@ -154,7 +154,7 @@ export function FeaturedOpportunities() {
               Featured opportunities.
             </h2>
             <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
-              A live snapshot of what&apos;s currently active across private trading and capital raising on FloatX.
+              A live snapshot of what&apos;s currently active across private trading and company investment on FloatX.
             </p>
           </div>
           <Link

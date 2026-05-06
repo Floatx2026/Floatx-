@@ -15,7 +15,7 @@ export function FundIndex() {
         <div>
           <div className="flex items-baseline gap-3 mb-1">
             <h2 className="font-sans font-bold text-navy text-[34px] leading-none -tracking-[0.01em]">
-              FloatX Fund Index
+              FloatX Unicorn Fund Index
             </h2>
             <span className="text-[12px] text-ink/55 inline-flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-tan inline-block" />
@@ -54,14 +54,14 @@ export function FundIndex() {
           </div>
 
           <p className="text-[11px] text-ink/55 mt-5 leading-[1.6] max-w-[640px]">
-            The FloatX Fund Index is provided for informational and educational purposes only and is not a recommendation to invest in any fund. See full <a href="#" className="underline">disclaimers</a>.
+            The FloatX Unicorn Fund Index is provided for informational and educational purposes only and is not a recommendation to invest in any fund. See full <a href="#" className="underline">disclaimers</a>.
           </p>
         </div>
 
         <aside className="hidden min-[1024px]:block">
           <div className="border-t-2 border-tan w-12 mb-6" />
           <p className="text-[15px] leading-[1.65] text-ink/[0.78] mb-6">
-            The FloatX Fund Index is a NAV-weighted performance index of the most-allocated private funds on the FloatX platform — drawn directly from live commitments and redemptions across our investor base.
+            The FloatX Unicorn Fund Index is a NAV-weighted performance index of the most-allocated private funds on the FloatX platform — drawn directly from live commitments and redemptions across our investor base.
           </p>
           <Button href="#" variant="primary" shape="pill" className="text-[14px]! px-6! py-2.5!">
             Learn more →

@@ -7,8 +7,8 @@ export function Logo({ className = "" }: Props) {
     <Image
       src="/floatx-logo.png"
       alt="FloatX"
-      width={1700}
-      height={500}
+      width={1593}
+      height={462}
       priority
       className={`h-7 w-auto ${className}`}
     />

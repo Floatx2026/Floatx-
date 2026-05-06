@@ -33,8 +33,8 @@ const accesses: Access[] = [
     ),
   },
   {
-    title: "Capital Raising",
-    href: "/investments/capital-raising",
+    title: "Company Investment",
+    href: "/investments/company-investment",
     blurb: "Primary equity rounds in private companies — sourced, due-diligenced, and structured for wholesale allocators.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">

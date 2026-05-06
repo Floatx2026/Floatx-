@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 const cols = [
@@ -12,7 +13,7 @@ const cols = [
     links: [
       "All opportunities",
       "Private trading",
-      "Capital raising",
+      "Company Investment",
       "Debt Investments",
       "Property investing",
       "Fund investments",
@@ -39,11 +40,11 @@ export function Footer() {
         <div className="grid grid-cols-2 min-[900px]:grid-cols-5 gap-10 min-[900px]:gap-8">
           {cols.map((c) => (
             <div key={c.title}>
-              <h4 className="font-sans font-medium text-[14px] text-tan mb-4">{c.title}</h4>
+              <h4 className="font-sans font-medium text-[16px] text-tan mb-4">{c.title}</h4>
               <ul>
                 {c.links.map((l) => (
                   <li key={l} className="mb-2.5">
-                    <Link href="#" className="text-white/85 text-[14px] hover:text-white transition-colors">
+                    <Link href="#" className="text-white/85 text-[15px] hover:text-white transition-colors">
                       {l}
                     </Link>
                   </li>
@@ -53,23 +54,36 @@ export function Footer() {
           ))}
 
           <div>
-            <h4 className="font-sans font-medium text-[14px] text-white mb-4">Sign up for Newsletter</h4>
+            <h4 className="font-sans font-medium text-[16px] text-white mb-4">Sign up for Newsletter</h4>
             <form
-              className="flex items-center bg-white rounded-full pl-4 pr-2 py-1.5 max-w-[340px]"
+              className="flex items-center bg-white rounded-full pl-5 pr-2 py-2 max-w-[460px]"
               onSubmit={(e) => e.preventDefault()}
             >
               <input
                 type="email"
                 placeholder="you@example.com"
                 aria-label="Email address"
-                className="flex-1 border-0 outline-none bg-transparent text-[14px] text-ink"
+                className="flex-1 border-0 outline-none bg-transparent text-[15px] text-ink py-1.5"
               />
               <button
                 type="submit"
                 aria-label="Subscribe"
-                className="bg-navy text-white rounded-full w-9 h-9 inline-flex items-center justify-center text-base font-medium"
+                className="bg-navy text-white rounded-full w-10 h-10 inline-flex items-center justify-center"
               >
-                →
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  className="w-[18px] h-[18px]"
+                >
+                  <path
+                    d="M5 12h14m-5-5l5 5-5 5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </button>
             </form>
           </div>
@@ -78,17 +92,24 @@ export function Footer() {
         <hr className="border-white/10 my-10" />
 
         <div className="flex flex-col min-[900px]:flex-row min-[900px]:items-center min-[900px]:justify-between gap-6">
-          <Link href="/" className="inline-flex items-center gap-2.5">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-label="FloatX mark">
-              <rect x="2" y="9" width="6" height="6" transform="rotate(45 5 12)" fill="#FFFFFF" />
-              <rect x="9" y="9" width="6" height="6" transform="rotate(45 12 12)" fill="#AF7D43" />
-              <rect x="2" y="2" width="6" height="6" transform="rotate(45 5 5)" fill="#FFFFFF" opacity="0.85" />
-              <rect x="9" y="2" width="6" height="6" transform="rotate(45 12 5)" fill="#AF7D43" opacity="0.85" />
-            </svg>
-            <span className="text-white font-bold text-[18px]">FloatX</span>
-            <span className="mx-3 text-white/30">|</span>
-            <span className="text-white/80 text-[13px] hover:text-white transition-colors">Legal</span>
-          </Link>
+          <div className="inline-flex items-center gap-3">
+            <Link href="/" className="inline-flex items-center" aria-label="FloatX home">
+              <Image
+                src="/floatx-logo-white.svg"
+                alt="FloatX"
+                width={131}
+                height={27}
+                className="h-7 w-auto"
+              />
+            </Link>
+            <span className="text-white/30">|</span>
+            <Link
+              href="/legal"
+              className="text-white/80 text-[13px] hover:text-white transition-colors"
+            >
+              Legal
+            </Link>
+          </div>
 
           <p className="text-[11px] text-white/55 leading-relaxed text-left min-[900px]:text-center max-w-[600px]">
             Copyright © 2026 FloatX. All rights reserved. FloatX Pty Ltd

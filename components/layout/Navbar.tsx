@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 const investmentsItems = [
   { href: "/investments", label: "All Opportunities" },
   { href: "/investments/cash-plus", label: "Cash Plus" },
-  { href: "/investments/capital-raising", label: "Capital Raising" },
+  { href: "/investments/company-investment", label: "Company Investment" },
   { href: "/investments/fund-investments", label: "Fund Investments" },
   { href: "/investments/property-investments", label: "Property Investments" },
   { href: "/investments/debt-investments", label: "Debt Investments" },

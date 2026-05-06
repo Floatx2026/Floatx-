@@ -53,7 +53,7 @@ export function IndexChart() {
         viewBox={`0 0 ${W} ${H}`}
         className="w-full h-auto block"
         role="img"
-        aria-label="FloatX Fund Index performance chart"
+        aria-label="FloatX Unicorn Fund Index performance chart"
       >
         <defs>
           <linearGradient id="fundIndexGrad" x1="0" y1="0" x2="0" y2="1">

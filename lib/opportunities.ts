@@ -1,4 +1,4 @@
-export type OpportunityType = "Private Trading" | "Capital Raising";
+export type OpportunityType = "Private Trading" | "Company Investment";
 export type Sector = "Technology" | "Fintech" | "Gaming" | "Health";
 export type Region = "AU" | "US" | "China" | "Global";
 
@@ -135,38 +135,38 @@ export const opportunities: Opportunity[] = [
   {
     name: "ANAHAD",
     initials: "AH",
-    type: "Capital Raising",
+    type: "Company Investment",
     sector: "Fintech",
     region: "AU",
     blurb: "Innovative pharmacy supply-chain platform raising primary capital through FloatX.",
-    href: "/investments/capital-raising",
+    href: "/investments/company-investment",
   },
   {
     name: "ArthroLase",
     initials: "AL",
-    type: "Capital Raising",
+    type: "Company Investment",
     sector: "Health",
     region: "AU",
     blurb: "Intelligent joint-resurfacing technology company raising primary capital through FloatX.",
-    href: "/investments/capital-raising",
+    href: "/investments/company-investment",
   },
   {
     name: "Deep Touch",
     initials: "DT",
-    type: "Capital Raising",
+    type: "Company Investment",
     sector: "Fintech",
     region: "AU",
     blurb: "Australian deep-tech R&D company raising primary capital through FloatX.",
-    href: "/investments/capital-raising",
+    href: "/investments/company-investment",
   },
   {
     name: "Oxygen Health Clinics",
     initials: "OX",
-    type: "Capital Raising",
+    type: "Company Investment",
     sector: "Health",
     region: "AU",
     blurb: "Accessible health-services group raising primary capital through FloatX.",
-    href: "/investments/capital-raising",
+    href: "/investments/company-investment",
   },
 ];
 
