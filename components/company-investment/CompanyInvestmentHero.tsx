@@ -100,7 +100,7 @@ export function CompanyInvestmentHero() {
           <div className="text-center min-[900px]:text-left">
             <Eyebrow>Company Investment</Eyebrow>
             <h1 className="font-serif italic font-normal text-navy text-[clamp(44px,6vw,72px)] leading-[1.05] mt-5 mb-5 max-w-[14ch] mx-auto min-[900px]:mx-0">
-              Company Investment.
+              Company Investment<br />Opportunities.
             </h1>
             <p className="text-[18px] leading-[1.6] max-w-[520px] text-ink/[0.75] m-0 mb-8 mx-auto min-[900px]:mx-0">
               Invest equity in global pre-IPO companies — and exit through FloatX&apos;s verified secondary market when you&apos;re ready, not when the company lists.
