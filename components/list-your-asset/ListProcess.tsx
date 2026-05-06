@@ -40,16 +40,45 @@ export function ListProcess() {
           </svg>
         </div>
 
-        <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1024px]:grid-cols-4 gap-6">
-          {steps.map((s) => (
-            <div key={s.number} className="relative">
-              <div className="text-[clamp(40px,5vw,56px)] font-serif italic font-normal text-navy/10 leading-none mb-4 select-none">
-                {s.number}
+        {/* Desktop: circles + dashed connectors */}
+        <div className="hidden min-[900px]:grid grid-cols-4 gap-0">
+          {steps.map((s, i) => (
+            <div key={s.number} className="relative flex flex-col items-center px-4">
+              {i > 0 && (
+                <div className="absolute right-1/2 top-5 left-0 border-t border-dashed border-navy/25" />
+              )}
+              {i < steps.length - 1 && (
+                <div className="absolute left-1/2 right-0 top-5 border-t border-dashed border-navy/25" />
+              )}
+              <div className="relative z-10 w-10 h-10 rounded-full border border-navy/35 bg-cream flex items-center justify-center mb-5 flex-none">
+                <span className="font-serif font-normal text-navy text-[15px] leading-none">{i + 1}</span>
               </div>
-              <h3 className="font-sans font-bold text-navy text-[17px] leading-[1.3] m-0 mb-2.5 -tracking-[0.005em]">
+              <h3 className="font-sans font-bold text-navy text-[16px] leading-[1.3] m-0 mb-2.5 -tracking-[0.005em] text-center">
                 {s.title}
               </h3>
-              <p className="text-[14px] leading-[1.65] text-ink/70 m-0">{s.body}</p>
+              <p className="text-[13.5px] leading-[1.65] text-ink/70 m-0 text-center">{s.body}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile: vertical stepper */}
+        <div className="min-[900px]:hidden flex flex-col">
+          {steps.map((s, i) => (
+            <div key={s.number} className="flex gap-5">
+              <div className="flex flex-col items-center flex-none">
+                <div className="w-9 h-9 rounded-full border border-navy/35 bg-cream flex items-center justify-center flex-none">
+                  <span className="font-serif font-normal text-navy text-[14px] leading-none">{i + 1}</span>
+                </div>
+                {i < steps.length - 1 && (
+                  <div className="flex-1 border-l border-dashed border-navy/25 my-2" />
+                )}
+              </div>
+              <div className={i < steps.length - 1 ? "pb-7" : ""}>
+                <h3 className="font-sans font-bold text-navy text-[16px] leading-[1.3] m-0 mb-2 mt-1.5 -tracking-[0.005em]">
+                  {s.title}
+                </h3>
+                <p className="text-[13.5px] leading-[1.65] text-ink/70 m-0">{s.body}</p>
+              </div>
             </div>
           ))}
         </div>
