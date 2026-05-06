@@ -158,7 +158,7 @@ export function ListComparison() {
             </thead>
             <tbody>
               {rows.map((row, i) => (
-                <tr key={row.feature} className={i < rows.length - 1 ? "border-b border-line" : ""}>
+                <tr key={row.feature} className={`group transition-colors duration-150 ${i < rows.length - 1 ? "border-b border-line" : ""} hover:bg-navy/[0.025]`}>
                   <td className="px-6 py-4 bg-white align-middle">
                     <p className="font-semibold text-navy text-[14.5px] leading-[1.35] m-0">
                       {row.feature}
