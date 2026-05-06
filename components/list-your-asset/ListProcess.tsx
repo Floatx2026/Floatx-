@@ -33,6 +33,7 @@ export function ListProcess() {
             A simple four-step process from initial screening to open for investment.
           </p>
         </div>
+        <hr className="border-0 border-t border-line mb-14" />
 
         <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1024px]:grid-cols-4 gap-6">
           {steps.map((s) => (
