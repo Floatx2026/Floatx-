@@ -12,9 +12,9 @@ const opportunities = [
     ),
   },
   {
-    title: "List to Raise Capital",
-    body: "List your company or fund to raise primary equity from FloatX's global pool of accredited investors. Run targeted campaigns and connect with sophisticated capital — without the cost and complexity of traditional fundraising.",
-    who: ["Growth-stage companies", "Fund managers raising new capital", "Property syndicates"],
+    title: "List to Support Company Growth",
+    body: "List your company or fund to raise primary equity from FloatX's global pool of accredited investors. Run targeted campaigns and connect with sophisticated investors — without the cost and complexity of traditional fundraising.",
+    who: ["Growth-stage companies", "Fund managers raising new equity", "Property syndicates"],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
         <path d="M12 20V4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />

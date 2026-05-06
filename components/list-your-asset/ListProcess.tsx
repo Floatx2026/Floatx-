@@ -2,7 +2,7 @@ const steps = [
   {
     number: "01",
     title: "Initial screening",
-    body: "Choose your listing type — private trading, capital raising, or debt and property — and meet your dedicated FloatX account manager to confirm eligibility.",
+    body: "Choose your listing type — private trading, company growth, or debt and property — and meet your dedicated FloatX account manager to confirm eligibility.",
   },
   {
     number: "02",

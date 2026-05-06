@@ -113,7 +113,7 @@ export function ListForm() {
                 >
                   <option value="" disabled>Select a listing type</option>
                   <option value="private-trading">Private trading — list shares for secondary market</option>
-                  <option value="capital-raising">Capital raising — raise primary equity</option>
+                  <option value="company-growth">Support company growth — raise primary equity</option>
                   <option value="fund-listing">Fund listing — raise from accredited investors</option>
                   <option value="debt">Debt opportunity — structured debt instrument</option>
                   <option value="property">Property opportunity — development or syndicate</option>
