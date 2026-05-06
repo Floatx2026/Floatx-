@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 type CellContent =
   | { type: "check" }
   | { type: "cross"; count?: number }
@@ -124,6 +128,12 @@ function Cell({ content }: { content: CellContent }) {
 }
 
 export function ListComparison() {
+  const [hoveredCol, setHoveredCol] = useState<number | null>(null);
+
+  const floatxBg = hoveredCol === 1 ? "bg-navy/[0.07]" : "bg-navy/[0.035]";
+  const otherBg  = hoveredCol === 2 ? "bg-[#E4E9F6]" : "bg-[#F6F8FD]";
+  const exchBg   = hoveredCol === 3 ? "bg-[#E4E9F6]" : "bg-[#F6F8FD]";
+
   return (
     <section className="bg-cream py-20">
       <div className="max-w-[1100px] mx-auto px-6">
@@ -143,22 +153,34 @@ export function ListComparison() {
                 <th className="bg-white text-left px-6 py-5 text-[13px] font-semibold text-ink/45 tracking-wide uppercase border-b border-line w-[38%]">
                   Comparison
                 </th>
-                <th className="bg-navy text-center px-4 py-5 border-b border-navy/70 w-[20%]">
+                <th
+                  className={`text-center px-4 py-5 border-b border-navy/70 w-[20%] cursor-default transition-colors duration-200 ${hoveredCol === 1 ? "bg-navy/90" : "bg-navy"}`}
+                  onMouseEnter={() => setHoveredCol(1)}
+                  onMouseLeave={() => setHoveredCol(null)}
+                >
                   <span className="font-bold text-white text-[17px] tracking-tight">
                     Float<span style={{ color: "#AF7D43" }}>X</span>
                   </span>
                 </th>
-                <th className="bg-[#EEF2FB] text-center px-4 py-5 text-[13px] font-semibold text-navy/65 border-b border-line leading-snug w-[21%]">
+                <th
+                  className={`text-center px-4 py-5 text-[13px] font-semibold text-navy/65 border-b border-line leading-snug w-[21%] cursor-default transition-colors duration-200 ${hoveredCol === 2 ? "bg-[#E4E9F6]" : "bg-[#EEF2FB]"}`}
+                  onMouseEnter={() => setHoveredCol(2)}
+                  onMouseLeave={() => setHoveredCol(null)}
+                >
                   Other Private<br />Platforms
                 </th>
-                <th className="bg-[#EEF2FB] text-center px-4 py-5 text-[13px] font-semibold text-navy/65 border-b border-line leading-snug w-[21%]">
+                <th
+                  className={`text-center px-4 py-5 text-[13px] font-semibold text-navy/65 border-b border-line leading-snug w-[21%] cursor-default transition-colors duration-200 ${hoveredCol === 3 ? "bg-[#E4E9F6]" : "bg-[#EEF2FB]"}`}
+                  onMouseEnter={() => setHoveredCol(3)}
+                  onMouseLeave={() => setHoveredCol(null)}
+                >
                   Public<br />Exchanges
                 </th>
               </tr>
             </thead>
             <tbody>
               {rows.map((row, i) => (
-                <tr key={row.feature} className={`group transition-colors duration-150 ${i < rows.length - 1 ? "border-b border-line" : ""} hover:bg-navy/[0.025]`}>
+                <tr key={row.feature} className={i < rows.length - 1 ? "border-b border-line" : ""}>
                   <td className="px-6 py-4 bg-white align-middle">
                     <p className="font-semibold text-navy text-[14.5px] leading-[1.35] m-0">
                       {row.feature}
@@ -169,13 +191,25 @@ export function ListComparison() {
                       </p>
                     )}
                   </td>
-                  <td className="px-4 py-4 bg-navy/[0.035] text-center align-middle">
+                  <td
+                    className={`px-4 py-4 text-center align-middle transition-colors duration-200 ${floatxBg}`}
+                    onMouseEnter={() => setHoveredCol(1)}
+                    onMouseLeave={() => setHoveredCol(null)}
+                  >
                     <Cell content={row.floatx} />
                   </td>
-                  <td className="px-4 py-4 bg-[#F6F8FD] text-center align-middle">
+                  <td
+                    className={`px-4 py-4 text-center align-middle transition-colors duration-200 ${otherBg}`}
+                    onMouseEnter={() => setHoveredCol(2)}
+                    onMouseLeave={() => setHoveredCol(null)}
+                  >
                     <Cell content={row.other} />
                   </td>
-                  <td className="px-4 py-4 bg-[#F6F8FD] text-center align-middle">
+                  <td
+                    className={`px-4 py-4 text-center align-middle transition-colors duration-200 ${exchBg}`}
+                    onMouseEnter={() => setHoveredCol(3)}
+                    onMouseLeave={() => setHoveredCol(null)}
+                  >
                     <Cell content={row.exchange} />
                   </td>
                 </tr>
