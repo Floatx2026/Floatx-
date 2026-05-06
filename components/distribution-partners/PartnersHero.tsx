@@ -8,8 +8,10 @@ type Node = {
   color: string;
 };
 
-const HUB_X = 160;
-const HUB_Y = 160;
+const VB_W = 410;
+const VB_H = 320;
+const HUB_X = VB_W / 2;
+const HUB_Y = VB_H / 2;
 const HUB_R = 26;
 const NODE_R = 11;
 const ORBIT_RADIUS = 100;
@@ -40,7 +42,7 @@ function linkPath(angleDeg: number): string {
 
 function DistributionAnim() {
   return (
-    <div className="relative w-full aspect-square max-w-[520px] mx-auto">
+    <div className="relative w-full aspect-[41/32] max-w-[600px] mx-auto">
       <style>{`
         @keyframes dpLinkReveal {
           from { stroke-dashoffset: 130; stroke-opacity: 0; }
@@ -104,7 +106,7 @@ function DistributionAnim() {
       />
 
       <svg
-        viewBox="0 0 320 320"
+        viewBox={`0 0 ${VB_W} ${VB_H}`}
         className="absolute inset-0 w-full h-full"
         aria-hidden="true"
       >
@@ -222,10 +224,20 @@ function DistributionAnim() {
 
         {nodes.map((n) => {
           const { x, y } = nodePos(n.angleDeg);
-          const labelOffset = 16;
           const rad = (n.angleDeg * Math.PI) / 180;
-          const lx = x + Math.cos(rad) * labelOffset;
-          const ly = y + Math.sin(rad) * labelOffset;
+          const cx = Math.cos(rad);
+          const cy = Math.sin(rad);
+          const isVertical = Math.abs(cx) <= 0.3;
+          const labelGap = NODE_R + 8;
+          const lx = isVertical ? x : x + cx * labelGap;
+          const ly = isVertical
+            ? y + (cy < 0 ? -labelGap : labelGap + 4)
+            : y + cy * labelGap + 4;
+          const anchor: "start" | "middle" | "end" = isVertical
+            ? "middle"
+            : cx > 0
+              ? "start"
+              : "end";
           return (
             <g key={`dp-node-group-${n.label}`}>
               <circle
@@ -240,12 +252,12 @@ function DistributionAnim() {
               />
               <text
                 x={lx}
-                y={ly + 4}
-                textAnchor="middle"
+                y={ly}
+                textAnchor={anchor}
                 fontSize="10"
                 fontWeight="700"
                 fill="#162347"
-                opacity="0.78"
+                opacity="0.82"
                 letterSpacing="0.9"
                 className="dp-label"
                 style={{ animationDelay: `${n.delay + 0.85}s` }}
@@ -257,8 +269,8 @@ function DistributionAnim() {
         })}
 
         <text
-          x="160"
-          y="306"
+          x={HUB_X}
+          y={VB_H - 14}
           textAnchor="middle"
           fontSize="10"
           fontWeight="600"
