@@ -1,7 +1,6 @@
 const stats = [
   { value: "$4B+", label: "Assets under management", note: "Across AIMS Financial Group since 1999" },
   { value: "33", label: "Years operating experience", note: "Backing founders since 1991" },
-  { value: "60K+", label: "Global accredited investors", note: "Across the FloatX platform" },
 ];
 
 export function TechStats() {

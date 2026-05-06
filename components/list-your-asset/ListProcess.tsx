@@ -33,13 +33,6 @@ export function ListProcess() {
             A simple four-step process from initial screening to open for investment.
           </p>
         </div>
-        <div className="flex items-center mb-14">
-          <div className="flex-1 h-px bg-line" />
-          <svg viewBox="0 0 8 12" fill="none" aria-hidden="true" className="w-2 h-3 flex-none ml-1 text-line">
-            <path d="M1 1l6 5-6 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-
         {/* Desktop: circles + dashed connectors */}
         <div className="hidden min-[900px]:grid grid-cols-4 gap-0">
           {steps.map((s, i) => (
