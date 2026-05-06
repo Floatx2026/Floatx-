@@ -98,7 +98,7 @@ export function Navbar() {
               }`}
             >
               {investmentsItems.map((it) => {
-                const isFeatured = it.label === "Cash Plus";
+                const isFeatured = it.label === "All Opportunities";
                 return (
                   <Link
                     key={it.href}
@@ -115,10 +115,10 @@ export function Navbar() {
                         aria-hidden="true"
                         className="w-[18px] h-[18px] flex-none text-tan"
                       >
-                        <ellipse cx="12" cy="6.5" rx="6.5" ry="2.2" stroke="currentColor" strokeWidth="1.6" />
-                        <path d="M5.5 6.5v4c0 1.2 2.9 2.2 6.5 2.2s6.5-1 6.5-2.2v-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                        <path d="M5.5 10.5v4c0 1.2 2.9 2.2 6.5 2.2s6.5-1 6.5-2.2v-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                        <path d="M5.5 14.5v3c0 1.2 2.9 2.2 6.5 2.2s6.5-1 6.5-2.2v-3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                        <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+                        <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+                        <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+                        <rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
                       </svg>
                     )}
                     {it.label}
