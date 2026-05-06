@@ -360,7 +360,7 @@ export function ListHero() {
           <div className="text-center min-[900px]:text-left">
             <Eyebrow>List Your Asset</Eyebrow>
             <h1 className="font-serif italic font-normal text-navy text-[clamp(44px,6vw,72px)] leading-[1.05] mt-5 mb-5 max-w-[14ch] mx-auto min-[900px]:mx-0">
-              Reach Accredited Investors.<br />List on FloatX.
+              Reach Accredited Investors.<br /><br />List on FloatX.
             </h1>
             <p className="text-[18px] leading-[1.6] max-w-[520px] text-ink/[0.75] m-0 mb-8 mx-auto min-[900px]:mx-0">
               List your company, fund or asset and gain access to 60,000+ global accredited investors — with dedicated support and go-live in as little as 48 hours.
