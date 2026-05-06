@@ -54,7 +54,7 @@ export function ListOpportunities() {
           {opportunities.map((o) => (
             <div
               key={o.title}
-              className="bg-cream rounded-[20px] p-7 flex flex-col transition-all duration-200 ease-out hover:translate-y-0.5 hover:shadow-[inset_0_3px_10px_-2px_rgba(22,35,71,0.14)]"
+              className="bg-cream rounded-[20px] p-7 flex flex-col transition-all duration-200 ease-out hover:translate-y-1 hover:bg-[#f0ede6] hover:shadow-[inset_0_4px_18px_-2px_rgba(22,35,71,0.22)]"
             >
               <div className="w-11 h-11 rounded-[12px] bg-tan/10 text-tan flex items-center justify-center mb-5 flex-none">
                 {o.icon}
