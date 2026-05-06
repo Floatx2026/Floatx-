@@ -12,7 +12,7 @@ const HUB_X = 160;
 const HUB_Y = 160;
 const HUB_R = 26;
 const NODE_R = 11;
-const ORBIT_RADIUS = 108;
+const ORBIT_RADIUS = 100;
 const PARTICLES_PER_LINK = 2;
 const FLOW_DURATION = 2.6;
 
@@ -58,14 +58,6 @@ function DistributionAnim() {
           0%, 100% { opacity: 0.18; transform: scale(1); }
           50% { opacity: 0.42; transform: scale(1.2); }
         }
-        @keyframes dpRingRotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes dpNodeRingPulse {
-          0%, 100% { opacity: 0.55; }
-          50% { opacity: 0.95; }
-        }
         @keyframes dpLabelFade {
           0% { opacity: 0; transform: translateY(2px); }
           100% { opacity: 1; transform: translateY(0); }
@@ -90,22 +82,12 @@ function DistributionAnim() {
           transform-origin: center;
           animation: dpHubGlow 3.4s ease-in-out infinite;
         }
-        .dp-orbit {
-          transform-box: fill-box;
-          transform-origin: ${HUB_X}px ${HUB_Y}px;
-          animation: dpNodePop 0.7s ease-out 0.05s both, dpRingRotate 36s linear infinite;
-        }
-        .dp-node-ring {
-          transform-box: fill-box;
-          transform-origin: center;
-          animation: dpNodePop 0.7s ease-out both, dpNodeRingPulse 3s ease-in-out infinite;
-        }
         .dp-label {
           transform-box: fill-box;
           animation: dpLabelFade 0.55s ease-out both;
         }
         @media (prefers-reduced-motion: reduce) {
-          .dp-link, .dp-node, .dp-hub-core, .dp-hub-glow, .dp-orbit, .dp-node-ring, .dp-label {
+          .dp-link, .dp-node, .dp-hub-core, .dp-hub-glow, .dp-label {
             animation: none !important;
             opacity: 1 !important;
             stroke-opacity: 0.32 !important;
@@ -113,7 +95,6 @@ function DistributionAnim() {
             transform: none !important;
           }
           .dp-hub-glow { opacity: 0.25 !important; }
-          .dp-node-ring { opacity: 0.7 !important; }
         }
       `}</style>
 
@@ -173,18 +154,6 @@ function DistributionAnim() {
             />
           ))}
         </defs>
-
-        <ellipse
-          cx={HUB_X}
-          cy={HUB_Y}
-          rx={ORBIT_RADIUS}
-          ry={ORBIT_RADIUS * 0.96}
-          fill="none"
-          stroke="rgba(22, 35, 71, 0.10)"
-          strokeWidth="1"
-          strokeDasharray="2 4"
-          className="dp-orbit"
-        />
 
         {nodes.map((n) => (
           <path
@@ -253,26 +222,12 @@ function DistributionAnim() {
 
         {nodes.map((n) => {
           const { x, y } = nodePos(n.angleDeg);
-          const labelOffset = 22;
+          const labelOffset = 16;
           const rad = (n.angleDeg * Math.PI) / 180;
           const lx = x + Math.cos(rad) * labelOffset;
           const ly = y + Math.sin(rad) * labelOffset;
-          const anchor =
-            Math.cos(rad) > 0.3 ? "start" : Math.cos(rad) < -0.3 ? "end" : "middle";
           return (
             <g key={`dp-node-group-${n.label}`}>
-              <ellipse
-                cx={x}
-                cy={y}
-                rx={NODE_R + 6}
-                ry={(NODE_R + 6) * 0.6}
-                fill="none"
-                stroke={n.color}
-                strokeWidth="1"
-                strokeDasharray="2 3"
-                className="dp-node-ring"
-                style={{ animationDelay: `${n.delay + 0.65}s, ${n.delay + 1.3}s` }}
-              />
               <circle
                 cx={x}
                 cy={y}
@@ -285,8 +240,8 @@ function DistributionAnim() {
               />
               <text
                 x={lx}
-                y={ly + 3}
-                textAnchor={anchor}
+                y={ly + 4}
+                textAnchor="middle"
                 fontSize="10"
                 fontWeight="700"
                 fill="#162347"

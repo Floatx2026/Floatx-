@@ -55,14 +55,6 @@ function SankeyAnim() {
           0%, 100% { opacity: 0.18; transform: scale(1); }
           50% { opacity: 0.4; transform: scale(1.18); }
         }
-        @keyframes sRingSpin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes sDestRingPulse {
-          0%, 100% { opacity: 0.55; }
-          50% { opacity: 0.95; }
-        }
         @keyframes sLabelFade {
           0% { opacity: 0; transform: translateX(-3px); }
           100% { opacity: 1; transform: translateX(0); }
@@ -87,22 +79,12 @@ function SankeyAnim() {
           transform-origin: center;
           animation: sSourceGlow 3.2s ease-in-out infinite;
         }
-        .s-source-orbit {
-          transform-box: fill-box;
-          transform-origin: center;
-          animation: sNodePop 0.7s ease-out 0.05s both;
-        }
-        .s-dest-orbit {
-          transform-box: fill-box;
-          transform-origin: center;
-          animation: sNodePop 0.7s ease-out both, sDestRingPulse 3s ease-in-out infinite;
-        }
         .s-label {
           transform-box: fill-box;
           animation: sLabelFade 0.55s ease-out both;
         }
         @media (prefers-reduced-motion: reduce) {
-          .s-stream, .s-node, .s-source-core, .s-source-glow, .s-source-orbit, .s-dest-orbit, .s-label {
+          .s-stream, .s-node, .s-source-core, .s-source-glow, .s-label {
             animation: none !important;
             opacity: 1 !important;
             stroke-opacity: 0.34 !important;
@@ -110,7 +92,6 @@ function SankeyAnim() {
             transform: none !important;
           }
           .s-source-glow { opacity: 0.25 !important; }
-          .s-dest-orbit { opacity: 0.7 !important; }
         }
       `}</style>
 
@@ -213,18 +194,6 @@ function SankeyAnim() {
           className="s-source-glow"
           transform={`rotate(-15 ${SOURCE_X} ${SOURCE_Y})`}
         />
-        <ellipse
-          cx={SOURCE_X}
-          cy={SOURCE_Y}
-          rx={SOURCE_RING_RX}
-          ry={SOURCE_RING_RY}
-          fill="none"
-          stroke="rgba(175, 125, 67, 0.55)"
-          strokeWidth="1"
-          strokeDasharray="2 3"
-          className="s-source-orbit"
-          transform={`rotate(-15 ${SOURCE_X} ${SOURCE_Y})`}
-        />
         <circle
           cx={SOURCE_X}
           cy={SOURCE_Y}
@@ -249,31 +218,17 @@ function SankeyAnim() {
         </text>
 
         {streams.map((s) => (
-          <g key={`dest-group-${s.label}`}>
-            <ellipse
-              cx={DEST_X}
-              cy={s.endY}
-              rx={DEST_RING_RX}
-              ry={DEST_RING_RY}
-              fill="none"
-              stroke={s.color}
-              strokeWidth="1"
-              strokeDasharray="2 3"
-              className="s-dest-orbit"
-              style={{ animationDelay: `${s.delay + 0.7}s, ${s.delay + 1.3}s` }}
-              transform={`rotate(${s.tilt} ${DEST_X} ${s.endY})`}
-            />
-            <circle
-              cx={DEST_X}
-              cy={s.endY}
-              r={DEST_R}
-              fill={`url(#s-dest-grad-${s.label})`}
-              stroke="rgba(0,0,0,0.10)"
-              strokeWidth="0.5"
-              className="s-node"
-              style={{ animationDelay: `${s.delay + 0.65}s` }}
-            />
-          </g>
+          <circle
+            key={`dest-group-${s.label}`}
+            cx={DEST_X}
+            cy={s.endY}
+            r={DEST_R}
+            fill={`url(#s-dest-grad-${s.label})`}
+            stroke="rgba(0,0,0,0.10)"
+            strokeWidth="0.5"
+            className="s-node"
+            style={{ animationDelay: `${s.delay + 0.65}s` }}
+          />
         ))}
 
         {streams.map((s) => (
