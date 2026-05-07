@@ -183,7 +183,7 @@ export function ProductSelector() {
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="max-w-[640px] mb-10">
             <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-3">
-              Pick an Investment.
+              Select an Investment.
             </h2>
             <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
               Choose a category to see live opportunities — or use the navigation above to dive into a product&apos;s full page.
