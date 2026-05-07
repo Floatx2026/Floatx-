@@ -41,6 +41,8 @@ export function OpportunityCard({ o }: { o: Opportunity }) {
   return (
     <Link
       href={o.href}
+      target={o.href.startsWith("http") ? "_blank" : undefined}
+      rel={o.href.startsWith("http") ? "noopener noreferrer" : undefined}
       className="group bg-white rounded-[20px] border border-line p-6 flex flex-col hover:border-navy/40 hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.16)] hover:-translate-y-0.5 transition-all duration-200"
     >
       <div className="flex items-start justify-between mb-5">
