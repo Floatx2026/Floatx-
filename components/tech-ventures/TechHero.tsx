@@ -6,10 +6,12 @@ const DASH = 460;
 const FLOW_DUR = 3.4;
 
 const milestones = [
-  { cx: 20, cy: 248, r: 5, color: "#8A9CC0", label: "PRE-SEED", anchor: "start", labelY: 265, delay: 0.6 },
-  { cx: 80, cy: 242, r: 5, color: "#5A74A0", label: "SEED", anchor: "middle", labelY: 259, delay: 0.85 },
-  { cx: 280, cy: 82, r: 5, color: "#162347", label: "SERIES A", anchor: "middle", labelY: 66, delay: 1.55 },
-  { cx: 385, cy: 38, r: 5, color: "#162347", label: "SCALE", anchor: "end", labelY: 22, delay: 1.9 },
+  { cx: 20,  cy: 248, r: 5, color: "#8A9CC0", label: "PRE-SEED", anchor: "start",  labelY: 265, delay: 0.6  },
+  { cx: 105, cy: 234, r: 5, color: "#5A74A0", label: "SEED",     anchor: "middle", labelY: 250, delay: 0.82 },
+  { cx: 228, cy: 129, r: 5, color: "#162347", label: "SERIES A", anchor: "middle", labelY: 115, delay: 1.25 },
+  { cx: 271, cy: 93,  r: 5, color: "#162347", label: "SERIES B", anchor: "middle", labelY: 79,  delay: 1.45 },
+  { cx: 309, cy: 69,  r: 5, color: "#162347", label: "SERIES C", anchor: "middle", labelY: 55,  delay: 1.65 },
+  { cx: 385, cy: 38,  r: 5, color: "#162347", label: "SCALE",    anchor: "end",    labelY: 24,  delay: 1.9  },
 ];
 
 function VenturesAnim() {
@@ -151,25 +153,25 @@ function VenturesAnim() {
         <ellipse
           cx="162"
           cy="196"
-          rx="28"
-          ry="22"
+          rx="38"
+          ry="30"
           fill="url(#tv-hub-glow-grad)"
           className="tv-hub-glow"
         />
         <circle
           cx="162"
           cy="196"
-          r="17"
+          r="24"
           fill="url(#tv-hub-grad)"
           stroke="rgba(175,125,67,0.5)"
-          strokeWidth="1"
+          strokeWidth="1.2"
           className="tv-hub"
         />
         <text
           x="162"
-          y="193"
+          y="192"
           textAnchor="middle"
-          fontSize="8"
+          fontSize="10"
           fontWeight="700"
           fill="white"
           letterSpacing="-0.1"
@@ -182,7 +184,7 @@ function VenturesAnim() {
           x="162"
           y="204"
           textAnchor="middle"
-          fontSize="7"
+          fontSize="8.5"
           fontWeight="600"
           fill="rgba(255,255,255,0.7)"
           letterSpacing="0.5"
@@ -251,7 +253,7 @@ export function TechHero() {
               Technology incubator.<br />Success made simple.
             </h1>
             <p className="text-[18px] leading-[1.6] max-w-[520px] text-ink/[0.75] m-0 mb-8 mx-auto min-[900px]:mx-0">
-              FloatX Ventures provides investment alongside a complete ecosystem of services — funding, infrastructure, strategic guidance and a global network of 60,000+ investors — to grow your startup.
+              FloatX Ventures provides investment alongside a complete ecosystem of services — funding, infrastructure, strategic guidance and a global network of accredited investors — to grow your startup.
             </p>
             <Button href="#pitch" variant="primary" shape="pill">
               Pitch your idea
