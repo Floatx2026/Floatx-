@@ -153,15 +153,15 @@ function VenturesAnim() {
         <ellipse
           cx="162"
           cy="196"
-          rx="38"
-          ry="30"
+          rx="50"
+          ry="40"
           fill="url(#tv-hub-glow-grad)"
           className="tv-hub-glow"
         />
         <circle
           cx="162"
           cy="196"
-          r="24"
+          r="32"
           fill="url(#tv-hub-grad)"
           stroke="rgba(175,125,67,0.5)"
           strokeWidth="1.2"
@@ -169,9 +169,9 @@ function VenturesAnim() {
         />
         <text
           x="162"
-          y="192"
+          y="191"
           textAnchor="middle"
-          fontSize="10"
+          fontSize="12"
           fontWeight="700"
           fill="white"
           letterSpacing="-0.1"
@@ -182,9 +182,9 @@ function VenturesAnim() {
         </text>
         <text
           x="162"
-          y="204"
+          y="205"
           textAnchor="middle"
-          fontSize="8.5"
+          fontSize="10"
           fontWeight="600"
           fill="rgba(255,255,255,0.7)"
           letterSpacing="0.5"
