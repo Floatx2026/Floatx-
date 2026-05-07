@@ -15,7 +15,7 @@ function LogoAvatar({ o }: { o: Opportunity }) {
 
   if (logoSrc && !failed) {
     return (
-      <div className="w-14 h-14 rounded-full bg-white border border-line flex items-center justify-center overflow-hidden flex-none">
+      <div className="w-14 h-14 rounded-full border border-line flex items-center justify-center overflow-hidden flex-none" style={{ backgroundColor: o.logoBg ?? "#ffffff" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={logoSrc}

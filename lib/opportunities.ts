@@ -7,6 +7,8 @@ export type Opportunity = {
   initials: string;
   /** Clearbit domain (e.g. "openai.com") OR a local path (e.g. "/logos/anahad.png") */
   logo?: string;
+  /** Background colour for the logo circle when the favicon has transparency */
+  logoBg?: string;
   type: OpportunityType;
   isUnicorn?: boolean;
   sector: Sector;
@@ -111,6 +113,7 @@ export const opportunities: Opportunity[] = [
     name: "Chime",
     initials: "CH",
     logo: "chime.com",
+    logoBg: "#00D54B",
     type: "Private Trading",
     sector: "Fintech",
     region: "US",
