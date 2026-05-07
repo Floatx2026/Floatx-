@@ -66,6 +66,24 @@ export function FundIndex() {
           <Button href="#" variant="primary" shape="pill" className="text-[14px]! px-6! py-2.5!">
             Learn more →
           </Button>
+
+          <div className="mt-8 bg-white border border-line rounded-[16px] p-5">
+            <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.12em] font-semibold text-tan border border-tan/40 px-2 py-0.5 rounded-full mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-tan animate-pulse" aria-hidden="true" />
+              Coming Soon
+            </span>
+            <p className="font-sans font-bold text-navy text-[14.5px] leading-[1.35] m-0 mb-3">
+              Alternatives Multi Asset Fund
+            </p>
+            <ul className="m-0 p-0 list-none flex flex-col gap-1.5">
+              {["Private equity", "Private credit", "Venture capital", "Real estate & infrastructure", "Hedge funds"].map((item) => (
+                <li key={item} className="flex items-center gap-2 text-[12.5px] text-ink/65 leading-[1.5]">
+                  <span className="w-1 h-1 rounded-full bg-tan flex-none" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </aside>
       </div>
     </section>
