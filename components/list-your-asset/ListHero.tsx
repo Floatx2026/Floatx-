@@ -363,7 +363,7 @@ export function ListHero() {
               Reach Accredited Investors.<br /><br />List on FloatX.
             </h1>
             <p className="text-[18px] leading-[1.6] max-w-[520px] text-ink/[0.75] m-0 mb-8 mx-auto min-[900px]:mx-0">
-              List your company, fund or asset and gain access to 60,000+ global accredited investors — with dedicated support and go-live in as little as 48 hours.
+              List your company, fund or asset and gain access to global accredited investors — with dedicated support and go-live in as little as 48 hours.
             </p>
             <Button href="#list" variant="primary" shape="pill">
               List your opportunity

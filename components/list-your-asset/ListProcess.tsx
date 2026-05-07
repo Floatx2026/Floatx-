@@ -17,7 +17,7 @@ const steps = [
   {
     number: "04",
     title: "Open to investors",
-    body: "FloatX promotes your opportunity to 60,000+ global accredited investors across the platform, digital channels and our network of distribution partners.",
+    body: "FloatX promotes your opportunity to global accredited investors across the platform, digital channels and our network of distribution partners.",
   },
 ];
 

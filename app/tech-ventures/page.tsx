@@ -8,7 +8,7 @@ import { TechClosing } from "@/components/tech-ventures/TechClosing";
 export const metadata = {
   title: "Tech Ventures — FloatX",
   description:
-    "FloatX Ventures provides investment and a complete ecosystem of services to grow your startup — funding, infrastructure, strategic guidance and 60,000+ global accredited investors.",
+    "FloatX Ventures provides investment and a complete ecosystem of services to grow your startup — funding, infrastructure, strategic guidance and global accredited investors.",
 };
 
 export default function TechVenturesPage() {

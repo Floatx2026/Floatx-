@@ -8,7 +8,7 @@ export function ListClosing() {
           Your opportunity, in front of the right investors.
         </h2>
         <p className="text-white/70 text-[16px] leading-[1.65] m-0 mb-10 max-w-[54ch] mx-auto">
-          List once. Reach 60,000+ global accredited investors across private trading, equity, funds, debt and property — with go-live in as little as 48 hours.
+          List once. Reach global accredited investors across private trading, equity, funds, debt and property — with go-live in as little as 48 hours.
         </p>
         <Button href="#list" variant="outlineWhite" shape="pill">
           Get started

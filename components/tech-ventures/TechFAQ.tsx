@@ -5,14 +5,14 @@ import { useState } from "react";
 const faqs = [
   {
     q: "Why FloatX?",
-    a: "Backed by over 33 years of investment experience and $4B+ in assets under management, FloatX provides founders with comprehensive infrastructure and investment services to support business growth. Our private trading platform connects your startup with 60,000+ global accredited investors — giving you access to the kind of demand typically reserved for later-stage companies.",
+    a: "Backed by over 33 years of investment experience and $4B+ in assets under management, FloatX provides founders with comprehensive infrastructure and investment services to support business growth. Our private trading platform connects your startup with global accredited investors — giving you access to the kind of demand typically reserved for later-stage companies.",
   },
   {
     q: "What does FloatX Ventures offer?",
     a: null,
     list: [
       { label: "Investment", detail: "Fund your business growth with equity at the right stage" },
-      { label: "Global Investor Network", detail: "Connect with over 60,000+ accredited investors across AU and APAC" },
+      { label: "Global Investor Network", detail: "Connect with accredited investors across AU and APAC" },
       { label: "Expert Guidance", detail: "Learn from experienced directors and industry leaders" },
       { label: "Strategic Partnerships", detail: "Collaborate with co-investors who bring more than capital" },
       { label: "Resources", detail: "Access tools, infrastructure, legal, accounting and templates" },

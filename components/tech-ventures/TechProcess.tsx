@@ -35,7 +35,7 @@ const services = [
   },
   {
     title: "Customer Acceleration",
-    body: "Accelerate your growth with FloatX's global network of 60,000+ accredited investors, distribution partners and strategic co-investors across AU and APAC.",
+    body: "Accelerate your growth with FloatX's global network of accredited investors, distribution partners and strategic co-investors across AU and APAC.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
         <path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
