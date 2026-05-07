@@ -25,7 +25,7 @@ const categories: Category[] = [
     ),
   },
   {
-    href: "/investments",
+    href: "#opportunities",
     label: "Unicorn trading",
     description: "Billion-dollar private companies, curated.",
     icon: (
@@ -42,7 +42,7 @@ const categories: Category[] = [
     ),
   },
   {
-    href: "/investments/fund-investments",
+    href: "#opportunities",
     label: "Funds trading",
     description: "Secondary trading of fund units.",
     icon: (
@@ -54,7 +54,7 @@ const categories: Category[] = [
     ),
   },
   {
-    href: "/investments/debt-investments",
+    href: "#opportunities",
     label: "Debt trading",
     description: "Private credit and structured debt notes.",
     icon: (
