@@ -42,25 +42,6 @@ const products: Product[] = [
     ),
   },
   {
-    id: "company-investment",
-    label: "Company Investment",
-    href: "/investments/company-investment",
-    description:
-      "Primary equity rounds in private companies — sourced, due-diligenced and structured for FloatX wholesale allocators.",
-    status: "live",
-    type: "Company Investment",
-    gradient: "bg-gradient-to-br from-white to-[#F8F1E5]",
-    hoverShadow: "0 22px 48px -12px rgba(175,125,67,0.24)",
-    iconClass: "bg-[#F5EAD5] border-[#D4AA6E] text-[#AF7D43]",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-7 h-7">
-        <rect x="3.5" y="6" width="17" height="13" rx="2" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M7 15l3-3 3 1.5 5-5.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M14 8h4v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
     id: "fund-investments",
     label: "Fund Investments",
     href: "/investments/fund-investments",
@@ -79,6 +60,25 @@ const products: Product[] = [
           strokeWidth="1.6"
           strokeLinecap="round"
         />
+      </svg>
+    ),
+  },
+  {
+    id: "company-investment",
+    label: "Company Investment",
+    href: "/investments/company-investment",
+    description:
+      "Primary equity rounds in private companies — sourced, due-diligenced and structured for FloatX wholesale allocators.",
+    status: "live",
+    type: "Company Investment",
+    gradient: "bg-gradient-to-br from-white to-[#F8F1E5]",
+    hoverShadow: "0 22px 48px -12px rgba(175,125,67,0.24)",
+    iconClass: "bg-[#F5EAD5] border-[#D4AA6E] text-[#AF7D43]",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-7 h-7">
+        <rect x="3.5" y="6" width="17" height="13" rx="2" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M7 15l3-3 3 1.5 5-5.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M14 8h4v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
