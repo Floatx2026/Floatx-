@@ -5,6 +5,8 @@ export type Region = "AU" | "US" | "China" | "Global";
 export type Opportunity = {
   name: string;
   initials: string;
+  /** Clearbit domain (e.g. "openai.com") OR a local path (e.g. "/logos/anahad.png") */
+  logo?: string;
   type: OpportunityType;
   isUnicorn?: boolean;
   sector: Sector;
@@ -17,6 +19,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "OpenAI",
     initials: "OA",
+    logo: "openai.com",
     type: "Private Trading",
     sector: "Technology",
     region: "US",
@@ -26,6 +29,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "Scale AI",
     initials: "SA",
+    logo: "scale.com",
     type: "Private Trading",
     sector: "Technology",
     region: "US",
@@ -35,6 +39,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "Plaid",
     initials: "PL",
+    logo: "plaid.com",
     type: "Private Trading",
     sector: "Fintech",
     region: "US",
@@ -44,6 +49,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "Airtable",
     initials: "AT",
+    logo: "airtable.com",
     type: "Private Trading",
     sector: "Fintech",
     region: "US",
@@ -53,6 +59,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "Kraken",
     initials: "KR",
+    logo: "kraken.com",
     type: "Private Trading",
     isUnicorn: true,
     sector: "Fintech",
@@ -63,6 +70,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "DriveWealth",
     initials: "DW",
+    logo: "drivewealth.com",
     type: "Private Trading",
     sector: "Fintech",
     region: "US",
@@ -72,6 +80,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "Miro",
     initials: "MR",
+    logo: "miro.com",
     type: "Private Trading",
     sector: "Technology",
     region: "US",
@@ -81,6 +90,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "Patreon",
     initials: "PT",
+    logo: "patreon.com",
     type: "Private Trading",
     sector: "Fintech",
     region: "US",
@@ -90,6 +100,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "Epic Games",
     initials: "EG",
+    logo: "epicgames.com",
     type: "Private Trading",
     sector: "Gaming",
     region: "US",
@@ -99,6 +110,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "Chime",
     initials: "CH",
+    logo: "chime.com",
     type: "Private Trading",
     sector: "Fintech",
     region: "US",
@@ -108,6 +120,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "Ripple",
     initials: "RP",
+    logo: "ripple.com",
     type: "Private Trading",
     sector: "Fintech",
     region: "US",
@@ -117,6 +130,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "ByteDance",
     initials: "BD",
+    logo: "bytedance.com",
     type: "Private Trading",
     sector: "Technology",
     region: "China",
@@ -126,6 +140,7 @@ export const opportunities: Opportunity[] = [
   {
     name: "Wealthfront",
     initials: "WF",
+    logo: "wealthfront.com",
     type: "Private Trading",
     sector: "Fintech",
     region: "US",
