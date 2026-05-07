@@ -15,6 +15,8 @@
 export type PortfolioNewsItem = {
   company: string;
   initials: string;
+  logo?: string;
+  logoBg?: string;
   headline: string;
   source: string;
   date: string;
@@ -25,6 +27,7 @@ export const portfolioNews: PortfolioNewsItem[] = [
   {
     company: "OpenAI",
     initials: "OA",
+    logo: "openai.com",
     headline: "OpenAI launches new agent framework for enterprise customers",
     source: "TechCrunch",
     date: "2026-04-22",
@@ -33,6 +36,8 @@ export const portfolioNews: PortfolioNewsItem[] = [
   {
     company: "ByteDance",
     initials: "BD",
+    logo: "tiktok.com",
+    logoBg: "#010101",
     headline: "ByteDance maintains global product roadmap as TikTok review continues",
     source: "Reuters",
     date: "2026-04-15",
@@ -41,6 +46,7 @@ export const portfolioNews: PortfolioNewsItem[] = [
   {
     company: "Ripple",
     initials: "RP",
+    logo: "ripple.com",
     headline: "Ripple expands RLUSD stablecoin to additional payment corridors",
     source: "CoinDesk",
     date: "2026-04-02",
@@ -49,6 +55,7 @@ export const portfolioNews: PortfolioNewsItem[] = [
   {
     company: "Plaid",
     initials: "PL",
+    logo: "plaid.com",
     headline: "Plaid extends open-banking integrations across European markets",
     source: "TechCrunch",
     date: "2026-03-26",
@@ -57,6 +64,7 @@ export const portfolioNews: PortfolioNewsItem[] = [
   {
     company: "Epic Games",
     initials: "EG",
+    logo: "epicgames.com",
     headline: "Unreal Engine adopted by new wave of automotive simulation studios",
     source: "The Verge",
     date: "2026-03-18",
@@ -65,6 +73,7 @@ export const portfolioNews: PortfolioNewsItem[] = [
   {
     company: "OpenAI",
     initials: "OA",
+    logo: "openai.com",
     headline: "OpenAI signals expanded compute partnerships through 2026",
     source: "Reuters",
     date: "2026-03-08",
@@ -73,6 +82,7 @@ export const portfolioNews: PortfolioNewsItem[] = [
   {
     company: "Wealthfront",
     initials: "WF",
+    logo: "wealthfront.com",
     headline: "Wealthfront's high-yield cash account holds above benchmark as rates ease",
     source: "Bloomberg",
     date: "2026-03-04",
@@ -81,6 +91,8 @@ export const portfolioNews: PortfolioNewsItem[] = [
   {
     company: "ByteDance",
     initials: "BD",
+    logo: "tiktok.com",
+    logoBg: "#010101",
     headline: "Douyin e-commerce posts strong Q1 across consumer categories",
     source: "South China Morning Post",
     date: "2026-02-26",
@@ -89,6 +101,7 @@ export const portfolioNews: PortfolioNewsItem[] = [
   {
     company: "Plaid",
     initials: "PL",
+    logo: "plaid.com",
     headline: "Plaid releases new fraud-prevention layer for fintech partners",
     source: "Finextra",
     date: "2026-02-12",

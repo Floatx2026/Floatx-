@@ -1,4 +1,7 @@
-import { portfolioNews } from "@/lib/portfolio-news";
+"use client";
+
+import { useState } from "react";
+import { portfolioNews, type PortfolioNewsItem } from "@/lib/portfolio-news";
 
 function formatDate(iso: string) {
   const d = new Date(iso);
@@ -7,6 +10,43 @@ function formatDate(iso: string) {
     month: "short",
     year: "numeric",
   });
+}
+
+function NewsAvatar({ n }: { n: PortfolioNewsItem }) {
+  const [failed, setFailed] = useState(false);
+
+  const logoSrc = n.logo
+    ? n.logo.startsWith("/")
+      ? n.logo
+      : `https://www.google.com/s2/favicons?domain=${n.logo}&sz=256`
+    : null;
+
+  if (logoSrc && !failed) {
+    return (
+      <div
+        className="flex-none w-10 h-10 rounded-full border border-line overflow-hidden"
+        style={{ backgroundColor: n.logoBg ?? "#ffffff" }}
+        aria-hidden="true"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={logoSrc}
+          alt=""
+          className="w-full h-full object-cover rounded-full"
+          onError={() => setFailed(true)}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="flex-none w-10 h-10 rounded-full bg-navy text-white flex items-center justify-center font-sans font-bold text-[12px] -tracking-[0.01em]"
+      aria-hidden="true"
+    >
+      {n.initials}
+    </div>
+  );
 }
 
 export function PortfolioNews() {
@@ -31,12 +71,7 @@ export function PortfolioNews() {
               rel="noopener noreferrer"
               className="group flex items-start gap-5 px-6 py-5 border-b border-line last:border-b-0 hover:bg-cream/60 transition-colors"
             >
-              <div
-                className="flex-none w-10 h-10 rounded-full bg-navy text-white flex items-center justify-center font-sans font-bold text-[12px] -tracking-[0.01em]"
-                aria-hidden="true"
-              >
-                {n.initials}
-              </div>
+              <NewsAvatar n={n} />
 
               <div className="flex-1 min-w-0">
                 <span className="text-[10.5px] uppercase tracking-[0.10em] font-semibold text-tan block mb-1.5">
