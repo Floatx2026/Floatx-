@@ -23,7 +23,7 @@ export function PartnersWho() {
             {audiences.map((a) => (
               <li
                 key={a.title}
-                className="bg-page-bg border border-line rounded-[14px] px-5 py-4 flex items-start gap-4"
+                className="bg-white border border-line rounded-[14px] px-5 py-4 flex items-start gap-4 transition-all duration-200 ease-out hover:translate-y-0.5 hover:bg-[#f0ede6] hover:shadow-[inset_0_4px_14px_-2px_rgba(22,35,71,0.18)]"
               >
                 <span
                   aria-hidden="true"
