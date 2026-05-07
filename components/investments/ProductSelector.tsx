@@ -15,6 +15,9 @@ type Product = {
   icon: ReactNode;
   status: Status;
   type?: OpportunityType;
+  gradient: string;
+  hoverShadow: string;
+  iconClass: string;
 };
 
 const products: Product[] = [
@@ -26,6 +29,9 @@ const products: Product[] = [
       "Late-stage privates and pre-IPO secondaries. Buy and sell shares in global private companies on FloatX's verified secondary market.",
     status: "live",
     type: "Private Trading",
+    gradient: "bg-gradient-to-br from-white to-[#EDF1FA]",
+    hoverShadow: "0 22px 48px -12px rgba(22,35,71,0.22)",
+    iconClass: "bg-[#E0E8F5] border-[#B8CAEA] text-[#2D4899]",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-7 h-7">
         <path d="M3 8h13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -43,6 +49,9 @@ const products: Product[] = [
       "Primary equity rounds in private companies — sourced, due-diligenced and structured for FloatX wholesale allocators.",
     status: "live",
     type: "Company Investment",
+    gradient: "bg-gradient-to-br from-white to-[#F8F1E5]",
+    hoverShadow: "0 22px 48px -12px rgba(175,125,67,0.24)",
+    iconClass: "bg-[#F5EAD5] border-[#D4AA6E] text-[#AF7D43]",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-7 h-7">
         <rect x="3.5" y="6" width="17" height="13" rx="2" stroke="currentColor" strokeWidth="1.6" />
@@ -58,6 +67,9 @@ const products: Product[] = [
     description:
       "Diversified exposure to top private funds — track our flagship FloatX Unicorn Fund Index alongside managed strategies.",
     status: "fund-index",
+    gradient: "bg-gradient-to-br from-white to-[#F0EDFA]",
+    hoverShadow: "0 22px 48px -12px rgba(124,93,199,0.22)",
+    iconClass: "bg-[#E8E0F5] border-[#C4ADE8] text-[#7C5DC7]",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-7 h-7">
         <circle cx="12" cy="12" r="2.5" stroke="currentColor" strokeWidth="1.6" />
@@ -77,6 +89,9 @@ const products: Product[] = [
     description:
       "Alternative-asset debt and property-mortgage positions — contractual income with capital protection from real underlying collateral.",
     status: "coming-soon",
+    gradient: "bg-gradient-to-br from-white to-[#E8F5F0]",
+    hoverShadow: "0 22px 48px -12px rgba(43,174,126,0.22)",
+    iconClass: "bg-[#D5F0E5] border-[#7DD4B0] text-[#2BAE7E]",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-7 h-7">
         <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.6" />
@@ -92,6 +107,9 @@ const products: Product[] = [
     description:
       "Diversified property exposure through professionally-managed mortgage and fund strategies, secured by real assets.",
     status: "coming-soon",
+    gradient: "bg-gradient-to-br from-white to-[#FAF0EA]",
+    hoverShadow: "0 22px 48px -12px rgba(196,105,58,0.22)",
+    iconClass: "bg-[#F5DDD0] border-[#D4956B] text-[#C4693A]",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-7 h-7">
         <path d="M4 20V9l8-5 8 5v11" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
@@ -127,6 +145,7 @@ function statusBadge(p: Product, count: number) {
 
 export function ProductSelector() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const revealRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
 
@@ -150,10 +169,17 @@ export function ProductSelector() {
 
   return (
     <>
-      <section
-        id="opportunities"
-        className="bg-white py-20 scroll-mt-24"
-      >
+      <section id="opportunities" className="bg-white py-20 scroll-mt-24">
+        <style>{`
+          @keyframes tileRise {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .tile-card { animation: none !important; opacity: 1 !important; }
+          }
+        `}</style>
+
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="max-w-[640px] mb-10">
             <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-3">
@@ -165,22 +191,34 @@ export function ProductSelector() {
           </div>
 
           <div className="grid grid-cols-1 min-[700px]:grid-cols-2 gap-6">
-            {products.map((p) => {
+            {products.map((p, i) => {
               const isSelected = p.id === selectedId;
+              const isHovered = p.id === hoveredId && !isSelected;
               const count = p.type
                 ? opportunities.filter((o) => o.type === p.type).length
                 : 0;
 
               return (
-                <div key={p.id} className="flex flex-col gap-4">
+                <div
+                  key={p.id}
+                  className="tile-card flex flex-col gap-4"
+                  style={{ animation: `tileRise 0.45s cubic-bezier(0.34,1.56,0.64,1) ${i * 0.07}s both` }}
+                >
                   <div
-                    className={`rounded-[24px] p-8 min-[700px]:p-10 flex flex-col gap-5 h-full transition-all duration-200 ${
+                    className={`rounded-[24px] p-8 min-[700px]:p-10 flex flex-col gap-5 h-full border transition-all duration-200 ${
                       isSelected
                         ? "bg-cream border-2 border-tan shadow-[0_18px_36px_-12px_rgba(175,125,67,0.20)]"
-                        : "bg-white border border-line"
+                        : `${p.gradient} border-line`
                     }`}
+                    style={
+                      isHovered
+                        ? { transform: "translateY(-5px)", boxShadow: p.hoverShadow }
+                        : undefined
+                    }
+                    onMouseEnter={() => setHoveredId(p.id)}
+                    onMouseLeave={() => setHoveredId(null)}
                   >
-                    <div className="w-14 h-14 rounded-full bg-cream border border-tan/30 flex items-center justify-center text-tan">
+                    <div className={`w-14 h-14 rounded-full border flex items-center justify-center flex-none ${isSelected ? "bg-cream border-tan/30 text-tan" : p.iconClass}`}>
                       {p.icon}
                     </div>
                     <h3 className="font-sans font-bold text-navy text-[20px] leading-[1.3] m-0 -tracking-[0.01em]">
@@ -193,14 +231,12 @@ export function ProductSelector() {
                   </div>
                   <button
                     type="button"
-                    onClick={() =>
-                      setSelectedId(isSelected ? null : p.id)
-                    }
+                    onClick={() => setSelectedId(isSelected ? null : p.id)}
                     aria-pressed={isSelected}
                     aria-controls="selected-product-panel"
                     className={`w-full rounded-full px-5 py-3 text-[13px] font-semibold uppercase tracking-[0.10em] transition-colors cursor-pointer ${
                       isSelected
-                        ? "bg-navy text-white hover:bg-navy-deep"
+                        ? "bg-navy text-white hover:bg-navy/80"
                         : "bg-white text-navy border border-navy hover:bg-navy hover:text-white"
                     }`}
                   >
@@ -273,11 +309,7 @@ export function ProductSelector() {
                 <p className="text-[14px] leading-[1.65] text-ink/65 m-0 mb-7 max-w-[55ch] mx-auto">
                   We&apos;re onboarding managers ahead of launch. Register early access to be notified when allocations open.
                 </p>
-                <Button
-                  href={`${selected.href}#early-access`}
-                  variant="primary"
-                  shape="pill"
-                >
+                <Button href={`${selected.href}#early-access`} variant="primary" shape="pill">
                   Get early access
                 </Button>
               </div>
