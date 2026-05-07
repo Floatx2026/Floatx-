@@ -32,6 +32,7 @@ export const opportunities: Opportunity[] = [
     name: "Scale AI",
     initials: "SA",
     logo: "scale.com",
+    logoBg: "#1a1a2e",
     type: "Private Trading",
     sector: "Technology",
     region: "US",
