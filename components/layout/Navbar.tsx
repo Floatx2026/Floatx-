@@ -143,7 +143,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button href="/login" variant="outlineInk" shape="rect">
+          <Button href="https://app.floatx.com/signup" target="_blank" rel="noopener noreferrer" variant="outlineInk" shape="rect">
             Log In
           </Button>
           <button
