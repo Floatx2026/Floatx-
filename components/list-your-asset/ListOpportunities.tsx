@@ -25,7 +25,7 @@ const opportunities = [
   },
   {
     title: "List a Debt or Property Opportunity",
-    body: "List your structured debt instrument or property opportunity to connect with institutional and sophisticated investors seeking yield and alternative asset exposure across the AU/APAC region.",
+    body: "List your structured debt instrument or property opportunity to connect with institutional and sophisticated investors seeking yield and alternative asset exposure.",
     who: ["Property developers & syndicates", "Corporate debt issuers", "Alternative asset managers"],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
@@ -39,7 +39,7 @@ const opportunities = [
 
 export function ListOpportunities() {
   return (
-    <section className="bg-white py-24">
+    <section id="opportunities" className="bg-white py-24 scroll-mt-24">
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="text-center mb-14 max-w-[52ch] mx-auto">
           <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">

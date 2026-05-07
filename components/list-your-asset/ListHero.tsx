@@ -29,7 +29,7 @@ const srcPath = `M ${SRC_X} ${SRC_Y} L ${HUB_X} ${HUB_Y}`;
 
 function ListingAnim() {
   return (
-    <div className="relative w-full aspect-[25/16] max-w-[600px] mx-auto">
+    <div className="relative w-full aspect-[25/16] max-w-[720px] mx-auto">
       <style>{`
         @keyframes laLinkReveal {
           from { stroke-dashoffset: 200; stroke-opacity: 0; }
@@ -356,17 +356,17 @@ export function ListHero() {
   return (
     <section className="bg-cream pt-36 pb-16 relative overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="grid grid-cols-1 min-[900px]:grid-cols-[1.1fr_1fr] gap-12 min-[900px]:gap-16 items-center">
+        <div className="grid grid-cols-1 min-[900px]:grid-cols-[1fr_1.15fr] gap-12 min-[900px]:gap-16 items-center">
           <div className="text-center min-[900px]:text-left">
             <Eyebrow>List Your Asset</Eyebrow>
             <h1 className="font-serif italic font-normal text-navy text-[clamp(44px,6vw,72px)] leading-[1.05] mt-5 mb-5 max-w-[14ch] mx-auto min-[900px]:mx-0">
-              Reach Accredited Investors.<br /><br />List on FloatX.
+              Reach Global Accredited Investors.<br /><br />List on FloatX.
             </h1>
             <p className="text-[18px] leading-[1.6] max-w-[520px] text-ink/[0.75] m-0 mb-8 mx-auto min-[900px]:mx-0">
               List your company, fund or asset and gain access to global accredited investors — with dedicated support and go-live in as little as 48 hours.
             </p>
-            <Button href="#list" variant="primary" shape="pill">
-              List your opportunity
+            <Button href="#opportunities" variant="primary" shape="pill">
+              Discover our opportunities
             </Button>
           </div>
           <div>
