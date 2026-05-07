@@ -164,7 +164,7 @@ export function ProductSelector() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1100px]:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 min-[700px]:grid-cols-2 gap-6">
             {products.map((p) => {
               const isSelected = p.id === selectedId;
               const count = p.type
@@ -174,19 +174,19 @@ export function ProductSelector() {
               return (
                 <div key={p.id} className="flex flex-col gap-4">
                   <div
-                    className={`rounded-[20px] p-6 flex flex-col gap-4 h-full transition-all duration-200 ${
+                    className={`rounded-[24px] p-8 min-[700px]:p-10 flex flex-col gap-5 h-full transition-all duration-200 ${
                       isSelected
                         ? "bg-cream border-2 border-tan shadow-[0_18px_36px_-12px_rgba(175,125,67,0.20)]"
                         : "bg-white border border-line"
                     }`}
                   >
-                    <div className="w-12 h-12 rounded-full bg-cream border border-tan/30 flex items-center justify-center text-tan">
+                    <div className="w-14 h-14 rounded-full bg-cream border border-tan/30 flex items-center justify-center text-tan">
                       {p.icon}
                     </div>
-                    <h3 className="font-sans font-bold text-navy text-[16px] leading-[1.3] m-0 -tracking-[0.005em]">
+                    <h3 className="font-sans font-bold text-navy text-[20px] leading-[1.3] m-0 -tracking-[0.01em]">
                       {p.label}
                     </h3>
-                    <p className="text-[13px] leading-[1.55] text-ink/70 m-0 flex-1">
+                    <p className="text-[15px] leading-[1.65] text-ink/70 m-0 flex-1">
                       {p.description}
                     </p>
                     <div>{statusBadge(p, count)}</div>
@@ -198,7 +198,7 @@ export function ProductSelector() {
                     }
                     aria-pressed={isSelected}
                     aria-controls="selected-product-panel"
-                    className={`w-full rounded-full px-5 py-2.5 text-[13px] font-semibold uppercase tracking-[0.10em] transition-colors cursor-pointer ${
+                    className={`w-full rounded-full px-5 py-3 text-[13px] font-semibold uppercase tracking-[0.10em] transition-colors cursor-pointer ${
                       isSelected
                         ? "bg-navy text-white hover:bg-navy-deep"
                         : "bg-white text-navy border border-navy hover:bg-navy hover:text-white"
