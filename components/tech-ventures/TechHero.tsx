@@ -8,9 +8,9 @@ const FLOW_DUR = 3.4;
 const milestones = [
   { cx: 20,  cy: 248, r: 5, color: "#8A9CC0", label: "PRE-SEED", anchor: "start",  labelY: 265, delay: 0.6  },
   { cx: 105, cy: 234, r: 5, color: "#5A74A0", label: "SEED",     anchor: "middle", labelY: 250, delay: 0.82 },
-  { cx: 228, cy: 129, r: 5, color: "#162347", label: "SERIES A", anchor: "middle", labelY: 115, delay: 1.25 },
-  { cx: 271, cy: 93,  r: 5, color: "#162347", label: "SERIES B", anchor: "middle", labelY: 79,  delay: 1.45 },
-  { cx: 309, cy: 69,  r: 5, color: "#162347", label: "SERIES C", anchor: "middle", labelY: 55,  delay: 1.65 },
+  { cx: 228, cy: 129, r: 5, color: "#162347", label: "SERIES A", anchor: "middle", labelY: 104, delay: 1.25 },
+  { cx: 271, cy: 93,  r: 5, color: "#162347", label: "SERIES B", anchor: "middle", labelY: 68,  delay: 1.45 },
+  { cx: 309, cy: 69,  r: 5, color: "#162347", label: "SERIES C", anchor: "middle", labelY: 44,  delay: 1.65 },
   { cx: 385, cy: 38,  r: 5, color: "#162347", label: "SCALE",    anchor: "end",    labelY: 24,  delay: 1.9  },
 ];
 
