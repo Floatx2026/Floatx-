@@ -10,7 +10,7 @@ function LogoAvatar({ o }: { o: Opportunity }) {
   const logoSrc = o.logo
     ? o.logo.startsWith("/")
       ? o.logo
-      : `https://logo.clearbit.com/${o.logo}`
+      : `https://www.google.com/s2/favicons?domain=${o.logo}&sz=256`
     : null;
 
   if (logoSrc && !failed) {
