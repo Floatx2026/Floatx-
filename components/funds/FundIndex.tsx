@@ -67,18 +67,27 @@ export function FundIndex() {
             Learn more →
           </Button>
 
-          <div className="mt-8 bg-white border border-line rounded-[16px] p-5">
-            <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.12em] font-semibold text-tan border border-tan/40 px-2 py-0.5 rounded-full mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-tan animate-pulse" aria-hidden="true" />
+          <div className="mt-8 bg-gradient-to-br from-white to-[#E8F5EF] border border-[#A8DEC4] rounded-[16px] p-6">
+            <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.12em] font-semibold text-[#1F9B6A] border border-[#1F9B6A]/35 bg-[#E8F5EF] px-2.5 py-1 rounded-full mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#1F9B6A] animate-pulse" aria-hidden="true" />
               Coming Soon
             </span>
-            <p className="font-sans font-bold text-navy text-[14.5px] leading-[1.35] m-0 mb-3">
+            <p className="font-sans font-bold text-navy text-[15.5px] leading-[1.3] m-0 mb-1">
               Alternatives Multi Asset Fund
             </p>
-            <ul className="m-0 p-0 list-none flex flex-col gap-1.5">
-              {["Private equity", "Private credit", "Venture capital", "Real estate & infrastructure", "Hedge funds"].map((item) => (
-                <li key={item} className="flex items-center gap-2 text-[12.5px] text-ink/65 leading-[1.5]">
-                  <span className="w-1 h-1 rounded-full bg-tan flex-none" aria-hidden="true" />
+            <p className="text-[12px] text-ink/50 m-0 mb-4 leading-[1.5]">
+              Diversified exposure across private market asset classes
+            </p>
+            <ul className="m-0 p-0 list-none flex flex-col gap-2.5">
+              {[
+                "Private equity",
+                "Private credit",
+                "Venture capital",
+                "Real estate & infrastructure",
+                "Hedge funds",
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-2.5 text-[13px] text-ink/70 leading-[1.5]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2BAE7E] flex-none" aria-hidden="true" />
                   {item}
                 </li>
               ))}
