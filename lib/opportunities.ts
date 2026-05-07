@@ -133,7 +133,8 @@ export const opportunities: Opportunity[] = [
   {
     name: "ByteDance",
     initials: "BD",
-    logo: "bytedance.com",
+    logo: "tiktok.com",
+    logoBg: "#010101",
     type: "Private Trading",
     sector: "Technology",
     region: "China",
