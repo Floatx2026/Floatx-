@@ -6,16 +6,21 @@ const steps = [
   },
   {
     number: "02",
+    title: "Reviewed by Investment Committee",
+    body: "Our Investment Committee reviews your opportunity against suitability, structure and disclosure standards before it can be offered to FloatX investors.",
+  },
+  {
+    number: "03",
     title: "Onboarding",
     body: "Provide your company or asset details. Our team handles compliance checks and has your opportunity live on the FloatX platform within 48 hours.",
   },
   {
-    number: "03",
+    number: "04",
     title: "Set your rules",
     body: "Define investor qualification criteria, minimum investment thresholds, trading parameters and any transfer restrictions — you retain full control.",
   },
   {
-    number: "04",
+    number: "05",
     title: "Open to investors",
     body: "FloatX promotes your opportunity to global accredited investors across the platform, digital channels and our network of distribution partners.",
   },
@@ -30,11 +35,11 @@ export function ListProcess() {
             Live in 48 hours. Here&apos;s how.
           </h2>
           <p className="text-[16px] leading-[1.65] text-ink/70 m-0">
-            A simple four-step process from initial screening to open for investment.
+            A simple five-step process from initial screening to open for investment.
           </p>
         </div>
         {/* Desktop: circles + dashed connectors */}
-        <div className="hidden min-[900px]:grid grid-cols-4 gap-0">
+        <div className="hidden min-[900px]:grid grid-cols-5 gap-0">
           {steps.map((s, i) => (
             <div key={s.number} className="relative flex flex-col items-center px-4">
               {i > 0 && (
