@@ -12,9 +12,21 @@ const opportunities = [
     ),
   },
   {
+    title: "List your Fund",
+    body: "List your fund to raise primary capital from FloatX's accredited investor pool. Run targeted campaigns and connect with sophisticated wholesale investors who understand alternative strategies.",
+    who: ["Wholesale fund managers", "Venture capital and private equity", "Alternative investment funds"],
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
+        <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M12 4v8h8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M12 12L5 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
     title: "List to Support Company Growth",
-    body: "List your company or fund to raise primary equity from FloatX's global pool of accredited investors. Run targeted campaigns and connect with sophisticated investors — without the cost and complexity of traditional fundraising.",
-    who: ["Growth-stage companies", "Fund managers raising new equity", "Property syndicates"],
+    body: "List your company to raise primary equity from FloatX's global pool of accredited investors. Run targeted campaigns and connect with sophisticated investors — without the cost and complexity of traditional fundraising.",
+    who: ["Growth-stage companies", "Founders raising primary equity", "Late-stage private companies"],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
         <path d="M12 20V4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
@@ -43,14 +55,14 @@ export function ListOpportunities() {
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="text-center mb-14 max-w-[52ch] mx-auto">
           <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
-            Three ways to list on FloatX.
+            Four ways to list on FloatX.
           </h2>
           <p className="text-[16px] leading-[1.65] text-ink/70 m-0">
             One platform, multiple listing paths — each designed to connect the right asset with the right investors.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 min-[700px]:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 min-[700px]:grid-cols-2 min-[1100px]:grid-cols-4 gap-6">
           {opportunities.map((o) => (
             <div
               key={o.title}
