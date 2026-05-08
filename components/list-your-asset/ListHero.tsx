@@ -354,15 +354,17 @@ function ListingAnim() {
 
 export function ListHero() {
   return (
-    <section className="bg-cream pt-36 pb-16 relative overflow-hidden">
+    <section className="bg-cream pt-36 pb-20 relative overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="grid grid-cols-1 min-[900px]:grid-cols-[1.5fr_1fr] gap-10 min-[900px]:gap-12 items-center">
+        <div className="text-center min-[900px]:text-left mb-12 min-[900px]:mb-16">
+          <Eyebrow>List Your Asset</Eyebrow>
+          <h1 className="font-serif italic font-normal text-navy text-[clamp(40px,5.4vw,68px)] leading-[1.04] mt-5 mb-0 mx-auto min-[900px]:mx-0">
+            Reach Global Accredited Investors.<br />List on FloatX.
+          </h1>
+        </div>
+        <div className="grid grid-cols-1 min-[900px]:grid-cols-[5fr_7fr] gap-10 min-[900px]:gap-12 items-center">
           <div className="text-center min-[900px]:text-left">
-            <Eyebrow>List Your Asset</Eyebrow>
-            <h1 className="font-serif italic font-normal text-navy text-[clamp(36px,4.2vw,52px)] leading-[1.08] mt-5 mb-6 max-w-[20ch] mx-auto min-[900px]:mx-0">
-              Reach Global Accredited Investors.<br />List on FloatX.
-            </h1>
-            <p className="text-[18px] leading-[1.6] max-w-[520px] text-ink/[0.75] m-0 mb-8 mx-auto min-[900px]:mx-0">
+            <p className="text-[18px] leading-[1.6] text-ink/[0.75] m-0 mb-8 max-w-[480px] mx-auto min-[900px]:mx-0">
               List your company, fund or asset and gain access to global accredited investors — with dedicated support and go-live in as little as 48 hours.
             </p>
             <Button href="#list" variant="primary" shape="pill">
