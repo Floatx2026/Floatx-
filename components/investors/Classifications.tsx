@@ -53,7 +53,7 @@ export function Classifications() {
         <div className="mb-12">
           <Eyebrow>Investor Classifications</Eyebrow>
           <h2 className="font-sans font-bold text-navy text-[clamp(30px,3.6vw,44px)] leading-[1.1] -tracking-[0.02em] mt-3 mb-4">
-            Choose your path to be an Accredited Member for Full Access
+            Choose your path to be an Accredited Investor for Full Access
           </h2>
           <p className="text-[16px] text-ink/75 m-0 leading-[1.6]">
             FloatX tailors access to opportunities based on your investor classification under Australian regulations.
