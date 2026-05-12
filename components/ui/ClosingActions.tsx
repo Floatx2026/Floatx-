@@ -10,7 +10,7 @@ const actions: Action[] = [
   {
     title: "Trading private investment opportunities",
     cta: "Invest now",
-    href: "/apply?tier=sophisticated",
+    href: "https://app.floatx.com/signup",
   },
   {
     title: "Listing your company or raising capital",
@@ -18,9 +18,9 @@ const actions: Action[] = [
     href: "/list-your-asset",
   },
   {
-    title: "Becoming a consultant member",
+    title: "Becoming a Distribution Partner",
     cta: "Join now",
-    href: "/distribution-partners",
+    href: "https://app.floatx.com/signup",
   },
 ];
 

@@ -3,34 +3,40 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const cols = [
+const cols: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Get Started",
-    links: ["Get Started", "Book demo", "Contact", "Insights", "Why FloatX"],
+    links: [
+      { label: "Get Started", href: "/apply" },
+      { label: "Book demo", href: "#" },
+      { label: "Contact", href: "/contact" },
+      { label: "Insights", href: "/insights" },
+      { label: "Why FloatX", href: "#" },
+    ],
   },
   {
     title: "Buy and Invest",
     links: [
-      "All opportunities",
-      "Private trading",
-      "Company Investment",
-      "Debt Investments",
-      "Property investing",
-      "Fund investments",
+      { label: "All opportunities", href: "/investments" },
+      { label: "Private trading", href: "/investments/private-trading" },
+      { label: "Company Investment", href: "/investments/company-investment" },
+      { label: "Debt Investments", href: "/investments/debt-investments" },
+      { label: "Property investing", href: "/investments/property-investments" },
+      { label: "Fund investments", href: "/investments/fund-investments" },
     ],
   },
   {
     title: "Partner with Us",
     links: [
-      "List Your Asset",
-      "Sell and raise",
-      "Consultant member",
-      "Accredited investor",
-      "About",
-      "Ventures",
+      { label: "List Your Asset", href: "/list-your-asset" },
+      { label: "Sell and raise", href: "/list-your-asset" },
+      { label: "Distribution Partners", href: "/distribution-partners" },
+      { label: "Accredited Investor", href: "/investors" },
+      { label: "About", href: "#" },
+      { label: "Ventures", href: "/tech-ventures" },
     ],
   },
-  { title: "Technology", links: ["Blockchain"] },
+  { title: "Technology", links: [{ label: "Blockchain", href: "#" }] },
 ];
 
 export function Footer() {
@@ -43,9 +49,9 @@ export function Footer() {
               <h4 className="font-sans font-medium text-[16px] text-tan mb-4">{c.title}</h4>
               <ul>
                 {c.links.map((l) => (
-                  <li key={l} className="mb-2.5">
-                    <Link href="#" className="text-white/85 text-[15px] hover:text-white transition-colors">
-                      {l}
+                  <li key={l.label} className="mb-2.5">
+                    <Link href={l.href} className="text-white/85 text-[15px] hover:text-white transition-colors">
+                      {l.label}
                     </Link>
                   </li>
                 ))}
