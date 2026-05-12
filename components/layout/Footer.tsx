@@ -11,7 +11,7 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Book demo", href: "#" },
       { label: "Contact", href: "/contact" },
       { label: "Insights", href: "/insights" },
-      { label: "Why FloatX", href: "#" },
+      { label: "Why FloatX", href: "/why-floatx" },
     ],
   },
   {
