@@ -36,7 +36,7 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Ventures", href: "/tech-ventures" },
     ],
   },
-  { title: "Technology", links: [{ label: "Blockchain", href: "#" }] },
+  { title: "Technology", links: [{ label: "Blockchain", href: "/blockchain" }] },
 ];
 
 export function Footer() {
