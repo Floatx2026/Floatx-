@@ -32,7 +32,7 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Sell and raise", href: "/list-your-asset" },
       { label: "Distribution Partners", href: "/distribution-partners" },
       { label: "Accredited Investor", href: "/investors" },
-      { label: "About", href: "#" },
+      { label: "About", href: "/about" },
       { label: "Ventures", href: "/tech-ventures" },
     ],
   },
