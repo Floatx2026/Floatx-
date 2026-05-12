@@ -1,6 +1,6 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
-import { LottiePlayer } from "@/components/ui/LottiePlayer";
+import { TradingTicker } from "@/components/private-trading/TradingTicker";
 
 export function PrivateTradingHero() {
   return (
@@ -19,8 +19,8 @@ export function PrivateTradingHero() {
               Get Started
             </Button>
           </div>
-          <div className="relative w-full max-w-[520px] aspect-square mx-auto">
-            <LottiePlayer src="/animations/opportunities-hero.json" />
+          <div className="relative w-full mx-auto">
+            <TradingTicker />
           </div>
         </div>
       </div>

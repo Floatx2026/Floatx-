@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { LogoAvatar } from "@/components/shared/LogoAvatar";
 
 type Opportunity = {
   name: string;
   initials: string;
+  logo?: string;
+  logoBg?: string;
   tags: string[];
   blurb: string;
   href: string;
@@ -13,6 +16,7 @@ const opportunities: Opportunity[] = [
   {
     name: "OpenAI",
     initials: "OA",
+    logo: "openai.com",
     tags: ["Private Trading", "Technology"],
     blurb: "AI research and deployment lab behind ChatGPT and the GPT model family.",
     href: "/investments/private-trading",
@@ -21,6 +25,8 @@ const opportunities: Opportunity[] = [
   {
     name: "ByteDance",
     initials: "BD",
+    logo: "tiktok.com",
+    logoBg: "#010101",
     tags: ["Private Trading", "Technology"],
     blurb: "Technology group behind TikTok, Douyin and a global suite of consumer applications.",
     href: "/investments/private-trading",
@@ -29,6 +35,7 @@ const opportunities: Opportunity[] = [
   {
     name: "Ripple",
     initials: "RP",
+    logo: "ripple.com",
     tags: ["Private Trading", "Fintech"],
     blurb: "Blockchain infrastructure for cross-border payments and institutional digital-asset settlement.",
     href: "/investments/private-trading",
@@ -37,6 +44,7 @@ const opportunities: Opportunity[] = [
   {
     name: "Plaid",
     initials: "PL",
+    logo: "plaid.com",
     tags: ["Private Trading", "Fintech"],
     blurb: "Financial data infrastructure connecting consumer apps to banks across North America and Europe.",
     href: "/investments/private-trading",
@@ -45,6 +53,7 @@ const opportunities: Opportunity[] = [
   {
     name: "Wealthfront",
     initials: "WF",
+    logo: "wealthfront.com",
     tags: ["Private Trading", "Fintech"],
     blurb: "Digital wealth manager combining automated investing with high-yield cash strategies.",
     href: "/investments/private-trading",
@@ -53,6 +62,7 @@ const opportunities: Opportunity[] = [
   {
     name: "Epic Games",
     initials: "EG",
+    logo: "epicgames.com",
     tags: ["Private Trading", "Technology"],
     blurb: "Maker of Fortnite and Unreal Engine — one of the largest privately-held games and 3D-tooling businesses.",
     href: "/investments/private-trading",
@@ -90,12 +100,7 @@ function Card({ o }: { o: Opportunity }) {
       className="group flex-none w-[320px] bg-white rounded-[20px] border border-line p-6 flex flex-col hover:border-navy/40 hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.16)] hover:-translate-y-0.5 transition-all duration-200"
     >
       <div className="flex items-start justify-between mb-5">
-        <div
-          className="w-14 h-14 rounded-full bg-navy text-white flex items-center justify-center font-sans font-bold text-[16px] -tracking-[0.01em]"
-          aria-hidden="true"
-        >
-          {o.initials}
-        </div>
+        <LogoAvatar name={o.name} initials={o.initials} logo={o.logo} logoBg={o.logoBg} />
         {o.region && (
           <span className="text-[10px] uppercase tracking-[0.14em] font-semibold text-ink/55 bg-cream border border-line px-2 py-1 rounded-full">
             {regionLabel[o.region]}

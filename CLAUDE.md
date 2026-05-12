@@ -1,4 +1,5 @@
 @AGENTS.md
+@C:\Users\MarcusRitchi_cpebn.AzureAD\.claude\skills\ui-ux-pro-max\src\ui-ux-pro-max\templates\base\quick-reference.md
 
 # FloatX Website
 

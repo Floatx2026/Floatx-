@@ -86,6 +86,16 @@ export const opportunities: Opportunity[] = [
     href: "https://app.floatx.com/signup",
   },
   {
+    name: "Lambda",
+    initials: "LM",
+    logo: "lambdalabs.com",
+    type: "Private Trading",
+    sector: "Technology",
+    region: "US",
+    blurb: "AI cloud infrastructure provider offering GPU clusters and on-demand compute for training and deploying large-scale models.",
+    href: "https://app.floatx.com/signup",
+  },
+  {
     name: "Plaid",
     initials: "PL",
     logo: "plaid.com",
