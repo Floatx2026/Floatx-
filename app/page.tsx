@@ -9,7 +9,7 @@ import { HomeClosing } from "@/components/home/HomeClosing";
 export const metadata = {
   title: "FloatX — The wholesale platform for private markets",
   description:
-    "FloatX is the wholesale platform for private equity, fund subscriptions, debt, property and cash strategies — built for family offices, institutions and qualified investors across the Asia-Pacific.",
+    "A global private investment and trading ecosystem supported by AI and Blockchain.",
 };
 
 export default function Home() {

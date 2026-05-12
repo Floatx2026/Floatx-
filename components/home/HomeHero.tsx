@@ -10,7 +10,7 @@ export function HomeHero() {
             Invest in the Extraordinary
           </h1>
           <p className="text-[18px] leading-[1.6] max-w-[560px] text-ink/[0.78] mb-9">
-            FloatX is the wholesale platform for private equity, fund subscriptions, debt, property and cash strategies — built for family offices, institutions and qualified investors.
+            A global private investment and trading ecosystem supported by AI and Blockchain.
           </p>
           <div className="flex flex-wrap gap-3 items-center">
             <Button href="/apply?tier=sophisticated" variant="primary" shape="pill">
