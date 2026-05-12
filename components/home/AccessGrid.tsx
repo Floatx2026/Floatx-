@@ -77,13 +77,13 @@ const accesses: Access[] = [
 
 export function AccessGrid() {
   return (
-    <section className="bg-[#E5ECF8] py-24">
+    <section className="bg-navy-deep py-24">
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="text-center mb-14 max-w-[680px] mx-auto">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-4">
+          <h2 className="font-serif italic font-normal text-white text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-4">
             What you can access on FloatX.
           </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
+          <p className="text-[16px] leading-[1.65] text-white/70 m-0">
             Six distinct asset classes, one verified venue. Subscribe, allocate and report on every position from a single dashboard.
           </p>
         </div>

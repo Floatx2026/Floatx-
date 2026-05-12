@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const FADE_MS = 450;
-const LOOP_MS = 8000;
+const LOOP_MS = 14000;
 
 type Period = "1Y" | "3Y" | "5Y";
 
@@ -15,7 +15,7 @@ const DATA: Record<Period, {
   companies: { line: string };
   aims: { line: string };
   dates: string[];
-  tooltip: { total: string; companies: string };
+  tooltip: { total: string; companies: string; aims: string };
   dots: { aims: number; companies: number; total: number };
 }> = {
   "1Y": {
@@ -27,7 +27,7 @@ const DATA: Record<Period, {
     companies: { line: "M 5 190 C 80 188 160 182 240 168 C 300 156 340 149 360 147" },
     aims:      { line: "M 5 190 C 80 189 160 186 240 182 C 300 178 340 175 360 173" },
     dates: ["2025", "2026"],
-    tooltip: { total: "+38%", companies: "+23%" },
+    tooltip: { total: "+38%", companies: "+23%", aims: "+9%" },
     dots: { aims: 173, companies: 147, total: 119 },
   },
   "3Y": {
@@ -39,7 +39,7 @@ const DATA: Record<Period, {
     companies: { line: "M 5 190 C 60 188 120 181 180 168 C 240 152 300 125 360 106" },
     aims:      { line: "M 5 190 C 80 188 160 183 240 174 C 300 165 340 158 360 153" },
     dates: ["2023", "2024", "2025", "2026"],
-    tooltip: { total: "+65%", companies: "+45%" },
+    tooltip: { total: "+65%", companies: "+45%", aims: "+20%" },
     dots: { aims: 153, companies: 106, total: 69 },
   },
   "5Y": {
@@ -51,7 +51,7 @@ const DATA: Record<Period, {
     companies: { line: "M 5 190 C 50 188 100 183 150 170 C 200 156 250 130 300 105 C 330 92 348 88 360 87" },
     aims:      { line: "M 5 190 C 80 188 160 182 240 170 C 300 160 340 143 360 138" },
     dates: ["2022", "2023", "2024", "2025", "2026"],
-    tooltip: { total: "+73%", companies: "+55%" },
+    tooltip: { total: "+73%", companies: "+55%", aims: "+28%" },
     dots: { aims: 138, companies: 87, total: 54 },
   },
 };
@@ -103,8 +103,13 @@ export function ChartPanel() {
           stroke-dasharray: 1;
           stroke-dashoffset: 1;
           opacity: 0;
-          animation: lineLoop 5s linear 300ms infinite;
+          animation: lineLoop 10s linear 300ms infinite;
         }
+        /* Slow all chart lines to 10s */
+        .price-line  { animation-duration: 10s !important; }
+        .volume-line { animation-duration: 10s !important; animation-delay: 500ms !important; }
+        /* Tab hover */
+        .chart-tab:hover:not(.is-active) { color: #2EA3F2; }
         @media (prefers-reduced-motion: reduce) {
           .aims-line { animation: none !important; opacity: 1 !important; stroke-dashoffset: 0 !important; }
         }
@@ -195,6 +200,8 @@ export function ChartPanel() {
           Total Investment: <strong>{d.tooltip.total}</strong>
           <br />
           Private Companies: <strong>{d.tooltip.companies}</strong>
+          <br />
+          AIMS Fund: <strong>{d.tooltip.aims}</strong>
         </div>
       </div>
 
