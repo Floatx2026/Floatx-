@@ -19,7 +19,7 @@ const variants: Record<Variant, string> = {
   outlineInk:
     "bg-white text-ink border border-line hover:border-navy hover:text-navy",
   outlineWhite:
-    "bg-transparent text-white border border-white/70 hover:bg-white/10",
+    "bg-transparent text-white border border-white hover:bg-white hover:text-navy",
   preview:
     "bg-navy text-white border border-navy hover:bg-white hover:text-navy",
 };

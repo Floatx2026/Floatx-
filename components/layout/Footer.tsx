@@ -19,7 +19,7 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "All opportunities", href: "/investments" },
       { label: "Private trading", href: "/investments/private-trading" },
-      { label: "Company Investment", href: "/investments/company-investment" },
+      { label: "Capital raising", href: "/investments/company-investment" },
       { label: "Debt Investments", href: "/investments/debt-investments" },
       { label: "Property investing", href: "/investments/property-investments" },
       { label: "Fund investments", href: "/investments/fund-investments" },

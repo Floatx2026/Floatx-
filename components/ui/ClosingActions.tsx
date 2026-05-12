@@ -26,13 +26,18 @@ const actions: Action[] = [
 
 export function ClosingActions() {
   return (
-    <div className="grid grid-cols-1 min-[700px]:grid-cols-3 gap-12 max-w-[960px] mx-auto">
+    <div className="grid grid-cols-1 min-[700px]:grid-cols-3 gap-10 max-w-[1000px] mx-auto">
       {actions.map((a) => (
-        <div key={a.cta} className="text-center flex flex-col items-center gap-5">
-          <p className="text-white text-[16px] leading-[1.45] m-0 max-w-[20ch]">
+        <div key={a.cta} className="text-center flex flex-col items-center gap-7">
+          <p className="text-white/85 text-[17px] leading-[1.5] m-0 max-w-[22ch]">
             {a.title}
           </p>
-          <Button href={a.href} shape="pill" variant="outlineWhite">
+          <Button
+            href={a.href}
+            shape="pill"
+            variant="outlineWhite"
+            className="px-9 py-[14px] text-[15px] border-white hover:bg-white hover:text-navy"
+          >
             {a.cta}
           </Button>
         </div>
