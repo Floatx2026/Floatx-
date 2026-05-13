@@ -20,7 +20,7 @@ export function DebtComingSoon() {
             </div>
             <div className="text-left min-[900px]:text-right">
               <Button
-                href="/apply?tier=sophisticated&interest=debt"
+                href="https://app.floatx.com/signup?tier=sophisticated&interest=debt"
                 shape="pill"
                 variant="primary"
               >

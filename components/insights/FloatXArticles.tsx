@@ -107,7 +107,7 @@ export function FloatXArticles() {
         >
           {articles.map((a) => (
             <div
-              key={a.href}
+              key={a.slug}
               className="snap-start flex-none w-[78%] min-[600px]:w-[44%] min-[1024px]:w-[calc((100%-3*1.25rem)/4)]"
             >
               <ArticleCard a={a} />

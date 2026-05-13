@@ -10,7 +10,7 @@ export function ClosingCta() {
         <p className="text-white/85 text-[17px] leading-[1.6] max-w-[620px] mx-auto mb-8">
           Become part of an exclusive community of investors who trust FloatX for private market access and intelligent trading execution.
         </p>
-        <Button href="/apply" variant="outlineWhite" shape="pill">
+        <Button href="https://app.floatx.com/signup" variant="outlineWhite" shape="pill">
           Apply Now
         </Button>
       </div>

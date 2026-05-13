@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 const features = [
   { name: "Private trading — with market depth", floatx: true,  forge: false, carta: false, addx: false, npm: false },
-  { name: "Capital raising",                     floatx: true,  forge: false, carta: false, addx: true,  npm: true  },
+  { name: "Company investment",                  floatx: true,  forge: false, carta: false, addx: true,  npm: true  },
   { name: "Fund investments",                    floatx: true,  forge: false, carta: false, addx: true,  npm: false },
   { name: "Debt investments",                    floatx: true,  forge: false, carta: false, addx: true,  npm: false },
   { name: "Property investments",                floatx: true,  forge: false, carta: false, addx: false, npm: false },
@@ -17,45 +20,65 @@ const competitors = [
   {
     key:       "floatx",
     label:     "FloatX",
-    sublabel:  "Our platform",
-    logo:      null,          // uses floatx-logo-white.svg
-    favicon:   null,
+    logo:      null,
     highlight: true,
   },
   {
     key:       "forge",
     label:     "Forge",
-    sublabel:  "forge.global",
-    logo:      null,
-    favicon:   "forge.global",
+    logo:      "https://www.google.com/s2/favicons?domain=forgeglobal.com&sz=128",
     highlight: false,
   },
   {
     key:       "carta",
     label:     "Carta",
-    sublabel:  "carta.com",
-    logo:      null,
-    favicon:   "carta.com",
+    logo:      "https://www.google.com/s2/favicons?domain=carta.com&sz=128",
     highlight: false,
   },
   {
     key:       "addx",
     label:     "ADDX",
-    sublabel:  "addx.co",
-    logo:      null,
-    favicon:   "addx.co",
+    logo:      "https://www.google.com/s2/favicons?domain=addx.co&sz=128",
     highlight: false,
   },
   {
     key:       "npm",
     label:     "NPM",
-    sublabel:  "Nasdaq Private",
-    logo:      null,
-    favicon:   "nasdaqprivatemarket.com",
+    logo:      "https://www.google.com/s2/favicons?domain=nasdaqprivatemarket.com&sz=128",
     highlight: false,
   },
 ] as const;
 
+/* ── Competitor logo with fallback initials ─────────────────── */
+function CompetitorLogo({ src, label }: { src: string; label: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
+        <span className="text-white font-bold text-[13px] leading-none">
+          {label.slice(0, 2).toUpperCase()}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={label}
+        width={40}
+        height={40}
+        className="w-6 h-6 object-contain"
+        onError={() => setFailed(true)}
+      />
+    </div>
+  );
+}
+
+/* ── Check / X icons ────────────────────────────────────────── */
 function Check({ yes }: { yes: boolean }) {
   return yes ? (
     <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#E6F6EE] transition-transform duration-200 group-hover:scale-110">
@@ -64,14 +87,15 @@ function Check({ yes }: { yes: boolean }) {
       </svg>
     </span>
   ) : (
-    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#F4F4F6]">
+    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#FEF2F2]">
       <svg viewBox="0 0 20 20" className="w-4 h-4" aria-label="No">
-        <path d="M6 6l8 8M14 6l-8 8" stroke="#C8C8D0" strokeWidth="2" strokeLinecap="round" fill="none" />
+        <path d="M6 6l8 8M14 6l-8 8" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" fill="none" />
       </svg>
     </span>
   );
 }
 
+/* ── Table ──────────────────────────────────────────────────── */
 export function ComparisonTable() {
   return (
     <section className="bg-page-bg py-20">
@@ -91,10 +115,10 @@ export function ComparisonTable() {
         <div className="overflow-x-auto rounded-[20px] shadow-[0_12px_40px_-12px_rgba(22,35,71,0.18)]">
           <table className="w-full min-w-[680px] border-collapse">
 
-            {/* ── Header ─────────────────────────────────────────────── */}
+            {/* ── Header ───────────────────────────────────────────── */}
             <thead>
               <tr className="bg-navy">
-                {/* Feature column label */}
+                {/* Feature label */}
                 <th className="text-left text-white/60 text-[12px] font-medium px-7 py-6 rounded-tl-[20px] w-[34%] uppercase tracking-[0.08em]">
                   Feature
                 </th>
@@ -102,56 +126,36 @@ export function ComparisonTable() {
                 {competitors.map((c, i) => (
                   <th
                     key={c.key}
-                    className={`text-center px-4 py-6 ${i === competitors.length - 1 ? "rounded-tr-[20px]" : ""} ${c.highlight ? "bg-white/[0.07]" : ""}`}
+                    className={`text-center px-4 py-5 ${i === competitors.length - 1 ? "rounded-tr-[20px]" : ""}`}
                   >
-                    {/* Best badge above FloatX */}
-                    {c.highlight && (
-                      <span className="block mb-2 text-[10px] font-bold uppercase tracking-[0.12em] text-tan bg-tan/20 rounded-full px-2.5 py-0.5 w-fit mx-auto">
-                        Best
-                      </span>
-                    )}
-
-                    {/* Logo / favicon */}
-                    <div className="flex justify-center mb-2">
+                    <div className="flex flex-col items-center gap-2">
                       {c.highlight ? (
-                        /* FloatX white logo */
-                        <div className="h-7 flex items-center">
-                          <Image
-                            src="/floatx-logo-white.svg"
-                            alt="FloatX"
-                            width={72}
-                            height={16}
-                            className="h-4 w-auto"
-                          />
-                        </div>
-                      ) : c.favicon ? (
-                        /* Competitor favicon in white pill */
-                        <div className="w-8 h-8 rounded-lg bg-white/90 flex items-center justify-center overflow-hidden">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={`https://www.google.com/s2/favicons?domain=${c.favicon}&sz=64`}
-                            alt={c.label}
-                            width={22}
-                            height={22}
-                            className="object-contain"
-                          />
-                        </div>
+                        /* FloatX — white SVG logo on navy background */
+                        <Image
+                          src="/floatx-logo-white.svg"
+                          alt="FloatX"
+                          width={100}
+                          height={22}
+                          className="h-5 w-auto"
+                        />
+                      ) : c.logo ? (
+                        /* Competitor — favicon in circle */
+                        <CompetitorLogo src={c.logo} label={c.label} />
                       ) : null}
-                    </div>
 
-                    {/* Label */}
-                    <span className={`block text-[13px] font-semibold ${c.highlight ? "text-tan" : "text-white/80"}`}>
-                      {c.label}
-                    </span>
-                    <span className="block text-[10px] text-white/40 mt-0.5 font-normal">
-                      {c.sublabel}
-                    </span>
+                      {/* Label — competitors only */}
+                      {!c.highlight && (
+                        <span className="block text-[12px] font-semibold text-white/80">
+                          {c.label}
+                        </span>
+                      )}
+                    </div>
                   </th>
                 ))}
               </tr>
             </thead>
 
-            {/* ── Rows ───────────────────────────────────────────────── */}
+            {/* ── Rows ─────────────────────────────────────────────── */}
             <tbody>
               {features.map((f, i) => {
                 const isLast = i === features.length - 1;
@@ -164,14 +168,14 @@ export function ComparisonTable() {
                       ${isLast ? "last-of-type:border-b-0" : ""}
                     `}
                   >
-                    {/* Feature name — slides right on hover */}
+                    {/* Feature name */}
                     <td className={`px-7 py-4 text-[14px] text-navy/85 font-medium ${isLast ? "rounded-bl-[20px]" : ""}`}>
                       <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
                         {f.name}
                       </span>
                     </td>
 
-                    {/* Competitor cells */}
+                    {/* Check cells */}
                     {competitors.map((c, ci) => (
                       <td
                         key={c.key}
@@ -193,7 +197,7 @@ export function ComparisonTable() {
           </table>
         </div>
 
-        {/* Note */}
+        {/* Footnote */}
         <p className="text-center text-[12px] text-ink/40 mt-5 m-0">
           Based on publicly available platform information. FloatX comparison is indicative only.
         </p>

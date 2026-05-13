@@ -1,51 +1,48 @@
-import Link from "next/link";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ArticleCard } from "@/components/insights/ArticleCard";
 import { articles } from "@/lib/insights";
+import { ContactClosing } from "@/components/contact/ContactClosing";
 
 export const metadata = {
-  title: "All insights — FloatX",
+  title: "All Insights — FloatX",
   description:
-    "The full FloatX insights archive — original commentary written for allocators, not press releases.",
+    "Original commentary on private capital from the FloatX team — written for allocators, not press releases.",
 };
 
 export default function InsightsArchivePage() {
   return (
     <>
-      <section className="bg-cream pt-36 pb-16">
-        <div className="max-w-[1100px] mx-auto px-6">
-          <div className="flex items-center gap-2 text-[12.5px] text-ink/55 mb-5 font-medium tracking-wide">
-            <Link
-              href="/insights"
-              className="hover:text-navy transition-colors duration-150"
-            >
+      {/* Hero */}
+      <section className="bg-page-bg pt-28 pb-0">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="bg-navy rounded-[24px] px-10 min-[800px]:px-16 py-16">
+            <span className="inline-block bg-white/10 text-white/80 rounded-full px-4 py-1.5 text-[13px] font-medium mb-6">
               Insights
-            </Link>
-            <span aria-hidden="true">›</span>
-            <span className="text-ink/70">All</span>
+            </span>
+            <h1 className="font-serif italic font-normal text-white text-[clamp(36px,4.5vw,56px)] leading-[1.1] m-0 mb-5">
+              Written by FloatX.
+            </h1>
+            <p className="text-white/70 text-[18px] leading-[1.65] m-0 max-w-[42ch]">
+              Original commentary from our team — written for allocators, not press releases.
+            </p>
           </div>
-          <Eyebrow>Archive</Eyebrow>
-          <h1 className="font-serif italic font-normal text-navy text-[clamp(40px,5.4vw,64px)] leading-[1.05] mt-5 mb-5 max-w-[18ch]">
-            Every insight, in one place.
-          </h1>
-          <p className="text-[17px] leading-[1.65] max-w-[640px] text-ink/[0.75] m-0">
-            Original commentary from the FloatX team — strategy, private trading, funds and the AU/APAC private market in plain language.
-          </p>
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      {/* Articles grid */}
+      <section className="bg-page-bg py-20">
         <div className="max-w-[1200px] mx-auto px-6">
           <p className="text-[13px] text-ink/55 m-0 mb-8 font-medium tracking-wide uppercase">
             {articles.length} {articles.length === 1 ? "article" : "articles"}
           </p>
           <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1024px]:grid-cols-3 gap-6">
             {articles.map((a) => (
-              <ArticleCard key={a.href} a={a} />
+              <ArticleCard key={a.slug} a={a} />
             ))}
           </div>
         </div>
       </section>
+
+      <ContactClosing />
     </>
   );
 }

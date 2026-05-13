@@ -13,7 +13,7 @@ export function TechStats() {
         <p className="text-center text-[15px] text-ink/60 leading-[1.6] mb-14 max-w-[52ch] mx-auto">
           FloatX Ventures&apos; performance metrics underscore our commitment to providing a thriving ecosystem for startup investments.
         </p>
-        <div className="grid grid-cols-1 min-[600px]:grid-cols-3 gap-10 text-center">
+        <div className="grid grid-cols-1 min-[600px]:grid-cols-2 gap-10 text-center max-w-[640px] mx-auto">
           {stats.map((s) => (
             <div key={s.label}>
               <p className="font-serif italic font-normal text-navy text-[clamp(52px,6.5vw,76px)] leading-none m-0 mb-2">

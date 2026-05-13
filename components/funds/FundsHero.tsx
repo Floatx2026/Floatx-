@@ -12,7 +12,7 @@ export function FundsHero() {
         <p className="text-[18px] leading-[1.6] max-w-[640px] mx-auto text-ink/[0.75] mb-9">
           Discover, evaluate, and allocate to institutional-grade private funds — curated for serious investors and managed end-to-end through FloatX.
         </p>
-        <Button href="/apply?tier=sophisticated" variant="primary" shape="pill">
+        <Button href="https://app.floatx.com/signup?tier=sophisticated" variant="primary" shape="pill">
           Get Started
         </Button>
       </div>

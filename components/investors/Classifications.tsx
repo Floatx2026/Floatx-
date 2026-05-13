@@ -14,7 +14,7 @@ const tiers = [
       "Dedicated investor coverage",
     ],
     ctaLabel: "Apply as Sophisticated",
-    ctaHref: "/apply?tier=sophisticated",
+    ctaHref: "https://app.floatx.com/signup?tier=sophisticated",
   },
   {
     eyebrow: "Knowledge-Based Access",
@@ -28,7 +28,7 @@ const tiers = [
       "Research and advisory support",
     ],
     ctaLabel: "Apply as Experienced",
-    ctaHref: "/apply?tier=experienced",
+    ctaHref: "https://app.floatx.com/signup?tier=experienced",
   },
   {
     eyebrow: "Open to All Investors",
@@ -42,7 +42,7 @@ const tiers = [
       "Full consumer safeguards apply",
     ],
     ctaLabel: "Apply As Retail",
-    ctaHref: "/apply?tier=retail",
+    ctaHref: "https://app.floatx.com/signup?tier=retail",
   },
 ];
 

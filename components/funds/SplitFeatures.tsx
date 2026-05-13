@@ -53,7 +53,7 @@ export function SplitFeatures() {
             Allocating to private funds the traditional way is slow, opaque, and relationship-bound. FloatX gives qualified investors a single, verified venue for fund discovery, subscription, and ongoing reporting.
           </p>
           <div className="mb-8">
-            <Button href="/apply?tier=sophisticated" variant="primary" shape="pill">
+            <Button href="https://app.floatx.com/signup?tier=sophisticated" variant="primary" shape="pill">
               Get Started
             </Button>
           </div>

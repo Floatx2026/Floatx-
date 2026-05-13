@@ -105,7 +105,7 @@ export function CompanyInvestmentHero() {
             <p className="text-[18px] leading-[1.6] max-w-[520px] text-ink/[0.75] m-0 mb-8 mx-auto min-[900px]:mx-0">
               Invest equity in global pre-IPO companies — and exit through FloatX&apos;s verified secondary market when you&apos;re ready, not when the company lists.
             </p>
-            <Button href="/apply?tier=sophisticated" variant="primary" shape="pill">
+            <Button href="https://app.floatx.com/signup?tier=sophisticated" variant="primary" shape="pill">
               Get Started
             </Button>
           </div>

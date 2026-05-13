@@ -10,7 +10,7 @@ const audiences = [
       "Curated, due-diligence-ready opportunities",
       "Clean reporting and tax documentation",
     ],
-    href: "/apply?tier=sophisticated",
+    href: "https://app.floatx.com/signup?tier=sophisticated",
   },
   {
     title: "Fund Managers",
@@ -32,7 +32,7 @@ const audiences = [
       "Whitelisted client list management",
       "Independent research and fund commentary",
     ],
-    href: "/apply?tier=experienced",
+    href: "https://app.floatx.com/signup?tier=experienced",
   },
 ];
 

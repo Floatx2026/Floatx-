@@ -173,7 +173,7 @@ export function CashPlusCalculator() {
             </div>
           </div>
 
-          <Button href="/apply?tier=sophisticated&product=cash-plus" variant="primary" shape="pill">
+          <Button href="https://app.floatx.com/signup?tier=sophisticated&product=cash-plus" variant="primary" shape="pill">
             Open an Account
           </Button>
         </div>

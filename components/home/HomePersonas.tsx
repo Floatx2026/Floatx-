@@ -34,7 +34,7 @@ const personas = [
       "Whitelisted client management",
       "Independent research and market commentary",
     ],
-    href: "/apply?tier=experienced",
+    href: "https://app.floatx.com/signup?tier=experienced",
     cta: "For advisors",
   },
 ];

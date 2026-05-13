@@ -1,7 +1,3 @@
-"use client";
-
-import { useState } from "react";
-
 type Office = {
   city: string;
   name: string;
@@ -19,32 +15,10 @@ const offices: Office[] = [
     mapSrc:
       "https://maps.google.com/maps?q=259+George+Street+Sydney+NSW+2000&output=embed",
   },
-  {
-    city: "Melbourne",
-    name: "FloatX — Melbourne",
-    address: "Details coming soon",
-    mapSrc:
-      "https://maps.google.com/maps?q=Melbourne+VIC+Australia&output=embed",
-  },
-  {
-    city: "Singapore",
-    name: "FloatX — Singapore",
-    address: "Details coming soon",
-    mapSrc:
-      "https://maps.google.com/maps?q=Singapore&output=embed",
-  },
-  {
-    city: "China",
-    name: "FloatX — China",
-    address: "Details coming soon",
-    mapSrc:
-      "https://maps.google.com/maps?q=Shanghai+China&output=embed",
-  },
 ];
 
 export function OfficeLocations() {
-  const [active, setActive] = useState("Sydney");
-  const office = offices.find((o) => o.city === active)!;
+  const office = offices[0];
 
   return (
     <section className="bg-[#f4f6fa]">
@@ -64,26 +38,9 @@ export function OfficeLocations() {
 
         {/* Office details */}
         <div className="bg-white px-10 py-14 flex flex-col justify-center">
-          <p className="font-sans font-semibold text-navy text-[15px] m-0 mb-6">
-            We have offices in
+          <p className="font-sans font-semibold text-navy text-[15px] m-0 mb-8">
+            Our office
           </p>
-
-          {/* City tabs */}
-          <div className="flex flex-wrap gap-2 mb-10">
-            {offices.map((o) => (
-              <button
-                key={o.city}
-                onClick={() => setActive(o.city)}
-                className={`px-5 py-2 rounded-full text-[13px] font-medium border transition-all duration-150 cursor-pointer ${
-                  active === o.city
-                    ? "bg-navy text-white border-navy"
-                    : "bg-white text-navy/65 border-line hover:border-navy hover:text-navy"
-                }`}
-              >
-                {o.city}
-              </button>
-            ))}
-          </div>
 
           {/* Office info */}
           <div className="flex flex-col gap-5">

@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { FooterNewsletter } from "./FooterNewsletter";
 
 const cols: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Get Started",
     links: [
-      { label: "Get Started", href: "/apply" },
-      { label: "Book demo", href: "#" },
+      { label: "Get Started", href: "https://app.floatx.com/signup" },
+      { label: "Book demo", href: "/book-demo" },
       { label: "Contact", href: "/contact" },
       { label: "Insights", href: "/insights" },
       { label: "Why FloatX", href: "/why-floatx" },
@@ -19,7 +20,7 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "All opportunities", href: "/investments" },
       { label: "Private trading", href: "/investments/private-trading" },
-      { label: "Capital raising", href: "/investments/company-investment" },
+      { label: "Company investment", href: "/investments/company-investment" },
       { label: "Debt Investments", href: "/investments/debt-investments" },
       { label: "Property investing", href: "/investments/property-investments" },
       { label: "Fund investments", href: "/investments/fund-investments" },
@@ -41,7 +42,7 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
 
 export function Footer() {
   return (
-    <footer className="bg-navy text-white pt-16 pb-10 border-t border-white/[0.06]">
+    <footer className="bg-navy text-white pt-10 pb-6 border-t border-white/[0.06]">
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="grid grid-cols-2 min-[900px]:grid-cols-5 gap-10 min-[900px]:gap-8">
           {cols.map((c) => (
@@ -61,41 +62,11 @@ export function Footer() {
 
           <div>
             <h4 className="font-sans font-medium text-[16px] text-white mb-4">Sign up for Newsletter</h4>
-            <form
-              className="flex items-center bg-white rounded-full pl-5 pr-2 py-2 max-w-[460px]"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                placeholder="you@example.com"
-                aria-label="Email address"
-                className="flex-1 border-0 outline-none bg-transparent text-[15px] text-ink py-1.5"
-              />
-              <button
-                type="submit"
-                aria-label="Subscribe"
-                className="bg-navy text-white rounded-full w-10 h-10 inline-flex items-center justify-center"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className="w-[18px] h-[18px]"
-                >
-                  <path
-                    d="M5 12h14m-5-5l5 5-5 5"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </form>
+            <FooterNewsletter />
           </div>
         </div>
 
-        <hr className="border-white/10 my-10" />
+        <hr className="border-white/10 my-6" />
 
         <div className="flex flex-col min-[900px]:flex-row min-[900px]:items-center min-[900px]:justify-between gap-6">
           <div className="inline-flex items-center gap-3">
@@ -134,7 +105,7 @@ export function Footer() {
           </Link>
         </div>
 
-        <p className="mt-10 text-[11px] text-white/45 leading-relaxed max-w-[800px]">
+        <p className="mt-6 text-[11px] text-white/45 leading-relaxed max-w-[800px]">
           FloatX provides access to wholesale and retail investment products in accordance with Australian financial services regulations. Wholesale offers are restricted to investors qualifying as Sophisticated or otherwise eligible. This page is general information only and does not constitute financial advice.
         </p>
       </div>

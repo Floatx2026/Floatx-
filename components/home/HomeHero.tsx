@@ -13,7 +13,7 @@ export function HomeHero() {
             A global private investment and trading ecosystem supported by AI and Blockchain.
           </p>
           <div className="flex flex-wrap gap-3 items-center">
-            <Button href="/apply?tier=sophisticated" variant="primary" shape="pill">
+            <Button href="https://app.floatx.com/signup?tier=sophisticated" variant="primary" shape="pill">
               Become a Member
             </Button>
             <Button href="/investments" variant="outlineNavy" shape="pill">

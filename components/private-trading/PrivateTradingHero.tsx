@@ -15,7 +15,7 @@ export function PrivateTradingHero() {
             <p className="text-[18px] leading-[1.6] max-w-[520px] text-ink/[0.75] m-0 mb-8 mx-auto min-[900px]:mx-0">
               Buy and sell shares in global private companies and funds — with multi-currency settlement and a verified wholesale member base.
             </p>
-            <Button href="/apply?tier=sophisticated" variant="primary" shape="pill">
+            <Button href="https://app.floatx.com/signup?tier=sophisticated" variant="primary" shape="pill">
               Get Started
             </Button>
           </div>
