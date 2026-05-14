@@ -1,7 +1,7 @@
-import { opportunities } from "@/lib/opportunities";
+import type { Opportunity } from "@/lib/opportunities";
 import { OpportunityCard } from "@/components/investments/OpportunityCard";
 
-export function CompanyInvestmentOpportunities() {
+export function CompanyInvestmentOpportunities({ opportunities }: { opportunities: Opportunity[] }) {
   const items = opportunities.filter((o) => o.type === "Company Investment");
 
   return (

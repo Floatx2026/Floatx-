@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/Button";
-import { opportunities, type OpportunityType } from "@/lib/opportunities";
+import type { Opportunity, OpportunityType } from "@/lib/opportunities";
 import { OpportunityCard } from "./OpportunityCard";
 
 type Status = "live" | "coming-soon" | "fund-index";
@@ -143,7 +143,7 @@ function statusBadge(p: Product, count: number) {
   );
 }
 
-export function ProductSelector() {
+export function ProductSelector({ opportunities }: { opportunities: Opportunity[] }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const revealRef = useRef<HTMLDivElement>(null);

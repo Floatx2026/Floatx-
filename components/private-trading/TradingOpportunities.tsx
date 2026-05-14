@@ -1,13 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { opportunities } from "@/lib/opportunities";
+import type { Opportunity } from "@/lib/opportunities";
 import { OpportunityCard } from "@/components/investments/OpportunityCard";
 
-export function TradingOpportunities() {
+export function TradingOpportunities({ opportunities }: { opportunities: Opportunity[] }) {
   const allItems = useMemo(
     () => opportunities.filter((o) => o.type === "Private Trading"),
-    [],
+    [opportunities],
   );
   const [query, setQuery] = useState("");
 

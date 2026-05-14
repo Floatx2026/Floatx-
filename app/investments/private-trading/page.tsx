@@ -3,6 +3,7 @@ import { TradingCategories } from "@/components/private-trading/TradingCategorie
 import { TradingBenefits } from "@/components/private-trading/TradingBenefits";
 import { TradingOpportunities } from "@/components/private-trading/TradingOpportunities";
 import { TradingClosing } from "@/components/private-trading/TradingClosing";
+import { getOpportunities } from "@/lib/opportunities";
 
 export const metadata = {
   title: "Private Trading — FloatX",
@@ -10,13 +11,14 @@ export const metadata = {
     "Buy and sell shares in global private companies and funds through FloatX — a verified wholesale secondary market with multi-currency settlement.",
 };
 
-export default function PrivateTradingPage() {
+export default async function PrivateTradingPage() {
+  const opportunities = await getOpportunities();
   return (
     <>
       <PrivateTradingHero />
       <TradingCategories />
       <TradingBenefits />
-      <TradingOpportunities />
+      <TradingOpportunities opportunities={opportunities} />
       <TradingClosing />
     </>
   );
