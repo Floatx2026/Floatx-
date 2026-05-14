@@ -17,7 +17,7 @@ export function HomeHero() {
               Become a Member
             </Button>
             <Button href="/investments" variant="outlineNavy" shape="pill">
-              View opportunities
+              View Opportunities
             </Button>
           </div>
         </div>
