@@ -31,6 +31,79 @@ const chipHover =
 const chipActive =
   "bg-navy! text-white! shadow-[0_4px_10px_-2px_rgba(22,35,71,0.20)] border-transparent! hover:bg-navy-deep!";
 
+type Locale = { code: string; label: string; flag: string };
+
+const locales: Locale[] = [
+  { code: "en", label: "En", flag: "🇦🇺" },
+  { code: "zh", label: "中文", flag: "🇨🇳" },
+];
+
+function LocaleSelector() {
+  const [current, setCurrent] = useState(locales[0]);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const close = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false);
+    };
+    document.addEventListener("click", close);
+    return () => document.removeEventListener("click", close);
+  }, []);
+
+  return (
+    <div ref={langRef} className="relative hidden min-[900px]:inline-flex">
+      <button
+        type="button"
+        onClick={() => setLangOpen((v) => !v)}
+        aria-label="Language"
+        aria-expanded={langOpen}
+        className="inline-flex items-center gap-1.5 text-[14px] text-ink/80 bg-transparent border-0 cursor-pointer hover:text-navy transition-colors"
+      >
+        <span className="w-6 h-6 rounded-full overflow-hidden inline-flex items-center justify-center text-[18px] leading-none shadow-[0_0_0_1px_rgba(0,0,0,0.08)]">
+          {current.flag}
+        </span>
+        <span className="font-medium">{current.label}</span>
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 12 12"
+          fill="none"
+          aria-hidden="true"
+          className={`transition-transform duration-200 ${langOpen ? "rotate-180" : ""}`}
+        >
+          <path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      {langOpen && (
+        <div className="absolute top-[calc(100%+8px)] right-0 min-w-[140px] bg-white border border-line rounded-[12px] shadow-[0_12px_28px_-8px_rgba(22,35,71,0.16)] p-1.5 z-40">
+          {locales.map((loc) => (
+            <button
+              key={loc.code}
+              type="button"
+              onClick={() => {
+                setCurrent(loc);
+                setLangOpen(false);
+              }}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-left text-[14px] font-medium transition-colors cursor-pointer ${
+                current.code === loc.code
+                  ? "bg-cream text-navy"
+                  : "text-ink/70 hover:bg-cream/60 hover:text-navy"
+              }`}
+            >
+              <span className="w-6 h-6 rounded-full overflow-hidden inline-flex items-center justify-center text-[18px] leading-none shadow-[0_0_0_1px_rgba(0,0,0,0.08)]">
+                {loc.flag}
+              </span>
+              {loc.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -143,18 +216,10 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button href="https://app.floatx.com/signup" target="_blank" rel="noopener noreferrer" variant="outlineInk" shape="rect">
+          <Button href="https://app.floatx.com/signup" target="_blank" rel="noopener noreferrer" variant="primary" shape="rect">
             Log In
           </Button>
-          <button
-            type="button"
-            aria-label="Language"
-            className="hidden min-[900px]:inline-flex items-center gap-1.5 text-[14px] text-ink/80 bg-transparent border-0"
-          >
-            <span aria-hidden="true" className="text-base">🇦🇺</span>
-            <span>En</span>
-            <span aria-hidden="true" className="text-[10px] opacity-70">▾</span>
-          </button>
+          <LocaleSelector />
         </div>
       </div>
     </header>

@@ -26,13 +26,13 @@ export function OfficeLocations() {
         {/* Google Map */}
         <div className="relative h-[380px] min-[900px]:h-auto min-h-[380px]">
           <iframe
-            key={active}
+            key={office.city}
             src={office.mapSrc}
             className="absolute inset-0 w-full h-full border-0"
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title={`FloatX ${active} office map`}
+            title={`FloatX ${office.city} office map`}
           />
         </div>
 
