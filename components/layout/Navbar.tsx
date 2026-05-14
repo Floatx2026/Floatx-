@@ -31,12 +31,24 @@ const chipHover =
 const chipActive =
   "bg-navy! text-white! shadow-[0_4px_10px_-2px_rgba(22,35,71,0.20)] border-transparent! hover:bg-navy-deep!";
 
-type Locale = { code: string; label: string; flag: string };
+type Locale = { code: string; label: string; flagSrc: string };
 
 const locales: Locale[] = [
-  { code: "en", label: "En", flag: "🇦🇺" },
-  { code: "zh", label: "中文", flag: "🇨🇳" },
+  { code: "en", label: "En", flagSrc: "https://flagcdn.com/w80/au.png" },
+  { code: "zh", label: "中文", flagSrc: "https://flagcdn.com/w80/cn.png" },
 ];
+
+function FlagCircle({ src, alt, size = 24 }: { src: string; alt: string; size?: number }) {
+  return (
+    <span
+      className="rounded-full overflow-hidden inline-block flex-none shadow-[0_0_0_1px_rgba(0,0,0,0.08)]"
+      style={{ width: size, height: size }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt={alt} className="w-full h-full object-cover" />
+    </span>
+  );
+}
 
 function LocaleSelector() {
   const [current, setCurrent] = useState(locales[0]);
@@ -60,9 +72,7 @@ function LocaleSelector() {
         aria-expanded={langOpen}
         className="inline-flex items-center gap-1.5 text-[14px] text-ink/80 bg-transparent border-0 cursor-pointer hover:text-navy transition-colors"
       >
-        <span className="w-6 h-6 rounded-full overflow-hidden inline-flex items-center justify-center text-[18px] leading-none shadow-[0_0_0_1px_rgba(0,0,0,0.08)]">
-          {current.flag}
-        </span>
+        <FlagCircle src={current.flagSrc} alt={current.label} />
         <span className="font-medium">{current.label}</span>
         <svg
           width="10"
@@ -92,9 +102,7 @@ function LocaleSelector() {
                   : "text-ink/70 hover:bg-cream/60 hover:text-navy"
               }`}
             >
-              <span className="w-6 h-6 rounded-full overflow-hidden inline-flex items-center justify-center text-[18px] leading-none shadow-[0_0_0_1px_rgba(0,0,0,0.08)]">
-                {loc.flag}
-              </span>
+              <FlagCircle src={loc.flagSrc} alt={loc.label} />
               {loc.label}
             </button>
           ))}
