@@ -21,7 +21,7 @@ export const articles: Article[] = [
   {
     slug: "building-a-strong-digital-presence-for-established-private-companies",
     title: "Building a Strong Digital Presence for Established Private Companies",
-    date: "28 June 2024",
+    date: "28 May 2026",
     author: "Marcus Ritchie",
     categories: ["Strategy"],
     image: "https://floatx.com/wp-content/uploads/2024/03/Rectangle-34624299.png",
@@ -61,7 +61,7 @@ export const articles: Article[] = [
   {
     slug: "is-the-public-market-fading-for-aussie-tech-floatx-analyzes-the-evolving-landscape",
     title: "Is the Public Market Fading for Aussie Tech?",
-    date: "21 May 2024",
+    date: "21 May 2026",
     author: "Marcus Ritchie",
     categories: ["Private Trading", "Technology"],
     image: "https://floatx.com/wp-content/uploads/2024/02/Is-the-Public-Market-Fading-for-Aussie-Tech_-1.png",
@@ -97,7 +97,7 @@ export const articles: Article[] = [
   {
     slug: "streamlining-fund-unit-trading-for-savvy-investors",
     title: "Streamlining Fund Unit Trading for Savvy Investors",
-    date: "4 March 2024",
+    date: "4 March 2026",
     author: "Marcus Ritchie",
     categories: ["Funds", "Private Trading"],
     image: "https://floatx.com/wp-content/uploads/2024/02/Empowering-Fund-Managers-to-Raise-Capital-and-Enhance-Investor-Liquidity-1.png",
@@ -130,7 +130,7 @@ export const articles: Article[] = [
   {
     slug: "private-powerhouse-thriving-in-the-tailored-landscape-of-private-markets",
     title: "Private Powerhouse: Thriving in the Tailored Landscape of Private Markets",
-    date: "5 February 2024",
+    date: "5 February 2026",
     author: "Marcus Ritchie",
     categories: ["Private Trading"],
     image: "https://floatx.com/wp-content/uploads/2024/02/Rectangle-34624303.png",

@@ -10,18 +10,6 @@ type Access = {
 
 const accesses: Access[] = [
   {
-    title: "Cash Plus",
-    href: "/investments/cash-plus",
-    blurb: "Wholesale cash strategy targeting RBA cash rate + 2% p.a., with daily accruals and instant access.",
-    badge: "New",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
-        <ellipse cx="12" cy="6.5" rx="6.5" ry="2.2" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M5.5 6.5v4c0 1.2 2.9 2.2 6.5 2.2s6.5-1 6.5-2.2v-4M5.5 10.5v4c0 1.2 2.9 2.2 6.5 2.2s6.5-1 6.5-2.2v-4M5.5 14.5v3c0 1.2 2.9 2.2 6.5 2.2s6.5-1 6.5-2.2v-3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
     title: "Private Trading",
     href: "/investments/private-trading",
     blurb: "Secondary market access to pre-IPO equity in established private companies, with verified counterparties.",
@@ -29,6 +17,16 @@ const accesses: Access[] = [
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
         <path d="M3 17l5-5 4 4 8-9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M14 7h6v6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "Fund Investments",
+    href: "/investments/fund-investments",
+    blurb: "Subscribe directly to institutional-grade private funds — covering venture, growth, credit and real assets.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
+        <path d="M3 21h18M5 18V9m4 9V6m4 12v-9m4 9V3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -43,12 +41,14 @@ const accesses: Access[] = [
     ),
   },
   {
-    title: "Fund Investments",
-    href: "/investments/fund-investments",
-    blurb: "Subscribe directly to institutional-grade private funds — covering venture, growth, credit and real assets.",
+    title: "Cash Plus",
+    href: "/investments/cash-plus",
+    blurb: "Wholesale cash strategy targeting RBA cash rate + 2% p.a., with daily accruals and instant access.",
+    badge: "New",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
-        <path d="M3 21h18M5 18V9m4 9V6m4 12v-9m4 9V3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <ellipse cx="12" cy="6.5" rx="6.5" ry="2.2" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M5.5 6.5v4c0 1.2 2.9 2.2 6.5 2.2s6.5-1 6.5-2.2v-4M5.5 10.5v4c0 1.2 2.9 2.2 6.5 2.2s6.5-1 6.5-2.2v-4M5.5 14.5v3c0 1.2 2.9 2.2 6.5 2.2s6.5-1 6.5-2.2v-3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
       </svg>
     ),
   },
