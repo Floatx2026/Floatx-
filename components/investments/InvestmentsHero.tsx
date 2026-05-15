@@ -2,6 +2,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 
 type Stream = {
+  id: string;
   label: string;
   color: string;
   endY: number;
@@ -13,11 +14,11 @@ type Stream = {
 };
 
 const streams: Stream[] = [
-  { label: "Private Trading", color: "#162347", endY: 70, width: 7, delay: 0.4, tilt: -22, labelFontSize: "7.5", labelSpacing: "0.3" },
-  { label: "Company", color: "#293A66", endY: 115, width: 5.5, delay: 0.6, tilt: 18 },
-  { label: "Fund", color: "#5A5163", endY: 158, width: 4.5, delay: 0.8, tilt: -10 },
-  { label: "Debt", color: "#8C6D4F", endY: 205, width: 3.5, delay: 1.0, tilt: 28 },
-  { label: "Property", color: "#AF7D43", endY: 250, width: 3.5, delay: 1.2, tilt: -18 },
+  { id: "private-trading", label: "Private Trading", color: "#162347", endY: 70, width: 7, delay: 0.4, tilt: -22, labelFontSize: "7.5", labelSpacing: "0.3" },
+  { id: "company", label: "Company", color: "#293A66", endY: 115, width: 5.5, delay: 0.6, tilt: 18 },
+  { id: "fund", label: "Fund", color: "#5A5163", endY: 158, width: 4.5, delay: 0.8, tilt: -10 },
+  { id: "debt", label: "Debt", color: "#8C6D4F", endY: 205, width: 3.5, delay: 1.0, tilt: 28 },
+  { id: "property", label: "Property", color: "#AF7D43", endY: 250, width: 3.5, delay: 1.2, tilt: -18 },
 ];
 
 const SOURCE_X = 58;
@@ -119,8 +120,8 @@ function SankeyAnim() {
           </radialGradient>
           {streams.map((s) => (
             <linearGradient
-              key={`grad-${s.label}`}
-              id={`s-stream-grad-${s.label}`}
+              key={`grad-${s.id}`}
+              id={`s-stream-grad-${s.id}`}
               x1="0"
               y1="0"
               x2="1"
@@ -132,8 +133,8 @@ function SankeyAnim() {
           ))}
           {streams.map((s) => (
             <radialGradient
-              key={`dest-grad-${s.label}`}
-              id={`s-dest-grad-${s.label}`}
+              key={`dest-grad-${s.id}`}
+              id={`s-dest-grad-${s.id}`}
               cx="35%"
               cy="35%"
               r="75%"
@@ -145,8 +146,8 @@ function SankeyAnim() {
           ))}
           {streams.map((s) => (
             <path
-              key={`def-path-${s.label}`}
-              id={`stream-path-${s.label}`}
+              key={`def-path-${s.id}`}
+              id={`stream-path-${s.id}`}
               d={streamPath(s.endY)}
               fill="none"
             />
@@ -155,9 +156,9 @@ function SankeyAnim() {
 
         {streams.map((s) => (
           <path
-            key={`stream-${s.label}`}
+            key={`stream-${s.id}`}
             d={streamPath(s.endY)}
-            stroke={`url(#s-stream-grad-${s.label})`}
+            stroke={`url(#s-stream-grad-${s.id})`}
             strokeWidth={s.width}
             fill="none"
             strokeLinecap="round"
@@ -169,7 +170,7 @@ function SankeyAnim() {
         {streams.map((s) =>
           Array.from({ length: PARTICLES_PER_STREAM }, (_, i) => (
             <circle
-              key={`particle-${s.label}-${i}`}
+              key={`particle-${s.id}-${i}`}
               r="3"
               fill={s.color}
               stroke="rgba(255,255,255,0.6)"
@@ -181,7 +182,7 @@ function SankeyAnim() {
                 begin={`${s.delay + 0.6 + (i * FLOW_DURATION) / PARTICLES_PER_STREAM}s`}
                 rotate="auto"
               >
-                <mpath href={`#stream-path-${s.label}`} />
+                <mpath href={`#stream-path-${s.id}`} />
               </animateMotion>
             </circle>
           )),
@@ -221,11 +222,11 @@ function SankeyAnim() {
 
         {streams.map((s) => (
           <circle
-            key={`dest-group-${s.label}`}
+            key={`dest-group-${s.id}`}
             cx={DEST_X}
             cy={s.endY}
             r={DEST_R}
-            fill={`url(#s-dest-grad-${s.label})`}
+            fill={`url(#s-dest-grad-${s.id})`}
             stroke="rgba(0,0,0,0.10)"
             strokeWidth="0.5"
             className="s-node"
@@ -235,7 +236,7 @@ function SankeyAnim() {
 
         {streams.map((s) => (
           <g
-            key={`dest-label-${s.label}`}
+            key={`dest-label-${s.id}`}
             className="s-label"
             style={{ animationDelay: `${s.delay + 0.9}s` }}
           >
