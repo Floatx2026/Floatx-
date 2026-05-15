@@ -21,11 +21,11 @@ type City = {
 };
 
 const cities: City[] = [
-  { id: "singapore",   label: "Singapore",   x: 229, y: 186, delay: 1.3, color: "#293A66", anchor: "start", lx: 241, ly: 183 },
-  { id: "hong-kong",   label: "Hong Kong",   x: 246, y: 146, delay: 1.5, color: "#5A5163", anchor: "start", lx: 258, ly: 143 },
-  { id: "tokyo",       label: "Tokyo",       x: 270, y: 110, delay: 1.7, color: "#162347", anchor: "start", lx: 282, ly: 107 },
-  { id: "china",       label: "China",       x: 238, y: 116, delay: 1.9, color: "#293A66", anchor: "end",   lx: 226, ly: 113 },
-  { id: "new-zealand", label: "New Zealand", x: 300, y: 204, delay: 2.1, color: "#5A5163", anchor: "start", lx: 312, ly: 201 },
+  { id: "china",       label: "China",       x: 168, y: 98,  delay: 1.3, color: "#AF7D43", anchor: "end",   lx: 156, ly: 95  },
+  { id: "tokyo",       label: "Tokyo",       x: 268, y: 95,  delay: 1.5, color: "#162347", anchor: "start", lx: 280, ly: 92  },
+  { id: "hong-kong",   label: "Hong Kong",   x: 248, y: 148, delay: 1.7, color: "#5A5163", anchor: "start", lx: 260, ly: 145 },
+  { id: "singapore",   label: "Singapore",   x: 210, y: 192, delay: 1.9, color: "#293A66", anchor: "end",   lx: 198, ly: 189 },
+  { id: "new-zealand", label: "New Zealand", x: 292, y: 212, delay: 2.1, color: "#5A5163", anchor: "start", lx: 304, ly: 209 },
 ];
 
 function arcPath(to: { x: number; y: number }): string {
