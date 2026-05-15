@@ -186,7 +186,7 @@ export function ProductSelector({ opportunities }: { opportunities: Opportunity[
               Select an Investment.
             </h2>
             <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
-              Choose a category to see live opportunities — or use the navigation above to dive into a product&apos;s full page.
+              Choose a category to see live opportunities — or use the navigation above to access our full range of Investment products.
             </p>
           </div>
 
