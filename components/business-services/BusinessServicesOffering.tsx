@@ -12,6 +12,15 @@ const services = [
     ),
   },
   {
+    title: "Financing Services",
+    body: "Capital structure advisory and financing solutions to support your growth — from debt facilities to equity structuring.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
     title: "Accounting Services",
     body: "Professional financial reporting, compliance and accounting support tailored for private companies and fund structures.",
     icon: (
@@ -30,15 +39,6 @@ const services = [
         <circle cx="17" cy="9" r="2.2" stroke="currentColor" strokeWidth="1.7" />
         <path d="M3.5 18.5c.5-2.8 2.8-4.8 5.5-4.8s5 2 5.5 4.8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
         <path d="M17 14c1.5.3 2.8 1.4 3.5 3" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Financing Services",
-    body: "Capital structure advisory and financing solutions to support your growth — from debt facilities to equity structuring.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
@@ -69,8 +69,8 @@ export function BusinessServicesOffering() {
         </div>
 
         <div className="relative">
-          {/* Orbital ring */}
-          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          {/* Orbital ring — on top of cards, pointer-events-none so cards remain interactive */}
+          <div className="absolute inset-0 pointer-events-none z-[20]" aria-hidden="true">
             <style>{`
               @keyframes ringDash {
                 from { stroke-dashoffset: 0; }
@@ -78,32 +78,27 @@ export function BusinessServicesOffering() {
               }
               .orbit-ring { animation: ringDash 28s linear infinite; }
             `}</style>
-            <svg viewBox="0 0 1000 580" preserveAspectRatio="xMidYMid meet"
-              className="w-full h-full">
+            <svg viewBox="0 0 1000 580" preserveAspectRatio="xMidYMid meet" className="w-full h-full">
               <ellipse cx="500" cy="290" rx="490" ry="268"
-                fill="none" stroke="#162347" strokeWidth="1"
-                strokeDasharray="7 13" opacity="0.13"
+                fill="none" stroke="#162347" strokeWidth="1.5"
+                strokeDasharray="7 13" opacity="0.22"
                 className="orbit-ring" />
-              {/* Primary travelling dot */}
-              <circle r="5.5" fill="#AF7D43" opacity="0.75">
-                <animate attributeName="filter" values="none" dur="1s" />
+              <circle r="5.5" fill="#AF7D43" opacity="0.85">
                 <animateMotion dur="20s" repeatCount="indefinite" rotate="auto"
                   path="M 990,290 A 490,268 0 1 0 10,290 A 490,268 0 1 0 990,290" />
               </circle>
-              {/* Trailing glow */}
-              <circle r="9" fill="#AF7D43" opacity="0.18">
+              <circle r="10" fill="#AF7D43" opacity="0.2">
                 <animateMotion dur="20s" repeatCount="indefinite" rotate="auto"
                   path="M 990,290 A 490,268 0 1 0 10,290 A 490,268 0 1 0 990,290" />
               </circle>
-              {/* Second dot offset by half */}
-              <circle r="3.5" fill="#AF7D43" opacity="0.45">
+              <circle r="3.5" fill="#AF7D43" opacity="0.5">
                 <animateMotion dur="20s" repeatCount="indefinite" rotate="auto" begin="-10s"
                   path="M 990,290 A 490,268 0 1 0 10,290 A 490,268 0 1 0 990,290" />
               </circle>
             </svg>
           </div>
 
-          <div className="relative grid grid-cols-1 min-[600px]:grid-cols-2 min-[1000px]:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1000px]:grid-cols-3 gap-6">
             {services.slice(0, 3).map((s) => (
               <div key={s.title}
                 className="bg-cream rounded-[20px] p-7 flex flex-col transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.16)]">
@@ -118,7 +113,7 @@ export function BusinessServicesOffering() {
             ))}
           </div>
 
-          <div className="relative grid grid-cols-1 min-[600px]:grid-cols-2 gap-6 mt-6 max-w-[840px] mx-auto">
+          <div className="grid grid-cols-1 min-[600px]:grid-cols-2 gap-6 mt-6 max-w-[840px] mx-auto">
             {services.slice(3).map((s) => (
               <div key={s.title}
                 className="bg-cream rounded-[20px] p-7 flex flex-col transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.16)]">
