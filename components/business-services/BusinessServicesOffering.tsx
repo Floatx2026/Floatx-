@@ -68,34 +68,70 @@ export function BusinessServicesOffering() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1000px]:grid-cols-3 gap-6">
-          {services.slice(0, 3).map((s) => (
-            <div key={s.title}
-              className="bg-cream rounded-[20px] p-7 flex flex-col transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.16)]">
-              <div className="w-11 h-11 rounded-[12px] bg-tan/10 text-tan flex items-center justify-center mb-5">
-                {s.icon}
-              </div>
-              <h3 className="font-sans font-bold text-navy text-[18px] leading-[1.3] m-0 mb-2.5 -tracking-[0.005em]">
-                {s.title}
-              </h3>
-              <p className="text-[14.5px] leading-[1.6] text-ink/75 m-0">{s.body}</p>
-            </div>
-          ))}
-        </div>
+        <div className="relative">
+          {/* Orbital ring */}
+          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+            <style>{`
+              @keyframes ringDash {
+                from { stroke-dashoffset: 0; }
+                to   { stroke-dashoffset: -110; }
+              }
+              .orbit-ring { animation: ringDash 28s linear infinite; }
+            `}</style>
+            <svg viewBox="0 0 1000 580" preserveAspectRatio="xMidYMid meet"
+              className="w-full h-full">
+              <ellipse cx="500" cy="290" rx="490" ry="268"
+                fill="none" stroke="#162347" strokeWidth="1"
+                strokeDasharray="7 13" opacity="0.13"
+                className="orbit-ring" />
+              {/* Primary travelling dot */}
+              <circle r="5.5" fill="#AF7D43" opacity="0.75">
+                <animate attributeName="filter" values="none" dur="1s" />
+                <animateMotion dur="20s" repeatCount="indefinite" rotate="auto"
+                  path="M 990,290 A 490,268 0 1 0 10,290 A 490,268 0 1 0 990,290" />
+              </circle>
+              {/* Trailing glow */}
+              <circle r="9" fill="#AF7D43" opacity="0.18">
+                <animateMotion dur="20s" repeatCount="indefinite" rotate="auto"
+                  path="M 990,290 A 490,268 0 1 0 10,290 A 490,268 0 1 0 990,290" />
+              </circle>
+              {/* Second dot offset by half */}
+              <circle r="3.5" fill="#AF7D43" opacity="0.45">
+                <animateMotion dur="20s" repeatCount="indefinite" rotate="auto" begin="-10s"
+                  path="M 990,290 A 490,268 0 1 0 10,290 A 490,268 0 1 0 990,290" />
+              </circle>
+            </svg>
+          </div>
 
-        <div className="grid grid-cols-1 min-[600px]:grid-cols-2 gap-6 mt-6 max-w-[840px] mx-auto">
-          {services.slice(3).map((s) => (
-            <div key={s.title}
-              className="bg-cream rounded-[20px] p-7 flex flex-col transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.16)]">
-              <div className="w-11 h-11 rounded-[12px] bg-tan/10 text-tan flex items-center justify-center mb-5">
-                {s.icon}
+          <div className="relative grid grid-cols-1 min-[600px]:grid-cols-2 min-[1000px]:grid-cols-3 gap-6">
+            {services.slice(0, 3).map((s) => (
+              <div key={s.title}
+                className="bg-cream rounded-[20px] p-7 flex flex-col transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.16)]">
+                <div className="w-11 h-11 rounded-[12px] bg-tan/10 text-tan flex items-center justify-center mb-5">
+                  {s.icon}
+                </div>
+                <h3 className="font-sans font-bold text-navy text-[18px] leading-[1.3] m-0 mb-2.5 -tracking-[0.005em]">
+                  {s.title}
+                </h3>
+                <p className="text-[14.5px] leading-[1.6] text-ink/75 m-0">{s.body}</p>
               </div>
-              <h3 className="font-sans font-bold text-navy text-[18px] leading-[1.3] m-0 mb-2.5 -tracking-[0.005em]">
-                {s.title}
-              </h3>
-              <p className="text-[14.5px] leading-[1.6] text-ink/75 m-0">{s.body}</p>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <div className="relative grid grid-cols-1 min-[600px]:grid-cols-2 gap-6 mt-6 max-w-[840px] mx-auto">
+            {services.slice(3).map((s) => (
+              <div key={s.title}
+                className="bg-cream rounded-[20px] p-7 flex flex-col transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.16)]">
+                <div className="w-11 h-11 rounded-[12px] bg-tan/10 text-tan flex items-center justify-center mb-5">
+                  {s.icon}
+                </div>
+                <h3 className="font-sans font-bold text-navy text-[18px] leading-[1.3] m-0 mb-2.5 -tracking-[0.005em]">
+                  {s.title}
+                </h3>
+                <p className="text-[14.5px] leading-[1.6] text-ink/75 m-0">{s.body}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
