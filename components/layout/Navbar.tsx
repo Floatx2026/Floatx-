@@ -26,7 +26,7 @@ const links = [
 ];
 
 const chipBase =
-  "text-navy bg-cream px-4 py-[9px] rounded-full border border-transparent shadow-[0_1px_2px_rgba(22,35,71,0.04)] transition-all duration-200 font-sans font-medium text-[14px] cursor-pointer inline-flex items-center gap-1.5 leading-none";
+  "text-navy bg-cream px-3 py-[8px] rounded-full border border-transparent shadow-[0_1px_2px_rgba(22,35,71,0.04)] transition-all duration-200 font-sans font-medium text-[13px] cursor-pointer inline-flex items-center gap-1 leading-none";
 const chipHover =
   "hover:bg-white hover:-translate-y-[2px] hover:shadow-[0_8px_16px_-4px_rgba(22,35,71,0.14)] hover:border-line";
 const chipActive =
@@ -144,7 +144,7 @@ export function Navbar() {
           <Logo />
         </Link>
 
-        <nav className="hidden min-[900px]:flex gap-2.5 text-[14px] items-center" aria-label="Primary">
+        <nav className="hidden min-[900px]:flex gap-1.5 items-center" aria-label="Primary">
           <div
             ref={itemRef}
             className={`relative inline-flex group ${open ? "is-open" : ""}`}
