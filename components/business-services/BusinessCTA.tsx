@@ -17,34 +17,10 @@ export function BusinessCTA() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-5 min-[900px]:items-end">
+          <div className="flex min-[900px]:items-end">
             <Button href="/contact" variant="outlineWhite" shape="pill" className="whitespace-nowrap border-white hover:bg-white hover:text-navy">
               Get in touch
             </Button>
-            <div className="flex flex-col gap-3 text-[14px]">
-              <a href="mailto:sherry@floatx.com"
-                className="flex items-center gap-2.5 text-white/75 hover:text-white transition-colors">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-4 h-4 flex-none text-tan">
-                  <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.7" />
-                  <path d="M2 8l10 7 10-7" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-                </svg>
-                sherry@floatx.com
-              </a>
-              <a href="tel:+61292260268"
-                className="flex items-center gap-2.5 text-white/75 hover:text-white transition-colors">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-4 h-4 flex-none text-tan">
-                  <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C9.6 21 3 14.4 3 6c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                +61 (2) 9226 0268
-              </a>
-              <p className="flex items-start gap-2.5 text-white/55 m-0">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-4 h-4 flex-none text-tan mt-0.5">
-                  <path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z" stroke="currentColor" strokeWidth="1.7" />
-                  <circle cx="12" cy="8" r="2" stroke="currentColor" strokeWidth="1.7" />
-                </svg>
-                Level 41, 259 George Street<br />Sydney, NSW 2000
-              </p>
-            </div>
           </div>
         </div>
       </div>
