@@ -8,10 +8,12 @@ type Stream = {
   width: number;
   delay: number;
   tilt: number;
+  labelFontSize?: string;
+  labelSpacing?: string;
 };
 
 const streams: Stream[] = [
-  { label: "Trading", color: "#162347", endY: 70, width: 7, delay: 0.4, tilt: -22 },
+  { label: "Private Trading", color: "#162347", endY: 70, width: 7, delay: 0.4, tilt: -22, labelFontSize: "7.5", labelSpacing: "0.3" },
   { label: "Company", color: "#293A66", endY: 115, width: 5.5, delay: 0.6, tilt: 18 },
   { label: "Fund", color: "#5A5163", endY: 158, width: 4.5, delay: 0.8, tilt: -10 },
   { label: "Debt", color: "#8C6D4F", endY: 205, width: 3.5, delay: 1.0, tilt: 28 },
@@ -241,11 +243,11 @@ function SankeyAnim() {
               x={DEST_X + DEST_RING_RX + 4}
               y={s.endY - 1}
               textAnchor="start"
-              fontSize="10"
+              fontSize={s.labelFontSize ?? "10"}
               fontWeight="700"
               fill="#162347"
               opacity="0.78"
-              letterSpacing="1.1"
+              letterSpacing={s.labelSpacing ?? "1.1"}
             >
               {s.label.toUpperCase()}
             </text>

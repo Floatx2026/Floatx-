@@ -65,7 +65,7 @@ const products: Product[] = [
   },
   {
     id: "company-investment",
-    label: "Company Investment",
+    label: "Company Investments",
     href: "/investments/company-investment",
     description:
       "Primary equity rounds in private companies — sourced, due-diligenced and structured for FloatX wholesale allocators.",
@@ -186,7 +186,7 @@ export function ProductSelector({ opportunities }: { opportunities: Opportunity[
               Select an Investment.
             </h2>
             <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
-              Choose a category to see live opportunities — or use the navigation above to access our full range of Investment products.
+              Choose a category to see live opportunities — or use the navigation above to access our full range of Investment Products.
             </p>
           </div>
 
