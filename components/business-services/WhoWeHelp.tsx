@@ -10,15 +10,6 @@ const audiences = [
     ),
   },
   {
-    title: "Unicorns & Pre-IPO",
-    body: "Precision investor access and capital markets strategy to prepare your company for seamless institutional engagement and IPO readiness.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
-        <polygon points="12,3 15.5,9 22,10 17,15 18.5,21 12,18 5.5,21 7,15 2,10 8.5,9" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
     title: "Fund Managers",
     body: "Expand your distribution reach across APAC and global markets through our established investor network and curated media channels.",
     icon: (
@@ -54,7 +45,7 @@ export function WhoWeHelp() {
             Agile, scalable marketing and IR solutions that open doors to qualified investors and media to support your business growth.
           </p>
         </div>
-        <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1000px]:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 min-[600px]:grid-cols-3 gap-6">
           {audiences.map((a) => (
             <div key={a.title}
               className="bg-cream rounded-[20px] p-6 flex flex-col transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.16)]">

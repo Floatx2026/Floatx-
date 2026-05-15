@@ -1,7 +1,6 @@
 import { BusinessServicesHero } from "@/components/business-services/BusinessServicesHero";
 import { BusinessServicesOffering } from "@/components/business-services/BusinessServicesOffering";
 import { InvestorConnectSection } from "@/components/business-services/InvestorConnectSection";
-import { BusinessStats } from "@/components/business-services/BusinessStats";
 import { WhoWeHelp } from "@/components/business-services/WhoWeHelp";
 import { BusinessDifference } from "@/components/business-services/BusinessDifference";
 import { BusinessCTA } from "@/components/business-services/BusinessCTA";
@@ -18,7 +17,6 @@ export default function BusinessServicesPage() {
       <BusinessServicesHero />
       <BusinessServicesOffering />
       <InvestorConnectSection />
-      <BusinessStats />
       <WhoWeHelp />
       <BusinessDifference />
       <BusinessCTA />
