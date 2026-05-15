@@ -31,7 +31,7 @@ const accesses: Access[] = [
     ),
   },
   {
-    title: "Company Investment",
+    title: "Company Investments",
     href: "/investments/company-investment",
     blurb: "Primary equity rounds in private companies — sourced, due-diligenced, and structured for wholesale allocators.",
     icon: (

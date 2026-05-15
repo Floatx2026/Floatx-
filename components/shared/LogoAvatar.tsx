@@ -12,7 +12,7 @@ export type LogoAvatarProps = {
 
 // Local high-res logos in /public/logos/ — takes priority over Google favicons
 const LOCAL_LOGOS: Record<string, string> = {
-  "openai.com":       "/logos/openai.svg",
+  "openai.com":       "/logos/openai.png",
   "epicgames.com":    "/logos/epicgames.svg",
   "anthropic.com":    "/logos/anthropic.svg",
   "tiktok.com":       "/logos/tiktok.svg",

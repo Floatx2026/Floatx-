@@ -4,7 +4,7 @@ const personas = [
   {
     title: "Investors",
     blurb:
-      "For family offices, professional investors and HNW allocators looking for diversified access to private capital across the region.",
+      "For family offices, professional investors and HNW individuals looking for diversified access to private capital across the region.",
     bullets: [
       "Single dashboard across asset classes",
       "Curated, due-diligence-ready opportunities",
@@ -45,10 +45,10 @@ export function HomePersonas() {
       <div className="max-w-[1200px] mx-auto px-6">
         <div className="text-center mb-14 max-w-[680px] mx-auto">
           <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-4">
-            Built for the way you allocate.
+            Built for you to allocate.
           </h2>
           <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
-            Whether you&apos;re putting capital to work, raising it, or advising on it — FloatX adapts to your role.
+            Whether you&apos;re deploying capital, raising it, or advising on it, FloatX adapts to your role.
           </p>
         </div>
 

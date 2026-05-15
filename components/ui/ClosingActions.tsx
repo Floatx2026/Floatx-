@@ -8,17 +8,17 @@ type Action = {
 
 const actions: Action[] = [
   {
-    title: "Trading private investment opportunities",
+    title: "Trade private investment opportunities",
     cta: "Invest now",
     href: "https://app.floatx.com/signup",
   },
   {
-    title: "Listing your company or raising capital",
+    title: "List your company or seek capital investment",
     cta: "List now",
     href: "/list-your-asset",
   },
   {
-    title: "Becoming a Distribution Partner",
+    title: "Become a Distribution Partner",
     cta: "Join now",
     href: "https://app.floatx.com/signup",
   },
