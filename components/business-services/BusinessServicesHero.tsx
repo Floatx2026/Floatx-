@@ -21,11 +21,13 @@ type City = {
 };
 
 const cities: City[] = [
-  { id: "singapore", label: "Singapore", x: 229, y: 186, delay: 1.3, color: "#293A66", anchor: "start", lx: 241, ly: 183 },
-  { id: "hong-kong", label: "Hong Kong", x: 246, y: 146, delay: 1.5, color: "#5A5163", anchor: "start", lx: 258, ly: 143 },
-  { id: "tokyo",     label: "Tokyo",     x: 270, y: 110, delay: 1.7, color: "#162347", anchor: "start", lx: 282, ly: 107 },
-  { id: "london",    label: "London",    x: 127, y: 67,  delay: 1.9, color: "#8C6D4F", anchor: "end",   lx: 115, ly: 64  },
-  { id: "dubai",     label: "Dubai",     x: 140, y: 136, delay: 2.1, color: "#AF7D43", anchor: "end",   lx: 128, ly: 133 },
+  { id: "singapore",   label: "Singapore",   x: 229, y: 186, delay: 1.3, color: "#293A66", anchor: "start", lx: 241, ly: 183 },
+  { id: "hong-kong",   label: "Hong Kong",   x: 246, y: 146, delay: 1.5, color: "#5A5163", anchor: "start", lx: 258, ly: 143 },
+  { id: "tokyo",       label: "Tokyo",       x: 270, y: 110, delay: 1.7, color: "#162347", anchor: "start", lx: 282, ly: 107 },
+  { id: "london",      label: "London",      x: 127, y: 67,  delay: 1.9, color: "#8C6D4F", anchor: "end",   lx: 115, ly: 64  },
+  { id: "dubai",       label: "Dubai",       x: 140, y: 136, delay: 2.1, color: "#AF7D43", anchor: "end",   lx: 128, ly: 133 },
+  { id: "china",       label: "China",       x: 238, y: 116, delay: 2.3, color: "#293A66", anchor: "end",   lx: 226, ly: 113 },
+  { id: "new-zealand", label: "New Zealand", x: 300, y: 204, delay: 2.5, color: "#5A5163", anchor: "start", lx: 312, ly: 201 },
 ];
 
 function arcPath(to: { x: number; y: number }): string {
