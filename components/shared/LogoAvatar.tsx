@@ -51,7 +51,7 @@ export function LogoAvatar({ name, initials, logo, logoBg, size = 56 }: LogoAvat
         <img
           src={logoSrc}
           alt={`${name} logo`}
-          style={{ width: "100%", height: "100%", objectFit: "contain", padding: "15%" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
           onError={() => setFailed(true)}
         />
       </div>
