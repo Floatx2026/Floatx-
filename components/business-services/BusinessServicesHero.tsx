@@ -113,6 +113,7 @@ function GlobeAnim() {
 
         {/* Grid lines clipped to globe */}
         <g clipPath="url(#globe-clip)" className="g-grid">
+          {/* Latitude lines — static */}
           {([-60, -30, 0, 30, 60] as number[]).map((lat) => {
             const latR = lat * (Math.PI / 180);
             const cyOff = -R * Math.sin(latR) * Math.cos(LAT0);
@@ -123,12 +124,18 @@ function GlobeAnim() {
                 fill="none" stroke="#162347" strokeWidth="0.55" opacity="0.14" />
             );
           })}
-          {([0, 36, 72, 108, 144] as number[]).map((angle) => (
-            <ellipse key={`lon-${angle}`} cx={CX} cy={CY}
-              rx={R} ry={R * Math.sin(LAT0)}
-              fill="none" stroke="#162347" strokeWidth="0.55" opacity="0.14"
-              transform={`rotate(${angle} ${CX} ${CY})`} />
-          ))}
+          {/* Longitude lines — spinning */}
+          <g>
+            <animateTransform attributeName="transform" type="rotate"
+              from={`0 ${CX} ${CY}`} to={`360 ${CX} ${CY}`}
+              dur="24s" repeatCount="indefinite" />
+            {([0, 36, 72, 108, 144] as number[]).map((angle) => (
+              <ellipse key={`lon-${angle}`} cx={CX} cy={CY}
+                rx={R} ry={R * Math.sin(LAT0)}
+                fill="none" stroke="#162347" strokeWidth="0.55" opacity="0.14"
+                transform={`rotate(${angle} ${CX} ${CY})`} />
+            ))}
+          </g>
         </g>
 
         {/* Globe outline ring */}
