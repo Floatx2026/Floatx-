@@ -1,7 +1,7 @@
 const stats = [
-  { value: "40",      label: "Global Unicorns" },
+  { value: "40+",     label: "Access Global Unicorns" },
   { value: "$3.2B+",  label: "of live opportunities on the platform" },
-  { value: "#1",      label: "investment and trading ecosystem supported by AI and Blockchain" },
+  { value: "#1",      label: "AI & Blockchain powered investment ecosystem" },
 ];
 
 export function HomeStats() {
@@ -9,7 +9,7 @@ export function HomeStats() {
     <section className="bg-page-bg pt-20 pb-16">
       <div className="max-w-[1200px] mx-auto px-6">
         <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.6vw,42px)] leading-[1.15] text-center max-w-[820px] mx-auto mb-14">
-          Trusted by allocators placing private capital.
+          Trusted by Private Capital Allocators.
         </h2>
 
         <div className="grid grid-cols-1 min-[700px]:grid-cols-3 gap-4">

@@ -10,15 +10,35 @@ export type LogoAvatarProps = {
   size?: number;
 };
 
+// Local high-res logos in /public/logos/ — takes priority over Google favicons
+const LOCAL_LOGOS: Record<string, string> = {
+  "openai.com":       "/logos/openai.svg",
+  "epicgames.com":    "/logos/epicgames.svg",
+  "anthropic.com":    "/logos/anthropic.svg",
+  "tiktok.com":       "/logos/tiktok.svg",
+  "ripple.com":       "/logos/ripple.svg",
+  "airtable.com":     "/logos/airtable.svg",
+  "miro.com":         "/logos/miro.svg",
+  "patreon.com":      "/logos/patreon.svg",
+  "lambdalabs.com":   "/logos/lambdalabs.svg",
+  "plaid.com":        "/logos/plaid.png",
+  "neuralink.com":    "/logos/neuralink.png",
+  "drivewealth.com":  "/logos/drivewealth.png",
+  "kalshi.com":       "/logos/kalshi.png",
+  "chime.com":        "/logos/chime.png",
+};
+
+function resolveLogoSrc(logo?: string): string | null {
+  if (!logo) return null;
+  if (logo.startsWith("/")) return logo;
+  if (LOCAL_LOGOS[logo]) return LOCAL_LOGOS[logo];
+  return `https://www.google.com/s2/favicons?domain=${logo}&sz=256`;
+}
+
 export function LogoAvatar({ name, initials, logo, logoBg, size = 56 }: LogoAvatarProps) {
   const [failed, setFailed] = useState(false);
 
-  const logoSrc = logo
-    ? logo.startsWith("/")
-      ? logo
-      : `https://www.google.com/s2/favicons?domain=${logo}&sz=256`
-    : null;
-
+  const logoSrc = resolveLogoSrc(logo);
   const dimension = { width: size, height: size };
 
   if (logoSrc && !failed) {
@@ -31,7 +51,7 @@ export function LogoAvatar({ name, initials, logo, logoBg, size = 56 }: LogoAvat
         <img
           src={logoSrc}
           alt={`${name} logo`}
-          className="w-full h-full object-cover rounded-full"
+          style={{ width: "100%", height: "100%", objectFit: "contain", padding: "15%" }}
           onError={() => setFailed(true)}
         />
       </div>

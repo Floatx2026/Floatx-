@@ -10,7 +10,7 @@ export function HomeHero() {
             Invest in the Extraordinary
           </h1>
           <p className="text-[18px] leading-[1.6] max-w-[560px] text-ink/[0.78] mb-9">
-            A global private investment and trading ecosystem supported by AI and Blockchain.
+            AI &amp; Blockchain powered investment ecosystem.
           </p>
           <div className="flex flex-wrap gap-3 items-center">
             <Button href="https://app.floatx.com/signup?tier=sophisticated" variant="primary" shape="pill">

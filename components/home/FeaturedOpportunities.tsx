@@ -26,7 +26,7 @@ const opportunities: Opportunity[] = [
     name: "ByteDance",
     initials: "BD",
     logo: "tiktok.com",
-    logoBg: "#010101",
+    logoBg: "#ffffff",
     tags: ["Private Trading", "Technology"],
     blurb: "Technology group behind TikTok, Douyin and a global suite of consumer applications.",
     href: "/investments/private-trading",

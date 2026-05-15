@@ -15,7 +15,7 @@ const audiences = [
   {
     title: "Fund Managers",
     blurb:
-      "For GPs raising capital from qualified Australian and Asia-Pacific allocators.",
+      "For GPs raising capital from qualified investors.",
     bullets: [
       "Distribute to verified wholesale investors",
       "Compliant subscription workflow",
@@ -24,7 +24,7 @@ const audiences = [
     href: "/list-your-asset",
   },
   {
-    title: "Advisors",
+    title: "Advisers",
     blurb:
       "For consultants and accountants placing client capital across private funds.",
     bullets: [

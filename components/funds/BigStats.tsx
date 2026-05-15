@@ -1,8 +1,7 @@
 const stats = [
   { value: "$100M+", label: "of fund commitments placed", note: "i" },
   { value: ">180",   label: "Global Alternative Investment Fund Strategies", note: "ii" },
-  { value: ">95%",   label: "of allocations completed in under 14 days", note: "iii" },
-  { value: "$3.2B+", label: "of live fund opportunities on the platform", note: "iv" },
+  { value: "$3.2B+", label: "of live fund opportunities on the platform", note: "iii" },
 ];
 
 export function BigStats() {
@@ -13,7 +12,7 @@ export function BigStats() {
           Trusted by family offices and institutions placing private capital across the region.
         </h2>
 
-        <div className="grid grid-cols-2 min-[900px]:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 min-[600px]:grid-cols-3 gap-4">
           {stats.map((s, i) => {
             const tinted = i === 0 || i === 2;
             return (
@@ -36,7 +35,7 @@ export function BigStats() {
         </div>
 
         <p className="text-[11px] text-ink/55 mt-6 max-w-[760px] leading-[1.6]">
-          <sup>i</sup> Based on a trailing 6-month rolling average of placed commitments. <sup>ii</sup> FloatX internal listing as at 31 March 2026. <sup>iii</sup> Time from initial expression of interest to executed subscription docs. <sup>iv</sup> Total NAV of fund opportunities currently open to FloatX members.
+          <sup>i</sup> Based on a trailing 6-month rolling average of placed commitments. <sup>ii</sup> FloatX internal listing as at 31 March 2026. <sup>iii</sup> Total NAV of fund opportunities currently open to FloatX members.
         </p>
       </div>
     </section>

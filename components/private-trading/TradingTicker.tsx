@@ -47,7 +47,7 @@ const stocks: Stock[] = [
     pts: [40,38,42,40,44,42,46,44,48,46,50,48,52,50,54,52,56,54,58,56],
   },
   {
-    rank: 7, name: "ByteDance", logo: "tiktok.com", logoBg: "#010101",
+    rank: 7, name: "ByteDance", logo: "tiktok.com", logoBg: "#ffffff",
     price: 185.40, change: -1.2, bid: 187.00, ask: 183.00, cap: "$268B",
     pts: [60,62,58,65,63,60,65,62,58,62,60,55,58,55,52,55,50,52,48,50],
   },

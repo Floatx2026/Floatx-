@@ -1,5 +1,5 @@
 const audiences = [
-  { title: "Independent Financial Advisors", note: "Holding an AFSL or operating as an authorised representative." },
+  { title: "Independent Financial Advisers", note: "Holding an AFSL or operating as an authorised representative." },
   { title: "Brokers & Wholesale Dealers", note: "Equities, fixed income and alternatives, AU and APAC." },
   { title: "Family Offices", note: "Single and multi-family, allocating across illiquid alts." },
   { title: "Wealth Managers & Private Banks", note: "Servicing sophisticated and professional investor clients." },

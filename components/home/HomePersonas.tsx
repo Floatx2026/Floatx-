@@ -16,7 +16,7 @@ const personas = [
   {
     title: "Companies & Funds",
     blurb:
-      "For private companies raising primary capital, and for fund managers distributing to qualified Australian and Asia-Pacific allocators.",
+      "For private companies raising primary capital, and for fund managers distributing to qualified investors.",
     bullets: [
       "Reach verified wholesale investors directly",
       "Compliant subscription and capital-raise workflow",
@@ -26,7 +26,7 @@ const personas = [
     cta: "List a deal",
   },
   {
-    title: "Advisors",
+    title: "Advisers",
     blurb:
       "For consultants, accountants and licensees placing client capital across private investments.",
     bullets: [
