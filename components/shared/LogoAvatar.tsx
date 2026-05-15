@@ -13,12 +13,13 @@ export type LogoAvatarProps = {
 // Local high-res logos in /public/logos/ — takes priority over Google favicons
 const LOCAL_LOGOS: Record<string, string> = {
   "openai.com":       "/logos/openai.png",
-  "epicgames.com":    "/logos/epicgames.svg",
+  "epicgames.com":    "/logos/epicgames.png",
   "anthropic.com":    "/logos/anthropic.svg",
-  "tiktok.com":       "/logos/tiktok.svg",
+  "tiktok.com":       "/logos/bytedance.png",
+  "anduril.com":      "/logos/anduril.png",
   "ripple.com":       "/logos/ripple.svg",
-  "airtable.com":     "/logos/airtable.svg",
-  "miro.com":         "/logos/miro.svg",
+  "airtable.com":     "/logos/airtable.png",
+  "miro.com":         "/logos/miro.png",
   "patreon.com":      "/logos/patreon.svg",
   "lambdalabs.com":   "/logos/lambdalabs.svg",
   "plaid.com":        "/logos/plaid.png",
@@ -26,6 +27,8 @@ const LOCAL_LOGOS: Record<string, string> = {
   "drivewealth.com":  "/logos/drivewealth.png",
   "kalshi.com":       "/logos/kalshi.png",
   "chime.com":        "/logos/chime.png",
+  "wealthfront.com":  "/logos/wealthfront.png",
+  "scale.com":        "/logos/scale.png",
 };
 
 function resolveLogoSrc(logo?: string): string | null {
