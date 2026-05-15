@@ -1,7 +1,7 @@
 const services = [
   {
-    title: "Investor Connect",
-    body: "Integrated marketing, media, IR and event management services to attract qualified investors through our global investor and media network.",
+    title: "Marketing Services",
+    body: "Digital marketing, media, IR and event management services to attract qualified investors through our global investor and media network.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
         <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.7" />
