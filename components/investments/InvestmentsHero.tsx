@@ -274,7 +274,7 @@ function SankeyAnim() {
           opacity="0.55"
           letterSpacing="0.6"
         >
-          ONE PLATFORM · FIVE ALLOCATION PATHS
+          ONE PLATFORM · FIVE ASSET CLASSES
         </text>
       </svg>
     </div>

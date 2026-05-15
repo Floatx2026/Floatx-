@@ -132,7 +132,9 @@ export function Navbar() {
     };
   }, []);
 
-  const investmentsActive = pathname?.startsWith("/investments");
+  const investmentsActive = pathname
+    ? investmentsItems.some((item) => pathname === item.href || pathname.startsWith(item.href + "/"))
+    : false;
 
   return (
     <header className="absolute top-0 left-0 right-0 z-30">
