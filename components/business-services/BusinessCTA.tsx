@@ -18,8 +18,8 @@ export function BusinessCTA() {
           </div>
 
           <div className="flex flex-col gap-5 min-[900px]:items-end">
-            <Button href="/contact" variant="primary" shape="pill" className="whitespace-nowrap">
-              Get Your Custom Package
+            <Button href="/contact" variant="outlineWhite" shape="pill" className="whitespace-nowrap border-white hover:bg-white hover:text-navy">
+              Get in touch
             </Button>
             <div className="flex flex-col gap-3 text-[14px]">
               <a href="mailto:sherry@floatx.com"
