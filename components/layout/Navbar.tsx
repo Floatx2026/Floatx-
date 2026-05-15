@@ -20,6 +20,7 @@ const links = [
   { href: "/investments/private-trading", label: "Private Trading" },
   { href: "/investors", label: "Investors" },
   { href: "/list-your-asset", label: "List Your Asset" },
+  { href: "/business-services", label: "Business Services" },
   { href: "/insights", label: "Insights" },
   { href: "/distribution-partners", label: "Distribution Partners" },
 ];

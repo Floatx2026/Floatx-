@@ -30,6 +30,7 @@ const cols: { title: string; links: { label: string; href: string }[] }[] = [
     title: "Partner with Us",
     links: [
       { label: "List Your Asset", href: "/list-your-asset" },
+      { label: "Business Services", href: "/business-services" },
       { label: "Distribution Partners", href: "/distribution-partners" },
       { label: "Accredited Investor", href: "/investors" },
       { label: "About", href: "/about" },
