@@ -251,18 +251,6 @@ function SankeyAnim() {
             >
               {s.label.toUpperCase()}
             </text>
-            <text
-              x={DEST_X + DEST_RING_RX + 4}
-              y={s.endY + 11}
-              textAnchor="start"
-              fontSize="8"
-              fontWeight="600"
-              fill="#162347"
-              opacity="0.5"
-              letterSpacing="0.9"
-            >
-              INVESTMENTS
-            </text>
           </g>
         ))}
 
