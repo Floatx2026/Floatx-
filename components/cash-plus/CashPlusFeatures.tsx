@@ -1,7 +1,7 @@
 const features = [
   {
     title: "Above-cash benchmark",
-    body: "Targets RBA cash rate plus 2% p.a. through an actively-managed mandate across cash, government and investment-grade credit.",
+    body: "Targets the RBA cash rate plus 2% p.a. through an actively-managed mandate across cash, government and investment-grade credit.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
         <path d="M3 17l5-5 4 4 8-9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -11,7 +11,7 @@ const features = [
   },
   {
     title: "Daily accrual, monthly compounding",
-    body: "Returns are calculated every business day. By default, distributions are reinvested each month — switch to cash if you'd rather draw the income.",
+    body: "Returns are calculated every business day. By default, distributions are reinvested each month — switch to cash if you'd rather receive the income.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">
         <path d="M12 3a9 9 0 1 0 9 9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
@@ -20,7 +20,7 @@ const features = [
     ),
   },
   {
-    title: "Instant liquidity",
+    title: "Daily liquidity",
     body: "Withdraw any business day. No lock-ups, no exit fees, no minimum holding period. Funds settle to your nominated account on T+1.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="w-6 h-6">

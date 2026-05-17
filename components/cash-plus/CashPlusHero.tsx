@@ -15,7 +15,7 @@ export function CashPlusHero() {
             Idle capital, working overnight.
           </h1>
           <p className="text-[18px] leading-[1.6] max-w-[560px] mx-auto text-ink/[0.75] mb-9">
-            A wholesale cash strategy targeting RBA cash rate plus 2% p.a. — daily accruals, monthly compounding, and instant access whenever you need your money back.
+            A wholesale cash strategy targeting the RBA cash rate plus 2% p.a. — daily accruals, monthly compounding, and same day access whenever you need your money back.
           </p>
 
           <div className="inline-flex items-center gap-5 bg-white border border-line rounded-2xl px-8 py-5 mb-10 shadow-[0_10px_28px_-12px_rgba(22,35,71,0.12)]">

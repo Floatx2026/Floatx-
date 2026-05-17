@@ -90,12 +90,12 @@ export function CashPlusCalculator() {
     <section className="bg-page-bg py-24">
       <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 min-[900px]:grid-cols-[1fr_1.2fr] gap-12 items-center">
         <div>
-          <p className="eyebrow mb-4">Calculator</p>
+          <p className="eyebrow mb-4">Compound Calculator</p>
           <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,3.6vw,44px)] leading-[1.15] m-0 mb-5 max-w-[18ch]">
             See what your idle cash could earn.
           </h2>
           <p className="text-[16px] leading-[1.65] text-ink/75 m-0 mb-3 max-w-[44ch]">
-            Project how a Cash Plus balance could grow at the current target rate of {rate.toFixed(2)}% p.a., with optional recurring top-ups and monthly compounding.
+            Project how a Cash Plus balance could grow at the current target rate with monthly compounding and optional recurring top-ups.
           </p>
           <p className="italic text-[14px] text-ink/55 m-0 mb-7">Rate subject to change.</p>
 

@@ -198,7 +198,7 @@ export function HowCashPlusWorks() {
             How Cash Plus works.
           </h2>
           <p className="text-white/75 text-[16px] leading-[1.65] m-0">
-            One mandate, one balance, four moments — from the second your funds arrive to the second you take them back out.
+            One mandate, one balance, four stages — from the deposit to redemption.
           </p>
         </div>
 
