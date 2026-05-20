@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LogoAvatar } from "@/components/shared/LogoAvatar";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 type Opportunity = {
   name: string;
@@ -152,7 +153,7 @@ export function FeaturedOpportunities() {
         }
       `}</style>
 
-      <div className="max-w-[1200px] mx-auto px-6 mb-12">
+      <FadeUp className="max-w-[1200px] mx-auto px-6 mb-12">
         <div className="flex items-end justify-between flex-wrap gap-4">
           <div className="max-w-[640px]">
             <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-3">
@@ -170,7 +171,7 @@ export function FeaturedOpportunities() {
             <span aria-hidden="true">→</span>
           </Link>
         </div>
-      </div>
+      </FadeUp>
 
       <div
         className="fo-marquee relative w-full"

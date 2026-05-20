@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 type Access = {
   title: string;
@@ -79,15 +80,18 @@ export function AccessGrid() {
   return (
     <section className="bg-navy-deep py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-14 max-w-[680px] mx-auto">
-          <h2 className="font-serif italic font-normal text-white text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-4">
-            What you can access on FloatX.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-white/70 m-0">
-            Six distinct asset classes, one verified venue. Subscribe, allocate and report on every position from a single dashboard.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-14 max-w-[680px] mx-auto">
+            <h2 className="font-serif italic font-normal text-white text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-4">
+              What you can access on FloatX.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-white/70 m-0">
+              Six distinct asset classes, one verified venue. Subscribe, allocate and report on every position from a single dashboard.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[700px]:grid-cols-2 min-[1024px]:grid-cols-3 gap-6">
           {accesses.map((a) => (
             <Link
@@ -118,6 +122,7 @@ export function AccessGrid() {
             </Link>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

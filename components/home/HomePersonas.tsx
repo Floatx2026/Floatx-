@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const personas = [
   {
@@ -43,15 +44,18 @@ export function HomePersonas() {
   return (
     <section className="bg-page-bg py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-14 max-w-[680px] mx-auto">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-4">
-            Built for you to allocate.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
-            Whether you&apos;re deploying capital, raising it, or advising on it, FloatX adapts to your role.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-14 max-w-[680px] mx-auto">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-4">
+              Built for you to allocate.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
+              Whether you&apos;re deploying capital, raising it, or advising on it, FloatX adapts to your role.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[900px]:grid-cols-3 gap-6">
           {personas.map((p) => (
             <div
@@ -80,6 +84,7 @@ export function HomePersonas() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

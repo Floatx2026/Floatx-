@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { FadeUp } from "@/components/ui/FadeUp";
 import { articles, type Article } from "@/lib/insights";
 
 function ArticleCard({ a }: { a: Article }) {
@@ -61,6 +62,7 @@ export function HomeInsights() {
   return (
     <section className="bg-cream py-24">
       <div className="max-w-[1200px] mx-auto px-6">
+        <FadeUp>
         <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
           <div className="max-w-[640px]">
             <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-3">
@@ -78,12 +80,15 @@ export function HomeInsights() {
             <span aria-hidden="true">→</span>
           </Link>
         </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1024px]:grid-cols-4 gap-5">
           {articles.map((a) => (
             <ArticleCard key={a.href} a={a} />
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );
