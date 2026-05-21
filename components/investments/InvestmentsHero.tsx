@@ -1,271 +1,222 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 
-type Stream = {
+type AssetCard = {
   id: string;
   label: string;
+  desc: string;
   color: string;
-  endY: number;
-  width: number;
-  delay: number;
-  tilt: number;
+  icon: React.ReactNode;
 };
 
-const streams: Stream[] = [
-  { id: "private-trading", label: "Private Trading", color: "#162347", endY: 70, width: 7, delay: 0.4, tilt: -22 },
-  { id: "company", label: "Company", color: "#293A66", endY: 115, width: 5.5, delay: 0.6, tilt: 18 },
-  { id: "fund", label: "Fund", color: "#5A5163", endY: 158, width: 4.5, delay: 0.8, tilt: -10 },
-  { id: "debt", label: "Debt", color: "#8C6D4F", endY: 205, width: 3.5, delay: 1.0, tilt: 28 },
-  { id: "property", label: "Property", color: "#AF7D43", endY: 250, width: 3.5, delay: 1.2, tilt: -18 },
+const assetCards: AssetCard[] = [
+  {
+    id: "private-trading",
+    label: "Private Trading",
+    desc: "Secondary equity market",
+    color: "#162347",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ width: 16, height: 16 }}>
+        <path d="M3 14l4-4 3 3 6-8" stroke="white" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12 6h5v5" stroke="white" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    id: "company",
+    label: "Company",
+    desc: "Primary equity raises",
+    color: "#293A66",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ width: 16, height: 16 }}>
+        <path d="M10 3v14M4 10l6-6 6 6" stroke="white" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    id: "fund",
+    label: "Fund",
+    desc: "Institutional fund access",
+    color: "#5A5163",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ width: 16, height: 16 }}>
+        <path d="M3 17h14M4 17V9m4 8V5m4 12V8m4 9V3" stroke="white" strokeWidth="1.7" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    id: "debt",
+    label: "Debt",
+    desc: "Private credit positions",
+    color: "#8C6D4F",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ width: 16, height: 16 }}>
+        <rect x="2" y="5" width="16" height="10" rx="2" stroke="white" strokeWidth="1.7" />
+        <circle cx="10" cy="10" r="2" stroke="white" strokeWidth="1.7" />
+      </svg>
+    ),
+  },
+  {
+    id: "property",
+    label: "Property",
+    desc: "Real asset investments",
+    color: "#AF7D43",
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ width: 16, height: 16 }}>
+        <path d="M3 9l7-6 7 6v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9z" stroke="white" strokeWidth="1.7" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
 ];
 
-const SOURCE_X = 58;
-const SOURCE_Y = 164;
-const DEST_X = 222;
-const SOURCE_R = 26;
-const DEST_R = 11;
-const MID_X = (SOURCE_X + DEST_X) / 2;
-const PARTICLES_PER_STREAM = 3;
-const FLOW_DURATION = 2.4;
-const SOURCE_RING_RX = SOURCE_R + 14;
-const SOURCE_RING_RY = (SOURCE_R + 14) * 0.52;
-const DEST_RING_RX = DEST_R + 8;
-const DEST_RING_RY = (DEST_R + 8) * 0.55;
-
-function streamPath(endY: number): string {
-  return `M ${SOURCE_X} ${SOURCE_Y} C ${MID_X} ${SOURCE_Y}, ${MID_X} ${endY}, ${DEST_X} ${endY}`;
-}
-
-function SankeyAnim() {
+function CardStackAnim() {
   return (
-    <div className="relative w-full aspect-square max-w-[520px] mx-auto">
+    <div
+      className="relative w-full aspect-[4/3] max-w-[480px] mx-auto select-none"
+      aria-hidden="true"
+    >
       <style>{`
-        @keyframes sStreamReveal {
-          from { stroke-dashoffset: 220; stroke-opacity: 0; }
-          to { stroke-dashoffset: 0; stroke-opacity: 0.34; }
+        @keyframes csFan0 {
+          from { opacity:0; transform:translateY(18px) scale(1); }
+          to   { opacity:1; transform:translateY(0px)  scale(1); }
         }
-        @keyframes sNodePop {
-          0% { opacity: 0; transform: scale(0.4); }
-          100% { opacity: 1; transform: scale(1); }
+        @keyframes csFan1 {
+          from { opacity:0; transform:translateY(0px) scale(1); }
+          to   { opacity:0.94; transform:translateY(-18px) scale(0.955); }
         }
-        @keyframes sSourcePulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.04); }
+        @keyframes csFan2 {
+          from { opacity:0; transform:translateY(0px) scale(1); }
+          to   { opacity:0.88; transform:translateY(-36px) scale(0.910); }
         }
-        @keyframes sSourceGlow {
-          0%, 100% { opacity: 0.18; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(1.18); }
+        @keyframes csFan3 {
+          from { opacity:0; transform:translateY(0px) scale(1); }
+          to   { opacity:0.80; transform:translateY(-54px) scale(0.865); }
         }
-        @keyframes sLabelFade {
-          0% { opacity: 0; transform: translateX(-3px); }
-          100% { opacity: 1; transform: translateX(0); }
+        @keyframes csFan4 {
+          from { opacity:0; transform:translateY(0px) scale(1); }
+          to   { opacity:0.72; transform:translateY(-72px) scale(0.820); }
         }
-        .s-stream {
-          stroke-dasharray: 220;
-          stroke-opacity: 0;
-          animation: sStreamReveal 1.0s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        @keyframes csFloat {
+          0%,100% { transform:translateY(0px)  scale(1); }
+          50%     { transform:translateY(-6px) scale(1); }
         }
-        .s-node {
-          transform-box: fill-box;
-          transform-origin: center;
-          animation: sNodePop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+        .cs-card {
+          position: absolute;
+          width: 100%;
+          background: white;
+          border-radius: 16px;
+          padding: 15px 18px;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          border: 1px solid rgba(22,35,71,0.08);
+          transform-origin: center bottom;
         }
-        .s-source-core {
-          transform-box: fill-box;
-          transform-origin: center;
-          animation: sNodePop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s both, sSourcePulse 3.2s ease-in-out infinite 0.6s;
+        .cs-card-4 {
+          z-index:1;
+          box-shadow: 0 2px 8px rgba(22,35,71,0.05);
+          opacity:0;
+          animation: csFan4 0.55s cubic-bezier(0.34,1.2,0.64,1) 1.0s both;
         }
-        .s-source-glow {
-          transform-box: fill-box;
-          transform-origin: center;
-          animation: sSourceGlow 3.2s ease-in-out infinite;
+        .cs-card-3 {
+          z-index:2;
+          box-shadow: 0 4px 14px rgba(22,35,71,0.07);
+          opacity:0;
+          animation: csFan3 0.55s cubic-bezier(0.34,1.2,0.64,1) 0.82s both;
         }
-        .s-label {
-          transform-box: fill-box;
-          animation: sLabelFade 0.55s ease-out both;
+        .cs-card-2 {
+          z-index:3;
+          box-shadow: 0 6px 18px rgba(22,35,71,0.09);
+          opacity:0;
+          animation: csFan2 0.55s cubic-bezier(0.34,1.2,0.64,1) 0.64s both;
         }
-        @media (prefers-reduced-motion: reduce) {
-          .s-stream, .s-node, .s-source-core, .s-source-glow, .s-label {
-            animation: none !important;
-            opacity: 1 !important;
-            stroke-opacity: 0.34 !important;
-            stroke-dashoffset: 0 !important;
-            transform: none !important;
-          }
-          .s-source-glow { opacity: 0.25 !important; }
+        .cs-card-1 {
+          z-index:4;
+          box-shadow: 0 8px 24px rgba(22,35,71,0.11);
+          opacity:0;
+          animation: csFan1 0.55s cubic-bezier(0.34,1.2,0.64,1) 0.46s both;
+        }
+        .cs-card-0 {
+          z-index:5;
+          box-shadow: 0 14px 36px -4px rgba(22,35,71,0.18), 0 0 0 1px rgba(22,35,71,0.04);
+          opacity:0;
+          animation: csFan0 0.55s cubic-bezier(0.34,1.3,0.64,1) 0.28s both,
+                     csFloat 4.2s ease-in-out infinite 2.2s;
+        }
+        @media (prefers-reduced-motion:reduce) {
+          .cs-card   { animation:none !important; }
+          .cs-card-0 { opacity:1    !important; transform:translateY(0px)   scale(1)     !important; }
+          .cs-card-1 { opacity:0.94 !important; transform:translateY(-18px) scale(0.955) !important; }
+          .cs-card-2 { opacity:0.88 !important; transform:translateY(-36px) scale(0.910) !important; }
+          .cs-card-3 { opacity:0.80 !important; transform:translateY(-54px) scale(0.865) !important; }
+          .cs-card-4 { opacity:0.72 !important; transform:translateY(-72px) scale(0.820) !important; }
         }
       `}</style>
 
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#E8EDF7] via-[#EEEFF6] to-[#F5EEE0] rounded-[28px]" />
+
+      {/* Stack anchor — card front sits at 64% from top, centered */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-[#E8EDF7] via-[#EEEFF6] to-[#F5EEE0] rounded-[28px]"
-        aria-hidden="true"
-      />
-
-      <svg
-        viewBox="0 0 320 320"
-        className="absolute inset-0 w-full h-full"
-        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "64%",
+          transform: "translateX(-50%)",
+          width: "74%",
+          height: "72px",
+        }}
       >
-        <defs>
-          <radialGradient id="s-source-grad" cx="35%" cy="35%" r="75%">
-            <stop offset="0%" stopColor="#4A5C8A" />
-            <stop offset="55%" stopColor="#293A66" />
-            <stop offset="100%" stopColor="#0A1530" />
-          </radialGradient>
-          <radialGradient id="s-source-glow-grad">
-            <stop offset="0" stopColor="#AF7D43" stopOpacity="0.45" />
-            <stop offset="1" stopColor="#AF7D43" stopOpacity="0" />
-          </radialGradient>
-          {streams.map((s) => (
-            <linearGradient
-              key={`grad-${s.id}`}
-              id={`s-stream-grad-${s.id}`}
-              x1="0"
-              y1="0"
-              x2="1"
-              y2="0"
-            >
-              <stop offset="0" stopColor="#162347" />
-              <stop offset="1" stopColor={s.color} />
-            </linearGradient>
-          ))}
-          {streams.map((s) => (
-            <radialGradient
-              key={`dest-grad-${s.id}`}
-              id={`s-dest-grad-${s.id}`}
-              cx="35%"
-              cy="35%"
-              r="75%"
-            >
-              <stop offset="0%" stopColor="rgba(255,255,255,0.55)" />
-              <stop offset="55%" stopColor={s.color} />
-              <stop offset="100%" stopColor={s.color} stopOpacity="0.85" />
-            </radialGradient>
-          ))}
-          {streams.map((s) => (
-            <path
-              key={`def-path-${s.id}`}
-              id={`stream-path-${s.id}`}
-              d={streamPath(s.endY)}
-              fill="none"
-            />
-          ))}
-        </defs>
-
-        {streams.map((s) => (
-          <path
-            key={`stream-${s.id}`}
-            d={streamPath(s.endY)}
-            stroke={`url(#s-stream-grad-${s.id})`}
-            strokeWidth={s.width}
-            fill="none"
-            strokeLinecap="round"
-            className="s-stream"
-            style={{ animationDelay: `${s.delay}s` }}
-          />
-        ))}
-
-        {streams.map((s) =>
-          Array.from({ length: PARTICLES_PER_STREAM }, (_, i) => (
-            <circle
-              key={`particle-${s.id}-${i}`}
-              r="3"
-              fill={s.color}
-              stroke="rgba(255,255,255,0.6)"
-              strokeWidth="0.6"
-            >
-              <animateMotion
-                dur={`${FLOW_DURATION}s`}
-                repeatCount="indefinite"
-                begin={`${s.delay + 0.6 + (i * FLOW_DURATION) / PARTICLES_PER_STREAM}s`}
-                rotate="auto"
+        {/* Render back-to-front so front card is on top in DOM */}
+        {[...assetCards].reverse().map((card, revIdx) => {
+          const idx = assetCards.length - 1 - revIdx;
+          return (
+            <div key={card.id} className={`cs-card cs-card-${idx}`}>
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 10,
+                  background: card.color,
+                  flexShrink: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                <mpath href={`#stream-path-${s.id}`} />
-              </animateMotion>
-            </circle>
-          )),
-        )}
+                {card.icon}
+              </div>
+              <div style={{ minWidth: 0 }}>
+                <p style={{ fontSize: 14, fontWeight: 700, color: "#162347", margin: 0, letterSpacing: "-0.2px", lineHeight: 1.2 }}>
+                  {card.label}
+                </p>
+                <p style={{ fontSize: 11, color: "rgba(13,12,34,0.50)", margin: 0, marginTop: 3, lineHeight: 1 }}>
+                  {card.desc}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
 
-        <ellipse
-          cx={SOURCE_X}
-          cy={SOURCE_Y}
-          rx={SOURCE_RING_RX + 6}
-          ry={SOURCE_RING_RY + 4}
-          fill="url(#s-source-glow-grad)"
-          className="s-source-glow"
-          transform={`rotate(-15 ${SOURCE_X} ${SOURCE_Y})`}
-        />
-        <circle
-          cx={SOURCE_X}
-          cy={SOURCE_Y}
-          r={SOURCE_R}
-          fill="url(#s-source-grad)"
-          stroke="rgba(175, 125, 67, 0.45)"
-          strokeWidth="1"
-          className="s-source-core"
-        />
-        <text
-          x={SOURCE_X}
-          y={SOURCE_Y + 4}
-          textAnchor="middle"
-          fontSize="11"
-          fontWeight="700"
-          fill="white"
-          letterSpacing="-0.2"
-          className="s-label"
-          style={{ animationDelay: "0.3s" }}
-        >
-          FloatX
-        </text>
-
-        {streams.map((s) => (
-          <circle
-            key={`dest-group-${s.id}`}
-            cx={DEST_X}
-            cy={s.endY}
-            r={DEST_R}
-            fill={`url(#s-dest-grad-${s.id})`}
-            stroke="rgba(0,0,0,0.10)"
-            strokeWidth="0.5"
-            className="s-node"
-            style={{ animationDelay: `${s.delay + 0.65}s` }}
-          />
-        ))}
-
-        {streams.map((s) => (
-          <g
-            key={`dest-label-${s.id}`}
-            className="s-label"
-            style={{ animationDelay: `${s.delay + 0.9}s` }}
-          >
-            <text
-              x={DEST_X + DEST_RING_RX + 4}
-              y={s.endY - 1}
-              textAnchor="start"
-              fontSize="7.5"
-              fontWeight="700"
-              fill="#162347"
-              opacity="0.78"
-              letterSpacing="0.3"
-            >
-              {s.label.toUpperCase()}
-            </text>
-          </g>
-        ))}
-
-        <text
-          x="160"
-          y="306"
-          textAnchor="middle"
-          fontSize="10"
-          fontWeight="600"
-          fill="#162347"
-          opacity="0.55"
-          letterSpacing="0.6"
-        >
-          ONE PLATFORM · FIVE ASSET CLASSES
-        </text>
-      </svg>
+      {/* Footer */}
+      <p
+        style={{
+          position: "absolute",
+          bottom: 18,
+          left: 0,
+          right: 0,
+          textAlign: "center",
+          fontSize: 10,
+          fontWeight: 600,
+          color: "rgba(22,35,71,0.48)",
+          letterSpacing: "0.6px",
+          margin: 0,
+        }}
+      >
+        ONE PLATFORM · FIVE ASSET CLASSES
+      </p>
     </div>
   );
 }
@@ -288,7 +239,7 @@ export function InvestmentsHero() {
             </Button>
           </div>
           <div>
-            <SankeyAnim />
+            <CardStackAnim />
           </div>
         </div>
       </div>
