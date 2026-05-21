@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const audiences = [
   {
@@ -40,10 +41,13 @@ export function HowItWorksFunds() {
   return (
     <section className="bg-[#E5ECF8] py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,4vw,48px)] leading-[1.15] text-center mb-14">
-          How can FloatX Funds work for you?
-        </h2>
+        <FadeUp>
+          <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,4vw,48px)] leading-[1.15] text-center mb-14">
+            How can FloatX Funds work for you?
+          </h2>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[900px]:grid-cols-3 gap-6">
           {audiences.map((a) => (
             <div
@@ -72,6 +76,7 @@ export function HowItWorksFunds() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

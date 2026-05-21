@@ -1,5 +1,6 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { TierCard } from "./TierCard";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const tiers = [
   {
@@ -50,21 +51,25 @@ export function Classifications() {
   return (
     <section className="bg-page-bg pt-8 pb-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="mb-12">
-          <Eyebrow>Investor Classifications</Eyebrow>
-          <h2 className="font-sans font-bold text-navy text-[clamp(30px,3.6vw,44px)] leading-[1.1] -tracking-[0.02em] mt-3 mb-4">
-            Choose your path to be an Accredited Investor for Full Access
-          </h2>
-          <p className="text-[16px] text-ink/75 m-0 leading-[1.6]">
-            FloatX tailors access to opportunities based on your investor classification under Australian regulations.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="mb-12">
+            <Eyebrow>Investor Classifications</Eyebrow>
+            <h2 className="font-sans font-bold text-navy text-[clamp(30px,3.6vw,44px)] leading-[1.1] -tracking-[0.02em] mt-3 mb-4">
+              Choose your path to be an Accredited Investor for Full Access
+            </h2>
+            <p className="text-[16px] text-ink/75 m-0 leading-[1.6]">
+              FloatX tailors access to opportunities based on your investor classification under Australian regulations.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[900px]:grid-cols-3 gap-6">
           {tiers.map((t) => (
             <TierCard key={t.title} {...t} />
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

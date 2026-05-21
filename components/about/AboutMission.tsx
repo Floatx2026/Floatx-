@@ -1,6 +1,9 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 export function AboutMission() {
   return (
     <section className="bg-cream py-20 border-b border-line">
+      <FadeUp>
       <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 min-[860px]:grid-cols-[200px_1fr] gap-10 items-start">
         <div>
           <span className="inline-block text-tan text-[11px] font-semibold uppercase tracking-[0.14em]">
@@ -15,6 +18,7 @@ export function AboutMission() {
           </p>
         </div>
       </div>
+      </FadeUp>
     </section>
   );
 }

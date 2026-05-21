@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const pillars = [
   {
     title: "Content Creation",
@@ -39,18 +41,21 @@ export function InvestorConnectSection() {
   return (
     <section className="bg-cream py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-4">
-          <p className="font-sans font-medium text-tan text-[13px] tracking-[1.6px] uppercase mb-4">
-            Investor Connect
-          </p>
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
-            Fast-track your growth with FloatX.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/[0.72] max-w-[560px] mx-auto m-0">
-            Investor &amp; Media insights, connections and opportunities — delivered through three integrated service pillars.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-4">
+            <p className="font-sans font-medium text-tan text-[13px] tracking-[1.6px] uppercase mb-4">
+              Investor Connect
+            </p>
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
+              Fast-track your growth with FloatX.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/[0.72] max-w-[560px] mx-auto m-0">
+              Investor &amp; Media insights, connections and opportunities — delivered through three integrated service pillars.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[700px]:grid-cols-3 gap-6 mt-14">
           {pillars.map((p) => (
             <div key={p.title}
@@ -73,6 +78,7 @@ export function InvestorConnectSection() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

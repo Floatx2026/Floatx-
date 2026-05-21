@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const commentary = [
   "Why Australian family offices are over-allocating to private credit",
@@ -16,15 +17,18 @@ export function InsightsBand() {
   return (
     <section className="bg-navy py-20">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-14">
-          <h2 className="font-serif italic font-normal text-white text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-4">
-            Your edge in private fund markets.
-          </h2>
-          <p className="text-white/75 text-[16px] leading-[1.6] max-w-[640px] mx-auto m-0">
-            From original research to plain-language commentary on the issues shaping private capital — written for allocators, not press releases.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-14">
+            <h2 className="font-serif italic font-normal text-white text-[clamp(32px,4vw,48px)] leading-[1.15] m-0 mb-4">
+              Your edge in private fund markets.
+            </h2>
+            <p className="text-white/75 text-[16px] leading-[1.6] max-w-[640px] mx-auto m-0">
+              From original research to plain-language commentary on the issues shaping private capital — written for allocators, not press releases.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[900px]:grid-cols-2 gap-12 items-start">
           <div className="grid grid-cols-[44px_1fr] gap-5">
             <div className="w-11 h-11 rounded-[12px] bg-tan/20 text-tan flex items-center justify-center">
@@ -69,6 +73,7 @@ export function InsightsBand() {
             </div>
           </div>
         </div>
+        </FadeUp>
       </div>
     </section>
   );

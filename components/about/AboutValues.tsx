@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const values = [
   {
     title: "Trust",
@@ -38,15 +40,18 @@ export function AboutValues() {
   return (
     <section className="bg-page-bg py-20">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-14">
-          <span className="inline-block text-tan text-[11px] font-semibold uppercase tracking-[0.14em] mb-3">
-            Our Values
-          </span>
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.5vw,42px)] leading-[1.2] m-0">
-            What drives everything we do
-          </h2>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-14">
+            <span className="inline-block text-tan text-[11px] font-semibold uppercase tracking-[0.14em] mb-3">
+              Our Values
+            </span>
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.5vw,42px)] leading-[1.2] m-0">
+              What drives everything we do
+            </h2>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[700px]:grid-cols-3 gap-6">
           {values.map((v) => (
             <div
@@ -63,6 +68,7 @@ export function AboutValues() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

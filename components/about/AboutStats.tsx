@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const stats = [
   { value: "30+", label: "Years of financial services" },
   { value: "$4B+", label: "Funds raised since 1999" },
@@ -9,6 +11,7 @@ export function AboutStats() {
   return (
     <section className="bg-navy-deep py-16">
       <div className="max-w-[1200px] mx-auto px-6">
+        <FadeUp>
         <div className="grid grid-cols-2 min-[700px]:grid-cols-4 gap-8">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
@@ -19,6 +22,7 @@ export function AboutStats() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

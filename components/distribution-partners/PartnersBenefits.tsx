@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const benefits = [
   {
     title: "Revenue share, transparent terms",
@@ -37,9 +39,12 @@ export function PartnersBenefits() {
   return (
     <section className="bg-page-bg py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] text-center mb-14 max-w-[22ch] mx-auto">
-          A distribution partnership built around your clients.
-        </h2>
+        <FadeUp>
+          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] text-center mb-14 max-w-[22ch] mx-auto">
+            A distribution partnership built around your clients.
+          </h2>
+        </FadeUp>
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[700px]:grid-cols-3 gap-6">
           {benefits.map((b) => (
             <div
@@ -56,6 +61,7 @@ export function PartnersBenefits() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const faqs = [
   {
@@ -39,10 +40,13 @@ export function CashPlusFaqs() {
   return (
     <section className="bg-page-bg py-24">
       <div className="max-w-[860px] mx-auto px-6">
-        <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,4vw,48px)] leading-[1.15] text-center mb-12">
-          Cash Plus FAQs
-        </h2>
+        <FadeUp>
+          <h2 className="font-serif italic font-normal text-navy text-[clamp(32px,4vw,48px)] leading-[1.15] text-center mb-12">
+            Cash Plus FAQs
+          </h2>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="rounded-[20px] border border-line bg-white overflow-hidden">
           {faqs.map((f, i) => {
             const isOpen = open === i;
@@ -86,6 +90,7 @@ export function CashPlusFaqs() {
             );
           })}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

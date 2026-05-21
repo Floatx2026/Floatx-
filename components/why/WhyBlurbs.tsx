@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 export function WhyBlurbs() {
   return (
     <section className="bg-page-bg pb-20">
+      <FadeUp>
       <div className="max-w-[820px] mx-auto px-6 flex flex-col gap-5">
         <p className="text-[16px] leading-[1.7] text-ink/80 m-0">
           <strong className="text-navy font-semibold">All-in-One Solution: </strong>
@@ -20,6 +22,7 @@ export function WhyBlurbs() {
           Ready to unlock the full potential of private markets?
         </p>
       </div>
+      </FadeUp>
     </section>
   );
 }

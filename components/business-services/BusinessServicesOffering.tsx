@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const services = [
   {
     title: "Marketing Services",
@@ -59,15 +61,18 @@ export function BusinessServicesOffering() {
   return (
     <section className="bg-page-bg py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-14">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
-            Everything your business needs to grow.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/[0.72] max-w-[560px] mx-auto m-0">
-            From investor outreach to operational infrastructure — FloatX Business Services provides end-to-end support for private companies and fund managers.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-14">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
+              Everything your business needs to grow.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/[0.72] max-w-[560px] mx-auto m-0">
+              From investor outreach to operational infrastructure — FloatX Business Services provides end-to-end support for private companies and fund managers.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="relative">
           {/* Orbital ring — on top of cards, pointer-events-none so cards remain interactive */}
           <div className="absolute inset-0 pointer-events-none z-[20]" aria-hidden="true">
@@ -128,6 +133,7 @@ export function BusinessServicesOffering() {
             ))}
           </div>
         </div>
+        </FadeUp>
       </div>
     </section>
   );

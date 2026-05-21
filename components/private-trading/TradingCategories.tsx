@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 type Category = {
   href: string;
@@ -71,6 +72,7 @@ export function TradingCategories() {
   return (
     <section className="bg-white py-20">
       <div className="max-w-[1200px] mx-auto px-6">
+        <FadeUp>
         <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1024px]:grid-cols-4 gap-4">
           {categories.map((c) => (
             <Link
@@ -102,6 +104,7 @@ export function TradingCategories() {
             </Link>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

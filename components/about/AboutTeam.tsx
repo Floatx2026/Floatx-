@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const team = [
   {
     initials: "GW",
@@ -21,15 +23,18 @@ export function AboutTeam() {
   return (
     <section className="bg-cream py-20 border-t border-line">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-14">
-          <span className="inline-block text-tan text-[11px] font-semibold uppercase tracking-[0.14em] mb-3">
-            Leadership
-          </span>
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.5vw,42px)] leading-[1.2] m-0">
-            The team behind FloatX
-          </h2>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-14">
+            <span className="inline-block text-tan text-[11px] font-semibold uppercase tracking-[0.14em] mb-3">
+              Leadership
+            </span>
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.5vw,42px)] leading-[1.2] m-0">
+              The team behind FloatX
+            </h2>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[760px]:grid-cols-2 gap-8">
           {team.map((member) => (
             <div
@@ -59,6 +64,7 @@ export function AboutTeam() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

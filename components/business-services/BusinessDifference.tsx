@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const differentiators = [
   {
     title: "Strategic APAC Gateway",
@@ -46,14 +48,17 @@ export function BusinessDifference() {
   return (
     <section className="bg-cream py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-14">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
-            The difference we deliver.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/[0.72] max-w-[480px] mx-auto m-0">
-            FloatX Business Services combines capital markets expertise, global networks and scalable execution in one integrated offering.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-14">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
+              The difference we deliver.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/[0.72] max-w-[480px] mx-auto m-0">
+              FloatX Business Services combines capital markets expertise, global networks and scalable execution in one integrated offering.
+            </p>
+          </div>
+        </FadeUp>
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1000px]:grid-cols-4 gap-6">
           {differentiators.map((d) => (
             <div key={d.title}
@@ -68,6 +73,7 @@ export function BusinessDifference() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

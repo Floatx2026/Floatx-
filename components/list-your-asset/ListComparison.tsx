@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 type CellContent =
   | { type: "check" }
@@ -137,15 +138,18 @@ export function ListComparison() {
   return (
     <section className="bg-cream py-20">
       <div className="max-w-[1100px] mx-auto px-6">
-        <div className="text-center mb-12 max-w-[48ch] mx-auto">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
-            How FloatX compares.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/70 m-0">
-            One platform built for private markets — faster, cheaper and more flexible than the alternatives.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-12 max-w-[48ch] mx-auto">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
+              How FloatX compares.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/70 m-0">
+              One platform built for private markets — faster, cheaper and more flexible than the alternatives.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="overflow-x-auto rounded-[20px] border border-line shadow-[0_4px_24px_-8px_rgba(22,35,71,0.10)]">
           <table className="w-full min-w-[600px] border-collapse">
             <thead>
@@ -217,6 +221,7 @@ export function ListComparison() {
             </tbody>
           </table>
         </div>
+        </FadeUp>
       </div>
     </section>
   );

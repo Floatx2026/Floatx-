@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/Button";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 export function BusinessCTA() {
   return (
     <section className="bg-navy py-20">
       <div className="max-w-[1200px] mx-auto px-6">
+        <FadeUp>
         <div className="grid grid-cols-1 min-[900px]:grid-cols-[1fr_auto] gap-10 items-center">
           <div>
             <p className="font-sans font-medium text-tan text-[13px] tracking-[1.6px] uppercase mb-4">
@@ -23,6 +25,7 @@ export function BusinessCTA() {
             </Button>
           </div>
         </div>
+        </FadeUp>
       </div>
     </section>
   );

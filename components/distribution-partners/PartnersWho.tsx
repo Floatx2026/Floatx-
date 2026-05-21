@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const audiences = [
   { title: "Independent Financial Advisers", note: "Holding an AFSL or operating as an authorised representative." },
   { title: "Brokers & Wholesale Dealers", note: "Equities, fixed income and alternatives, AU and APAC." },
@@ -11,6 +13,7 @@ export function PartnersWho() {
     <section className="bg-cream py-24">
       <div className="max-w-[1100px] mx-auto px-6">
         <div className="grid grid-cols-1 min-[900px]:grid-cols-[0.85fr_1fr] gap-12 min-[900px]:gap-16 items-start">
+          <FadeUp>
           <div>
             <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-5">
               Who this is for.
@@ -19,6 +22,8 @@ export function PartnersWho() {
               FloatX is wholesale-only under s708 of the Corporations Act. We partner with licensed professionals who already serve sophisticated clients — and want a curated, AU/APAC-focused alts platform behind them.
             </p>
           </div>
+          </FadeUp>
+          <FadeUp delay={80}>
           <ul className="m-0 p-0 list-none grid grid-cols-1 gap-3">
             {audiences.map((a) => (
               <li
@@ -38,6 +43,7 @@ export function PartnersWho() {
               </li>
             ))}
           </ul>
+          </FadeUp>
         </div>
       </div>
     </section>

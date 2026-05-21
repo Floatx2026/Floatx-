@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const audiences = [
   {
     title: "Scale-ups",
@@ -37,14 +39,17 @@ export function WhoWeHelp() {
   return (
     <section className="bg-page-bg py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-14">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
-            Who we help grow.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/[0.72] max-w-[480px] mx-auto m-0">
-            Agile, scalable marketing and IR solutions that open doors to qualified investors and media to support your business growth.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-14">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
+              Who we help grow.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/[0.72] max-w-[480px] mx-auto m-0">
+              Agile, scalable marketing and IR solutions that open doors to qualified investors and media to support your business growth.
+            </p>
+          </div>
+        </FadeUp>
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[600px]:grid-cols-3 gap-6">
           {audiences.map((a) => (
             <div key={a.title}
@@ -59,6 +64,7 @@ export function WhoWeHelp() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const pillars = [
   {
@@ -19,13 +20,16 @@ export function Advantage() {
   return (
     <section className="bg-cream py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="mb-10 max-w-[640px]">
-          <Eyebrow>Why FloatX</Eyebrow>
-          <h2 className="font-sans font-bold text-navy text-[clamp(32px,4vw,48px)] leading-[1.1] -tracking-[0.02em] mt-3 mb-4">
-            The FloatX advantage
-          </h2>
-        </div>
+        <FadeUp>
+          <div className="mb-10 max-w-[640px]">
+            <Eyebrow>Why FloatX</Eyebrow>
+            <h2 className="font-sans font-bold text-navy text-[clamp(32px,4vw,48px)] leading-[1.1] -tracking-[0.02em] mt-3 mb-4">
+              The FloatX advantage
+            </h2>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[900px]:grid-cols-3 gap-6">
           {pillars.map((p) => (
             <div
@@ -39,6 +43,7 @@ export function Advantage() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 type DebtType = {
   title: string;
@@ -44,15 +45,18 @@ export function DebtTypes() {
   return (
     <section className="bg-white py-20">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="max-w-[640px] mb-10">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-3">
-            Two routes into private debt.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
-            Choose the income-stream profile that fits your portfolio — both available to FloatX wholesale members at launch.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="max-w-[640px] mb-10">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-3">
+              Two routes into private debt.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
+              Choose the income-stream profile that fits your portfolio — both available to FloatX wholesale members at launch.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[800px]:grid-cols-2 gap-5">
           {types.map((t) => (
             <div
@@ -69,6 +73,7 @@ export function DebtTypes() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

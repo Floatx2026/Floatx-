@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const services = [
   {
     title: "Investment",
@@ -49,18 +51,21 @@ export function TechProcess() {
   return (
     <section className="bg-cream py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="max-w-[52ch] mb-14">
-          <p className="text-[11.5px] uppercase tracking-[0.14em] font-semibold text-ink/45 mb-4">
-            Process
-          </p>
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
-            How we help.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/70 m-0">
-            FloatX supports entrepreneurs by providing investment funding and the necessary ecosystem support to grow your business — from first cheque to global scale.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="max-w-[52ch] mb-14">
+            <p className="text-[11.5px] uppercase tracking-[0.14em] font-semibold text-ink/45 mb-4">
+              Process
+            </p>
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
+              How we help.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/70 m-0">
+              FloatX supports entrepreneurs by providing investment funding and the necessary ecosystem support to grow your business — from first cheque to global scale.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1024px]:grid-cols-4 gap-6">
           {services.map((s) => (
             <div
@@ -77,6 +82,7 @@ export function TechProcess() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

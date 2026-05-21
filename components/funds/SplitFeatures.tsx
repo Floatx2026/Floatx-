@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const features = [
   {
@@ -45,6 +46,7 @@ export function SplitFeatures() {
   return (
     <section className="bg-page-bg py-20">
       <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 min-[900px]:grid-cols-2 gap-12">
+        <FadeUp>
         <div className="bg-cream rounded-[24px] p-10 flex flex-col">
           <h2 className="font-serif italic font-normal text-navy text-[clamp(30px,3.4vw,40px)] leading-[1.15] m-0 mb-5 max-w-[16ch]">
             Private funds, made transparent.
@@ -61,7 +63,9 @@ export function SplitFeatures() {
             <span className="text-ink/45 text-[14px]">Portal preview placeholder</span>
           </div>
         </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="flex flex-col gap-10 justify-center">
           {features.map((f) => (
             <div key={f.title} className="grid grid-cols-[44px_1fr] gap-4">
@@ -77,6 +81,7 @@ export function SplitFeatures() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const features = [
   { name: "Private trading — with market depth", floatx: true,  forge: false, carta: false, addx: false, npm: false },
@@ -102,16 +103,19 @@ export function ComparisonTable() {
       <div className="max-w-[1100px] mx-auto px-6">
 
         {/* Heading */}
-        <div className="text-center mb-12">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(26px,3.5vw,40px)] leading-[1.2] m-0 mb-3">
-            Unmatched choice in private markets: compare investment options
-          </h2>
-          <p className="text-[16px] text-ink/65 m-0">
-            Simplify your search: compare private investment platforms
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-12">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(26px,3.5vw,40px)] leading-[1.2] m-0 mb-3">
+              Unmatched choice in private markets: compare investment options
+            </h2>
+            <p className="text-[16px] text-ink/65 m-0">
+              Simplify your search: compare private investment platforms
+            </p>
+          </div>
+        </FadeUp>
 
         {/* Table — scrollable on mobile */}
+        <FadeUp delay={80}>
         <div className="overflow-x-auto rounded-[20px] shadow-[0_12px_40px_-12px_rgba(22,35,71,0.18)]">
           <table className="w-full min-w-[680px] border-collapse">
 
@@ -196,6 +200,7 @@ export function ComparisonTable() {
 
           </table>
         </div>
+        </FadeUp>
 
         {/* Footnote */}
         <p className="text-center text-[12px] text-ink/40 mt-5 m-0">

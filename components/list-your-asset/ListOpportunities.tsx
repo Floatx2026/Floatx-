@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const opportunities = [
   {
     title: "List for Private Trading",
@@ -53,15 +55,18 @@ export function ListOpportunities() {
   return (
     <section id="opportunities" className="bg-white py-24 scroll-mt-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-14 max-w-[52ch] mx-auto">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
-            Four ways to list on FloatX.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/70 m-0">
-            One platform, multiple listing paths — each designed to connect the right asset with the right investors.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-14 max-w-[52ch] mx-auto">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
+              Four ways to list on FloatX.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/70 m-0">
+              One platform, multiple listing paths — each designed to connect the right asset with the right investors.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[700px]:grid-cols-2 min-[1100px]:grid-cols-4 gap-6">
           {opportunities.map((o) => (
             <div
@@ -91,6 +96,7 @@ export function ListOpportunities() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

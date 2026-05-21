@@ -1,3 +1,4 @@
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const features = [
   {
@@ -49,6 +50,7 @@ export function BlockchainHowItWorks() {
       <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 min-[960px]:grid-cols-2 gap-16 items-center">
 
         {/* Left — text + features */}
+        <FadeUp>
         <div>
           <h2 className="font-sans font-bold text-navy text-[clamp(26px,3vw,36px)] leading-[1.2] m-0 mb-8">
             How blockchain works<br />in Private Trading
@@ -80,6 +82,7 @@ export function BlockchainHowItWorks() {
             ))}
           </div>
         </div>
+        </FadeUp>
 
         {/* Right — blue tree image in iPad frame */}
         <div className="flex items-center justify-center">

@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const benefits = [
   {
     title: "Enhanced security",
@@ -36,12 +38,15 @@ export function BlockchainBenefits() {
   return (
     <section className="bg-page-bg py-20">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="text-center mb-14">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.5vw,42px)] leading-[1.2] m-0">
-            The benefits are clear for both sides of the trade
-          </h2>
-        </div>
+        <FadeUp>
+          <div className="text-center mb-14">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.5vw,42px)] leading-[1.2] m-0">
+              The benefits are clear for both sides of the trade
+            </h2>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[700px]:grid-cols-3 gap-6">
           {benefits.map((b) => (
             <div
@@ -58,6 +63,7 @@ export function BlockchainBenefits() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

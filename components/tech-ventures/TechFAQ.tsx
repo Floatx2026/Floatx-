@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const faqs = [
   {
@@ -30,16 +31,19 @@ export function TechFAQ() {
   return (
     <section className="bg-white py-24">
       <div className="max-w-[800px] mx-auto px-6">
-        <p className="text-[11.5px] uppercase tracking-[0.14em] font-semibold text-ink/45 mb-4">
-          Frequently asked questions
-        </p>
-        <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-3">
-          Got questions? We can help.
-        </h2>
-        <p className="text-[16px] leading-[1.65] text-ink/65 m-0 mb-12">
-          If you don&apos;t see an answer below, don&apos;t hesitate to get in touch.
-        </p>
+        <FadeUp>
+          <p className="text-[11.5px] uppercase tracking-[0.14em] font-semibold text-ink/45 mb-4">
+            Frequently asked questions
+          </p>
+          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-3">
+            Got questions? We can help.
+          </h2>
+          <p className="text-[16px] leading-[1.65] text-ink/65 m-0 mb-12">
+            If you don&apos;t see an answer below, don&apos;t hesitate to get in touch.
+          </p>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="flex flex-col gap-3">
           {faqs.map((f, i) => (
             <div
@@ -88,6 +92,7 @@ export function TechFAQ() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

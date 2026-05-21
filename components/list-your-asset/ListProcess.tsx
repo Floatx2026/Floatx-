@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const steps = [
   {
     number: "01",
@@ -25,14 +27,17 @@ export function ListProcess() {
   return (
     <section className="bg-cream py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="max-w-[52ch] mb-14">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
-            Live in 48 hours. Here&apos;s how.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/70 m-0">
-            A simple four-step process from initial screening to open for investment.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="max-w-[52ch] mb-14">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.4vw,40px)] leading-[1.15] m-0 mb-4">
+              Live in 48 hours. Here&apos;s how.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/70 m-0">
+              A simple four-step process from initial screening to open for investment.
+            </p>
+          </div>
+        </FadeUp>
+        <FadeUp delay={80}>
         {/* Desktop: circles + dashed connectors */}
         <div className="hidden min-[900px]:grid grid-cols-4 gap-0">
           {steps.map((s, i) => (
@@ -75,6 +80,7 @@ export function ListProcess() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

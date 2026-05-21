@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const tiles: { accent: string; rest: ReactNode }[] = [
   { accent: "40", rest: " Unicorns" },
@@ -13,6 +14,7 @@ export function StatsStrip() {
   return (
     <section className="bg-page-bg py-8">
       <div className="max-w-[1200px] mx-auto px-6">
+        <FadeUp>
         <div className="grid grid-cols-2 min-[768px]:grid-cols-4 gap-5 min-[768px]:gap-6">
           {tiles.map((t, i) => (
             <div
@@ -29,6 +31,7 @@ export function StatsStrip() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

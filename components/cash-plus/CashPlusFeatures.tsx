@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const features = [
   {
     title: "Above-cash benchmark",
@@ -45,9 +47,12 @@ export function CashPlusFeatures() {
   return (
     <section className="bg-page-bg py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.6vw,46px)] leading-[1.15] text-center mb-14 whitespace-nowrap">
-          A simpler way to put cash to work.
-        </h2>
+        <FadeUp>
+          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.6vw,46px)] leading-[1.15] text-center mb-14 whitespace-nowrap">
+            A simpler way to put cash to work.
+          </h2>
+        </FadeUp>
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[700px]:grid-cols-2 min-[1100px]:grid-cols-4 gap-6">
           {features.map((f) => (
             <div
@@ -64,6 +69,7 @@ export function CashPlusFeatures() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

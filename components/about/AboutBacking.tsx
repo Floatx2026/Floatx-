@@ -1,3 +1,5 @@
+import { FadeUp } from "@/components/ui/FadeUp";
+
 const partners = [
   {
     initials: "AIMS",
@@ -20,6 +22,7 @@ export function AboutBacking() {
   return (
     <section className="bg-navy py-20">
       <div className="max-w-[1200px] mx-auto px-6">
+        <FadeUp>
         <div className="text-center mb-14">
           <span className="inline-block text-white/60 text-[11px] font-semibold uppercase tracking-[0.14em] mb-3">
             Backing & Regulation
@@ -33,7 +36,9 @@ export function AboutBacking() {
             and acquired close to $4.1 billion in investment assets since 1999.
           </p>
         </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[700px]:grid-cols-3 gap-6">
           {partners.map((p) => (
             <div
@@ -50,6 +55,7 @@ export function AboutBacking() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );

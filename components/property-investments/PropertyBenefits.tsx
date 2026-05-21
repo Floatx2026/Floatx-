@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 type Benefit = {
   title: string;
@@ -54,15 +55,18 @@ export function PropertyBenefits() {
   return (
     <section className="bg-white py-24">
       <div className="max-w-[1200px] mx-auto px-6">
-        <div className="max-w-[720px] mb-12">
-          <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.6vw,42px)] leading-[1.15] m-0 mb-3">
-            Secure, stable, returns.
-          </h2>
-          <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
-            Single-asset positions and diversified fund strategies — both backed by real property collateral and managed by specialists.
-          </p>
-        </div>
+        <FadeUp>
+          <div className="max-w-[720px] mb-12">
+            <h2 className="font-serif italic font-normal text-navy text-[clamp(28px,3.6vw,42px)] leading-[1.15] m-0 mb-3">
+              Secure, stable, returns.
+            </h2>
+            <p className="text-[16px] leading-[1.65] text-ink/[0.78] m-0">
+              Single-asset positions and diversified fund strategies — both backed by real property collateral and managed by specialists.
+            </p>
+          </div>
+        </FadeUp>
 
+        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[700px]:grid-cols-3 gap-5">
           {benefits.map((b) => (
             <div
@@ -79,6 +83,7 @@ export function PropertyBenefits() {
             </div>
           ))}
         </div>
+        </FadeUp>
       </div>
     </section>
   );
