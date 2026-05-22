@@ -91,38 +91,37 @@ export function AccessGrid() {
           </div>
         </FadeUp>
 
-        <FadeUp delay={80}>
         <div className="grid grid-cols-1 min-[700px]:grid-cols-2 min-[1024px]:grid-cols-3 gap-6">
-          {accesses.map((a) => (
-            <Link
-              key={a.title}
-              href={a.href}
-              className="group relative bg-white rounded-[20px] p-7 flex flex-col shadow-[0_8px_24px_-12px_rgba(22,35,71,0.10)] hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.18)] hover:-translate-y-0.5 transition-all duration-200"
-            >
-              <div className="flex items-start justify-between mb-5">
-                <div className="w-11 h-11 rounded-[12px] bg-tan/10 text-tan flex items-center justify-center">
-                  {a.icon}
+          {accesses.map((a, i) => (
+            <FadeUp key={a.title} delay={80 + (i % 3) * 80}>
+              <Link
+                href={a.href}
+                className="group relative bg-white rounded-[20px] p-7 flex flex-col shadow-[0_8px_24px_-12px_rgba(22,35,71,0.10)] hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.18)] hover:-translate-y-0.5 transition-all duration-200 h-full"
+              >
+                <div className="flex items-start justify-between mb-5">
+                  <div className="w-11 h-11 rounded-[12px] bg-tan/10 text-tan flex items-center justify-center">
+                    {a.icon}
+                  </div>
+                  {a.badge && (
+                    <span className="text-[10px] uppercase tracking-[0.14em] font-semibold text-tan bg-tan/10 px-2.5 py-1 rounded-full">
+                      {a.badge}
+                    </span>
+                  )}
                 </div>
-                {a.badge && (
-                  <span className="text-[10px] uppercase tracking-[0.14em] font-semibold text-tan bg-tan/10 px-2.5 py-1 rounded-full">
-                    {a.badge}
-                  </span>
-                )}
-              </div>
-              <h3 className="font-sans font-bold text-navy text-[20px] leading-[1.25] m-0 mb-2.5 -tracking-[0.005em]">
-                {a.title}
-              </h3>
-              <p className="text-[14.5px] leading-[1.6] text-ink/75 m-0 mb-6 flex-1">
-                {a.blurb}
-              </p>
-              <span className="text-[13px] font-medium text-navy inline-flex items-center gap-1.5">
-                Explore
-                <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
-              </span>
-            </Link>
+                <h3 className="font-sans font-bold text-navy text-[20px] leading-[1.25] m-0 mb-2.5 -tracking-[0.005em]">
+                  {a.title}
+                </h3>
+                <p className="text-[14.5px] leading-[1.6] text-ink/75 m-0 mb-6 flex-1">
+                  {a.blurb}
+                </p>
+                <span className="text-[13px] font-medium text-navy inline-flex items-center gap-1.5">
+                  Explore
+                  <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                </span>
+              </Link>
+            </FadeUp>
           ))}
         </div>
-        </FadeUp>
       </div>
     </section>
   );
