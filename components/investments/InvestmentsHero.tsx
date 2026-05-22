@@ -1,222 +1,158 @@
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 
-type AssetCard = {
-  id: string;
-  label: string;
-  desc: string;
-  color: string;
-  icon: React.ReactNode;
-};
-
-const assetCards: AssetCard[] = [
-  {
-    id: "private-trading",
-    label: "Private Trading",
-    desc: "Secondary equity market",
-    color: "#162347",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ width: 16, height: 16 }}>
-        <path d="M3 14l4-4 3 3 6-8" stroke="white" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M12 6h5v5" stroke="white" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    id: "company",
-    label: "Company",
-    desc: "Primary equity raises",
-    color: "#293A66",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ width: 16, height: 16 }}>
-        <path d="M10 3v14M4 10l6-6 6 6" stroke="white" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    id: "fund",
-    label: "Fund",
-    desc: "Institutional fund access",
-    color: "#5A5163",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ width: 16, height: 16 }}>
-        <path d="M3 17h14M4 17V9m4 8V5m4 12V8m4 9V3" stroke="white" strokeWidth="1.7" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    id: "debt",
-    label: "Debt",
-    desc: "Private credit positions",
-    color: "#8C6D4F",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ width: 16, height: 16 }}>
-        <rect x="2" y="5" width="16" height="10" rx="2" stroke="white" strokeWidth="1.7" />
-        <circle cx="10" cy="10" r="2" stroke="white" strokeWidth="1.7" />
-      </svg>
-    ),
-  },
-  {
-    id: "property",
-    label: "Property",
-    desc: "Real asset investments",
-    color: "#AF7D43",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style={{ width: 16, height: 16 }}>
-        <path d="M3 9l7-6 7 6v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9z" stroke="white" strokeWidth="1.7" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
+const chartLines = [
+  { id: "private-trading", label: "Private Trading", color: "#162347", endY: 52,  d: "M 55 222 C 100 218, 195 78,  265 52"  },
+  { id: "company",         label: "Company",         color: "#293A66", endY: 90,  d: "M 55 222 C 100 218, 195 112, 265 90"  },
+  { id: "fund",            label: "Fund",            color: "#5A5163", endY: 130, d: "M 55 222 C 100 220, 195 148, 265 130" },
+  { id: "debt",            label: "Debt",            color: "#8C6D4F", endY: 163, d: "M 55 222 C 100 221, 195 172, 265 163" },
+  { id: "property",        label: "Property",        color: "#AF7D43", endY: 190, d: "M 55 222 C 100 222, 195 192, 265 190" },
 ];
 
-function CardStackAnim() {
+function ChartAnim() {
   return (
-    <div
-      className="relative w-full aspect-[4/3] max-w-[480px] mx-auto select-none"
-      aria-hidden="true"
-    >
+    <div className="relative w-full aspect-[4/3] max-w-[480px] mx-auto select-none" aria-hidden="true">
       <style>{`
-        @keyframes csFan0 {
-          from { opacity:0; transform:translateY(18px) scale(1); }
-          to   { opacity:1; transform:translateY(0px)  scale(1); }
+        @keyframes chLineIn {
+          from { stroke-dashoffset: 1; opacity: 0; }
+          8%   { opacity: 1; }
+          to   { stroke-dashoffset: 0; }
         }
-        @keyframes csFan1 {
-          from { opacity:0; transform:translateY(0px) scale(1); }
-          to   { opacity:0.94; transform:translateY(-18px) scale(0.955); }
+        @keyframes chDotPop {
+          0%  { opacity: 0; transform: scale(0.2); }
+          65% { transform: scale(1.35); }
+          100%{ opacity: 1; transform: scale(1); }
         }
-        @keyframes csFan2 {
-          from { opacity:0; transform:translateY(0px) scale(1); }
-          to   { opacity:0.88; transform:translateY(-36px) scale(0.910); }
+        @keyframes chLabelIn {
+          from { opacity: 0; transform: translateX(-5px); }
+          to   { opacity: 1; transform: translateX(0); }
         }
-        @keyframes csFan3 {
-          from { opacity:0; transform:translateY(0px) scale(1); }
-          to   { opacity:0.80; transform:translateY(-54px) scale(0.865); }
+        @keyframes chOriginPulse {
+          0%,100% { r: 5;   opacity: 0.9; }
+          50%     { r: 6.5; opacity: 1;   }
         }
-        @keyframes csFan4 {
-          from { opacity:0; transform:translateY(0px) scale(1); }
-          to   { opacity:0.72; transform:translateY(-72px) scale(0.820); }
+        @keyframes chAreaIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
         }
-        @keyframes csFloat {
-          0%,100% { transform:translateY(0px)  scale(1); }
-          50%     { transform:translateY(-6px) scale(1); }
+        .ch-line {
+          stroke-dasharray: 1;
+          stroke-dashoffset: 1;
+          animation: chLineIn 1.3s cubic-bezier(0.4,0,0.2,1) forwards;
         }
-
-        .cs-card {
-          position: absolute;
-          width: 100%;
-          background: white;
-          border-radius: 16px;
-          padding: 15px 18px;
-          display: flex;
-          align-items: center;
-          gap: 14px;
-          border: 1px solid rgba(22,35,71,0.08);
-          transform-origin: center bottom;
+        .ch-dot {
+          transform-box: fill-box;
+          transform-origin: center;
+          animation: chDotPop 0.45s cubic-bezier(0.34,1.56,0.64,1) both;
         }
-        .cs-card-4 {
-          z-index:1;
-          box-shadow: 0 2px 8px rgba(22,35,71,0.05);
-          opacity:0;
-          animation: csFan4 0.55s cubic-bezier(0.34,1.2,0.64,1) 1.0s both;
-        }
-        .cs-card-3 {
-          z-index:2;
-          box-shadow: 0 4px 14px rgba(22,35,71,0.07);
-          opacity:0;
-          animation: csFan3 0.55s cubic-bezier(0.34,1.2,0.64,1) 0.82s both;
-        }
-        .cs-card-2 {
-          z-index:3;
-          box-shadow: 0 6px 18px rgba(22,35,71,0.09);
-          opacity:0;
-          animation: csFan2 0.55s cubic-bezier(0.34,1.2,0.64,1) 0.64s both;
-        }
-        .cs-card-1 {
-          z-index:4;
-          box-shadow: 0 8px 24px rgba(22,35,71,0.11);
-          opacity:0;
-          animation: csFan1 0.55s cubic-bezier(0.34,1.2,0.64,1) 0.46s both;
-        }
-        .cs-card-0 {
-          z-index:5;
-          box-shadow: 0 14px 36px -4px rgba(22,35,71,0.18), 0 0 0 1px rgba(22,35,71,0.04);
-          opacity:0;
-          animation: csFan0 0.55s cubic-bezier(0.34,1.3,0.64,1) 0.28s both,
-                     csFloat 4.2s ease-in-out infinite 2.2s;
-        }
+        .ch-label { animation: chLabelIn 0.4s ease-out both; }
+        .ch-area  { animation: chAreaIn  0.8s ease-out both; }
         @media (prefers-reduced-motion:reduce) {
-          .cs-card   { animation:none !important; }
-          .cs-card-0 { opacity:1    !important; transform:translateY(0px)   scale(1)     !important; }
-          .cs-card-1 { opacity:0.94 !important; transform:translateY(-18px) scale(0.955) !important; }
-          .cs-card-2 { opacity:0.88 !important; transform:translateY(-36px) scale(0.910) !important; }
-          .cs-card-3 { opacity:0.80 !important; transform:translateY(-54px) scale(0.865) !important; }
-          .cs-card-4 { opacity:0.72 !important; transform:translateY(-72px) scale(0.820) !important; }
+          .ch-line  { animation:none !important; stroke-dashoffset:0 !important; opacity:1 !important; }
+          .ch-dot   { animation:none !important; opacity:1 !important; transform:none !important; }
+          .ch-label { animation:none !important; opacity:1 !important; transform:none !important; }
+          .ch-area  { animation:none !important; opacity:1 !important; }
         }
       `}</style>
 
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#E8EDF7] via-[#EEEFF6] to-[#F5EEE0] rounded-[28px]" />
 
-      {/* Stack anchor — card front sits at 64% from top, centered */}
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "64%",
-          transform: "translateX(-50%)",
-          width: "74%",
-          height: "72px",
-        }}
-      >
-        {/* Render back-to-front so front card is on top in DOM */}
-        {[...assetCards].reverse().map((card, revIdx) => {
-          const idx = assetCards.length - 1 - revIdx;
+      <svg viewBox="0 0 400 280" className="absolute inset-0 w-full h-full" aria-hidden="true">
+        <defs>
+          {/* Gradient fill under top line */}
+          <linearGradient id="ch-fill-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stopColor="#162347" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#162347" stopOpacity="0"    />
+          </linearGradient>
+        </defs>
+
+        {/* Horizontal grid */}
+        {[80, 120, 160, 200].map((y) => (
+          <line key={y} x1="55" y1={y} x2="268" y2={y}
+            stroke="#162347" strokeWidth="0.6" opacity="0.07" strokeDasharray="3 5" />
+        ))}
+
+        {/* Axes */}
+        <line x1="55" y1="38" x2="55"  y2="226" stroke="#162347" strokeWidth="0.8" opacity="0.14" />
+        <line x1="55" y1="226" x2="268" y2="226" stroke="#162347" strokeWidth="0.8" opacity="0.14" />
+
+        {/* Y-axis labels */}
+        <text x="49" y="230" textAnchor="end" fontSize="7" fill="#162347" opacity="0.42" fontWeight="600">0%</text>
+        <text x="49" y="165" textAnchor="end" fontSize="7" fill="#162347" opacity="0.42" fontWeight="600">+10%</text>
+        <text x="49" y="84"  textAnchor="end" fontSize="7" fill="#162347" opacity="0.42" fontWeight="600">+20%</text>
+
+        {/* X-axis labels */}
+        <text x="55"  y="238" textAnchor="middle" fontSize="7" fill="#162347" opacity="0.38" fontWeight="500">Today</text>
+        <text x="265" y="238" textAnchor="middle" fontSize="7" fill="#162347" opacity="0.38" fontWeight="500">5 yr</text>
+
+        {/* Subtle area fill under Private Trading line */}
+        <path
+          d="M 55 222 C 100 218, 195 78, 265 52 L 265 226 L 55 226 Z"
+          fill="url(#ch-fill-grad)"
+          className="ch-area"
+          style={{ animationDelay: "0.3s" }}
+        />
+
+        {/* Performance lines — back to front */}
+        {[...chartLines].reverse().map((line, i) => {
+          const delay = 0.2 + (chartLines.length - 1 - i) * 0.18;
           return (
-            <div key={card.id} className={`cs-card cs-card-${idx}`}>
-              <div
-                style={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: 10,
-                  background: card.color,
-                  flexShrink: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                {card.icon}
-              </div>
-              <div style={{ minWidth: 0 }}>
-                <p style={{ fontSize: 14, fontWeight: 700, color: "#162347", margin: 0, letterSpacing: "-0.2px", lineHeight: 1.2 }}>
-                  {card.label}
-                </p>
-                <p style={{ fontSize: 11, color: "rgba(13,12,34,0.50)", margin: 0, marginTop: 3, lineHeight: 1 }}>
-                  {card.desc}
-                </p>
-              </div>
-            </div>
+            <path
+              key={line.id}
+              d={line.d}
+              fill="none"
+              stroke={line.color}
+              strokeWidth={line.id === "private-trading" ? 2.4 : 1.7}
+              strokeLinecap="round"
+              pathLength="1"
+              className="ch-line"
+              style={{ animationDelay: `${delay}s` }}
+            />
           );
         })}
-      </div>
 
-      {/* Footer */}
-      <p
-        style={{
-          position: "absolute",
-          bottom: 18,
-          left: 0,
-          right: 0,
-          textAlign: "center",
-          fontSize: 10,
-          fontWeight: 600,
-          color: "rgba(22,35,71,0.48)",
-          letterSpacing: "0.6px",
-          margin: 0,
-        }}
-      >
-        ONE PLATFORM · FIVE ASSET CLASSES
-      </p>
+        {/* Endpoint dots + labels */}
+        {chartLines.map((line, i) => {
+          const lineDelay = 0.2 + i * 0.18;
+          return (
+            <g key={`end-${line.id}`}>
+              <circle
+                cx={265} cy={line.endY}
+                r={line.id === "private-trading" ? 5 : 3.8}
+                fill={line.color}
+                stroke="white" strokeWidth="1.5"
+                className="ch-dot"
+                style={{ animationDelay: `${lineDelay + 1.1}s` }}
+              />
+              <text
+                x={273} y={line.endY + 3.5}
+                fontSize="7.5" fontWeight="700"
+                fill={line.color} letterSpacing="0.35"
+                className="ch-label"
+                style={{ animationDelay: `${lineDelay + 1.25}s` }}
+              >
+                {line.label.toUpperCase()}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Origin dot — pulsing */}
+        <circle cx="55" cy="222" r="5"
+          fill="#162347" stroke="rgba(175,125,67,0.55)" strokeWidth="1.5"
+          className="ch-dot" style={{ animationDelay: "0.1s" }} />
+        <text x="55" y="215" textAnchor="middle"
+          fontSize="6.5" fontWeight="700" fill="#162347" opacity="0.5" letterSpacing="0.2">
+          FloatX
+        </text>
+
+        {/* Footer */}
+        <text x="160" y="268" textAnchor="middle"
+          fontSize="10" fontWeight="600" fill="#162347" opacity="0.45" letterSpacing="0.6">
+          ONE PLATFORM · FIVE ASSET CLASSES
+        </text>
+      </svg>
     </div>
   );
 }
@@ -239,7 +175,7 @@ export function InvestmentsHero() {
             </Button>
           </div>
           <div>
-            <CardStackAnim />
+            <ChartAnim />
           </div>
         </div>
       </div>
