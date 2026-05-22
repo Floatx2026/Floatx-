@@ -93,7 +93,7 @@ export function AccessGrid() {
 
         <div className="grid grid-cols-1 min-[700px]:grid-cols-2 min-[1024px]:grid-cols-3 gap-6">
           {accesses.map((a, i) => (
-            <FadeUp key={a.title} delay={80 + (i % 3) * 80}>
+            <FadeUp key={a.title} delay={(i % 3) * 160 + Math.floor(i / 3) * 80 + 80}>
               <Link
                 href={a.href}
                 className="group relative bg-white rounded-[20px] p-7 flex flex-col shadow-[0_8px_24px_-12px_rgba(22,35,71,0.10)] hover:shadow-[0_18px_36px_-12px_rgba(22,35,71,0.18)] hover:-translate-y-0.5 transition-all duration-200 h-full"
