@@ -1,0 +1,3975 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloatX — Unicorn SPV Structure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       CSS VARIABLES — Deep Navy Gradient Palette
+       ============================================ */
+    :root {
+      --c-navy-deep: #000B36;
+      --c-navy-dark: #0E2841;
+      --c-navy: #243E88;
+      --c-navy-mid: #2E55B0;
+      --c-blue-soft: #5BA4CF;
+      --c-blue-pale: #8FC4E0;
+      --c-blue-ice:  #D9EAF5;
+      --c-white: #FFFFFF;
+      --c-off-white: #F2F6FF;
+      --c-grey-light: #E8E8E8;
+      --c-grey-mid: #B3B3B3;
+      --c-grey-dark: #565859;
+      --c-ink: #0A1530;
+
+      --c-accent: var(--c-blue-soft);
+      --c-accent-rgb: 91, 164, 207;
+      --c-navy-rgb: 36, 62, 136;
+
+      --grad-hero: linear-gradient(135deg, #000B36 0%, #0E2841 45%, #243E88 100%);
+      --grad-panel: linear-gradient(180deg, rgba(14,40,65,0.92) 0%, rgba(0,11,54,0.92) 100%);
+      --grad-light: linear-gradient(180deg, #FFFFFF 0%, #F2F6FF 100%);
+      --grad-accent: linear-gradient(90deg, #243E88 0%, #5BA4CF 100%);
+
+      --font-heading: 'Lora', Georgia, serif;
+      --font-body: 'Inter', Arial, sans-serif;
+
+      --shadow-card: 0 4px 18px rgba(0, 11, 54, 0.08);
+      --shadow-card-lift: 0 12px 32px rgba(0, 11, 54, 0.16);
+      --shadow-glow: 0 0 24px rgba(91, 164, 207, 0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: var(--font-body);
+      color: var(--c-ink);
+      background: var(--c-navy-deep);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============================================
+       LAYOUT — deck, slides, navigation
+       ============================================ */
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      padding: 56px 72px 40px;
+      background: var(--c-white);
+      color: var(--c-ink);
+      overflow: hidden;
+      flex-direction: column;
+    }
+    .slide.active {
+      display: flex;
+    }
+    .slide.dark {
+      background: var(--grad-hero);
+      color: var(--c-white);
+    }
+
+    /* Slide header */
+    .slide-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+    .slide-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 1.1;
+      color: var(--c-navy);
+      letter-spacing: -0.5px;
+    }
+    .slide.dark .slide-title { color: var(--c-white); }
+    .slide-title .accent { color: var(--c-blue-soft); }
+    .slide-subtitle {
+      font-size: 15px;
+      color: var(--c-grey-dark);
+      margin-top: 6px;
+      font-weight: 400;
+    }
+    .slide.dark .slide-subtitle { color: var(--c-blue-pale); }
+    .slide-brand {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--c-navy);
+      letter-spacing: -0.5px;
+    }
+    .slide.dark .slide-brand { color: var(--c-white); }
+    .slide-brand .x { color: var(--c-blue-soft); }
+
+    /* Slide body */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    /* Slide footer + per-slide progress bar */
+    .slide-footer {
+      flex-shrink: 0;
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--c-grey-mid);
+      padding-top: 12px;
+    }
+    .slide.dark .slide-footer { color: rgba(255,255,255,0.5); }
+    .slide-footer .page-num { font-weight: 600; }
+    .slide-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: var(--grad-accent);
+      transition: width 0.6s cubic-bezier(.2,.8,.2,1);
+      box-shadow: 4px 0 10px rgba(var(--c-accent-rgb), 0.5);
+    }
+
+    /* Global nav arrows */
+    .nav-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(36,62,136,0.15);
+      color: var(--c-navy);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0,11,54,0.12);
+    }
+    .nav-arrow:hover {
+      background: var(--c-navy);
+      color: var(--c-white);
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 8px 22px rgba(0,11,54,0.25);
+    }
+    .nav-prev { left: 22px; }
+    .nav-next { right: 22px; }
+
+    .slide-counter {
+      position: fixed;
+      top: 22px;
+      right: 28px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--c-navy);
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      padding: 7px 14px;
+      border-radius: 20px;
+      z-index: 50;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0,11,54,0.1);
+    }
+    .slide.dark ~ .slide-counter { background: rgba(255,255,255,0.12); color: var(--c-white); }
+
+    /* ============================================
+       BUTTON SYSTEM
+       ============================================ */
+    .btn-primary, .btn-outline, .btn-ghost {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1.5px solid transparent;
+      overflow: hidden;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+    }
+    .btn-primary {
+      background: var(--c-navy);
+      color: var(--c-white);
+      border-color: var(--c-navy);
+      box-shadow: 0 4px 14px rgba(36,62,136,0.28);
+    }
+    .btn-primary:hover { box-shadow: 0 10px 24px rgba(36,62,136,0.4); }
+    .btn-outline {
+      background: transparent;
+      color: var(--c-navy);
+      border-color: var(--c-navy);
+    }
+    .btn-outline:hover { background: rgba(36,62,136,0.06); box-shadow: 0 6px 18px rgba(36,62,136,0.18); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--c-navy);
+      border-color: transparent;
+    }
+    .btn-ghost:hover { background: rgba(36,62,136,0.08); }
+    .btn-label { position: relative; z-index: 2; transition: transform 0.2s ease; }
+    .btn-primary:hover .btn-label,
+    .btn-outline:hover .btn-label,
+    .btn-ghost:hover .btn-label { transform: translateY(-1px); }
+    .btn-arrow {
+      display: inline-block;
+      opacity: 0;
+      width: 0;
+      transition: opacity 0.2s ease, width 0.2s ease, transform 0.2s ease;
+      transform: translateX(-8px);
+      z-index: 2;
+    }
+    .btn-primary:hover .btn-arrow,
+    .btn-outline:hover .btn-arrow {
+      opacity: 1;
+      width: 14px;
+      transform: translateX(0);
+    }
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      pointer-events: none;
+      opacity: 0.25;
+      z-index: 1;
+    }
+
+    /* ==========================================================
+       SLIDE 1 — Interactive SPV Diagram
+       ========================================================== */
+    .spv-canvas {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 36px;
+      min-height: 0;
+    }
+    .spv-diagram {
+      position: relative;
+      background: var(--grad-hero);
+      border-radius: 16px;
+      padding: 28px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .spv-diagram::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(91,164,207,0.22), transparent 60%);
+      pointer-events: none;
+    }
+    .spv-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .spv-node {
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(143,196,224,0.25);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--c-white);
+      cursor: pointer;
+      transition: all 0.28s ease;
+      min-width: 140px;
+      text-align: center;
+    }
+    .spv-node:hover,
+    .spv-node.focused {
+      background: rgba(91,164,207,0.22);
+      border-color: var(--c-blue-soft);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+    .spv-node .label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .spv-node .sub {
+      display: block;
+      font-size: 10px;
+      color: var(--c-blue-pale);
+      margin-top: 3px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+    .spv-node.master {
+      background: rgba(36,62,136,0.55);
+      border-color: rgba(143,196,224,0.5);
+    }
+    .spv-row {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 12px;
+    }
+    .spv-row.row-top { margin-bottom: 10px; }
+    .spv-row.row-mid { margin: 14px 0; justify-content: center; }
+    .spv-row.row-sub { margin-top: 12px; gap: 14px; }
+    .spv-row.row-bottom { margin-top: 14px; justify-content: center; }
+
+    .spv-info {
+      background: var(--c-off-white);
+      border-radius: 16px;
+      padding: 26px 30px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(36,62,136,0.08);
+    }
+    .spv-info h3 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      color: var(--c-navy);
+      margin-bottom: 4px;
+      transition: color 0.3s ease;
+    }
+    .spv-info .info-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--c-blue-soft);
+      margin-bottom: 12px;
+    }
+    .spv-info p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--c-grey-dark);
+    }
+    .spv-info .pill-row {
+      margin-top: 18px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .spv-pill {
+      font-size: 11px;
+      background: var(--c-white);
+      border: 1px solid rgba(36,62,136,0.15);
+      padding: 6px 12px;
+      border-radius: 20px;
+      color: var(--c-navy);
+      font-weight: 500;
+    }
+    .spv-pill.strong { background: var(--c-navy); color: var(--c-white); border-color: var(--c-navy); }
+    .spv-hint {
+      font-size: 11px;
+      color: var(--c-grey-mid);
+      margin-top: auto;
+      padding-top: 14px;
+      font-style: italic;
+    }
+
+    /* ==========================================================
+       SLIDE 2 — Tabbed share class cards + layer diagram
+       ========================================================== */
+    .slide2-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 28px;
+      min-height: 0;
+    }
+    .layer-diagram {
+      position: relative;
+      display: flex;
+      gap: 14px;
+      padding-right: 6px;
+      min-height: 0;
+      overflow: hidden;
+      height: 100%;
+    }
+    .layer-axis {
+      position: relative;
+      width: 18px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .layer-axis::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      bottom: 8px;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(36,62,136,0.5), rgba(91,164,207,0.2));
+    }
+    .layer-axis span {
+      position: absolute;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--c-navy);
+      background: var(--c-white);
+      padding: 8px 0;
+    }
+    .layer-stack {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 0;
+      gap: 0;
+    }
+    .layer-box {
+      position: relative;
+      border-radius: 10px;
+      padding: 6px 14px;
+      color: var(--c-white);
+      cursor: default;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, outline 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0,11,54,0.12);
+      height: 62px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      overflow: hidden;
+    }
+    .layer-box[data-tab] { cursor: pointer; }
+    .layer-box[data-tab]:hover {
+      transform: translateX(3px);
+      box-shadow: 0 8px 20px rgba(0,11,54,0.22);
+    }
+    .layer-box.active {
+      outline-color: var(--c-blue-soft);
+      transform: translateX(3px);
+      box-shadow: 0 10px 24px rgba(36,62,136,0.35), 0 0 20px rgba(91,164,207,0.35);
+    }
+    .layer-box .layer-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    .layer-box .layer-sub {
+      font-size: 10px;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+    .layer-box .layer-note {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-align: right;
+      line-height: 1.1;
+    }
+    /* Blue gradient palette — darker = closer, lighter = more intermediated */
+    .layer-box.l-cap    { background: linear-gradient(135deg, #000B36, #0E2841); }
+    .layer-box.l-direct { background: linear-gradient(135deg, #0E2841, #17356A); }
+    .layer-box.l-1      { background: linear-gradient(135deg, #17356A, #243E88); }
+    .layer-box.l-15     { background: linear-gradient(135deg, #243E88, #2E55B0); }
+    .layer-box.l-2      { background: linear-gradient(135deg, #2E55B0, #4A7BC7); }
+    .layer-box.l-3      { background: linear-gradient(135deg, #4A7BC7, #5BA4CF); }
+    .layer-arrow {
+      align-self: center;
+      color: rgba(36,62,136,0.55);
+      font-size: 10px;
+      line-height: 1;
+      padding: 2px 0;
+      flex-shrink: 0;
+    }
+
+    .tab-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .tab-btn {
+      position: relative;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 12px 22px;
+      background: var(--c-white);
+      border: 1.5px solid rgba(36,62,136,0.18);
+      border-radius: 10px;
+      color: var(--c-navy);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      overflow: hidden;
+    }
+    .tab-btn:hover {
+      border-color: var(--c-blue-soft);
+      background: var(--c-off-white);
+    }
+    .tab-btn.active {
+      background: var(--grad-accent);
+      color: var(--c-white);
+      border-color: transparent;
+      box-shadow: 0 8px 22px rgba(36,62,136,0.28);
+    }
+    .tab-btn small {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      opacity: 0.75;
+      margin-top: 2px;
+    }
+    .tab-btn {
+      padding: 8px 12px;
+      font-size: 11.5px;
+    }
+    .tab-btn small {
+      font-size: 9px;
+    }
+
+    .tab-column {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .tab-panel-wrap {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+    }
+    .tab-panel {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      overflow: hidden;
+      visibility: hidden;
+    }
+    .tab-panel.active {
+      visibility: visible;
+    }
+    .tab-panel.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .tab-card {
+      background: var(--c-white);
+      border: 1px solid rgba(36,62,136,0.1);
+      border-radius: 12px;
+      padding: 14px 18px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .tab-card .card-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      color: var(--c-blue-soft);
+      margin-bottom: 3px;
+    }
+    .tab-card h3 {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      color: var(--c-navy);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .tab-card p {
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: var(--c-grey-dark);
+      margin-bottom: 6px;
+    }
+    .tab-card ul {
+      list-style: none;
+      margin-top: 6px;
+    }
+    .tab-card ul li {
+      font-size: 11px;
+      padding: 5px 0 5px 18px;
+      position: relative;
+      color: var(--c-ink);
+      border-top: 1px solid rgba(36,62,136,0.06);
+    }
+    .tab-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 8px;
+      height: 2px;
+      background: var(--c-blue-soft);
+      border-radius: 2px;
+    }
+    .tab-card .fee-block {
+      margin-top: 8px;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, rgba(36,62,136,0.06), rgba(91,164,207,0.08));
+      border-left: 3px solid var(--c-blue-soft);
+      border-radius: 6px;
+    }
+    .fee-block .fee-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--c-grey-dark);
+    }
+    .fee-block .fee-value {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 17px;
+      color: var(--c-navy);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* ==========================================================
+       SLIDE 3 — Animated fee comparison
+       ========================================================== */
+    .fee-intro {
+      font-size: 14px;
+      color: var(--c-grey-dark);
+      max-width: 820px;
+      line-height: 1.55;
+      margin-bottom: 22px;
+    }
+    .fee-table {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(36,62,136,0.1);
+    }
+    .fee-row {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4, 1fr);
+      align-items: center;
+      padding: 14px 22px;
+      border-bottom: 1px solid rgba(36,62,136,0.08);
+      transition: background 0.25s ease;
+      position: relative;
+    }
+    .fee-row:last-child { border-bottom: none; }
+    .fee-row.header {
+      background: var(--grad-hero);
+      color: var(--c-white);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      padding: 18px 22px;
+    }
+    .fee-row.header .fee-col { color: var(--c-white); }
+    .fee-row:not(.header):hover {
+      background: rgba(91,164,207,0.08);
+    }
+    .fee-row:not(.header):hover .fee-col {
+      color: var(--c-navy);
+    }
+    .fee-col {
+      font-size: 13px;
+      color: var(--c-grey-dark);
+      text-align: center;
+      transition: color 0.2s ease;
+    }
+    .fee-col.label {
+      text-align: left;
+      font-weight: 600;
+      color: var(--c-ink);
+      font-size: 14px;
+    }
+    .fee-col .amount {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--c-navy);
+      display: block;
+    }
+    .fee-col .note {
+      font-size: 10px;
+      color: var(--c-grey-mid);
+      display: block;
+      margin-top: 2px;
+    }
+    .fee-bar {
+      display: block;
+      height: 4px;
+      background: var(--grad-accent);
+      border-radius: 2px;
+      margin-top: 6px;
+      width: 0;
+      transition: width 1s cubic-bezier(.2,.8,.2,1);
+    }
+    .fee-note {
+      font-size: 11px;
+      color: var(--c-grey-mid);
+      margin-top: 10px;
+      font-style: italic;
+    }
+    .fee-callout {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 8px;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, rgba(36,62,136,0.06), rgba(91,164,207,0.1));
+      border-left: 3px solid var(--c-blue-soft);
+      border-radius: 6px;
+    }
+    .fee-callout:first-of-type { margin-top: 14px; }
+    .fee-callout-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 54px;
+      height: 22px;
+      padding: 0 10px;
+      background: var(--grad-accent);
+      color: var(--c-white);
+      font-family: var(--font-heading);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .fee-callout p {
+      margin: 0;
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--c-ink);
+    }
+    .fee-callout p strong { color: var(--c-navy); font-weight: 700; }
+
+    /* ==========================================================
+       SLIDES 4 / 5 — Step-by-step phases
+       ========================================================== */
+    .phase-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .phase-block {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+      background: linear-gradient(180deg, rgba(36,62,136,0.035), rgba(91,164,207,0.035));
+      border: 1px solid rgba(36,62,136,0.12);
+      border-left: 4px solid var(--c-blue-soft);
+      border-radius: 12px;
+      padding: 16px 18px 18px;
+      position: relative;
+    }
+    .phase-block.revealed {
+      opacity: 1;
+      transform: none;
+    }
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .phase-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 10px;
+      background: var(--grad-accent);
+      color: var(--c-white);
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(36,62,136,0.25);
+      flex-shrink: 0;
+    }
+    .phase-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--c-navy);
+      letter-spacing: 0.2px;
+      flex: 1;
+    }
+    .phase-title small {
+      display: inline-block;
+      margin-left: 8px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--c-grey-dark);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .phase-rule {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(36,62,136,0.2), rgba(36,62,136,0));
+    }
+    .step-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .step-grid.two { grid-template-columns: repeat(2, 1fr); }
+    .step-card {
+      background: var(--c-white);
+      border: 1px solid rgba(36,62,136,0.1);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: all 0.28s ease;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--grad-accent);
+      transition: width 0.35s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card-lift);
+    }
+    .step-card:hover::before { width: 100%; }
+    .step-num {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--c-blue-soft);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .step-name {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--c-navy);
+      margin-bottom: 6px;
+    }
+    .step-desc {
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--c-grey-dark);
+    }
+    .phase-note {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--c-grey-mid);
+      font-style: italic;
+    }
+
+    /* Compact mode — merged phases 1–5 fit on one slide */
+    .slide.compact-phases .phase-wrap { gap: 0; overflow: hidden; padding-right: 0; justify-content: space-between; }
+    .slide.compact-phases .phase-block { padding: 5px 9px 6px; border-radius: 7px; border-left-width: 3px; }
+    .slide.compact-phases .phase-header { margin-bottom: 4px; gap: 7px; }
+    .slide.compact-phases .phase-badge { height: 16px; min-width: 16px; font-size: 8.5px; padding: 0 5px; border-radius: 3px; letter-spacing: 0.5px; }
+    .slide.compact-phases .phase-title { font-size: 11px; }
+    .slide.compact-phases .phase-title small { font-size: 9px; margin-left: 5px; }
+    .slide.compact-phases .step-grid { gap: 5px; }
+    .slide.compact-phases .step-card { padding: 5px 8px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,11,54,0.05); }
+    .slide.compact-phases .step-num { font-size: 11.5px; margin-bottom: 1px; }
+    .slide.compact-phases .step-name { font-size: 10.5px; margin-bottom: 1px; line-height: 1.2; }
+    .slide.compact-phases .step-desc { font-size: 9px; line-height: 1.3; }
+    .slide.compact-phases .phase-note { margin-top: 0; font-size: 9px; }
+    .slide.compact-phases .slide-footer { margin-top: 8px; padding-top: 5px; }
+    .slide.compact-phases .slide-header { margin-bottom: 10px; }
+    .slide.compact-phases .slide-subtitle { font-size: 12px; }
+
+    /* Snapshot strip on split Business Structure slides */
+    .biz-snapshot {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 8px 14px;
+      margin: 2px 0 14px;
+      background: linear-gradient(180deg, rgba(36,62,136,0.04), rgba(91,164,207,0.04));
+      border: 1px solid rgba(36,62,136,0.12);
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .biz-snapshot .snap-label {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--c-navy);
+      margin-right: 4px;
+    }
+    .biz-snapshot .snap-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px 5px 5px;
+      background: var(--c-white);
+      border: 1px solid rgba(36,62,136,0.16);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--c-grey-mid);
+      opacity: 0.55;
+      transition: opacity 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .biz-snapshot .snap-chip.on {
+      opacity: 1;
+      color: var(--c-navy);
+      font-weight: 600;
+      box-shadow: 0 3px 10px rgba(36,62,136,0.15);
+      border-color: rgba(36,62,136,0.4);
+    }
+    .biz-snapshot .snap-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(36,62,136,0.12);
+      color: var(--c-grey-mid);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .biz-snapshot .snap-chip.on .snap-num { background: var(--c-navy); color: var(--c-white); }
+    .biz-snapshot .snap-hint {
+      margin-left: auto;
+      font-size: 10.5px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--c-grey-mid);
+      font-weight: 600;
+    }
+    .biz-canvas.single-stream .product-stack { gap: 14px; }
+
+    /* Two-stream layout (slide 6) — cards side-by-side, portrait/vertical */
+    .biz-canvas.two-stream .product-stack {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .biz-canvas.two-stream .product-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 18px 18px 16px 22px;
+      min-height: 180px;
+    }
+    .biz-canvas.two-stream .product-card .product-num {
+      margin-left: 0;
+      align-self: flex-start;
+    }
+    .biz-canvas.two-stream .product-card .product-body {
+      width: 100%;
+      flex: 1;
+    }
+    .biz-canvas.two-stream .product-card .product-title {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .biz-canvas.two-stream .product-card .product-headline {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .biz-canvas.two-stream .product-card .product-headline .big {
+      font-size: 28px;
+    }
+    .biz-canvas.two-stream .product-card .product-meta {
+      align-items: flex-start;
+      width: 100%;
+    }
+    .rail-note {
+      margin-top: 10px;
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: var(--c-grey-dark);
+    }
+
+    /* US GP chip — inbound / amber accent */
+    .investor-chip.us-gp {
+      background: linear-gradient(135deg, #FFF4E0, #FFE8B0);
+      border-color: rgba(196,130,0,0.35);
+      color: #7A4F00;
+    }
+    .investor-chip.us-gp:hover { background: #FFE0A0; border-color: rgba(196,130,0,0.6); }
+    .us-gp-sub { display: block; font-weight: 400; font-size: 9.5px; color: #A06000; margin-top: 1px; }
+
+    /* Market depth tabs */
+    .depth-tabs { display: flex; gap: 6px; }
+    .depth-tab {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.6);
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+    }
+    .depth-tab.active {
+      background: var(--c-blue-soft);
+      border-color: var(--c-blue-soft);
+      color: var(--c-navy-deep);
+    }
+    .depth-tab:hover:not(.active) { background: rgba(255,255,255,0.14); color: var(--c-white); }
+
+    /* Two-col depth layout */
+    .depth-sub-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .depth-company-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--c-white);
+      letter-spacing: 0.5px;
+    }
+    .depth-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .depth-col-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .depth-col-label.sell { color: var(--c-blue-soft); }
+    .depth-col-label.buy { color: rgba(143,196,224,0.7); }
+
+    /* ==========================================================
+       SLIDE 6 — Live Revenue Model
+       ========================================================== */
+    .model-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 28px;
+      min-height: 0;
+    }
+    .model-controls {
+      background: var(--grad-hero);
+      color: var(--c-white);
+      border-radius: 16px;
+      padding: 24px 26px;
+      overflow-y: auto;
+      position: relative;
+    }
+    .model-controls::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top left, rgba(91,164,207,0.2), transparent 60%);
+      border-radius: 16px;
+      pointer-events: none;
+    }
+    .model-controls > * { position: relative; z-index: 1; }
+    .controls-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .controls-sub {
+      font-size: 11px;
+      color: var(--c-blue-pale);
+      letter-spacing: 0.4px;
+      margin-bottom: 20px;
+    }
+    .slider-group {
+      margin-bottom: 18px;
+    }
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--c-blue-pale);
+      margin-bottom: 6px;
+    }
+    .slider-value {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--c-white);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: var(--c-blue-soft);
+      border: 3px solid var(--c-white);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35), 0 0 0 0 rgba(91,164,207,0.4);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.12);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4), 0 0 0 8px rgba(91,164,207,0.2);
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      background: var(--c-blue-soft);
+      border: 3px solid var(--c-white);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .reset-btn {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--c-white);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .reset-btn:hover {
+      background: rgba(91,164,207,0.18);
+      border-color: var(--c-blue-soft);
+    }
+
+    .model-output {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 0;
+      overflow-y: auto;
+    }
+    .headline-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .headline-box {
+      background: var(--c-white);
+      border: 1px solid rgba(36,62,136,0.1);
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .headline-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--grad-accent);
+    }
+    .headline-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--c-grey-dark);
+    }
+    .headline-value {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--c-navy);
+      margin-top: 4px;
+      line-height: 1.1;
+    }
+    .headline-sub {
+      display: block;
+      font-size: 10px;
+      color: var(--c-grey-mid);
+      margin-top: 3px;
+      font-weight: 400;
+    }
+
+    /* Sensitivity table */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--c-navy);
+      margin: 10px 0 8px;
+    }
+    .headline-strip.second { margin-top: 4px; }
+
+    .sens-wrap {
+      background: var(--c-white);
+      border: 1px solid rgba(36,62,136,0.12);
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .sens-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(36,62,136,0.08);
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .sens-tab {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 11px;
+      padding: 7px 13px;
+      background: var(--c-white);
+      border: 1.5px solid rgba(36,62,136,0.18);
+      border-radius: 20px;
+      color: var(--c-navy);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .sens-tab:hover {
+      border-color: var(--c-blue-soft);
+      background: rgba(91,164,207,0.06);
+    }
+    .sens-tab.active {
+      background: var(--grad-accent);
+      color: var(--c-white);
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(36,62,136,0.25);
+    }
+    .sens-table-wrap {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: auto;
+      min-height: 0;
+    }
+    .sens-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+    }
+    .sens-table thead th {
+      position: sticky;
+      top: 0;
+      background: var(--c-off-white);
+      color: var(--c-grey-dark);
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(36,62,136,0.1);
+      white-space: nowrap;
+    }
+    .sens-table tbody td {
+      padding: 9px 12px;
+      border-bottom: 1px solid rgba(36,62,136,0.05);
+      color: var(--c-ink);
+      white-space: nowrap;
+    }
+    .sens-table tbody tr:last-child td { border-bottom: none; }
+    .sens-table tbody tr:hover { background: rgba(91,164,207,0.05); }
+    .sens-table tbody tr.current {
+      background: rgba(91,164,207,0.14);
+      box-shadow: inset 3px 0 0 var(--c-blue-soft);
+    }
+    .sens-table tbody tr.current td { color: var(--c-navy); font-weight: 600; }
+    .sens-table td.num, .sens-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .sens-table td.key { font-weight: 700; color: var(--c-navy); }
+    .sens-table .profit { color: var(--c-navy); }
+    .pill-reg {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 12px;
+    }
+    .pill-reg.wholesale { background: rgba(36,62,136,0.12); color: var(--c-navy); }
+    .pill-reg.small     { background: rgba(91,164,207,0.18); color: var(--c-navy); }
+
+    .sens-footnote {
+      font-size: 10px;
+      color: var(--c-grey-mid);
+      font-style: italic;
+      margin-top: 6px;
+      line-height: 1.45;
+    }
+
+    /* Trade-off analysis */
+    .tradeoff-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 14px;
+      min-height: 0;
+    }
+    .sweet-spot {
+      background: linear-gradient(135deg, rgba(36,62,136,0.06), rgba(91,164,207,0.1));
+      border: 1px solid rgba(91,164,207,0.3);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sweet-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--c-blue-soft);
+      margin-bottom: 8px;
+    }
+    .sweet-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(36,62,136,0.06);
+    }
+    .sweet-row:last-child { border-bottom: none; }
+    .sweet-row .sk { color: var(--c-grey-dark); }
+    .sweet-row .sv {
+      font-weight: 700;
+      color: var(--c-navy);
+      font-family: var(--font-heading);
+    }
+    .zone-table {
+      border-collapse: collapse;
+      font-size: 10.5px;
+      width: 100%;
+    }
+    .zone-table thead th {
+      background: var(--c-off-white);
+      color: var(--c-grey-dark);
+      font-weight: 600;
+      font-size: 9px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid rgba(36,62,136,0.12);
+    }
+    .zone-table tbody td {
+      padding: 7px 10px;
+      border-bottom: 1px solid rgba(36,62,136,0.05);
+      color: var(--c-ink);
+      vertical-align: top;
+    }
+    .zone-table tbody tr:hover { background: rgba(91,164,207,0.05); }
+    .zone-table tbody tr.zone-sweet {
+      background: rgba(91,164,207,0.12);
+      box-shadow: inset 3px 0 0 var(--c-blue-soft);
+    }
+    .zone-table tbody tr.zone-sweet td { color: var(--c-navy); font-weight: 600; }
+    .zone-star { color: var(--c-blue-soft); font-size: 13px; line-height: 1; }
+
+    .pulse {
+      animation: pulse-hl 0.55s ease;
+    }
+    @keyframes pulse-hl {
+      0%   { color: var(--c-navy); }
+      40%  { color: var(--c-blue-soft); }
+      100% { color: var(--c-navy); }
+    }
+
+    /* ============================================
+       SLIDE 8 — Business Structure / Three Revenue Streams
+       ============================================ */
+    .biz-canvas {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 28px;
+      min-height: 0;
+      position: relative;
+    }
+    .biz-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+
+    /* Left rail — Three Revenue Streams */
+    .biz-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-right: 22px;
+      border-right: 1px solid rgba(36, 62, 136, 0.12);
+    }
+    .biz-rail-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--c-navy);
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+    .stream-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 4px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .stream-item:hover { background: rgba(91,164,207,0.06); transform: translateX(2px); }
+    .stream-item.active { background: rgba(91,164,207,0.10); }
+    .stream-num {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--c-navy);
+      color: var(--c-white);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stream-item.active .stream-num { background: var(--c-blue-soft); box-shadow: 0 0 0 4px rgba(91,164,207,0.18); }
+    .stream-text {
+      font-size: 13.5px;
+      line-height: 1.4;
+      color: var(--c-ink);
+      font-weight: 500;
+      padding-top: 3px;
+    }
+
+    /* Center — flow diagram */
+    .biz-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 0;
+      position: relative;
+    }
+    .investor-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .investor-chip {
+      background: var(--c-blue-ice);
+      border: 1px solid rgba(36,62,136,0.15);
+      border-radius: 22px;
+      padding: 10px 10px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--c-navy);
+      line-height: 1.25;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .investor-chip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(36,62,136,0.14);
+      background: #C8DDEE;
+    }
+    .biz-band {
+      background: var(--c-navy);
+      color: var(--c-white);
+      text-align: center;
+      padding: 9px 16px;
+      border-radius: 4px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 14px rgba(0,11,54,0.18);
+    }
+    .biz-band.platform { background: var(--c-navy-deep); }
+    .biz-connector {
+      align-self: center;
+      width: 2px;
+      height: 10px;
+      background: var(--c-navy);
+      opacity: 0.45;
+    }
+
+    /* Product cards */
+    .product-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 0 0 auto;
+      min-height: 0;
+    }
+    .product-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 36px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 18px 14px 14px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(36,62,136,0.18);
+      background: var(--c-white);
+      box-shadow: var(--shadow-card);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+    }
+    .product-card::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 4px;
+      border-radius: 0 3px 3px 0;
+      background: var(--c-blue-soft);
+    }
+    .product-card.fill {
+      background: var(--c-navy-deep);
+      color: var(--c-white);
+      border-color: var(--c-navy-deep);
+    }
+    .product-card.fill::before { background: var(--c-blue-soft); }
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-lift);
+      border-color: var(--c-navy-mid);
+    }
+    .product-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--c-navy);
+      color: var(--c-white);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 6px;
+    }
+    .product-card.fill .product-num { background: var(--c-blue-soft); color: var(--c-navy-deep); }
+    .product-body { min-width: 0; }
+    .product-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--c-navy);
+      margin-bottom: 4px;
+    }
+    .product-card.fill .product-title { color: var(--c-white); }
+    .product-headline {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .product-headline .big {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--c-navy);
+      letter-spacing: -0.3px;
+    }
+    .product-card.fill .product-headline .big { color: var(--c-white); }
+    .product-headline .label {
+      font-size: 12px;
+      color: var(--c-grey-dark);
+      font-weight: 500;
+    }
+    .product-card.fill .product-headline .label { color: var(--c-blue-pale); }
+    .product-headline .label b { color: var(--c-navy); font-weight: 700; }
+    .product-card.fill .product-headline .label b { color: var(--c-white); }
+    .product-detail {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--c-grey-dark);
+      font-style: italic;
+      margin-top: 3px;
+    }
+    .product-card.fill .product-detail { color: var(--c-blue-pale); font-style: normal; }
+    .product-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .product-pill {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--c-white);
+      background: var(--c-navy);
+      padding: 5px 12px;
+      border-radius: 14px;
+      white-space: nowrap;
+    }
+    .product-card.fill .product-pill { background: var(--c-blue-soft); color: var(--c-navy-deep); }
+    .product-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .product-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 12px;
+      background: rgba(91,164,207,0.18);
+      color: var(--c-navy);
+      white-space: nowrap;
+    }
+    .product-card.fill .product-tag { background: rgba(91,164,207,0.25); color: var(--c-white); }
+
+    /* Right column — Market depth (sits directly below Trading SPV card, visually merged) */
+    .market-depth {
+      margin-top: -12px; /* absorb biz-flow gap so it sits flush against card 3 */
+      background: var(--c-navy-deep);
+      border-radius: 0 0 8px 8px;
+      padding: 10px 18px 14px;
+      color: var(--c-white);
+      box-shadow: 0 8px 22px rgba(0,11,54,0.22);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+    /* When card 3 is followed by depth widget, square its bottom corners so they merge */
+    .product-card.fill.has-depth { border-radius: 8px 8px 0 0; box-shadow: none; }
+    .depth-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .depth-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--c-blue-pale);
+    }
+    .depth-sub {
+      font-size: 10px;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.6px;
+    }
+    .depth-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .depth-row {
+      display: grid;
+      grid-template-columns: 50px 1fr 110px;
+      gap: 12px;
+      align-items: center;
+      font-size: 11px;
+    }
+    .depth-price {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--c-white);
+      letter-spacing: 0.3px;
+    }
+    .depth-bar-track {
+      height: 12px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .depth-bar {
+      position: absolute;
+      inset: 0 auto 0 0;
+      background: linear-gradient(90deg, var(--c-navy-mid) 0%, var(--c-blue-soft) 100%);
+      border-radius: 2px;
+      transition: width 0.7s cubic-bezier(.2,.8,.2,1);
+    }
+    .depth-row.best .depth-bar {
+      background: linear-gradient(90deg, var(--c-blue-soft) 0%, var(--c-blue-pale) 100%);
+      box-shadow: 0 0 12px rgba(143,196,224,0.45);
+    }
+    .depth-row.entry .depth-bar {
+      background: linear-gradient(90deg, var(--c-navy) 0%, var(--c-navy-mid) 100%);
+      opacity: 0.85;
+    }
+    .depth-size {
+      font-size: 11px;
+      color: var(--c-blue-pale);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      letter-spacing: 0.3px;
+    }
+    .depth-tag {
+      font-size: 10px;
+      color: rgba(255,255,255,0.55);
+      text-align: right;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .depth-row.best .depth-tag { color: var(--c-blue-soft); font-weight: 700; }
+    .depth-row.entry .depth-tag { color: var(--c-blue-pale); font-weight: 600; }
+
+    .depth-spread {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 0 2px;
+      font-size: 9px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+    }
+    .depth-spread::before, .depth-spread::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    }
+
+    /* Diagram slides 7 & 8 */
+    .diagram-wrap {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      background: transparent;
+      padding: 0;
+      border: none;
+      display: flex;
+      align-items: flex-start;
+    }
+    .diagram-wrap svg { width: 100%; height: 100%; display: block; max-height: 100%; }
+    .diagram-wrap .t  { font-family: 'Inter',Arial,sans-serif; font-size: 14px; font-weight: 400; fill: #0A1530; }
+    .diagram-wrap .ts { font-family: 'Inter',Arial,sans-serif; font-size: 11.5px; font-weight: 400; fill: #565859; letter-spacing: 0.02em; }
+    .diagram-wrap .th { font-family: 'Inter',Arial,sans-serif; font-size: 13.5px; font-weight: 600; fill: #0A1530; }
+
+    /* ============================================
+       SLIDE 4 — Transaction Flow (swim lanes)
+       ============================================ */
+    .flow-canvas {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 0;
+      position: relative;
+    }
+    .flow-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .swim-lane {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 12px;
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      z-index: 2;
+    }
+    .lane-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: var(--font-body);
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: var(--c-white);
+      border-radius: 6px;
+      padding: 12px 8px;
+      box-shadow: 0 6px 18px rgba(0,11,54,0.18);
+    }
+    .lane-label.buyer   { background: linear-gradient(180deg, #3F66B5 0%, #5BA4CF 100%); }
+    .lane-label.manager { background: linear-gradient(180deg, #0E2841 0%, #243E88 100%); }
+    .lane-label.seller  { background: linear-gradient(180deg, #5BA4CF 0%, #8FC4E0 100%); }
+
+    .lane-track {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      background: rgba(36, 62, 136, 0.04);
+      border-radius: 6px;
+      padding: 10px;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .step-card-tx {
+      background: var(--c-white);
+      border-radius: 6px;
+      border-left: 3px solid var(--c-blue-soft);
+      padding: 11px 13px 11px 11px;
+      box-shadow: 0 4px 12px rgba(0,11,54,0.10);
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 9px;
+      align-items: start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-color 0.2s ease;
+      position: relative;
+    }
+    .step-card-tx:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0,11,54,0.16);
+      border-left-color: var(--c-navy);
+    }
+    .step-num-tx {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--c-navy);
+      color: var(--c-white);
+      font-weight: 700;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-title-tx {
+      font-weight: 700;
+      color: var(--c-navy);
+      font-size: 12.5px;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+    .step-desc-tx {
+      font-size: 11px;
+      color: var(--c-grey-dark);
+      line-height: 1.4;
+    }
+
+    /* Place each step at its column */
+    .step-card-tx[data-col="1"] { grid-column: 1; }
+    .step-card-tx[data-col="2"] { grid-column: 2; }
+    .step-card-tx[data-col="3"] { grid-column: 3; }
+    .step-card-tx[data-col="4"] { grid-column: 4; }
+    .step-card-tx[data-col="5"] { grid-column: 5; }
+    .step-card-tx[data-col="6"] { grid-column: 6; }
+    .step-card-tx[data-col="7"] { grid-column: 7; }
+
+    .flow-legend {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--c-grey-dark);
+      padding: 0 4px;
+      font-style: italic;
+    }
+    .flow-legend-right {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-style: normal;
+    }
+    .flow-legend-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+    }
+    .flow-legend-dot::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--c-navy);
+      display: inline-block;
+    }
+
+    /* Simple responsive tweak */
+    @media (max-width: 1100px) {
+      .slide { padding: 40px 44px 30px; }
+      .slide-title { font-size: 30px; }
+      .spv-canvas, .model-grid { grid-template-columns: 1fr; }
+      .streams-grid { grid-template-columns: 1fr; }
+      .step-grid { grid-template-columns: 1fr 1fr; }
+      .biz-canvas { grid-template-columns: 1fr; }
+      .biz-rail { border-right: none; border-bottom: 1px solid rgba(36,62,136,0.12); padding-right: 0; padding-bottom: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+
+    <!-- ============================================================
+         SLIDE 1 — The SPV structure · simple view (no democratisation)
+         ============================================================ -->
+    <section class="slide" data-slide="1" data-spv-variant="simple">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">The <span class="accent">SPV</span> Structure · simple view</h1>
+          <p class="slide-subtitle">The custody and legal relationships — no economics, no democratisation</p>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="spv-canvas">
+          <!-- Diagram -->
+          <div class="spv-diagram">
+            <svg class="spv-svg" preserveAspectRatio="none"></svg>
+
+            <div class="spv-row row-top">
+              <div class="spv-node" data-node="seller">
+                <span class="label">Seller</span>
+                <span class="sub">via SPV L1 / L2 / L3</span>
+              </div>
+            </div>
+
+            <div class="spv-row row-mid">
+              <div class="spv-node" data-node="afsl">
+                <span class="label">AFSL trustee / RE</span>
+                <span class="sub">responsible entity</span>
+              </div>
+              <div class="spv-node master" data-node="master">
+                <span class="label">Master SPV</span>
+                <span class="sub">single buying vehicle</span>
+              </div>
+            </div>
+
+            <div class="spv-row row-sub">
+              <div class="spv-node" data-node="sub-a">
+                <span class="label">FloatX Anduril sub-SPV</span>
+                <span class="sub">holds Anduril position</span>
+              </div>
+              <div class="spv-node" data-node="sub-b">
+                <span class="label">FloatX Anthropic sub-SPV</span>
+                <span class="sub">holds Anthropic position</span>
+              </div>
+            </div>
+
+            <div class="spv-row row-bottom">
+              <div class="spv-node" data-node="investors">
+                <span class="label">Investors</span>
+                <span class="sub">subscribe into issuer-specific sub-SPV</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info panel -->
+          <div class="spv-info">
+            <span class="info-tag js-info-tag">HOVER A NODE</span>
+            <h3 class="js-info-title">The custody chain, simplified</h3>
+            <p class="js-info-body">
+              This view shows the legal entities and their relationships — no economics, no sponsor retention, no democratisation.
+              The Master SPV buys the shares from the seller; issuer-specific sub-SPVs then hold each position for investors.
+              Hover or tap any block on the diagram to see its role.
+            </p>
+            <div class="pill-row js-info-pills">
+              <span class="spv-pill strong">Single buying vehicle</span>
+              <span class="spv-pill">Issuer-specific sub-SPVs</span>
+              <span class="spv-pill">Ring-fenced per issuer</span>
+              <span class="spv-pill">Investors subscribe directly</span>
+            </div>
+            <p class="spv-hint">Click a node to lock the view. Click again to release.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">01 / 10</span>
+      </div>
+      <div class="slide-progress" style="width: 10%"></div>
+    </section>
+    <!-- ============================================================
+         SLIDE 3 — SPV share class structures (tabs)
+         ============================================================ -->
+    <section class="slide" data-slide="2">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">SPV share class <span class="accent">structures</span></h1>
+          <p class="slide-subtitle">Four routes to the same position — different risk, rights and cost profiles</p>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="slide2-grid">
+
+          <!-- Left: tabs + cards -->
+          <div class="tab-column">
+            <div class="tab-row" id="tabRow">
+              <button class="tab-btn active" data-tab="l1">Layer 1<small>Direct SPV</small></button>
+              <button class="tab-btn" data-tab="l15">Layer 1.5<small>Intermediary</small></button>
+              <button class="tab-btn" data-tab="l2">Layer 2<small>Fund of funds</small></button>
+              <button class="tab-btn" data-tab="l3">Layer 3<small>Fund of funds</small></button>
+              <button class="tab-btn" data-tab="l2s">L2 + side<small>Hybrid</small></button>
+            </div>
+
+            <div class="tab-panel-wrap" id="tabPanelWrap">
+
+          <div class="tab-panel active" data-panel="l1">
+            <div class="tab-card">
+              <span class="card-tag">Layer 1 · Top-tier share-holding vehicle</span>
+              <h3>Directly holds the unicorn shares</h3>
+              <ul>
+                <li>Directly holds the unicorn shares</li>
+                <li>Appears on the cap table as the registered holder</li>
+                <li>Has whatever voting, information and consent rights attach to those shares</li>
+                <li>Signs the SPA, deals with ROFR, gets the company's transfer consent</li>
+                <li>Is the single legal shareholder from the unicorn's perspective</li>
+              </ul>
+            </div>
+            <div class="tab-card">
+              <span class="card-tag">Fees &amp; economics</span>
+              <h3>Direct ownership, direct rights</h3>
+              <div class="fee-block">
+                <span class="fee-label">Access fee</span>
+                <span class="fee-value">8% – 12%</span>
+              </div>
+              <ul>
+                <li>On issuer share register as holder of record</li>
+                <li>Requires ROFR process and transfer approval</li>
+                <li>Net to position: ~88% – 92%</li>
+                <li>GP lock-up: issuer standard (180 days)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-panel="l15">
+            <div class="tab-card">
+              <span class="card-tag">Level 1.5 · Intermediary</span>
+              <h3>Forward contract tracking the underlying shares</h3>
+              <p>No share transfer. The existing holder enters a participation interest or forward contract with the SPV. Economic return tracks shares 1:1.</p>
+              <div class="fee-block">
+                <span class="fee-label">Access fee</span>
+                <span class="fee-value">13%+</span>
+              </div>
+            </div>
+            <div class="tab-card">
+              <span class="card-tag">Key features</span>
+              <h3>Speed over registration</h3>
+              <ul>
+                <li>Holder remains on cap table — no transfer</li>
+                <li>Bypasses ROFR — no issuer approval needed</li>
+                <li>Net to position: ~87%</li>
+                <li>GP lock-up: issuer standard (180 days)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-panel="l2s">
+            <div class="tab-card">
+              <span class="card-tag">L2 + side letter · Hybrid</span>
+              <h3>L2 access with L1-equivalent rights</h3>
+              <p>Investor subscribes at L2 but a side letter grants L1-equivalent rights — cap table visibility and transfer rights — bridging the two structures.</p>
+              <div class="fee-block">
+                <span class="fee-label">Fee profile</span>
+                <span class="fee-value">Included in L1 fee</span>
+              </div>
+            </div>
+            <div class="tab-card">
+              <span class="card-tag">Key features</span>
+              <h3>The best of both</h3>
+              <ul>
+                <li>Side letter grants L1-level economic rights</li>
+                <li>Requires separate issuer acknowledgement</li>
+                <li>Bridges L2 access with L1 protections</li>
+                <li>Performance fee: 10%–20% above hurdle</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-panel="l2">
+            <div class="tab-card">
+              <span class="card-tag">Layer 2 · Lower-tier feeder</span>
+              <h3>Feeder hanging off L1 — economics only</h3>
+              <ul>
+                <li>Holds an interest in L1, not in the unicorn</li>
+                <li>Passes through economics only — dividends, sale proceeds, liquidity events</li>
+                <li>No voting rights in the unicorn — voting stays at L1</li>
+                <li>This is where the downstream investors subscribe</li>
+                <li>Can be one of several L2s feeding into the same L1</li>
+              </ul>
+            </div>
+            <div class="tab-card">
+              <span class="card-tag">Fees &amp; economics</span>
+              <h3>Pooled access, smaller tickets</h3>
+              <div class="fee-block">
+                <span class="fee-label">Management fee</span>
+                <span class="fee-value">1% – 2% p.a.</span>
+              </div>
+              <ul>
+                <li>May carry additional management fee / carry</li>
+                <li>Used for smaller tickets or pooled access</li>
+                <li>Performance fee: 10%–20% above hurdle on liquidation</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-panel="l3">
+            <div class="tab-card">
+              <span class="card-tag">Layer 3 · Multi-layer wrapper</span>
+              <h3>Fund of funds of funds</h3>
+              <p>An L3 structure wraps the position in three or more entities: the issuer's L1 SPV, an intermediate feeder, and a further fund-of-funds that ultimately holds the LP interest. Most heavily intermediated route.</p>
+              <div class="fee-block">
+                <span class="fee-label">Layered fees</span>
+                <span class="fee-value">Compounded</span>
+              </div>
+            </div>
+            <div class="tab-card">
+              <span class="card-tag">Key features</span>
+              <h3>Maximum intermediation</h3>
+              <ul>
+                <li>3+ entities between investor and cap table</li>
+                <li>Multiple management fees stack across layers</li>
+                <li>No visibility to underlying holder of record</li>
+                <li>Used where direct access is not available</li>
+              </ul>
+            </div>
+          </div>
+
+            </div>
+          </div>
+
+          <!-- Right: overarching layer diagram -->
+          <div class="layer-diagram">
+            <div class="layer-axis"><span>Increasing intermediation</span></div>
+            <div class="layer-stack">
+              <div class="layer-box l-cap">
+                <div class="layer-title">Company cap table</div>
+                <div class="layer-sub">Issuer share register</div>
+              </div>
+              <div class="layer-arrow">&#9662;</div>
+              <div class="layer-box l-direct">
+                <div class="layer-title">Direct to cap table</div>
+                <div class="layer-sub">Buyer holds shares directly</div>
+                <div class="layer-note">Closest</div>
+              </div>
+              <div class="layer-arrow">&#9662;</div>
+              <div class="layer-box l-1" data-tab="l1">
+                <div class="layer-title">Layer 1</div>
+                <div class="layer-sub">Single SPV on cap table</div>
+                <div class="layer-note">1 entity<br>removed</div>
+              </div>
+              <div class="layer-arrow">&#9662;</div>
+              <div class="layer-box l-15" data-tab="l15">
+                <div class="layer-title">Layer 1.5</div>
+                <div class="layer-sub">SPV into an SPV on cap table</div>
+                <div class="layer-note">1–2 entities<br>removed</div>
+              </div>
+              <div class="layer-arrow">&#9662;</div>
+              <div class="layer-box l-2" data-tab="l2">
+                <div class="layer-title">Layer 2</div>
+                <div class="layer-sub">Fund or SPV via another fund</div>
+                <div class="layer-note">2–3 entities<br>removed</div>
+              </div>
+              <div class="layer-arrow">&#9662;</div>
+              <div class="layer-box l-3" data-tab="l3">
+                <div class="layer-title">Layer 3</div>
+                <div class="layer-sub">Fund of funds · multi-layer wrapper</div>
+                <div class="layer-note">3+ entities<br>removed</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>No GP lock-up beyond issuer standard (180d) for L1. No voting rights on L1.5.</span>
+        <span class="page-num">02 / 10</span>
+      </div>
+      <div class="slide-progress" style="width: 20%"></div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 4 — Transaction Flow · Manager Process (swim lanes)
+         ============================================================ -->
+    <section class="slide" data-slide="3">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Transaction <span class="accent">Flow</span> &mdash; Manager Process</h1>
+          <p class="slide-subtitle">From buyer Proof of Funds through share transfer completion</p>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="flow-canvas">
+          <svg class="flow-svg" preserveAspectRatio="none" aria-hidden="true"></svg>
+
+          <!-- BUYER lane (1 step) -->
+          <div class="swim-lane" data-lane="buyer">
+            <div class="lane-label buyer">Buyer</div>
+            <div class="lane-track">
+              <div class="step-card-tx" data-col="1" data-step="1">
+                <span class="step-num-tx">1</span>
+                <div>
+                  <div class="step-title-tx">Unicorn Interest</div>
+                  <div class="step-desc-tx">Re: Anthropic &middot; expressed on dashboard</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MANAGER lane (4 steps) -->
+          <div class="swim-lane" data-lane="manager">
+            <div class="lane-label manager">Manager</div>
+            <div class="lane-track">
+              <div class="step-card-tx" data-col="2" data-step="2">
+                <span class="step-num-tx">2</span>
+                <div>
+                  <div class="step-title-tx">Dashboard &middot; Opportunity Listed</div>
+                  <div class="step-desc-tx">Terms provided to buyer and funds sent to Manager</div>
+                </div>
+              </div>
+              <div class="step-card-tx" data-col="4" data-step="4">
+                <span class="step-num-tx">4</span>
+                <div>
+                  <div class="step-title-tx">Virtual Data Room</div>
+                  <div class="step-desc-tx">Due diligence opens</div>
+                </div>
+              </div>
+              <div class="step-card-tx" data-col="5" data-step="5">
+                <span class="step-num-tx">5</span>
+                <div>
+                  <div class="step-title-tx">Deal Confirmed &middot; Terms Agreed</div>
+                  <div class="step-desc-tx">Anthropic SPV holds the shares</div>
+                </div>
+              </div>
+              <div class="step-card-tx" data-col="7" data-step="7">
+                <span class="step-num-tx">7</span>
+                <div>
+                  <div class="step-title-tx">Share Liquidity On Platform</div>
+                  <div class="step-desc-tx">Secondary market open</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SELLER lane (2 steps) -->
+          <div class="swim-lane" data-lane="seller">
+            <div class="lane-label seller">Seller</div>
+            <div class="lane-track">
+              <div class="step-card-tx" data-col="3" data-step="3">
+                <span class="step-num-tx">3</span>
+                <div>
+                  <div class="step-title-tx">Documents Sent to Seller</div>
+                  <div class="step-desc-tx">PoF &middot; LOI &middot; UBO packaged and passed on</div>
+                </div>
+              </div>
+              <div class="step-card-tx" data-col="6" data-step="6">
+                <span class="step-num-tx">6</span>
+                <div>
+                  <div class="step-title-tx">Share Transfer Complete</div>
+                  <div class="step-desc-tx">Funds sent to Seller from Manager</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-legend">
+            <span>Indicative flow &middot; actual timing varies by issuer and ticket size.</span>
+            <span class="flow-legend-right">
+              <span class="flow-legend-dot">Step</span>
+              <span>Swim-lane: Buyer &middot; Manager &middot; Seller</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">03 / 10</span>
+      </div>
+      <div class="slide-progress" style="width: 30%"></div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 5 — Unicorn Fee structure
+         ============================================================ -->
+    <section class="slide" data-slide="4">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Unicorn <span class="accent">Fee</span> structure</h1>
+          <p class="slide-subtitle">Standard fee schedule across each share class structure</p>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <p class="fee-intro">
+          All fees are charged at the SPV level and deducted before capital is deployed.
+          The table below summarises the standard fee schedule across each share class structure.
+          Hover any row to highlight it across all columns.
+        </p>
+
+        <div class="fee-table" id="feeTable">
+          <div class="fee-row header">
+            <div class="fee-col label">Fee component</div>
+            <div class="fee-col">L1 — Direct SPV</div>
+            <div class="fee-col">L1.5 — Intermediary</div>
+            <div class="fee-col">L2 — Fund of Funds</div>
+            <div class="fee-col">L2 + L1 side letter</div>
+          </div>
+
+          <div class="fee-row" data-row>
+            <div class="fee-col label">Access fee (upfront)</div>
+            <div class="fee-col"><span class="amount">8% – 12%</span></div>
+            <div class="fee-col"><span class="amount">13%+</span></div>
+            <div class="fee-col"><span class="amount">Included</span><span class="note">in L1 fee</span></div>
+            <div class="fee-col"><span class="amount">Included</span><span class="note">in L1 fee</span></div>
+          </div>
+
+          <div class="fee-row" data-row>
+            <div class="fee-col label">Management fee (p.a.)</div>
+            <div class="fee-col"><span class="amount">Case by case</span></div>
+            <div class="fee-col"><span class="amount">Case by case</span></div>
+            <div class="fee-col"><span class="amount">1% – 2%</span></div>
+            <div class="fee-col"><span class="amount">1% – 2%</span></div>
+          </div>
+
+          <div class="fee-row" data-row>
+            <div class="fee-col label">Performance fee / carry</div>
+            <div class="fee-col"><span class="amount">Case by case</span></div>
+            <div class="fee-col"><span class="amount">Case by case</span></div>
+            <div class="fee-col"><span class="amount">10% – 20%</span><span class="note">above hurdle · on liquidation</span></div>
+            <div class="fee-col"><span class="amount">10% – 20%</span><span class="note">above hurdle · on liquidation</span></div>
+          </div>
+
+          <div class="fee-row" data-row>
+            <div class="fee-col label">Net to position</div>
+            <div class="fee-col"><span class="amount">~88% – 92%</span></div>
+            <div class="fee-col"><span class="amount">~87%</span></div>
+            <div class="fee-col"><span class="amount">Varies</span><span class="note">L2 layer fees</span></div>
+            <div class="fee-col"><span class="amount">Varies</span><span class="note">L2 layer fees</span></div>
+          </div>
+
+          <div class="fee-row" data-row>
+            <div class="fee-col label">GP lock-up</div>
+            <div class="fee-col"><span class="amount">180d</span><span class="note">issuer standard</span></div>
+            <div class="fee-col"><span class="amount">180d</span><span class="note">issuer standard</span></div>
+            <div class="fee-col"><span class="amount">Per L2 terms</span></div>
+            <div class="fee-col"><span class="amount">Per L2 terms</span></div>
+          </div>
+        </div>
+
+        <div class="fee-callout">
+          <span class="fee-callout-tag">Note</span>
+          <p>The <strong>L1.5 structure</strong> carries more overhead because you're essentially paying for <strong>two entities</strong> instead of one.</p>
+        </div>
+
+        <div class="fee-callout">
+          <span class="fee-callout-tag">Note</span>
+          <p><strong>Management fees</strong> and <strong>performance fees</strong> depend entirely on the structure from the seller — <strong>the same fees apply across all layers</strong>.</p>
+        </div>
+
+        <p class="fee-note">
+          Fees are indicative and may vary by deal, issuer, and ticket size. Performance fees subject to preferred return hurdle where applicable.
+        </p>
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">04 / 10</span>
+      </div>
+      <div class="slide-progress" style="width: 40%"></div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 5 — Step by step (phases 1–3)
+         ============================================================ -->
+    <section class="slide compact-phases" data-slide="5">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Step-by-step: <span class="accent">commitment</span> to exit</h1>
+          <p class="slide-subtitle">Phases 1–5 · Origination through exit on a single page</p>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="phase-wrap">
+
+          <div class="phase-block">
+            <div class="phase-header">
+              <span class="phase-badge">Phase 1</span>
+              <div class="phase-title">Origination <small>steps 01–02</small></div>
+              <div class="phase-rule"></div>
+            </div>
+            <div class="step-grid two">
+              <div class="step-card">
+                <div class="step-num">01</div>
+                <div class="step-name">Seller initiates</div>
+                <div class="step-desc">Secondary holder approaches or is sourced. Indicative pricing set on last round or market comparables.</div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">02</div>
+                <div class="step-name">Indicative terms issued</div>
+                <div class="step-desc">Term sheet circulated with price, structure, fee breakdown and minimum ticket size.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-block">
+            <div class="phase-header">
+              <span class="phase-badge">Phase 2</span>
+              <div class="phase-title">Investor onboarding <small>steps 03–05</small></div>
+              <div class="phase-rule"></div>
+            </div>
+            <div class="step-grid">
+              <div class="step-card">
+                <div class="step-num">03</div>
+                <div class="step-name">LOI and UBO disclosure</div>
+                <div class="step-desc">Letter of intent signed. KYC/AML, UBO verification and proof of funds completed.</div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">04</div>
+                <div class="step-name">Buyer data room open</div>
+                <div class="step-desc">Operating &amp; subscription agreements available for investor review and diligence.</div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">05</div>
+                <div class="step-name">Subscription docs executed</div>
+                <div class="step-desc">Investor executes subscription agreement and side letter (if applicable). Capital committed.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-block">
+            <div class="phase-header">
+              <span class="phase-badge">Phase 3</span>
+              <div class="phase-title">Transfer execution <small>step 06</small></div>
+              <div class="phase-rule"></div>
+            </div>
+            <div class="step-grid two">
+              <div class="step-card">
+                <div class="step-num">06</div>
+                <div class="step-name">ROFR notice served</div>
+                <div class="step-desc">Right of first refusal served on issuer (L1). Transfer docs prepared: SPA, deed and board consent.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-block">
+            <div class="phase-header">
+              <span class="phase-badge">Phase 4</span>
+              <div class="phase-title">Settlement <small>steps 07–09</small></div>
+              <div class="phase-rule"></div>
+            </div>
+            <div class="step-grid">
+              <div class="step-card">
+                <div class="step-num">07</div>
+                <div class="step-name">Issuer consent</div>
+                <div class="step-desc">Issuer approves transfer and updates register (L1), or forward contract executed (L1.5).</div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">08</div>
+                <div class="step-name">Funds wired</div>
+                <div class="step-desc">Capital deployed to seller. SPV holds position on behalf of investors. Confirmation issued.</div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">09</div>
+                <div class="step-name">Cap table updated</div>
+                <div class="step-desc">SPV (or nominee) confirmed on issuer share register. Holding statement issued to investors.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-block">
+            <div class="phase-header">
+              <span class="phase-badge">Phase 5</span>
+              <div class="phase-title">Ongoing &amp; exit <small>steps 10–11</small></div>
+              <div class="phase-rule"></div>
+            </div>
+            <div class="step-grid two">
+              <div class="step-card">
+                <div class="step-num">10</div>
+                <div class="step-name">Ongoing reporting</div>
+                <div class="step-desc">Quarterly NAV updates, material issuer events, and annual audited financials.</div>
+              </div>
+              <div class="step-card">
+                <div class="step-num">11</div>
+                <div class="step-name">Exit and distributions</div>
+                <div class="step-desc">On IPO, M&amp;A or tender: proceeds distributed pro-rata net of carry. GP lock-up per terms.</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="phase-note">
+            L1.5 forward contracts do not require issuer transfer approval. Exit timing subject to issuer lock-up and liquidity event schedule.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">05 / 10</span>
+      </div>
+      <div class="slide-progress" style="width: 50%"></div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 8 — Business Structure / Three Revenue Streams
+         ============================================================ -->
+    <section class="slide biz-split" data-slide="6">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Business <span class="accent">Structure</span> · Fund &amp; Co-Invest</h1>
+          <p class="slide-subtitle">Streams 1 &amp; 2 — distribution and direct ownership</p>
+        </div>
+        <div class="slide-brand">Float<span class="x">X</span></div>
+      </div>
+
+      <!-- Snapshot strip -->
+      <div class="biz-snapshot" aria-label="Three revenue streams snapshot">
+        <span class="snap-label">Three Revenue Streams</span>
+        <div class="snap-chip on"><span class="snap-num">1</span><span class="snap-text">Fund</span></div>
+        <div class="snap-chip on"><span class="snap-num">2</span><span class="snap-text">Co-Invest Direct SPV</span></div>
+        <div class="snap-chip"><span class="snap-num">3</span><span class="snap-text">Trading · Liquidity</span></div>
+        <span class="snap-hint">Detail on this slide →</span>
+      </div>
+
+      <div class="slide-body">
+        <div class="biz-canvas two-stream">
+          <svg class="biz-svg" preserveAspectRatio="none" aria-hidden="true"></svg>
+
+          <aside class="biz-rail">
+            <div class="biz-rail-title">In focus</div>
+            <div class="stream-item active" data-stream="1">
+              <span class="stream-num">1</span>
+              <span class="stream-text">Fund</span>
+            </div>
+            <div class="stream-item active" data-stream="2">
+              <span class="stream-num">2</span>
+              <span class="stream-text">Direct purchase — held in SPV</span>
+            </div>
+          </aside>
+
+          <div class="biz-flow">
+            <div class="investor-row">
+              <div class="investor-chip">Institution /<br>Superfunds</div>
+              <div class="investor-chip">High Net<br>Wealth</div>
+              <div class="investor-chip">Private<br>Wealth</div>
+              <div class="investor-chip">Family<br>Office</div>
+              <div class="investor-chip us-gp">US GPs<br><span class="us-gp-sub">Inbound · US product distribution</span></div>
+            </div>
+
+            <div class="biz-connector"></div>
+            <div class="biz-band">Distribution</div>
+            <div class="biz-connector"></div>
+            <div class="biz-band platform">Platform</div>
+
+            <div class="product-stack">
+              <div class="product-card" data-stream="1">
+                <span class="product-num">1</span>
+                <div class="product-body">
+                  <div class="product-title">GP Fund</div>
+                  <div class="product-headline">
+                    <span class="big">$300M</span>
+                    <span class="label">Target raise</span>
+                    <span class="label">Min Cheque <b>$3M</b></span>
+                    <span class="label">Fee <b>2 / 20%</b></span>
+                    <span class="label">Access fee <b>5–15%</b></span>
+                  </div>
+                </div>
+                <div class="product-meta">
+                  <span class="product-pill">10 unicorns</span>
+                </div>
+              </div>
+
+              <div class="product-card" data-stream="2">
+                <span class="product-num">2</span>
+                <div class="product-body">
+                  <div class="product-title">Co-Invest Direct SPV</div>
+                  <div class="product-detail">Access fee <b style="color:var(--c-navy);font-style:normal;">+5–13%</b></div>
+                </div>
+                <div class="product-meta">
+                  <div class="product-tags">
+                    <span class="product-tag">SPV 1</span>
+                    <span class="product-tag">SPV 1.5</span>
+                    <span class="product-tag">SPV 2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">06 / 10</span>
+      </div>
+      <div class="slide-progress" style="width: 60%"></div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 7 — End-to-end transaction structure
+         ============================================================ -->
+    <section class="slide" data-slide="7">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">End-to-end <span class="accent">Transaction</span> Structure</h1>
+          <p class="slide-subtitle">How investors flow through the Australian trust and US holding entity to sit on an issuer's cap table</p>
+        </div>
+        <div class="slide-brand">Float<span class="x">X</span></div>
+      </div>
+
+      <div class="slide-body">
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 840 660" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr-d1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="#2E55B0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+            </defs>
+            <text class="ts" x="420" y="26" text-anchor="middle">INVESTOR LAYER</text>
+            <g>
+              <rect x="50" y="36" width="160" height="52" rx="8" fill="rgba(136,135,128,0.10)" stroke="rgba(36,62,136,0.28)" stroke-width="0.5"/>
+              <text class="th" x="130" y="56" text-anchor="middle" dominant-baseline="central">Investor A</text>
+              <text class="ts" x="130" y="74" text-anchor="middle" dominant-baseline="central">Wholesale / s708</text>
+            </g>
+            <g>
+              <rect x="230" y="36" width="160" height="52" rx="8" fill="rgba(136,135,128,0.10)" stroke="rgba(36,62,136,0.28)" stroke-width="0.5"/>
+              <text class="th" x="310" y="56" text-anchor="middle" dominant-baseline="central">Investor B</text>
+              <text class="ts" x="310" y="74" text-anchor="middle" dominant-baseline="central">Wholesale / s708</text>
+            </g>
+            <g>
+              <rect x="410" y="36" width="160" height="52" rx="8" fill="rgba(136,135,128,0.10)" stroke="rgba(36,62,136,0.28)" stroke-width="0.5"/>
+              <text class="th" x="490" y="56" text-anchor="middle" dominant-baseline="central">Investor C–N</text>
+              <text class="ts" x="490" y="74" text-anchor="middle" dominant-baseline="central">Up to ~20–30</text>
+            </g>
+            <g>
+              <rect x="600" y="36" width="200" height="52" rx="8" fill="rgba(91,164,207,0.12)" stroke="#5BA4CF" stroke-width="0.5"/>
+              <text class="th" x="700" y="53" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Investor requirements</text>
+              <text class="ts" x="700" y="71" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">KYC · s708 cert · sub agmt</text>
+            </g>
+            <line x1="130" y1="88" x2="310" y2="168" stroke="rgba(36,62,136,0.28)" stroke-width="1" marker-end="url(#arr-d1)"/>
+            <line x1="310" y1="88" x2="350" y2="168" stroke="rgba(36,62,136,0.28)" stroke-width="1" marker-end="url(#arr-d1)"/>
+            <line x1="490" y1="88" x2="400" y2="168" stroke="rgba(36,62,136,0.28)" stroke-width="1" marker-end="url(#arr-d1)"/>
+            <text class="ts" x="420" y="158" text-anchor="middle">AUSTRALIAN LAYER</text>
+            <g>
+              <rect x="90" y="166" width="460" height="64" rx="10" fill="rgba(36,62,136,0.18)" stroke="#2E55B0" stroke-width="0.5"/>
+              <text class="th" x="320" y="190" text-anchor="middle" dominant-baseline="central" style="fill:#0A1530">Australian wholesale unit trust</text>
+              <text class="ts" x="320" y="210" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">AFSL trustee · MIS authorisation · AUSTRAC enrolled</text>
+            </g>
+            <g>
+              <rect x="570" y="166" width="230" height="64" rx="8" fill="rgba(91,164,207,0.12)" stroke="#5BA4CF" stroke-width="0.5"/>
+              <text class="th" x="685" y="183" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Trust setup requirements</text>
+              <text class="ts" x="685" y="200" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Trust deed · IM · AML/CTF</text>
+              <text class="ts" x="685" y="216" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">program · AML rep letter</text>
+            </g>
+            <line x1="320" y1="230" x2="320" y2="272" stroke="rgba(36,62,136,0.28)" stroke-width="1" marker-end="url(#arr-d1)"/>
+            <text class="ts" x="420" y="262" text-anchor="middle">ISSUER PREFERENCE</text>
+            <polygon points="320,276 400,308 320,340 240,308" fill="rgba(36,62,136,0.18)" stroke="#2E55B0" stroke-width="0.5"/>
+            <text class="ts" x="320" y="304" text-anchor="middle" style="fill:#0A1530">AUS trust</text>
+            <text class="ts" x="320" y="318" text-anchor="middle" style="fill:#0A1530">accepted?</text>
+            <text class="ts" x="175" y="304" text-anchor="middle">Yes — direct</text>
+            <line x1="240" y1="308" x2="130" y2="308" stroke="rgba(36,62,136,0.28)" stroke-width="1"/>
+            <line x1="130" y1="308" x2="130" y2="390" stroke="rgba(36,62,136,0.28)" stroke-width="1" marker-end="url(#arr-d1)"/>
+            <text class="ts" x="465" y="304" text-anchor="middle">No — US entity</text>
+            <line x1="400" y1="308" x2="520" y2="308" stroke="rgba(36,62,136,0.28)" stroke-width="1"/>
+            <line x1="520" y1="308" x2="520" y2="358" stroke="rgba(36,62,136,0.28)" stroke-width="1" marker-end="url(#arr-d1)"/>
+            <text class="ts" x="130" y="380" text-anchor="middle">DIRECT PATH</text>
+            <g>
+              <rect x="60" y="388" width="140" height="52" rx="8" fill="rgba(36,62,136,0.18)" stroke="#2E55B0" stroke-width="0.5"/>
+              <text class="th" x="130" y="408" text-anchor="middle" dominant-baseline="central" style="fill:#0A1530">Trust on</text>
+              <text class="th" x="130" y="424" text-anchor="middle" dominant-baseline="central" style="fill:#0A1530">cap table</text>
+            </g>
+            <text class="ts" x="520" y="348" text-anchor="middle">US HOLDING LAYER</text>
+            <g>
+              <rect x="410" y="356" width="220" height="64" rx="10" fill="rgba(14,40,65,0.55)" stroke="#2E55B0" stroke-width="0.5"/>
+              <text class="th" x="520" y="376" text-anchor="middle" dominant-baseline="central" style="fill:#0A1530">Delaware LLC</text>
+              <text class="ts" x="520" y="394" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">or Cayman LP</text>
+              <text class="ts" x="520" y="410" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Single holding entity</text>
+            </g>
+            <g>
+              <rect x="648" y="356" width="152" height="64" rx="8" fill="rgba(91,164,207,0.12)" stroke="#5BA4CF" stroke-width="0.5"/>
+              <text class="th" x="724" y="373" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">US entity reqs</text>
+              <text class="ts" x="724" y="390" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Reg. agent</text>
+              <text class="ts" x="724" y="406" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Op. agmt · bank acct</text>
+            </g>
+            <line x1="520" y1="420" x2="420" y2="480" stroke="rgba(36,62,136,0.28)" stroke-width="1"/>
+            <line x1="130" y1="440" x2="340" y2="480" stroke="rgba(36,62,136,0.28)" stroke-width="1"/>
+            <text class="ts" x="420" y="472" text-anchor="middle">TRANSACTION LAYER</text>
+            <g>
+              <rect x="90" y="480" width="460" height="64" rx="10" fill="rgba(186,117,23,0.12)" stroke="#ba7517" stroke-width="0.5"/>
+              <text class="th" x="320" y="500" text-anchor="middle" dominant-baseline="central" style="fill:#7a4800">Secondary transaction</text>
+              <text class="ts" x="320" y="518" text-anchor="middle" dominant-baseline="central" style="fill:#ba7517">Source shares · broker-dealer chaperone · SPA · ROFR window · transfer agent</text>
+            </g>
+            <g>
+              <rect x="570" y="480" width="230" height="64" rx="8" fill="rgba(91,164,207,0.12)" stroke="#5BA4CF" stroke-width="0.5"/>
+              <text class="th" x="685" y="497" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Transaction requirements</text>
+              <text class="ts" x="685" y="514" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">ROFR condition precedent</text>
+              <text class="ts" x="685" y="530" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Issuer reps · board approval</text>
+            </g>
+            <line x1="320" y1="544" x2="320" y2="584" stroke="rgba(36,62,136,0.28)" stroke-width="1" marker-end="url(#arr-d1)"/>
+            <text class="ts" x="420" y="574" text-anchor="middle">ISSUER CAP TABLE</text>
+            <g><rect x="50" y="582" width="140" height="52" rx="8" fill="rgba(59,109,17,0.10)" stroke="#3b6d11" stroke-width="0.5"/><text class="th" x="120" y="602" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">SpaceX</text><text class="ts" x="120" y="618" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">ROFR · workable</text></g>
+            <g><rect x="205" y="582" width="140" height="52" rx="8" fill="rgba(59,109,17,0.10)" stroke="#3b6d11" stroke-width="0.5"/><text class="th" x="275" y="602" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">Neuralink</text><text class="ts" x="275" y="618" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">ROFR · workable</text></g>
+            <g><rect x="360" y="582" width="140" height="52" rx="8" fill="rgba(186,117,23,0.12)" stroke="#ba7517" stroke-width="0.5"/><text class="th" x="430" y="602" text-anchor="middle" dominant-baseline="central" style="fill:#7a4800">Anduril</text><text class="ts" x="430" y="618" text-anchor="middle" dominant-baseline="central" style="fill:#ba7517">Restricted</text></g>
+            <g><rect x="515" y="582" width="140" height="52" rx="8" fill="rgba(163,45,45,0.12)" stroke="#a32d2d" stroke-width="0.5"/><text class="th" x="585" y="602" text-anchor="middle" dominant-baseline="central" style="fill:#a32d2d">OpenAI</text><text class="ts" x="585" y="618" text-anchor="middle" dominant-baseline="central" style="fill:#a32d2d">Board approval only</text></g>
+            <g><rect x="670" y="582" width="140" height="52" rx="8" fill="rgba(163,45,45,0.12)" stroke="#a32d2d" stroke-width="0.5"/><text class="th" x="740" y="602" text-anchor="middle" dominant-baseline="central" style="fill:#a32d2d">Anthropic</text><text class="ts" x="740" y="618" text-anchor="middle" dominant-baseline="central" style="fill:#a32d2d">Board approval only</text></g>
+            <line x1="220" y1="544" x2="120" y2="582" stroke="rgba(36,62,136,0.18)" stroke-width="0.5"/>
+            <line x1="260" y1="544" x2="275" y2="582" stroke="rgba(36,62,136,0.18)" stroke-width="0.5"/>
+            <line x1="320" y1="544" x2="430" y2="582" stroke="rgba(36,62,136,0.18)" stroke-width="0.5"/>
+            <line x1="370" y1="544" x2="585" y2="582" stroke="rgba(36,62,136,0.18)" stroke-width="0.5"/>
+            <line x1="410" y1="544" x2="740" y2="582" stroke="rgba(36,62,136,0.18)" stroke-width="0.5"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">07 / 10</span>
+      </div>
+      <div class="slide-progress" style="width: 70%"></div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 8 — Series trust structure
+         ============================================================ -->
+    <section class="slide" data-slide="8">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Series <span class="accent">Trust</span> Structure</h1>
+          <p class="slide-subtitle">One trust, multiple ring-fenced deals — infrastructure set up once, each new series costs $2–5k and takes 1–2 weeks</p>
+        </div>
+        <div class="slide-brand">Float<span class="x">X</span></div>
+      </div>
+
+      <div class="slide-body">
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 840 730" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr-d2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="rgba(36,62,136,0.75)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+            </defs>
+            <rect x="30" y="30" width="780" height="580" rx="16" fill="rgba(36,62,136,0.10)" stroke="#2E55B0" stroke-width="0.5"/>
+            <text class="th" x="420" y="60" text-anchor="middle" style="fill:#0A1530">Australian wholesale unit trust</text>
+            <text class="ts" x="420" y="78" text-anchor="middle" style="fill:#2E55B0">One legal entity · One AFSL trustee · One AML/CTF program · One AUSTRAC enrolment</text>
+            <rect x="50" y="90" width="740" height="40" rx="8" fill="rgba(36,62,136,0.25)" stroke="#2E55B0" stroke-width="0.5"/>
+            <text class="th" x="420" y="110" text-anchor="middle" dominant-baseline="central" style="fill:#0A1530">Trustee (AFSL holder · MIS authorised)</text>
+            <rect x="50" y="140" width="740" height="34" rx="6" fill="rgba(36,62,136,0.18)" stroke="#2E55B0" stroke-width="0.5"/>
+            <text class="ts" x="420" y="157" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Shared: trust deed · AML program · AUSTRAC enrolment · fund administrator · annual reporting</text>
+            <text class="ts" x="420" y="196" text-anchor="middle" style="fill:#2E55B0">RING-FENCED SERIES (one per deal · $2–5k · 1–2 weeks each)</text>
+            <!-- Series 1 -->
+            <rect x="50" y="206" width="350" height="172" rx="10" fill="rgba(36,62,136,0.10)" stroke="#2E55B0" stroke-width="0.5"/>
+            <text class="th" x="225" y="228" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Series 1 — SpaceX</text>
+            <rect x="66" y="242" width="148" height="28" rx="6" fill="rgba(91,164,207,0.15)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="140" y="256" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Investor A</text>
+            <rect x="226" y="242" width="148" height="28" rx="6" fill="rgba(91,164,207,0.15)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="300" y="256" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Investor B</text>
+            <rect x="66" y="278" width="308" height="24" rx="4" fill="rgba(91,164,207,0.12)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="220" y="290" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Own bank account · unit register · IM</text>
+            <rect x="66" y="310" width="308" height="24" rx="4" fill="rgba(91,164,207,0.12)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="220" y="322" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Delaware LLC (if required)</text>
+            <text class="ts" x="225" y="358" text-anchor="middle" style="fill:#2E55B0">Series supplement + sub docs only</text>
+            <!-- Series 2 -->
+            <rect x="440" y="206" width="350" height="172" rx="10" fill="rgba(36,62,136,0.10)" stroke="#2E55B0" stroke-width="0.5"/>
+            <text class="th" x="615" y="228" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Series 2 — Neuralink</text>
+            <rect x="456" y="242" width="148" height="28" rx="6" fill="rgba(91,164,207,0.15)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="530" y="256" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Investor B</text>
+            <rect x="616" y="242" width="148" height="28" rx="6" fill="rgba(91,164,207,0.15)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="690" y="256" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Investor C</text>
+            <rect x="456" y="278" width="308" height="24" rx="4" fill="rgba(91,164,207,0.12)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="610" y="290" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Own bank account · unit register · IM</text>
+            <rect x="456" y="310" width="308" height="24" rx="4" fill="rgba(91,164,207,0.12)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="610" y="322" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Delaware LLC (if required)</text>
+            <text class="ts" x="615" y="358" text-anchor="middle" style="fill:#2E55B0">Series supplement + sub docs only</text>
+            <!-- Series 3 -->
+            <rect x="50" y="390" width="350" height="172" rx="10" fill="rgba(36,62,136,0.10)" stroke="#2E55B0" stroke-width="0.5"/>
+            <text class="th" x="225" y="412" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Series 3 — Anduril</text>
+            <rect x="66" y="426" width="148" height="28" rx="6" fill="rgba(91,164,207,0.15)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="140" y="440" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Investor A</text>
+            <rect x="226" y="426" width="148" height="28" rx="6" fill="rgba(91,164,207,0.15)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="300" y="440" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Investor D</text>
+            <rect x="66" y="462" width="308" height="24" rx="4" fill="rgba(91,164,207,0.12)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="220" y="474" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Own bank account · unit register · IM</text>
+            <rect x="66" y="494" width="308" height="24" rx="4" fill="rgba(91,164,207,0.12)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="220" y="506" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Direct institutional only</text>
+            <text class="ts" x="225" y="542" text-anchor="middle" style="fill:#2E55B0">Series supplement + sub docs only</text>
+            <!-- Series 4 future -->
+            <rect x="440" y="390" width="350" height="172" rx="10" fill="rgba(136,135,128,0.05)" stroke="rgba(36,62,136,0.22)" stroke-width="0.5" stroke-dasharray="7 4"/>
+            <text class="th" x="615" y="412" text-anchor="middle" dominant-baseline="central" style="fill:#888780">Series 4 — next deal</text>
+            <rect x="456" y="426" width="148" height="28" rx="6" fill="rgba(136,135,128,0.08)" stroke="rgba(36,62,136,0.18)" stroke-width="0.5"/><text class="ts" x="530" y="440" text-anchor="middle" dominant-baseline="central" style="fill:#888780">Investor ?</text>
+            <rect x="616" y="426" width="148" height="28" rx="6" fill="rgba(136,135,128,0.08)" stroke="rgba(36,62,136,0.18)" stroke-width="0.5"/><text class="ts" x="690" y="440" text-anchor="middle" dominant-baseline="central" style="fill:#888780">Investor ?</text>
+            <rect x="456" y="462" width="308" height="24" rx="4" fill="rgba(136,135,128,0.06)" stroke="rgba(36,62,136,0.15)" stroke-width="0.5"/><text class="ts" x="610" y="474" text-anchor="middle" dominant-baseline="central" style="fill:#555450">Own bank account · unit register · IM</text>
+            <rect x="456" y="494" width="308" height="24" rx="4" fill="rgba(136,135,128,0.06)" stroke="rgba(36,62,136,0.15)" stroke-width="0.5"/><text class="ts" x="610" y="506" text-anchor="middle" dominant-baseline="central" style="fill:#555450">Structure TBD per issuer</text>
+            <text class="ts" x="615" y="542" text-anchor="middle" style="fill:#555450">$2–5k per series · 1–2 weeks</text>
+            <text class="ts" x="420" y="612" text-anchor="middle" style="fill:#2E55B0">Each series is legally ring-fenced — investors in one series have no claim on assets in any other series</text>
+            <!-- Cap tables -->
+            <text class="ts" x="420" y="648" text-anchor="middle" style="fill:rgba(36,62,136,0.55)">ISSUER CAP TABLES</text>
+            <g><rect x="50" y="656" width="160" height="52" rx="8" fill="rgba(59,109,17,0.10)" stroke="#3b6d11" stroke-width="0.5"/><text class="th" x="130" y="676" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">SpaceX</text><text class="ts" x="130" y="694" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">ROFR · workable</text></g>
+            <g><rect x="230" y="656" width="160" height="52" rx="8" fill="rgba(59,109,17,0.10)" stroke="#3b6d11" stroke-width="0.5"/><text class="th" x="310" y="676" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">Neuralink</text><text class="ts" x="310" y="694" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">ROFR · workable</text></g>
+            <g><rect x="410" y="656" width="160" height="52" rx="8" fill="rgba(186,117,23,0.12)" stroke="#ba7517" stroke-width="0.5"/><text class="th" x="490" y="676" text-anchor="middle" dominant-baseline="central" style="fill:#7a4800">Anduril</text><text class="ts" x="490" y="694" text-anchor="middle" dominant-baseline="central" style="fill:#ba7517">Restricted</text></g>
+            <g><rect x="590" y="656" width="160" height="52" rx="8" fill="rgba(136,135,128,0.10)" stroke="rgba(36,62,136,0.28)" stroke-width="0.5" stroke-dasharray="5 3"/><text class="th" x="670" y="676" text-anchor="middle" dominant-baseline="central">Future issuer</text><text class="ts" x="670" y="694" text-anchor="middle" dominant-baseline="central">TBD</text></g>
+            <line x1="225" y1="574" x2="130" y2="656" stroke="rgba(36,62,136,0.35)" stroke-width="1" marker-end="url(#arr-d2)"/>
+            <line x1="615" y1="574" x2="310" y2="656" stroke="rgba(36,62,136,0.35)" stroke-width="1" marker-end="url(#arr-d2)"/>
+            <line x1="225" y1="574" x2="490" y2="656" stroke="rgba(186,117,23,0.4)" stroke-width="1" marker-end="url(#arr-d2)"/>
+            <line x1="615" y1="574" x2="670" y2="656" stroke="rgba(136,135,128,0.3)" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#arr-d2)"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">08 / 10</span>
+      </div>
+      <div class="slide-progress" style="width: 80%"></div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 9 — Business Structure · Trading & Liquidity (Stream 3)
+         ============================================================ -->
+    <section class="slide biz-split" data-slide="9">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Business <span class="accent">Structure</span> · Trading &amp; Liquidity</h1>
+          <p class="slide-subtitle">Stream 3 — secondary market and democratised access</p>
+        </div>
+        <div class="slide-brand">Float<span class="x">X</span></div>
+      </div>
+
+      <!-- Snapshot strip -->
+      <div class="biz-snapshot" aria-label="Three revenue streams snapshot">
+        <span class="snap-label">Three Revenue Streams</span>
+        <div class="snap-chip"><span class="snap-num">1</span><span class="snap-text">Fund</span></div>
+        <div class="snap-chip"><span class="snap-num">2</span><span class="snap-text">Co-Invest Direct SPV</span></div>
+        <div class="snap-chip on"><span class="snap-num">3</span><span class="snap-text">Trading · Liquidity</span></div>
+        <span class="snap-hint">Detail on this slide →</span>
+      </div>
+
+      <div class="slide-body">
+        <div class="biz-canvas single-stream">
+          <svg class="biz-svg" preserveAspectRatio="none" aria-hidden="true"></svg>
+
+          <aside class="biz-rail">
+            <div class="biz-rail-title">In focus</div>
+            <div class="stream-item active" data-stream="3">
+              <span class="stream-num">3</span>
+              <span class="stream-text">Trading — secondary &amp; democratised</span>
+            </div>
+            <p class="rail-note">Open marketplace for SPV units. Provides exit liquidity for Streams 1 &amp; 2 holders and primary access for new buyers — all at a transparent margin to cost basis.</p>
+          </aside>
+
+          <div class="biz-flow">
+            <div class="investor-row">
+              <div class="investor-chip">Institution /<br>Superfunds</div>
+              <div class="investor-chip">High Net<br>Wealth</div>
+              <div class="investor-chip">Private<br>Wealth</div>
+              <div class="investor-chip">Family<br>Office</div>
+              <div class="investor-chip us-gp">US GPs<br><span class="us-gp-sub">Inbound · US product distribution</span></div>
+            </div>
+
+            <div class="biz-connector"></div>
+            <div class="biz-band platform">Trading Platform</div>
+
+            <div class="product-stack">
+              <div class="product-card fill has-depth" data-stream="3">
+                <span class="product-num">3</span>
+                <div class="product-body">
+                  <div class="product-title">Trading SPV · Liquidity</div>
+                  <div class="product-detail">Secondary market — democratised access &amp; exit</div>
+                </div>
+                <div class="product-meta">
+                  <div class="product-tags">
+                    <span class="product-tag">+5% margin PPS</span>
+                    <span class="product-tag">+6% buyer brokerage</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="market-depth" aria-label="Trading platform market depth">
+              <div class="depth-header">
+                <span class="depth-title">Market Depth · Trading Platform</span>
+                <div class="depth-tabs">
+                  <button class="depth-tab active" data-company="spacex">SpaceX</button>
+                  <button class="depth-tab" data-company="koala">Koala</button>
+                </div>
+              </div>
+
+              <!-- SpaceX -->
+              <div class="depth-company" data-company="spacex">
+                <div class="depth-sub-row">
+                  <span class="depth-company-name">SpaceX · Series X</span>
+                  <span class="depth-sub">Cost basis $185 → +5% ask $194 · Valuation ~$350B</span>
+                </div>
+                <div class="depth-two-col">
+                  <div>
+                    <div class="depth-col-label sell">Sellers (ask)</div>
+                    <div class="depth-rows">
+                      <div class="depth-row best">
+                        <span class="depth-price">$194</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:88%"></span></span>
+                        <span class="depth-tag">Best ask · +5%</span>
+                      </div>
+                      <div class="depth-row">
+                        <span class="depth-price">$196</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:61%"></span></span>
+                        <span class="depth-tag">Resting ask</span>
+                      </div>
+                      <div class="depth-row">
+                        <span class="depth-price">$199</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:38%"></span></span>
+                        <span class="depth-tag">Resting ask</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="depth-col-label buy">Buyers (bid)</div>
+                    <div class="depth-rows">
+                      <div class="depth-row entry">
+                        <span class="depth-price">$185</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:76%"></span></span>
+                        <span class="depth-tag">Best bid · cost</span>
+                      </div>
+                      <div class="depth-row">
+                        <span class="depth-price">$182</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:52%"></span></span>
+                        <span class="depth-tag">Resting bid</span>
+                      </div>
+                      <div class="depth-row">
+                        <span class="depth-price">$178</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:29%"></span></span>
+                        <span class="depth-tag">Resting bid</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="depth-spread">spread · ~4.8%</div>
+              </div>
+
+              <!-- Koala -->
+              <div class="depth-company" data-company="koala" style="display:none">
+                <div class="depth-sub-row">
+                  <span class="depth-company-name">Koala · Series C</span>
+                  <span class="depth-sub">Cost basis $12.50 → +5% ask $13.13 · Valuation ~$1.2B</span>
+                </div>
+                <div class="depth-two-col">
+                  <div>
+                    <div class="depth-col-label sell">Sellers (ask)</div>
+                    <div class="depth-rows">
+                      <div class="depth-row best">
+                        <span class="depth-price">$13.13</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:92%"></span></span>
+                        <span class="depth-tag">Best ask · +5%</span>
+                      </div>
+                      <div class="depth-row">
+                        <span class="depth-price">$13.50</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:65%"></span></span>
+                        <span class="depth-tag">Resting ask</span>
+                      </div>
+                      <div class="depth-row">
+                        <span class="depth-price">$14.00</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:41%"></span></span>
+                        <span class="depth-tag">Resting ask</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="depth-col-label buy">Buyers (bid)</div>
+                    <div class="depth-rows">
+                      <div class="depth-row entry">
+                        <span class="depth-price">$12.50</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:83%"></span></span>
+                        <span class="depth-tag">Best bid · cost</span>
+                      </div>
+                      <div class="depth-row">
+                        <span class="depth-price">$12.00</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:55%"></span></span>
+                        <span class="depth-tag">Resting bid</span>
+                      </div>
+                      <div class="depth-row">
+                        <span class="depth-price">$11.50</span>
+                        <span class="depth-bar-track"><span class="depth-bar" style="width:27%"></span></span>
+                        <span class="depth-tag">Resting bid</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="depth-spread">spread · ~5.0%</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">09 / 10</span>
+      </div>
+      <div class="slide-progress" style="width: 90%"></div>
+    </section>
+
+    <!-- ============================================================
+         SLIDE 7 — Unicorn Sensitivity
+         ============================================================ -->
+    <section class="slide" data-slide="10">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Unicorn <span class="accent">Sensitivity</span></h1>
+          <p class="slide-subtitle">Drag the parameters to see how the fund economics and regulatory path shift</p>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="model-grid">
+
+          <!-- Controls -->
+          <div class="model-controls">
+            <div class="controls-title">Parameters</div>
+            <div class="controls-sub">Live · Anduril illustrative</div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Total SPV investment (AUD)</span>
+                <span class="slider-value" id="lbl-capital">A$5.0M</span>
+              </div>
+              <input type="range" id="s-capital" min="1" max="20" value="5" step="0.5">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Anduril share price (USD)</span>
+                <span class="slider-value" id="lbl-price">US$108</span>
+              </div>
+              <input type="range" id="s-price" min="40" max="250" value="108" step="1">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>AUD / USD rate</span>
+                <span class="slider-value" id="lbl-fx">0.63</span>
+              </div>
+              <input type="range" id="s-fx" min="0.55" max="0.80" value="0.63" step="0.01">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Share price per trust share (AUD)</span>
+                <span class="slider-value" id="lbl-unit">A$500</span>
+              </div>
+              <input type="range" id="s-unit" min="100" max="2000" value="500" step="25">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Fund % syndicated</span>
+                <span class="slider-value" id="lbl-fund">100%</span>
+              </div>
+              <input type="range" id="s-fund" min="0" max="100" value="100" step="5">
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Margin on fund shares</span>
+                <span class="slider-value" id="lbl-margin">10%</span>
+              </div>
+              <input type="range" id="s-margin" min="0" max="25" value="10" step="0.5">
+            </div>
+
+            <button class="reset-btn" id="resetBtn">Reset to defaults</button>
+          </div>
+
+          <!-- Output -->
+          <div class="model-output">
+            <div class="section-label">Investors &amp; Price per Investment</div>
+
+            <!-- Investor table -->
+            <div class="sens-wrap">
+              <div class="sens-table-wrap">
+                <table class="sens-table" id="sensTable">
+                  <thead>
+                    <tr>
+                      <th>Investors</th>
+                      <th>Price / investor</th>
+                      <th>Shares / investor</th>
+                      <th>Fund raise</th>
+                      <th>Margin profit</th>
+                      <th>Reg. path</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sensBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Trade-Off Analysis -->
+            <div class="section-label">Trade-off analysis <span style="font-weight:400;letter-spacing:0;text-transform:none;font-size:10px;color:var(--c-grey-dark);margin-left:6px;">Optimal investor mix targeting fund raise with 75-investor sweet spot</span></div>
+
+            <div class="tradeoff-grid">
+              <!-- Sweet spot callout -->
+              <div class="sweet-spot">
+                <div class="sweet-label">Sweet spot &nbsp;(75 investors)</div>
+                <div class="sweet-row"><span class="sk">Ticket size per investor</span><span class="sv" id="sw-ticket">A$73,333</span></div>
+                <div class="sweet-row"><span class="sk">Shares per investor</span><span class="sv" id="sw-units">133.33</span></div>
+                <div class="sweet-row"><span class="sk">Total fund raise</span><span class="sv" id="sw-raise">A$5,500,000</span></div>
+                <div class="sweet-row"><span class="sk">Margin profit (day one)</span><span class="sv" id="sw-margin">A$500,000</span></div>
+                <div class="sweet-row"><span class="sk">Regulatory path</span><span class="sv"><span class="pill-reg wholesale" id="sw-reg">Large wholesale MIS</span></span></div>
+              </div>
+
+              <!-- Zone comparison -->
+              <div style="overflow-x:auto;min-height:0;">
+                <table class="zone-table">
+                  <thead>
+                    <tr>
+                      <th>Zone</th>
+                      <th>Investors</th>
+                      <th>Ticket size</th>
+                      <th>Reg. path</th>
+                      <th>Consideration</th>
+                    </tr>
+                  </thead>
+                  <tbody id="zoneBody">
+                    <tr>
+                      <td>Exclusive</td>
+                      <td>10 – 19</td>
+                      <td id="z-exc-ticket">A$289,474 – A$550,000</td>
+                      <td><span class="pill-reg small">s708 exempt</span></td>
+                      <td>Simplest compliance; very high ticket limits audience</td>
+                    </tr>
+                    <tr class="zone-sweet">
+                      <td><span class="zone-star">&#9733;</span> Sweet spot</td>
+                      <td>50 – 100</td>
+                      <td id="z-sweet-ticket">A$55,000 – A$110,000</td>
+                      <td><span class="pill-reg wholesale">Large wholesale MIS</span></td>
+                      <td>Accessible ticket; manageable cap table; fills quickly</td>
+                    </tr>
+                    <tr>
+                      <td>Broad access</td>
+                      <td>250 – 500</td>
+                      <td id="z-broad-ticket">A$11,000 – A$22,000</td>
+                      <td><span class="pill-reg wholesale">Large wholesale MIS</span></td>
+                      <td>Lower barrier; higher admin &amp; investor comms overhead</td>
+                    </tr>
+                    <tr>
+                      <td>Mass market</td>
+                      <td>1,000+</td>
+                      <td id="z-mass-ticket">A$5,500 &amp; below</td>
+                      <td><span class="pill-reg wholesale">Large wholesale MIS</span></td>
+                      <td>Retail scale; heavy compliance, registry &amp; reporting</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <p class="sens-footnote">
+              Indicative only. Figures AUD. Margin profit realised at subscription.
+              Net sponsor capital = gross capital − fund raise. Seek AFSL-licensed and tax advice before proceeding.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Live model · illustrative only</span>
+        <span class="page-num">10 / 10</span>
+      </div>
+      <div class="slide-progress" style="width: 100%"></div>
+    </section>
+
+  </div>
+
+  <!-- Global navigation -->
+  <button class="nav-arrow nav-prev" id="navPrev" aria-label="Previous slide">&#8249;</button>
+  <button class="nav-arrow nav-next" id="navNext" aria-label="Next slide">&#8250;</button>
+  <div class="slide-counter" id="slideCounter">01 / 08</div>
+
+  <script>
+  /* ============================================================
+     DECK NAVIGATION
+     ============================================================ */
+  (function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const total = slides.length;
+    const counter = document.getElementById('slideCounter');
+    const prevBtn = document.getElementById('navPrev');
+    const nextBtn = document.getElementById('navNext');
+    let current = 0;
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function animateIn(slide) {
+      // JS-driven CSS transitions — set inline, clear after 30ms
+      const targets = slide.querySelectorAll(
+        '.slide-title, .slide-subtitle, .slide-brand, ' +
+        '.spv-node, .spv-info, ' +
+        '.tab-btn, .tab-panel.active .tab-card, ' +
+        '.fee-row, .phase-block, ' +
+        '.model-controls, .headline-box, .stream-card'
+      );
+      targets.forEach((el, i) => {
+        el.style.transition = 'none';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(14px)';
+      });
+      setTimeout(() => {
+        targets.forEach((el, i) => {
+          const delay = Math.min(i * 30, 350);
+          el.style.transition = `opacity 0.55s ease ${delay}ms, transform 0.55s ease ${delay}ms`;
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      }, 30);
+
+      // Safety-net
+      setTimeout(() => {
+        targets.forEach(el => {
+          el.style.transition = 'none';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+        setTimeout(() => {
+          targets.forEach(el => {
+            el.style.transition = '';
+            el.style.opacity = '';
+            el.style.transform = '';
+          });
+        }, 50);
+      }, 1500);
+
+      // Slide-specific triggers
+      const n = Number(slide.dataset.slide);
+      if (n === 1) initSpvDiagram(slide);
+      if (n === 3) initTransactionFlow(slide);
+      if (n === 4) animateFeeBars(slide);
+      if (n === 5) revealPhases(slide);
+      if (n === 6 || n === 9) initBusinessStructure(slide);
+      if (n === 10) runModel();
+    }
+
+    function go(idx) {
+      if (idx < 0 || idx >= total) return;
+      slides[current].classList.remove('active');
+      current = idx;
+      slides[current].classList.add('active');
+      counter.textContent = pad(current + 1) + ' / ' + pad(total);
+      animateIn(slides[current]);
+    }
+
+    prevBtn.addEventListener('click', () => go(current - 1));
+    nextBtn.addEventListener('click', () => go(current + 1));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+      if (e.key === 'ArrowLeft'  || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
+      if (e.key === 'Home') go(0);
+      if (e.key === 'End')  go(total - 1);
+    });
+
+    // Ripple for buttons
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-primary, .btn-outline, .btn-ghost, .tab-btn, .reset-btn');
+      if (!btn) return;
+      const rect = btn.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = x + 'px';
+      ripple.style.top  = y + 'px';
+      const color = getComputedStyle(btn).color;
+      ripple.style.background = color;
+      btn.appendChild(ripple);
+      let t = 0;
+      const interval = setInterval(() => {
+        t += 20;
+        const p = Math.min(t / 500, 1);
+        ripple.style.transform = 'scale(' + (3 * p) + ')';
+        ripple.style.opacity = String(0.25 * (1 - p));
+        if (p >= 1) {
+          clearInterval(interval);
+          ripple.remove();
+        }
+      }, 20);
+    });
+
+    // Activate first slide
+    slides[0].classList.add('active');
+    animateIn(slides[0]);
+  })();
+
+  /* ============================================================
+     SPV diagram — hover/click info panels (slides 1 & 2)
+     ============================================================ */
+  const spvNodeData = {
+    sponsor: {
+      tag: 'THE CAPITAL SOURCE',
+      title: 'Sponsor provides the entire pool',
+      body: 'The sponsor seeds the Master SPV with the full capital commitment (A$10M illustrative — funding two A$5M deals). This capital is never fragmented — it all flows into a single buying vehicle.',
+      pills: ['A$10M contributed', 'Full risk upfront', 'Retains 10% per deal']
+    },
+    afsl: {
+      tag: 'GOVERNANCE',
+      title: 'AFSL trustee / responsible entity',
+      body: 'The AFSL trustee governs the Master SPV as the responsible entity, ensuring compliance with Australian financial services regulation.',
+      pills: ['AFSL licensed', 'Responsible entity', 'Governance layer']
+    },
+    seller: {
+      tag: 'COUNTERPARTY',
+      title: 'Seller of secondary shares',
+      body: 'Secondary shareholders (via SPV Level 1, 2 or 3) sell their position into the Master SPV. Price is set on last round or market comparables.',
+      pills: ['Secondary holder', 'L1 / L2 / L3 source', 'Price discovery']
+    },
+    master: {
+      tag: 'THE BUYING VEHICLE',
+      title: 'Master SPV holds the full position',
+      body: 'The Master SPV holds the A$10M capital pool across all deals. It is the single point of custody and decides how to split what it holds into each issuer-specific sub-SPV (A$5M per deal in this example).',
+      pills: ['A$10M capital pool', 'Splits into A$5M sub-SPVs', 'Single custody point']
+    },
+    retained: {
+      tag: 'REVENUE STREAM 2',
+      title: 'Sponsor retains 10% per deal',
+      body: "FloatX keeps 10% of each A$5M deal on its own balance sheet — A$500K per deal (2,916 Anduril shares illustrative). These quietly appreciate and carry a 1.5–2% annual management fee.",
+      pills: ['10% per A$5M deal', 'A$500K retained/deal', '1.5–2% mgmt fee']
+    },
+    'sub-a': {
+      tag: 'SUB-SPV · ANDURIL',
+      title: 'FloatX Anduril sub-SPV · A$5M',
+      body: 'A A$5M tranche from the Master SPV funds this deal. The democratised 90% (A$4.5M / 26,250 shares) is transferred into the Anduril sub-SPV at cost + 10% margin. Investors buy shares in this sub-SPV directly.',
+      pills: ['A$5M deal size', '90% democratised', 'cost + 10% margin']
+    },
+    'sub-b': {
+      tag: 'SUB-SPV · ANTHROPIC',
+      title: 'FloatX Anthropic sub-SPV · A$5M',
+      body: "A separate A$5M tranche funds the Anthropic deal. Same pattern as Anduril: 90% democratised at cost + margin, 10% retained on FloatX's balance sheet.",
+      pills: ['A$5M deal size', 'Same 90/10 split', 'Independent shares']
+    },
+    investors: {
+      tag: 'END BUYERS · DIRECT ACCESS',
+      title: 'Invest directly in any of the three products',
+      body: 'Wholesale investors (s708) can subscribe directly into any or all of the three products — the Sponsor-retained tranche, the FloatX Anduril sub-SPV, or the FloatX Anthropic sub-SPV. Each product is its own unit, so investors choose their exposure per issuer. 5% brokerage is charged on subscription and on every subsequent secondary trade.',
+      pills: ['Direct into any product', 'Wholesale only · s708', 'A$50K–$250K tickets', '5% brokerage']
+    }
+  };
+
+  // Simplified node data for slide 2 (legal/custody view — no democratisation)
+  const spvNodeDataSimple = {
+    afsl: {
+      tag: 'GOVERNANCE',
+      title: 'AFSL trustee / responsible entity',
+      body: 'The AFSL trustee governs the Master SPV as the responsible entity, ensuring compliance with Australian financial services regulation.',
+      pills: ['AFSL licensed', 'Responsible entity', 'Governance layer']
+    },
+    seller: {
+      tag: 'COUNTERPARTY',
+      title: 'Seller of secondary shares',
+      body: 'Secondary shareholders (via SPV Level 1, 2 or 3) sell their position into the Master SPV. Price is set on last round or market comparables.',
+      pills: ['Secondary holder', 'L1 / L2 / L3 source', 'Price discovery']
+    },
+    master: {
+      tag: 'THE BUYING VEHICLE',
+      title: 'Master SPV holds the position',
+      body: 'The Master SPV is the single legal buying vehicle. It purchases shares from the seller and is the single point of custody for the position before any issuer-specific structuring.',
+      pills: ['Single buying vehicle', 'Holds shares purchased', 'Single custody point']
+    },
+    'sub-a': {
+      tag: 'SUB-SPV · ANDURIL',
+      title: 'FloatX Anduril sub-SPV',
+      body: 'An issuer-specific sub-SPV that holds the Anduril position on behalf of investors. Legally separate from the Master SPV and from other issuer sub-SPVs.',
+      pills: ['Issuer-specific', 'Holds Anduril shares', 'Independent legal entity']
+    },
+    'sub-b': {
+      tag: 'SUB-SPV · ANTHROPIC',
+      title: 'FloatX Anthropic sub-SPV',
+      body: 'An issuer-specific sub-SPV that holds the Anthropic position on behalf of investors. Independent from other sub-SPVs so issuer-level events are ring-fenced.',
+      pills: ['Issuer-specific', 'Holds Anthropic shares', 'Independent legal entity']
+    },
+    investors: {
+      tag: 'END BUYERS',
+      title: 'Wholesale investors',
+      body: 'Wholesale investors (s708) subscribe directly into the issuer-specific sub-SPV that matches the exposure they want. Each sub-SPV has its own investor register.',
+      pills: ['Wholesale only · s708', 'Subscribe per sub-SPV', 'Own issuer exposure']
+    }
+  };
+
+  function initSpvDiagram(slide) {
+    const nodes = slide.querySelectorAll('.spv-node');
+    const tag = slide.querySelector('.js-info-tag');
+    const title = slide.querySelector('.js-info-title');
+    const body = slide.querySelector('.js-info-body');
+    const pills = slide.querySelector('.js-info-pills');
+    const isSimple = slide.dataset.spvVariant === 'simple';
+    let locked = null;
+
+    function render(key) {
+      const dataMap = isSimple ? spvNodeDataSimple : spvNodeData;
+      const d = dataMap[key];
+      if (!d) return;
+      tag.textContent = d.tag;
+      title.textContent = d.title;
+      body.textContent = d.body;
+      pills.innerHTML = d.pills.map((p, i) =>
+        '<span class="spv-pill' + (i === 0 ? ' strong' : '') + '">' + p + '</span>'
+      ).join('');
+    }
+
+    nodes.forEach(n => {
+      n.addEventListener('mouseenter', () => {
+        if (locked) return;
+        render(n.dataset.node);
+        nodes.forEach(x => x.classList.remove('focused'));
+        n.classList.add('focused');
+      });
+      n.addEventListener('mouseleave', () => {
+        if (!locked) nodes.forEach(x => x.classList.remove('focused'));
+      });
+      n.addEventListener('click', () => {
+        if (locked === n) {
+          locked = null;
+          n.classList.remove('focused');
+        } else {
+          locked = n;
+          nodes.forEach(x => x.classList.remove('focused'));
+          n.classList.add('focused');
+          render(n.dataset.node);
+        }
+      });
+    });
+
+    // Draw connecting lines
+    drawSpvLines(slide);
+    window.addEventListener('resize', () => drawSpvLines(slide));
+  }
+
+  function drawSpvLines(slide) {
+    const svg = slide.querySelector('.spv-svg');
+    const diagram = slide.querySelector('.spv-diagram');
+    if (!svg || !diagram) return;
+    const dRect = diagram.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${dRect.width} ${dRect.height}`);
+    svg.innerHTML = '';
+
+    const master = slide.querySelector('[data-node="master"]');
+    const investors = slide.querySelector('[data-node="investors"]');
+    const masterTargets = ['sponsor','afsl','seller','retained','sub-a','sub-b']
+      .map(k => slide.querySelector(`[data-node="${k}"]`))
+      .filter(Boolean);
+    const productNodes = ['retained','sub-a','sub-b']
+      .map(k => slide.querySelector(`[data-node="${k}"]`))
+      .filter(Boolean);
+
+    if (!master) return;
+    const mRect = master.getBoundingClientRect();
+    const mx = mRect.left + mRect.width/2 - dRect.left;
+    const my = mRect.top + mRect.height/2 - dRect.top;
+
+    // Unique marker IDs per slide to avoid collisions
+    const markerId = 'arrow-' + (slide.dataset.slide || '1');
+    const markerIdInv = 'arrowInv-' + (slide.dataset.slide || '1');
+    const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+    defs.innerHTML = `
+      <marker id="${markerId}" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L8,4 L0,8 Z" fill="rgba(143,196,224,0.55)"/>
+      </marker>
+      <marker id="${markerIdInv}" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L8,4 L0,8 Z" fill="rgba(143,196,224,0.7)"/>
+      </marker>`;
+    svg.appendChild(defs);
+
+    // Master SPV -> top row + product row
+    masterTargets.forEach(t => {
+      const r = t.getBoundingClientRect();
+      const tx = r.left + r.width/2 - dRect.left;
+      const ty = r.top + r.height/2 - dRect.top;
+      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      const dy = (ty - my) * 0.5;
+      const d = `M ${mx} ${my} C ${mx} ${my + dy}, ${tx} ${ty - dy}, ${tx} ${ty}`;
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'rgba(143,196,224,0.38)');
+      path.setAttribute('stroke-width', '1.4');
+      path.setAttribute('stroke-dasharray', '4 4');
+      path.setAttribute('marker-end', `url(#${markerId})`);
+      svg.appendChild(path);
+    });
+
+    // Investors -> each product node (direct investment, arrows pointing up)
+    if (investors) {
+      const iRect = investors.getBoundingClientRect();
+      const ix = iRect.left + iRect.width/2 - dRect.left;
+      const iyTop = iRect.top - dRect.top;
+      productNodes.forEach(p => {
+        const r = p.getBoundingClientRect();
+        const px = r.left + r.width/2 - dRect.left;
+        const pyBottom = r.bottom - dRect.top;
+        const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+        const dy = (iyTop - pyBottom) * 0.55;
+        const d = `M ${ix} ${iyTop} C ${ix} ${iyTop - dy}, ${px} ${pyBottom + dy}, ${px} ${pyBottom}`;
+        path.setAttribute('d', d);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', 'rgba(143,196,224,0.55)');
+        path.setAttribute('stroke-width', '1.6');
+        path.setAttribute('marker-end', `url(#${markerIdInv})`);
+        svg.appendChild(path);
+      });
+    }
+  }
+
+  /* ============================================================
+     SLIDE 2 — Tabs + layer diagram sync
+     ============================================================ */
+  (function () {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+    const layers = document.querySelectorAll('.layer-box[data-tab]');
+
+    function activate(key) {
+      tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === key));
+      panels.forEach(p => p.classList.toggle('active', p.dataset.panel === key));
+      // L2+side letter has no diagram counterpart — keep l2 highlighted in that case
+      const layerKey = key === 'l2s' ? 'l2' : key;
+      layers.forEach(l => l.classList.toggle('active', l.dataset.tab === layerKey));
+    }
+
+    tabs.forEach(btn => btn.addEventListener('click', () => activate(btn.dataset.tab)));
+    layers.forEach(l => l.addEventListener('click', () => activate(l.dataset.tab)));
+
+    // Prime L1 on load
+    activate('l1');
+  })();
+
+  /* ============================================================
+     SLIDE 3 — Animate fee bars on entry
+     ============================================================ */
+  function animateFeeBars(slide) {
+    const bars = slide.querySelectorAll('.fee-bar');
+    bars.forEach(b => { b.style.width = '0'; });
+    setTimeout(() => {
+      bars.forEach(b => {
+        const pct = b.dataset.bar || '0';
+        b.style.width = pct + '%';
+      });
+    }, 250);
+  }
+
+  /* ============================================================
+     SLIDES 4 / 5 — Phase reveal
+     ============================================================ */
+  function revealPhases(slide) {
+    const blocks = slide.querySelectorAll('.phase-block');
+    blocks.forEach((b, i) => {
+      b.classList.remove('revealed');
+      setTimeout(() => b.classList.add('revealed'), 200 + i * 200);
+    });
+  }
+
+  /* ============================================================
+     SLIDE 6 — Unicorn Sensitivity
+     ============================================================ */
+  const modelState = {
+    capital: 5,       // A$M
+    price: 108,       // USD per share
+    fx: 0.63,         // AUD/USD
+    unit: 500,        // A$ per trust unit (at cost)
+    fund: 100,        // % syndicated
+    margin: 10        // % margin
+  };
+  const defaults = { ...modelState };
+
+  function fmtAUD(v) {
+    const a = Math.abs(v);
+    if (a >= 1e6) return 'A$' + (v/1e6).toFixed(2) + 'M';
+    if (a >= 1e3) return 'A$' + Math.round(v).toLocaleString();
+    return 'A$' + Math.round(v).toLocaleString();
+  }
+  function fmtNum(v) { return Math.round(v).toLocaleString(); }
+
+  function compute(p) {
+    const capitalAud = p.capital * 1_000_000;
+    const audPrice = p.price / p.fx;
+    const totalShares = capitalAud / audPrice;
+    const sharesSyndicated = totalShares * p.fund / 100;
+    const costSyndicated = sharesSyndicated * audPrice;
+    const unitsIssued = p.unit > 0 ? costSyndicated / p.unit : 0;
+    const unitPriceMargin = p.unit * (1 + p.margin / 100);
+    const fundRaise = unitsIssued * unitPriceMargin;
+    const marginProfit = fundRaise - costSyndicated;
+    return { capitalAud, fundRaise, marginProfit, unitsIssued, unitPriceMargin };
+  }
+
+  function runModel() {
+    const r = compute(modelState);
+    const el = id => document.getElementById(id);
+
+    // Slider labels
+    el('lbl-capital').textContent = 'A$' + modelState.capital.toFixed(1) + 'M';
+    el('lbl-price').textContent = 'US$' + modelState.price;
+    el('lbl-fx').textContent = modelState.fx.toFixed(2);
+    el('lbl-unit').textContent = 'A$' + modelState.unit;
+    el('lbl-fund').textContent = modelState.fund + '%';
+    el('lbl-margin').textContent = modelState.margin + '%';
+
+    renderInvestorTable(r);
+    renderTradeOff(r);
+  }
+
+  // Investor table renderer
+  function renderInvestorTable(r) {
+    const body = document.getElementById('sensBody');
+    if (!body) return;
+    const investorCounts = [10, 19, 20, 50, 75, 100, 250, 500, 1000, 2500, 5000, 10000];
+    body.innerHTML = investorCounts.map(n => {
+      const price = n > 0 ? r.fundRaise / n : 0;
+      const units = n > 0 ? r.unitsIssued / n : 0;
+      const regCls = n < 20 ? 'small' : 'wholesale';
+      const regLabel = n < 20 ? '<20 — s708' : 'Large wholesale MIS';
+      const isSweetSpot = n === 75;
+      return '<tr' + (isSweetSpot ? ' class="current"' : '') + '>' +
+        '<td class="key">' + fmtNum(n) + '</td>' +
+        '<td>' + fmtAUD(price) + '</td>' +
+        '<td>' + units.toFixed(2) + '</td>' +
+        '<td>' + fmtAUD(r.fundRaise) + '</td>' +
+        '<td>' + fmtAUD(r.marginProfit) + '</td>' +
+        '<td><span class="pill-reg ' + regCls + '">' + regLabel + '</span></td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  // Trade-off analysis
+  function renderTradeOff(r) {
+    const el = id => document.getElementById(id);
+    const sweetInvestors = 75;
+    const sweetTicket = r.fundRaise / sweetInvestors;
+    const sweetUnits = r.unitsIssued / sweetInvestors;
+
+    el('sw-ticket').textContent = fmtAUD(sweetTicket);
+    el('sw-units').textContent = sweetUnits.toFixed(2);
+    el('sw-raise').textContent = fmtAUD(r.fundRaise);
+    el('sw-margin').textContent = fmtAUD(r.marginProfit);
+
+    // Zone ticket ranges
+    const t = n => fmtAUD(r.fundRaise / n);
+    el('z-exc-ticket').textContent = t(19) + ' – ' + t(10);
+    el('z-sweet-ticket').textContent = t(100) + ' – ' + t(50);
+    el('z-broad-ticket').textContent = t(500) + ' – ' + t(250);
+    el('z-mass-ticket').textContent = t(1000) + ' & below';
+  }
+
+  (function wireSliders() {
+    const map = {
+      's-capital': 'capital',
+      's-price':   'price',
+      's-fx':      'fx',
+      's-unit':    'unit',
+      's-fund':    'fund',
+      's-margin':  'margin'
+    };
+    Object.keys(map).forEach(id => {
+      const input = document.getElementById(id);
+      if (!input) return;
+      input.addEventListener('input', () => {
+        modelState[map[id]] = parseFloat(input.value);
+        runModel();
+      });
+    });
+    const reset = document.getElementById('resetBtn');
+    if (reset) {
+      reset.addEventListener('click', () => {
+        Object.assign(modelState, defaults);
+        Object.keys(map).forEach(id => {
+          const i = document.getElementById(id);
+          if (i) i.value = modelState[map[id]];
+        });
+        runModel();
+      });
+    }
+    runModel();
+  })();
+
+  /* ============================================================
+     SLIDE 4 — Transaction Flow swim-lane connectors
+     ============================================================ */
+  function initTransactionFlow(slide) {
+    const canvas = slide.querySelector('.flow-canvas');
+    const svg = slide.querySelector('.flow-svg');
+    if (!canvas || !svg) return;
+
+    // Wait one frame so layout is settled, then draw
+    requestAnimationFrame(() => drawFlowConnectors(canvas, svg));
+  }
+
+  function drawFlowConnectors(canvas, svg) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+    const cRect = canvas.getBoundingClientRect();
+    const cards = Array.from(canvas.querySelectorAll('.step-card-tx[data-step]'))
+      .sort((a, b) => Number(a.dataset.step) - Number(b.dataset.step));
+    if (cards.length < 2) return;
+
+    // Marker (arrowhead)
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    defs.innerHTML = `
+      <marker id="flowArrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L8,4 L0,8 Z" fill="rgba(36,62,136,0.55)"/>
+      </marker>`;
+    svg.appendChild(defs);
+
+    for (let i = 0; i < cards.length - 1; i++) {
+      const a = cards[i].getBoundingClientRect();
+      const b = cards[i + 1].getBoundingClientRect();
+      // Anchor: right-mid of A, left-mid of B
+      const ax = a.right - cRect.left;
+      const ay = a.top + a.height / 2 - cRect.top;
+      const bx = b.left - cRect.left;
+      const by = b.top + b.height / 2 - cRect.top;
+
+      // Path: from A right edge, go horizontally to a midpoint, then vertically to B's row, then to B's left edge
+      const midX = (ax + bx) / 2;
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const d = `M ${ax} ${ay} L ${midX} ${ay} L ${midX} ${by} L ${bx} ${by}`;
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'rgba(36,62,136,0.55)');
+      path.setAttribute('stroke-width', '1.4');
+      path.setAttribute('stroke-dasharray', '4 4');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('marker-end', 'url(#flowArrow)');
+      svg.appendChild(path);
+    }
+  }
+
+  // Redraw on resize while slide 3 (transaction flow) or 7 (business structure) is active
+  window.addEventListener('resize', () => {
+    const txActive = document.querySelector('.slide.active[data-slide="3"]');
+    if (txActive) {
+      const canvas = txActive.querySelector('.flow-canvas');
+      const svg = txActive.querySelector('.flow-svg');
+      if (canvas && svg) drawFlowConnectors(canvas, svg);
+    }
+    const bizActive = document.querySelector('.slide.active[data-slide="7"]');
+    if (bizActive) {
+      const canvas = bizActive.querySelector('.biz-canvas');
+      const svg = bizActive.querySelector('.biz-svg');
+      if (canvas && svg) drawBizConnectors(canvas, svg);
+    }
+  });
+
+  /* ============================================================
+     SLIDE 7 — Business Structure: branching lines from Distribution
+     ============================================================ */
+  function initBusinessStructure(slide) {
+    const canvas = slide.querySelector('.biz-canvas');
+    const svg = slide.querySelector('.biz-svg');
+    if (!canvas || !svg) return;
+    if (canvas.classList.contains('two-stream')) return;
+    requestAnimationFrame(() => drawBizConnectors(canvas, svg));
+    // Re-draw once more after layout fully settles
+    setTimeout(() => drawBizConnectors(canvas, svg), 250);
+  }
+
+  function drawBizConnectors(canvas, svg) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    const cRect = canvas.getBoundingClientRect();
+    const distribution = canvas.querySelector('.biz-band:not(.platform)');
+    const cards = Array.from(canvas.querySelectorAll('.product-card[data-stream]'))
+      .sort((a, b) => Number(a.dataset.stream) - Number(b.dataset.stream));
+    if (!distribution || cards.length < 1) return;
+
+    const dRect = distribution.getBoundingClientRect();
+    const distLeftX  = dRect.left - cRect.left;
+    const distBottomY = dRect.bottom - cRect.top;
+
+    // Trunk runs vertically through the 28px grid gap between rail and flow
+    const trunkX = distLeftX - 14;
+
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    defs.innerHTML = `
+      <marker id="bizArrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L8,4 L0,8 Z" fill="rgba(36,62,136,0.7)"/>
+      </marker>`;
+    svg.appendChild(defs);
+
+    // Trunk: from Distribution's bottom-left corner, jog left to the gap, then descend
+    const lastCard = cards[cards.length - 1];
+    const lastRect = lastCard.getBoundingClientRect();
+    const trunkBottomY = lastRect.top + lastRect.height / 2 - cRect.top;
+
+    const trunk = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    trunk.setAttribute('d',
+      `M ${distLeftX} ${distBottomY}
+       L ${trunkX} ${distBottomY + 10}
+       L ${trunkX} ${trunkBottomY}`);
+    trunk.setAttribute('fill', 'none');
+    trunk.setAttribute('stroke', 'rgba(36,62,136,0.55)');
+    trunk.setAttribute('stroke-width', '1.6');
+    trunk.setAttribute('stroke-linecap', 'round');
+    trunk.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(trunk);
+
+    // One branch per product card
+    cards.forEach(card => {
+      const r = card.getBoundingClientRect();
+      const cx = r.left - cRect.left;
+      const cy = r.top + r.height / 2 - cRect.top;
+
+      const branch = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      branch.setAttribute('d', `M ${trunkX} ${cy} L ${cx - 4} ${cy}`);
+      branch.setAttribute('fill', 'none');
+      branch.setAttribute('stroke', 'rgba(36,62,136,0.65)');
+      branch.setAttribute('stroke-width', '1.4');
+      branch.setAttribute('stroke-dasharray', '4 4');
+      branch.setAttribute('stroke-linecap', 'round');
+      branch.setAttribute('marker-end', 'url(#bizArrow)');
+      svg.appendChild(branch);
+
+      const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      dot.setAttribute('cx', trunkX);
+      dot.setAttribute('cy', cy);
+      dot.setAttribute('r', 2.5);
+      dot.setAttribute('fill', 'rgba(36,62,136,0.7)');
+      svg.appendChild(dot);
+    });
+  }
+
+  /* ============================================================
+     Market depth — company tab switching
+     ============================================================ */
+  (function () {
+    document.querySelectorAll('.depth-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const depth = tab.closest('.market-depth');
+        depth.querySelectorAll('.depth-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const key = tab.dataset.company;
+        depth.querySelectorAll('.depth-company').forEach(c => {
+          c.style.display = c.dataset.company === key ? '' : 'none';
+        });
+      });
+    });
+  })();
+
+  /* ============================================================
+     SLIDE 8 — Sync revenue-stream rail with product cards
+     ============================================================ */
+  (function () {
+    const items = document.querySelectorAll('.stream-item[data-stream]');
+    const cards = document.querySelectorAll('.product-card[data-stream]');
+    if (!items.length) return;
+
+    function activate(key) {
+      items.forEach(i => i.classList.toggle('active', i.dataset.stream === key));
+      cards.forEach(c => {
+        const match = c.dataset.stream === key;
+        c.style.transform = match ? 'translateY(-2px)' : '';
+        c.style.boxShadow = match ? 'var(--shadow-card-lift)' : '';
+        c.style.borderColor = match ? 'var(--c-navy-mid)' : '';
+      });
+    }
+    items.forEach(i => i.addEventListener('click', () => activate(i.dataset.stream)));
+    cards.forEach(c => c.addEventListener('click', () => activate(c.dataset.stream)));
+  })();
+  </script>
+</body>
+</html>
