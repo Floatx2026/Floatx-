@@ -1055,6 +1055,30 @@
       align-items: flex-start;
       width: 100%;
     }
+
+    /* Slide 3 — compact mode to fit indicative portfolio */
+    .slide[data-slide="3"] { padding: 36px 56px 24px; }
+    .slide[data-slide="3"] .slide-header { margin-bottom: 10px; }
+    .slide[data-slide="3"] .slide-title { font-size: 32px; }
+    .slide[data-slide="3"] .biz-flow { gap: 5px; }
+    .slide[data-slide="3"] .slide-body { gap: 6px; }
+    .slide[data-slide="3"] .investor-row { gap: 8px; }
+    .slide[data-slide="3"] .investor-chip { padding: 6px 8px; font-size: 11px; }
+    .slide[data-slide="3"] .us-gp-sub { font-size: 8.5px; }
+    .slide[data-slide="3"] .biz-band { padding: 6px 14px; font-size: 12px; letter-spacing: 3px; }
+    .slide[data-slide="3"] .biz-connector { height: 6px; }
+    .slide[data-slide="3"] .biz-canvas.two-stream .product-card { padding: 12px 14px; min-height: 0; gap: 6px; }
+    .slide[data-slide="3"] .biz-canvas.two-stream .product-card .product-title { font-size: 14px; margin-bottom: 4px; }
+    .slide[data-slide="3"] .biz-canvas.two-stream .product-card .product-headline { gap: 3px; }
+    .slide[data-slide="3"] .biz-canvas.two-stream .product-card .product-headline .big { font-size: 22px; }
+    .slide[data-slide="3"] .biz-canvas.two-stream .product-card .product-headline .label { font-size: 10.5px; }
+    .slide[data-slide="3"] .product-tag { padding: 2px 8px; font-size: 10px; }
+    .slide[data-slide="3"] .biz-rail { padding: 12px 14px; }
+    .slide[data-slide="3"] .biz-rail-title { font-size: 9px; margin-bottom: 6px; }
+    .slide[data-slide="3"] .stream-item { padding: 6px 8px; gap: 6px; }
+    .slide[data-slide="3"] .stream-num { width: 18px; height: 18px; font-size: 10px; }
+    .slide[data-slide="3"] .stream-text { font-size: 11px; }
+    .slide[data-slide="3"] .rail-note { font-size: 10.5px; margin-top: 6px; }
     .rail-note {
       margin-top: 10px;
       font-size: 11.5px;
@@ -2022,87 +2046,457 @@
     <!-- ============================================================
          SLIDE 1 — The SPV structure · simple view (no democratisation)
          ============================================================ -->
-    <section class="slide" data-slide="1" data-spv-variant="simple">
+        <!-- ============================================================
+         SLIDE 1 (was 11)
+         ============================================================ -->
+        <!-- SLIDE 1 -->
+    <section class="slide" data-slide="1">
       <div class="slide-header">
         <div>
-          <h1 class="slide-title">The <span class="accent">SPV</span> Structure · simple view</h1>
-          <p class="slide-subtitle">The custody and legal relationships — no economics, no democratisation</p>
+          <h1 class="slide-title">The Case for a <span class="accent">Unicorn</span> Fund</h1>
+          <p class="slide-subtitle">Why late-stage private equity is the right product to build — and why now is the right time</p>
         </div>
+        <div class="slide-brand">Float<span class="x">X</span></div>
       </div>
 
-      <div class="slide-body">
-        <div class="spv-canvas">
-          <!-- Diagram -->
-          <div class="spv-diagram">
-            <svg class="spv-svg" preserveAspectRatio="none"></svg>
+      <div class="slide-body" style="gap: 16px;">
 
-            <div class="spv-row row-top">
-              <div class="spv-node" data-node="seller">
-                <span class="label">Seller</span>
-                <span class="sub">via SPV L1 / L2 / L3</span>
-              </div>
-            </div>
+        <!-- Three thesis cards -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; flex-shrink: 0;">
 
-            <div class="spv-row row-mid">
-              <div class="spv-node" data-node="afsl">
-                <span class="label">AFSL trustee / RE</span>
-                <span class="sub">responsible entity</span>
-              </div>
-              <div class="spv-node master" data-node="master">
-                <span class="label">Master SPV</span>
-                <span class="sub">single buying vehicle</span>
-              </div>
-            </div>
+          <!-- Card 1 -->
+          <div style="background: var(--c-off-white); border: 1px solid var(--c-grey-light); border-top: 3px solid var(--c-navy); border-radius: 10px; padding: 22px 20px 20px;">
+            <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--c-blue-soft); margin-bottom: 10px;">LP Demand</div>
+            <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--c-navy); line-height: 1.2; margin-bottom: 12px;">Unmet allocator demand — and it's growing</div>
+            <p style="font-size: 13px; color: var(--c-grey-dark); line-height: 1.6; margin-bottom: 14px;">Family offices, endowments, and institutional allocators are lifting private-market allocations to 20–30% of portfolio. Most can't access top-tier late-stage deals directly — they lack the relationships and can't meet minimum ticket sizes.</p>
+            <div style="background: var(--c-blue-ice); border-radius: 6px; padding: 10px 12px; font-size: 12px; color: var(--c-navy); font-weight: 500;">A fund closes that access gap at scale.</div>
+          </div>
 
-            <div class="spv-row row-sub">
-              <div class="spv-node" data-node="sub-a">
-                <span class="label">FloatX Anduril sub-SPV</span>
-                <span class="sub">holds Anduril position</span>
-              </div>
-              <div class="spv-node" data-node="sub-b">
-                <span class="label">FloatX Anthropic sub-SPV</span>
-                <span class="sub">holds Anthropic position</span>
-              </div>
-            </div>
+          <!-- Card 2 -->
+          <div style="background: var(--c-off-white); border: 2px dashed #c0392b; border-radius: 10px; padding: 22px 20px 20px; box-shadow: 0 0 0 4px rgba(192,57,43,0.06);">
+            <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--c-blue-soft); margin-bottom: 10px;">Differentiation</div>
+            <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--c-navy); line-height: 1.2; margin-bottom: 12px;">Quality supply is the bottleneck</div>
+            <p style="font-size: 13px; color: var(--c-grey-dark); line-height: 1.6; margin-bottom: 14px;">Clean structure + lean fees + genuine deal access equals a product that stands out. In a category where credible vehicles are rare, a well-run fund is differentiated rather than commoditised.</p>
+            <div style="background: var(--c-blue-ice); border-radius: 6px; padding: 10px 12px; font-size: 12px; color: var(--c-navy); font-weight: 500;">Scarcity of supply = pricing power + LP loyalty.</div>
+          </div>
 
-            <div class="spv-row row-bottom">
-              <div class="spv-node" data-node="investors">
-                <span class="label">Investors</span>
-                <span class="sub">subscribe into issuer-specific sub-SPV</span>
-              </div>
+          <!-- Card 3 -->
+          <div style="background: var(--c-off-white); border: 1px solid var(--c-grey-light); border-top: 3px solid var(--c-navy-mid); border-radius: 10px; padding: 22px 20px 20px;">
+            <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--c-blue-soft); margin-bottom: 10px;">Timing</div>
+            <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--c-navy); line-height: 1.2; margin-bottom: 12px;">The category window is open now</div>
+            <p style="font-size: 13px; color: var(--c-grey-dark); line-height: 1.6; margin-bottom: 14px;">Allocators are moving into private markets in this cycle. Peer vehicles are launching. First-mover positioning with the right distribution advantage compounds — the window is real but not indefinite.</p>
+            <div style="background: var(--c-blue-ice); border-radius: 6px; padding: 10px 12px; font-size: 12px; color: var(--c-navy); font-weight: 500;">Right category, right network, right moment.</div>
+          </div>
+        </div>
+
+        <!-- Moat strip -->
+        <div style="background: var(--grad-hero); border-radius: 10px; padding: 20px 28px; display: flex; align-items: center; gap: 24px; flex-shrink: 0;">
+          <div style="flex-shrink: 0;">
+            <div style="font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--c-blue-pale); margin-bottom: 4px;">The Moat</div>
+            <div style="font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: white; line-height: 1.1;">Distribution<br>Advantage</div>
+          </div>
+          <div style="width: 1px; background: rgba(255,255,255,0.15); align-self: stretch;"></div>
+          <p style="font-size: 13.5px; color: var(--c-blue-pale); line-height: 1.65; flex: 1;">An established investor network is the hardest part of this business to build — and yours already exists. The fund monetises a distribution advantage that competitors would take years and hundreds of millions to replicate. That network is the durable edge.</p>
+        </div>
+
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">01 / 13</span>
+      </div>
+      <div class="slide-progress" style="width: 8%"></div>
+    </section>
+
+    <!-- SLIDE 2 -->
+    <section class="slide" data-slide="2">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Unicorn Fund vs <span class="accent">PPP</span> — Key Points</h1>
+          <p class="slide-subtitle">Why a unicorn fund addresses the specific weaknesses that constrained the existing pre-IPO product</p>
+        </div>
+        <div class="slide-brand">Float<span class="x">X</span></div>
+      </div>
+
+      <div class="slide-body" style="gap: 14px;">
+
+        <!-- Three columns -->
+        <div style="display: grid; grid-template-columns: 1.1fr 0.9fr 1fr; gap: 14px; flex: 1; min-height: 0;">
+
+          <!-- Column 1: What a unicorn fund fixes -->
+          <div style="background: var(--c-off-white); border: 1px solid var(--c-grey-light); border-top: 3px solid var(--c-navy); border-radius: 10px; padding: 18px 18px 16px; display: flex; flex-direction: column;">
+            <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--c-navy); margin-bottom: 6px;">✓ What a unicorn fund fixes</div>
+            <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--c-navy); line-height: 1.2; margin-bottom: 12px;">Addresses PPP's structural weaknesses</div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+              <li style="font-size: 12px; color: var(--c-grey-dark); line-height: 1.45; padding-left: 14px; position: relative;"><span style="position:absolute;left:0;color:var(--c-navy);font-weight:700;">›</span><strong style="color: var(--c-navy);">Breaks exit dependence</strong> — secondary markets allow pricing and exit without needing an IPO window</li>
+              <li style="font-size: 12px; color: var(--c-grey-dark); line-height: 1.45; padding-left: 14px; position: relative;"><span style="position:absolute;left:0;color:var(--c-navy);font-weight:700;">›</span><strong style="color: var(--c-navy);">Global scope</strong> removes concentration in Australia's thin IPO pipeline</li>
+              <li style="font-size: 12px; color: var(--c-grey-dark); line-height: 1.45; padding-left: 14px; position: relative;"><span style="position:absolute;left:0;color:var(--c-navy);font-weight:700;">›</span><strong style="color: var(--c-navy);">Larger opportunity set</strong> — 1,300+ global unicorns vs. 30–45 domestic names</li>
+              <li style="font-size: 12px; color: var(--c-grey-dark); line-height: 1.45; padding-left: 14px; position: relative;"><span style="position:absolute;left:0;color:var(--c-navy);font-weight:700;">›</span><strong style="color: var(--c-navy);">Evergreen structure option</strong> avoids the forced-exit trap that hurt closed-end PPP vintages</li>
+              <li style="font-size: 12px; color: var(--c-grey-dark); line-height: 1.45; padding-left: 14px; position: relative;"><span style="position:absolute;left:0;color:var(--c-navy);font-weight:700;">›</span><strong style="color: var(--c-navy);">Durable structural shift</strong> — companies staying private far longer, capturing growth pre-listing</li>
+            </ul>
+          </div>
+
+          <!-- Column 2: What PPP actually showed -->
+          <div style="background: var(--c-off-white); border: 1px solid var(--c-grey-light); border-top: 3px solid var(--c-blue-soft); border-radius: 10px; padding: 18px 18px 16px; display: flex; flex-direction: column;">
+            <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--c-blue-soft); margin-bottom: 6px;">◐ What PPP actually showed</div>
+            <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--c-navy); line-height: 1.2; margin-bottom: 12px;">Structure was the constraint — not the asset class</div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+              <li style="font-size: 12px; color: var(--c-grey-dark); line-height: 1.45; padding-left: 14px; position: relative;"><span style="position:absolute;left:0;color:var(--c-blue-soft);font-weight:700;">›</span><strong style="color: var(--c-navy);">Strong start, then stalled</strong> — 31.89% year one, faded to flat/negative once the IPO window closed post-2022</li>
+              <li style="font-size: 12px; color: var(--c-grey-dark); line-height: 1.45; padding-left: 14px; position: relative;"><span style="position:absolute;left:0;color:var(--c-blue-soft);font-weight:700;">›</span><strong style="color: var(--c-navy);">Problem was structural</strong> — exit dependence + domestic concentration, not the asset class itself</li>
+              <li style="font-size: 12px; color: var(--c-grey-dark); line-height: 1.45; padding-left: 14px; position: relative;"><span style="position:absolute;left:0;color:var(--c-blue-soft);font-weight:700;">›</span><strong style="color: var(--c-navy);">PPP+ response</strong> — Perennial's own answer was evergreen + valuation discipline, not a pivot to unicorns</li>
+            </ul>
+            <div style="margin-top: auto; padding-top: 12px;">
+              <div style="background: var(--c-blue-ice); border-radius: 6px; padding: 9px 11px; font-size: 11.5px; color: var(--c-navy); line-height: 1.45;">A unicorn fund is the next logical evolution of PPP+ — same discipline, broader opportunity set, better liquidity story.</div>
             </div>
           </div>
 
-          <!-- Info panel -->
-          <div class="spv-info">
-            <span class="info-tag js-info-tag">HOVER A NODE</span>
-            <h3 class="js-info-title">The custody chain, simplified</h3>
-            <p class="js-info-body">
-              This view shows the legal entities and their relationships — no economics, no sponsor retention, no democratisation.
-              The Master SPV buys the shares from the seller; issuer-specific sub-SPVs then hold each position for investors.
-              Hover or tap any block on the diagram to see its role.
-            </p>
-            <div class="pill-row js-info-pills">
-              <span class="spv-pill strong">Single buying vehicle</span>
-              <span class="spv-pill">Issuer-specific sub-SPVs</span>
-              <span class="spv-pill">Ring-fenced per issuer</span>
-              <span class="spv-pill">Investors subscribe directly</span>
+          <!-- Column 3: Bottom line -->
+          <div style="background: var(--grad-hero); border-top: 3px solid var(--c-blue-soft); border-radius: 10px; padding: 18px 20px 18px; display: flex; flex-direction: column;">
+            <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--c-blue-pale); margin-bottom: 6px;">★ Bottom Line</div>
+            <div style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: white; line-height: 1.2; margin-bottom: 14px;">Structure &amp; discipline,<br>not the label</div>
+            <p style="font-size: 12.5px; color: var(--c-blue-pale); line-height: 1.55; margin: 0 0 12px 0;">A unicorn fund fixes the specific things that broke PPP — <strong style="color: white;">exit dependence</strong> and <strong style="color: white;">geographic concentration</strong>.</p>
+            <p style="font-size: 12.5px; color: var(--c-blue-pale); line-height: 1.55; margin: 0 0 14px 0;">The edge comes from <strong style="color: white;">how it's structured and how it's run</strong> — not the marketing label.</p>
+            <div style="margin-top: auto; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15);">
+              <div style="font-size: 11px; color: rgba(255,255,255,0.55); line-height: 1.5;">Same underwriting discipline as PPP+. Broader opportunity set. Better liquidity story.</div>
             </div>
-            <p class="spv-hint">Click a node to lock the view. Click again to release.</p>
           </div>
+
+        </div>
+
+        <p style="font-size: 9.5px; color: var(--c-grey-mid); text-align: center; margin: 0; flex-shrink: 0;">For wholesale investors only. Not investment advice.</p>
+
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">02 / 13</span>
+      </div>
+      <div class="slide-progress" style="width: 15%"></div>
+    </section>
+
+    <!-- SLIDE 3 -->
+    <section class="slide biz-split" data-slide="3">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Business <span class="accent">Structure</span> · Fund &amp; Co-Invest</h1>
+          <p class="slide-subtitle">Streams 1 &amp; 2 — distribution and direct ownership</p>
+        </div>
+        <div class="slide-brand">Float<span class="x">X</span></div>
+      </div>
+
+      <div class="slide-body" style="gap: 8px;">
+        <div class="biz-canvas two-stream" style="--biz-compact: 1;">
+          <svg class="biz-svg" preserveAspectRatio="none" aria-hidden="true"></svg>
+
+          <aside class="biz-rail">
+            <div class="biz-rail-title">In focus</div>
+            <div class="stream-item active" data-stream="1">
+              <span class="stream-num">1</span>
+              <span class="stream-text">Fund</span>
+            </div>
+            <div class="stream-item active" data-stream="2">
+              <span class="stream-num">2</span>
+              <span class="stream-text">Direct purchase — held in SPV</span>
+            </div>
+          </aside>
+
+          <div class="biz-flow">
+            <div class="investor-row">
+              <div class="investor-chip">Institution /<br>Superfunds</div>
+              <div class="investor-chip">High Net<br>Wealth</div>
+              <div class="investor-chip">Private<br>Wealth</div>
+              <div class="investor-chip">Family<br>Office</div>
+              <div class="investor-chip us-gp">US GPs<br><span class="us-gp-sub">Inbound · US product distribution</span></div>
+            </div>
+
+            <div class="biz-connector"></div>
+            <div class="biz-band">Distribution</div>
+            <div class="biz-connector"></div>
+            <div class="biz-band platform">Platform</div>
+
+            <div class="product-stack">
+              <div class="product-card" data-stream="1">
+                <span class="product-num">1</span>
+                <div class="product-body">
+                  <div class="product-title">GP Fund</div>
+                  <div class="product-headline">
+                    <span class="big">$300M</span>
+                    <span class="label">Target raise</span>
+                    <span class="label">Fee <b>2 / 20%</b></span>
+                    <span class="label">Access fee <b>5–15%</b></span>
+                  </div>
+
+                  <!-- Indicative portfolio -->
+                  <div style="margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--c-grey-light);">
+                    <div style="font-size: 8.5px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--c-blue-soft); margin-bottom: 4px;">Indicative · Confirmed allocations</div>
+
+                    <div style="display: flex; align-items: center; gap: 6px; padding: 2px 0;">
+                      <img src="https://logo.clearbit.com/anduril.com" style="width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0;" alt="Anduril">
+                      <span style="font-weight: 600; color: var(--c-navy); font-size: 10.5px; min-width: 64px;">Anduril</span>
+                      <span style="color: var(--c-grey-dark); font-size: 9.5px; flex: 1;">$80M @ $110/sh</span>
+                      <span style="color: var(--c-navy); font-size: 8.5px; font-weight: 600;">5/0/0 · ROFA ✓</span>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 6px; padding: 2px 0;">
+                      <span style="width: 12px; height: 12px; border-radius: 2px; background: linear-gradient(135deg, var(--c-navy), var(--c-blue-soft)); color: white; font-size: 7px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;">P</span>
+                      <span style="font-weight: 600; color: var(--c-navy); font-size: 10.5px; min-width: 64px;">Prometheus</span>
+                      <span style="color: var(--c-grey-dark); font-size: 9.5px; flex: 1;">Bezos vehicle</span>
+                      <span style="color: var(--c-navy); font-size: 8.5px; font-weight: 600;">5/0/0 · ROFA ✓</span>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 6px; padding: 2px 0;">
+                      <img src="https://logo.clearbit.com/openai.com" style="width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0;" alt="OpenAI">
+                      <span style="font-weight: 600; color: var(--c-navy); font-size: 10.5px; min-width: 64px;">OpenAI</span>
+                      <span style="color: var(--c-grey-dark); font-size: 9.5px; flex: 1;">$500B val</span>
+                      <span style="color: var(--c-navy); font-size: 8.5px; font-weight: 600;">5/0/0 · ROFA ✓</span>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 6px; padding: 2px 0;">
+                      <img src="https://logo.clearbit.com/stripe.com" style="width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0;" alt="Stripe">
+                      <span style="font-weight: 600; color: var(--c-navy); font-size: 10.5px; min-width: 64px;">Stripe</span>
+                      <span style="color: var(--c-grey-dark); font-size: 9.5px; flex: 1;">$67/sh</span>
+                      <span style="color: var(--c-navy); font-size: 8.5px; font-weight: 600;">4/0/0 · ROFA ✓</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="product-card" data-stream="2">
+                <span class="product-num">2</span>
+                <div class="product-body">
+                  <div class="product-title">Co-Invest Direct SPV</div>
+                  <div class="product-headline">
+                    <span class="big">+5–13%</span>
+                    <span class="label">Access fee</span>
+                    <span class="label">Per-deal SPV</span>
+                    <span class="label">High-conviction LPs</span>
+                  </div>
+                  <div style="margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap;">
+                    <span class="product-tag">SPV 1</span>
+                    <span class="product-tag">SPV 1.5</span>
+                    <span class="product-tag">SPV 2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Merged bottom: Pipeline strip spanning both cards -->
+            <div style="margin-top: 8px; padding: 8px 12px; background: var(--c-blue-ice); border-radius: 8px; border-left: 3px solid var(--c-navy); display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <span style="font-size: 9px; font-weight: 700; letter-spacing: 0.9px; text-transform: uppercase; color: var(--c-navy); white-space: nowrap;">+ Pipeline</span>
+              <span style="display: inline-flex; align-items: center; gap: 4px; background: white; padding: 3px 7px 3px 5px; border-radius: 10px; font-size: 10px; color: var(--c-navy); font-weight: 600;"><img src="https://logo.clearbit.com/bytedance.com" style="width: 12px; height: 12px; border-radius: 2px;" alt="ByteDance">ByteDance</span>
+              <span style="display: inline-flex; align-items: center; gap: 4px; background: white; padding: 3px 7px 3px 5px; border-radius: 10px; font-size: 10px; color: var(--c-navy); font-weight: 600;"><img src="https://logo.clearbit.com/kalshi.com" style="width: 12px; height: 12px; border-radius: 2px;" alt="Kalshi">Kalshi</span>
+              <span style="display: inline-flex; align-items: center; gap: 4px; background: white; padding: 3px 7px 3px 5px; border-radius: 10px; font-size: 10px; color: var(--c-navy); font-weight: 600;"><img src="https://logo.clearbit.com/lambdalabs.com" style="width: 12px; height: 12px; border-radius: 2px;" alt="Lambda">Lambda</span>
+              <span style="display: inline-flex; align-items: center; gap: 4px; background: white; padding: 3px 7px 3px 5px; border-radius: 10px; font-size: 10px; color: var(--c-navy); font-weight: 600;"><img src="https://logo.clearbit.com/neuralink.com" style="width: 12px; height: 12px; border-radius: 2px;" alt="Neuralink">Neuralink</span>
+              <span style="display: inline-flex; align-items: center; gap: 4px; background: white; padding: 3px 7px 3px 5px; border-radius: 10px; font-size: 10px; color: var(--c-navy); font-weight: 600;"><img src="https://logo.clearbit.com/revolut.com" style="width: 12px; height: 12px; border-radius: 2px;" alt="Revolut">Revolut</span>
+              <span style="display: inline-flex; align-items: center; gap: 4px; background: white; padding: 3px 7px 3px 5px; border-radius: 10px; font-size: 10px; color: var(--c-navy); font-weight: 600;"><img src="https://logo.clearbit.com/elevenlabs.io" style="width: 12px; height: 12px; border-radius: 2px;" alt="ElevenLabs">ElevenLabs</span>
+              <span style="display: inline-flex; align-items: center; gap: 4px; background: white; padding: 3px 7px 3px 5px; border-radius: 10px; font-size: 10px; color: var(--c-navy); font-weight: 600;"><img src="https://logo.clearbit.com/saronictechnologies.com" style="width: 12px; height: 12px; border-radius: 2px;" alt="Saronic">Saronic</span>
+            </div>
+          </div>
+
         </div>
       </div>
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">01 / 10</span>
+        <span class="page-num">03 / 13</span>
       </div>
-      <div class="slide-progress" style="width: 10%"></div>
+      <div class="slide-progress" style="width: 23%"></div>
     </section>
-    <!-- ============================================================
-         SLIDE 3 — SPV share class structures (tabs)
-         ============================================================ -->
-    <section class="slide" data-slide="2">
+
+    <!-- SLIDE 4 -->
+    <section class="slide" data-slide="4">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Fund <span class="accent">+</span> Co-Invest</h1>
+          <p class="slide-subtitle">Two products from the same distribution engine — fund as the recurring base, deal-by-deal SPVs as the high-conviction upside layer</p>
+        </div>
+        <div class="slide-brand">Float<span class="x">X</span></div>
+      </div>
+
+      <div class="slide-body" style="flex-direction: row; gap: 24px;">
+
+        <!-- Left: Stacked revenue economics -->
+        <div style="flex: 0 0 300px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--c-blue-soft);">Stacked Revenue</div>
+
+          <!-- Stat 1: Fund base -->
+          <div style="background: var(--grad-hero); border-radius: 10px; padding: 20px 22px;">
+            <div style="font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--c-blue-pale); margin-bottom: 6px;">FUND · BASE LAYER</div>
+            <div style="font-family: var(--font-heading); font-size: 42px; font-weight: 700; color: white; line-height: 1;">~$6M</div>
+            <div style="font-size: 12px; color: var(--c-blue-pale); margin-top: 4px; margin-bottom: 10px;">management fees / year + 20% carry</div>
+            <div style="font-size: 11.5px; color: rgba(255,255,255,0.6); line-height: 1.5;">2% on a $300M fund. Predictable, recurring, independent of deal flow.</div>
+          </div>
+
+          <!-- Stat 2: Co-Invest layer -->
+          <div style="background: white; border: 2px solid var(--c-blue-soft); border-radius: 10px; padding: 18px 20px;">
+            <div style="font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--c-blue-soft); margin-bottom: 6px;">CO-INVEST · UPSIDE LAYER</div>
+            <div style="font-family: var(--font-heading); font-size: 36px; font-weight: 700; color: var(--c-navy); line-height: 1;">+5–13%</div>
+            <div style="font-size: 12px; color: var(--c-grey-dark); margin-top: 4px; margin-bottom: 8px;">access fee per SPV deal</div>
+            <div style="font-size: 11.5px; color: var(--c-grey-dark); line-height: 1.5;">Larger tickets from highest-conviction LPs — incremental revenue on top of fund economics.</div>
+          </div>
+
+          <!-- Revenue model tags -->
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span style="background: var(--c-blue-ice); color: var(--c-navy); font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 20px;">Recurring base</span>
+            <span style="background: var(--c-blue-ice); color: var(--c-navy); font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 20px;">+ Deal upside</span>
+            <span style="background: var(--c-blue-ice); color: var(--c-navy); font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 20px;">Shared LP base</span>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div style="width: 1px; background: var(--c-grey-light); align-self: stretch; flex-shrink: 0;"></div>
+
+        <!-- Right: How they complement each other -->
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--c-blue-soft);">How They Complement Each Other</div>
+
+          <!-- Table -->
+          <div style="border: 1px solid var(--c-grey-light); border-radius: 10px; overflow: hidden; font-size: 13px;">
+            <!-- Header row -->
+            <div style="display: grid; grid-template-columns: 0.9fr 1.1fr 1.1fr; background: var(--c-navy); color: white; font-weight: 600; font-size: 11.5px; letter-spacing: 0.5px;">
+              <div style="padding: 8px 14px; border-right: 1px solid rgba(255,255,255,0.18);">Dimension</div>
+              <div style="padding: 8px 14px; border-right: 1px solid rgba(255,255,255,0.18); color: var(--c-blue-pale);">Fund · Base</div>
+              <div style="padding: 8px 14px; color: var(--c-blue-ice);">Co-Invest · Upside</div>
+            </div>
+            <!-- Rows -->
+            <div style="display: grid; grid-template-columns: 0.9fr 1.1fr 1.1fr; border-top: 1px solid var(--c-grey-light); background: white;">
+              <div style="padding: 9px 14px; color: var(--c-grey-dark); font-size: 12px; font-weight: 500; border-right: 1px solid var(--c-grey-light);">Capital model</div>
+              <div style="padding: 9px 14px; color: var(--c-navy); font-weight: 500; border-right: 1px solid var(--c-grey-light);">Committed upfront</div>
+              <div style="padding: 9px 14px; color: var(--c-navy-mid); font-weight: 500;">Discretionary per deal</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 0.9fr 1.1fr 1.1fr; border-top: 1px solid var(--c-grey-light); background: var(--c-off-white);">
+              <div style="padding: 9px 14px; color: var(--c-grey-dark); font-size: 12px; font-weight: 500; border-right: 1px solid var(--c-grey-light);">Investor base</div>
+              <div style="padding: 9px 14px; color: var(--c-navy); font-weight: 500; border-right: 1px solid var(--c-grey-light);">Broad LP base</div>
+              <div style="padding: 9px 14px; color: var(--c-navy-mid); font-weight: 500;">High-conviction allocators</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 0.9fr 1.1fr 1.1fr; border-top: 1px solid var(--c-grey-light); background: white;">
+              <div style="padding: 9px 14px; color: var(--c-grey-dark); font-size: 12px; font-weight: 500; border-right: 1px solid var(--c-grey-light);">Ticket profile</div>
+              <div style="padding: 9px 14px; color: var(--c-navy); font-weight: 500; border-right: 1px solid var(--c-grey-light);">Diversified portfolio</div>
+              <div style="padding: 9px 14px; color: var(--c-navy-mid); font-weight: 500;">Concentrated, larger cheques</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 0.9fr 1.1fr 1.1fr; border-top: 1px solid var(--c-grey-light); background: var(--c-off-white);">
+              <div style="padding: 9px 14px; color: var(--c-grey-dark); font-size: 12px; font-weight: 500; border-right: 1px solid var(--c-grey-light);">Fee profile</div>
+              <div style="padding: 9px 14px; color: var(--c-navy); font-weight: 500; border-right: 1px solid var(--c-grey-light);">2 / 20 recurring</div>
+              <div style="padding: 9px 14px; color: var(--c-navy-mid); font-weight: 500;">Per-deal access fee on top</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 0.9fr 1.1fr 1.1fr; border-top: 1px solid var(--c-grey-light); background: white;">
+              <div style="padding: 9px 14px; color: var(--c-grey-dark); font-size: 12px; font-weight: 500; border-right: 1px solid var(--c-grey-light);">Strategy</div>
+              <div style="padding: 9px 14px; color: var(--c-navy); font-weight: 500; border-right: 1px solid var(--c-grey-light);">Core mandate exposure</div>
+              <div style="padding: 9px 14px; color: var(--c-navy-mid); font-weight: 500;">Opportunistic / oversubscribed</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 0.9fr 1.1fr 1.1fr; border-top: 1px solid var(--c-grey-light); background: var(--c-off-white);">
+              <div style="padding: 9px 14px; color: var(--c-grey-dark); font-size: 12px; font-weight: 500; border-right: 1px solid var(--c-grey-light);">Business outcome</div>
+              <div style="padding: 9px 14px; color: var(--c-navy); font-weight: 500; border-right: 1px solid var(--c-grey-light);">Scalable franchise</div>
+              <div style="padding: 9px 14px; color: var(--c-navy-mid); font-weight: 500;">Premium upside layer</div>
+            </div>
+          </div>
+
+          <!-- Bottom callout -->
+          <div style="background: var(--c-blue-ice); border-left: 3px solid var(--c-navy); border-radius: 0 8px 8px 0; padding: 9px 14px; font-size: 13px; color: var(--c-navy); line-height: 1.55;">
+            <strong>Bottom line:</strong> Same distribution network, two stacked revenue streams. The fund builds a defensible recurring business; co-invest SPVs add deal-level upside and let your top allocators lean in further on highest-conviction names.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">04 / 13</span>
+      </div>
+      <div class="slide-progress" style="width: 31%"></div>
+    </section>
+
+    <!-- SLIDE 5 -->
+    <section class="slide" data-slide="5">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Unicorn <span class="accent">Fee</span> structure</h1>
+          <p class="slide-subtitle">Standard fee schedule across each share class structure</p>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <p class="fee-intro">
+          All fees are charged at the SPV level and deducted before capital is deployed.
+          The table below summarises the standard fee schedule across each share class structure.
+          Hover any row to highlight it across all columns.
+        </p>
+
+        <div class="fee-table" id="feeTable">
+          <div class="fee-row header">
+            <div class="fee-col label">Fee component</div>
+            <div class="fee-col">L1 — Direct SPV</div>
+            <div class="fee-col">L1.5 — Intermediary</div>
+            <div class="fee-col">L2 — Fund of Funds</div>
+            <div class="fee-col">L2 + L1 side letter</div>
+          </div>
+
+          <div class="fee-row" data-row>
+            <div class="fee-col label">Access fee (upfront)</div>
+            <div class="fee-col"><span class="amount">8% – 12%</span></div>
+            <div class="fee-col"><span class="amount">13%+</span></div>
+            <div class="fee-col"><span class="amount">Included</span><span class="note">in L1 fee</span></div>
+            <div class="fee-col"><span class="amount">Included</span><span class="note">in L1 fee</span></div>
+          </div>
+
+          <div class="fee-row" data-row>
+            <div class="fee-col label">Management fee (p.a.)</div>
+            <div class="fee-col"><span class="amount">Case by case</span></div>
+            <div class="fee-col"><span class="amount">Case by case</span></div>
+            <div class="fee-col"><span class="amount">1% – 2%</span></div>
+            <div class="fee-col"><span class="amount">1% – 2%</span></div>
+          </div>
+
+          <div class="fee-row" data-row>
+            <div class="fee-col label">Performance fee / carry</div>
+            <div class="fee-col"><span class="amount">Case by case</span></div>
+            <div class="fee-col"><span class="amount">Case by case</span></div>
+            <div class="fee-col"><span class="amount">10% – 20%</span><span class="note">above hurdle · on liquidation</span></div>
+            <div class="fee-col"><span class="amount">10% – 20%</span><span class="note">above hurdle · on liquidation</span></div>
+          </div>
+
+          <div class="fee-row" data-row>
+            <div class="fee-col label">Net to position</div>
+            <div class="fee-col"><span class="amount">~88% – 92%</span></div>
+            <div class="fee-col"><span class="amount">~87%</span></div>
+            <div class="fee-col"><span class="amount">Varies</span><span class="note">L2 layer fees</span></div>
+            <div class="fee-col"><span class="amount">Varies</span><span class="note">L2 layer fees</span></div>
+          </div>
+
+          <div class="fee-row" data-row>
+            <div class="fee-col label">GP lock-up</div>
+            <div class="fee-col"><span class="amount">180d</span><span class="note">issuer standard</span></div>
+            <div class="fee-col"><span class="amount">180d</span><span class="note">issuer standard</span></div>
+            <div class="fee-col"><span class="amount">Per L2 terms</span></div>
+            <div class="fee-col"><span class="amount">Per L2 terms</span></div>
+          </div>
+        </div>
+
+        <div class="fee-callout">
+          <span class="fee-callout-tag">Note</span>
+          <p>The <strong>L1.5 structure</strong> carries more overhead because you're essentially paying for <strong>two entities</strong> instead of one.</p>
+        </div>
+
+        <div class="fee-callout">
+          <span class="fee-callout-tag">Note</span>
+          <p><strong>Management fees</strong> and <strong>performance fees</strong> depend entirely on the structure from the seller — <strong>the same fees apply across all layers</strong>.</p>
+        </div>
+
+        <p class="fee-note">
+          Fees are indicative and may vary by deal, issuer, and ticket size. Performance fees subject to preferred return hurdle where applicable.
+        </p>
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">05 / 13</span>
+      </div>
+      <div class="slide-progress" style="width: 38%"></div>
+    </section>
+
+    <!-- SLIDE 6 -->
+    <section class="slide" data-slide="6">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">SPV share class <span class="accent">structures</span></h1>
@@ -2295,15 +2689,92 @@
 
       <div class="slide-footer">
         <span>No GP lock-up beyond issuer standard (180d) for L1. No voting rights on L1.5.</span>
-        <span class="page-num">02 / 10</span>
+        <span class="page-num">06 / 13</span>
       </div>
-      <div class="slide-progress" style="width: 20%"></div>
+      <div class="slide-progress" style="width: 46%"></div>
     </section>
 
-    <!-- ============================================================
-         SLIDE 4 — Transaction Flow · Manager Process (swim lanes)
-         ============================================================ -->
-    <section class="slide" data-slide="3">
+    <!-- SLIDE 7 -->
+    <section class="slide" data-slide="7" data-spv-variant="simple">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">The <span class="accent">SPV</span> Structure · simple view</h1>
+          <p class="slide-subtitle">The custody and legal relationships — no economics, no democratisation</p>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="spv-canvas">
+          <!-- Diagram -->
+          <div class="spv-diagram">
+            <svg class="spv-svg" preserveAspectRatio="none"></svg>
+
+            <div class="spv-row row-top">
+              <div class="spv-node" data-node="seller">
+                <span class="label">Seller</span>
+                <span class="sub">via SPV L1 / L2 / L3</span>
+              </div>
+            </div>
+
+            <div class="spv-row row-mid">
+              <div class="spv-node" data-node="afsl">
+                <span class="label">AFSL trustee / RE</span>
+                <span class="sub">responsible entity</span>
+              </div>
+              <div class="spv-node master" data-node="master">
+                <span class="label">Master SPV</span>
+                <span class="sub">single buying vehicle</span>
+              </div>
+            </div>
+
+            <div class="spv-row row-sub">
+              <div class="spv-node" data-node="sub-a">
+                <span class="label">FloatX Anduril sub-SPV</span>
+                <span class="sub">holds Anduril position</span>
+              </div>
+              <div class="spv-node" data-node="sub-b">
+                <span class="label">FloatX Anthropic sub-SPV</span>
+                <span class="sub">holds Anthropic position</span>
+              </div>
+            </div>
+
+            <div class="spv-row row-bottom">
+              <div class="spv-node" data-node="investors">
+                <span class="label">Investors</span>
+                <span class="sub">subscribe into issuer-specific sub-SPV</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info panel -->
+          <div class="spv-info">
+            <span class="info-tag js-info-tag">HOVER A NODE</span>
+            <h3 class="js-info-title">The custody chain, simplified</h3>
+            <p class="js-info-body">
+              This view shows the legal entities and their relationships — no economics, no sponsor retention, no democratisation.
+              The Master SPV buys the shares from the seller; issuer-specific sub-SPVs then hold each position for investors.
+              Hover or tap any block on the diagram to see its role.
+            </p>
+            <div class="pill-row js-info-pills">
+              <span class="spv-pill strong">Single buying vehicle</span>
+              <span class="spv-pill">Issuer-specific sub-SPVs</span>
+              <span class="spv-pill">Ring-fenced per issuer</span>
+              <span class="spv-pill">Investors subscribe directly</span>
+            </div>
+            <p class="spv-hint">Click a node to lock the view. Click again to release.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">07 / 13</span>
+      </div>
+      <div class="slide-progress" style="width: 54%"></div>
+    </section>
+
+    <!-- SLIDE 8 -->
+    <section class="slide" data-slide="8">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Transaction <span class="accent">Flow</span> &mdash; Manager Process</h1>
@@ -2397,105 +2868,13 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">03 / 10</span>
+        <span class="page-num">08 / 13</span>
       </div>
-      <div class="slide-progress" style="width: 30%"></div>
+      <div class="slide-progress" style="width: 62%"></div>
     </section>
 
-    <!-- ============================================================
-         SLIDE 5 — Unicorn Fee structure
-         ============================================================ -->
-    <section class="slide" data-slide="4">
-      <div class="slide-header">
-        <div>
-          <h1 class="slide-title">Unicorn <span class="accent">Fee</span> structure</h1>
-          <p class="slide-subtitle">Standard fee schedule across each share class structure</p>
-        </div>
-      </div>
-
-      <div class="slide-body">
-        <p class="fee-intro">
-          All fees are charged at the SPV level and deducted before capital is deployed.
-          The table below summarises the standard fee schedule across each share class structure.
-          Hover any row to highlight it across all columns.
-        </p>
-
-        <div class="fee-table" id="feeTable">
-          <div class="fee-row header">
-            <div class="fee-col label">Fee component</div>
-            <div class="fee-col">L1 — Direct SPV</div>
-            <div class="fee-col">L1.5 — Intermediary</div>
-            <div class="fee-col">L2 — Fund of Funds</div>
-            <div class="fee-col">L2 + L1 side letter</div>
-          </div>
-
-          <div class="fee-row" data-row>
-            <div class="fee-col label">Access fee (upfront)</div>
-            <div class="fee-col"><span class="amount">8% – 12%</span></div>
-            <div class="fee-col"><span class="amount">13%+</span></div>
-            <div class="fee-col"><span class="amount">Included</span><span class="note">in L1 fee</span></div>
-            <div class="fee-col"><span class="amount">Included</span><span class="note">in L1 fee</span></div>
-          </div>
-
-          <div class="fee-row" data-row>
-            <div class="fee-col label">Management fee (p.a.)</div>
-            <div class="fee-col"><span class="amount">Case by case</span></div>
-            <div class="fee-col"><span class="amount">Case by case</span></div>
-            <div class="fee-col"><span class="amount">1% – 2%</span></div>
-            <div class="fee-col"><span class="amount">1% – 2%</span></div>
-          </div>
-
-          <div class="fee-row" data-row>
-            <div class="fee-col label">Performance fee / carry</div>
-            <div class="fee-col"><span class="amount">Case by case</span></div>
-            <div class="fee-col"><span class="amount">Case by case</span></div>
-            <div class="fee-col"><span class="amount">10% – 20%</span><span class="note">above hurdle · on liquidation</span></div>
-            <div class="fee-col"><span class="amount">10% – 20%</span><span class="note">above hurdle · on liquidation</span></div>
-          </div>
-
-          <div class="fee-row" data-row>
-            <div class="fee-col label">Net to position</div>
-            <div class="fee-col"><span class="amount">~88% – 92%</span></div>
-            <div class="fee-col"><span class="amount">~87%</span></div>
-            <div class="fee-col"><span class="amount">Varies</span><span class="note">L2 layer fees</span></div>
-            <div class="fee-col"><span class="amount">Varies</span><span class="note">L2 layer fees</span></div>
-          </div>
-
-          <div class="fee-row" data-row>
-            <div class="fee-col label">GP lock-up</div>
-            <div class="fee-col"><span class="amount">180d</span><span class="note">issuer standard</span></div>
-            <div class="fee-col"><span class="amount">180d</span><span class="note">issuer standard</span></div>
-            <div class="fee-col"><span class="amount">Per L2 terms</span></div>
-            <div class="fee-col"><span class="amount">Per L2 terms</span></div>
-          </div>
-        </div>
-
-        <div class="fee-callout">
-          <span class="fee-callout-tag">Note</span>
-          <p>The <strong>L1.5 structure</strong> carries more overhead because you're essentially paying for <strong>two entities</strong> instead of one.</p>
-        </div>
-
-        <div class="fee-callout">
-          <span class="fee-callout-tag">Note</span>
-          <p><strong>Management fees</strong> and <strong>performance fees</strong> depend entirely on the structure from the seller — <strong>the same fees apply across all layers</strong>.</p>
-        </div>
-
-        <p class="fee-note">
-          Fees are indicative and may vary by deal, issuer, and ticket size. Performance fees subject to preferred return hurdle where applicable.
-        </p>
-      </div>
-
-      <div class="slide-footer">
-        <span>Private and Confidential</span>
-        <span class="page-num">04 / 10</span>
-      </div>
-      <div class="slide-progress" style="width: 40%"></div>
-    </section>
-
-    <!-- ============================================================
-         SLIDE 5 — Step by step (phases 1–3)
-         ============================================================ -->
-    <section class="slide compact-phases" data-slide="5">
+    <!-- SLIDE 9 -->
+    <section class="slide compact-phases" data-slide="9">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Step-by-step: <span class="accent">commitment</span> to exit</h1>
@@ -2619,111 +2998,13 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">05 / 10</span>
+        <span class="page-num">09 / 13</span>
       </div>
-      <div class="slide-progress" style="width: 50%"></div>
+      <div class="slide-progress" style="width: 69%"></div>
     </section>
 
-    <!-- ============================================================
-         SLIDE 8 — Business Structure / Three Revenue Streams
-         ============================================================ -->
-    <section class="slide biz-split" data-slide="6">
-      <div class="slide-header">
-        <div>
-          <h1 class="slide-title">Business <span class="accent">Structure</span> · Fund &amp; Co-Invest</h1>
-          <p class="slide-subtitle">Streams 1 &amp; 2 — distribution and direct ownership</p>
-        </div>
-        <div class="slide-brand">Float<span class="x">X</span></div>
-      </div>
-
-      <!-- Snapshot strip -->
-      <div class="biz-snapshot" aria-label="Three revenue streams snapshot">
-        <span class="snap-label">Three Revenue Streams</span>
-        <div class="snap-chip on"><span class="snap-num">1</span><span class="snap-text">Fund</span></div>
-        <div class="snap-chip on"><span class="snap-num">2</span><span class="snap-text">Co-Invest Direct SPV</span></div>
-        <div class="snap-chip"><span class="snap-num">3</span><span class="snap-text">Trading · Liquidity</span></div>
-        <span class="snap-hint">Detail on this slide →</span>
-      </div>
-
-      <div class="slide-body">
-        <div class="biz-canvas two-stream">
-          <svg class="biz-svg" preserveAspectRatio="none" aria-hidden="true"></svg>
-
-          <aside class="biz-rail">
-            <div class="biz-rail-title">In focus</div>
-            <div class="stream-item active" data-stream="1">
-              <span class="stream-num">1</span>
-              <span class="stream-text">Fund</span>
-            </div>
-            <div class="stream-item active" data-stream="2">
-              <span class="stream-num">2</span>
-              <span class="stream-text">Direct purchase — held in SPV</span>
-            </div>
-          </aside>
-
-          <div class="biz-flow">
-            <div class="investor-row">
-              <div class="investor-chip">Institution /<br>Superfunds</div>
-              <div class="investor-chip">High Net<br>Wealth</div>
-              <div class="investor-chip">Private<br>Wealth</div>
-              <div class="investor-chip">Family<br>Office</div>
-              <div class="investor-chip us-gp">US GPs<br><span class="us-gp-sub">Inbound · US product distribution</span></div>
-            </div>
-
-            <div class="biz-connector"></div>
-            <div class="biz-band">Distribution</div>
-            <div class="biz-connector"></div>
-            <div class="biz-band platform">Platform</div>
-
-            <div class="product-stack">
-              <div class="product-card" data-stream="1">
-                <span class="product-num">1</span>
-                <div class="product-body">
-                  <div class="product-title">GP Fund</div>
-                  <div class="product-headline">
-                    <span class="big">$300M</span>
-                    <span class="label">Target raise</span>
-                    <span class="label">Min Cheque <b>$3M</b></span>
-                    <span class="label">Fee <b>2 / 20%</b></span>
-                    <span class="label">Access fee <b>5–15%</b></span>
-                  </div>
-                </div>
-                <div class="product-meta">
-                  <span class="product-pill">10 unicorns</span>
-                </div>
-              </div>
-
-              <div class="product-card" data-stream="2">
-                <span class="product-num">2</span>
-                <div class="product-body">
-                  <div class="product-title">Co-Invest Direct SPV</div>
-                  <div class="product-detail">Access fee <b style="color:var(--c-navy);font-style:normal;">+5–13%</b></div>
-                </div>
-                <div class="product-meta">
-                  <div class="product-tags">
-                    <span class="product-tag">SPV 1</span>
-                    <span class="product-tag">SPV 1.5</span>
-                    <span class="product-tag">SPV 2</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="slide-footer">
-        <span>Private and Confidential</span>
-        <span class="page-num">06 / 10</span>
-      </div>
-      <div class="slide-progress" style="width: 60%"></div>
-    </section>
-
-    <!-- ============================================================
-         SLIDE 7 — End-to-end transaction structure
-         ============================================================ -->
-    <section class="slide" data-slide="7">
+    <!-- SLIDE 10 -->
+    <section class="slide" data-slide="10">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">End-to-end <span class="accent">Transaction</span> Structure</h1>
@@ -2838,15 +3119,13 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">07 / 10</span>
+        <span class="page-num">10 / 13</span>
       </div>
-      <div class="slide-progress" style="width: 70%"></div>
+      <div class="slide-progress" style="width: 77%"></div>
     </section>
 
-    <!-- ============================================================
-         SLIDE 8 — Series trust structure
-         ============================================================ -->
-    <section class="slide" data-slide="8">
+    <!-- SLIDE 11 -->
+    <section class="slide" data-slide="11">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Series <span class="accent">Trust</span> Structure</h1>
@@ -2920,15 +3199,13 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">08 / 10</span>
+        <span class="page-num">11 / 13</span>
       </div>
-      <div class="slide-progress" style="width: 80%"></div>
+      <div class="slide-progress" style="width: 85%"></div>
     </section>
 
-    <!-- ============================================================
-         SLIDE 9 — Business Structure · Trading & Liquidity (Stream 3)
-         ============================================================ -->
-    <section class="slide biz-split" data-slide="9">
+    <!-- SLIDE 12 -->
+    <section class="slide biz-split" data-slide="12">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Business <span class="accent">Structure</span> · Trading &amp; Liquidity</h1>
@@ -3105,15 +3382,13 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">09 / 10</span>
+        <span class="page-num">12 / 13</span>
       </div>
-      <div class="slide-progress" style="width: 90%"></div>
+      <div class="slide-progress" style="width: 92%"></div>
     </section>
 
-    <!-- ============================================================
-         SLIDE 7 — Unicorn Sensitivity
-         ============================================================ -->
-    <section class="slide" data-slide="10">
+    <!-- SLIDE 13 -->
+    <section class="slide" data-slide="13">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Unicorn <span class="accent">Sensitivity</span></h1>
@@ -3273,7 +3548,7 @@
 
       <div class="slide-footer">
         <span>Live model · illustrative only</span>
-        <span class="page-num">10 / 10</span>
+        <span class="page-num">13 / 13</span>
       </div>
       <div class="slide-progress" style="width: 100%"></div>
     </section>
@@ -3283,9 +3558,33 @@
   <!-- Global navigation -->
   <button class="nav-arrow nav-prev" id="navPrev" aria-label="Previous slide">&#8249;</button>
   <button class="nav-arrow nav-next" id="navNext" aria-label="Next slide">&#8250;</button>
-  <div class="slide-counter" id="slideCounter">01 / 08</div>
+  <div class="slide-counter" id="slideCounter">01 / 12</div>
 
   <script>
+  /* ============================================================
+     LOGO FALLBACK — swap failed brand logos for letter avatars
+     ============================================================ */
+  document.addEventListener('error', function(e) {
+    const img = e.target;
+    if (img.tagName !== 'IMG') return;
+    if (!img.src || !img.src.includes('clearbit') && !img.src.includes('google.com/s2')) return;
+    // Try Google favicon fallback once, then replace with letter avatar
+    if (img.src.includes('clearbit') && !img.dataset.fallbackTried) {
+      img.dataset.fallbackTried = '1';
+      const domain = img.src.split('/').pop().split('?')[0];
+      img.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=64';
+      return;
+    }
+    // Final fallback: replace with letter avatar
+    const letter = (img.alt || 'X').trim()[0].toUpperCase();
+    const w = img.style.width || (img.width + 'px');
+    const h = img.style.height || (img.height + 'px');
+    const avatar = document.createElement('span');
+    avatar.style.cssText = 'width:' + w + ';height:' + h + ';border-radius:2px;background:linear-gradient(135deg,#243E88,#5BA4CF);color:white;font-size:7px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;';
+    avatar.textContent = letter;
+    img.parentNode.replaceChild(avatar, img);
+  }, true);
+
   /* ============================================================
      DECK NAVIGATION
      ============================================================ */
@@ -3340,12 +3639,12 @@
 
       // Slide-specific triggers
       const n = Number(slide.dataset.slide);
-      if (n === 1) initSpvDiagram(slide);
-      if (n === 3) initTransactionFlow(slide);
-      if (n === 4) animateFeeBars(slide);
-      if (n === 5) revealPhases(slide);
-      if (n === 6 || n === 9) initBusinessStructure(slide);
-      if (n === 10) runModel();
+      if (n === 7) initSpvDiagram(slide);
+      if (n === 8) initTransactionFlow(slide);
+      if (n === 5) animateFeeBars(slide);
+      if (n === 9) revealPhases(slide);
+      if (n === 3 || n === 12) initBusinessStructure(slide);
+      if (n === 13) runModel();
     }
 
     function go(idx) {
@@ -3842,13 +4141,13 @@
 
   // Redraw on resize while slide 3 (transaction flow) or 7 (business structure) is active
   window.addEventListener('resize', () => {
-    const txActive = document.querySelector('.slide.active[data-slide="3"]');
+    const txActive = document.querySelector('.slide.active[data-slide="8"]');
     if (txActive) {
       const canvas = txActive.querySelector('.flow-canvas');
       const svg = txActive.querySelector('.flow-svg');
       if (canvas && svg) drawFlowConnectors(canvas, svg);
     }
-    const bizActive = document.querySelector('.slide.active[data-slide="7"]');
+    const bizActive = document.querySelector('.slide.active[data-slide="12"]');
     if (bizActive) {
       const canvas = bizActive.querySelector('.biz-canvas');
       const svg = bizActive.querySelector('.biz-svg');
