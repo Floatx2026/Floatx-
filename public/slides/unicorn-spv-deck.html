@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FloatX — Unicorn SPV Structure</title>
+  <title>Unicorn Fund — Investor Deck</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1877,12 +1877,17 @@
       padding: 0;
       border: none;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: center;
     }
-    .diagram-wrap svg { width: 100%; height: 100%; display: block; max-height: 100%; }
-    .diagram-wrap .t  { font-family: 'Inter',Arial,sans-serif; font-size: 14px; font-weight: 400; fill: #0A1530; }
-    .diagram-wrap .ts { font-family: 'Inter',Arial,sans-serif; font-size: 11.5px; font-weight: 400; fill: #565859; letter-spacing: 0.02em; }
-    .diagram-wrap .th { font-family: 'Inter',Arial,sans-serif; font-size: 13.5px; font-weight: 600; fill: #0A1530; }
+    .diagram-wrap svg { width: 100%; height: auto; max-height: 100%; display: block; }
+    .diagram-wrap .t  { font-family: 'Inter',Arial,sans-serif; font-size: 15px; font-weight: 400; fill: #0A1530; }
+    .diagram-wrap .ts { font-family: 'Inter',Arial,sans-serif; font-size: 12.5px; font-weight: 400; fill: #565859; letter-spacing: 0.02em; }
+    .diagram-wrap .th { font-family: 'Inter',Arial,sans-serif; font-size: 14.5px; font-weight: 600; fill: #0A1530; }
+
+    /* Slides 10 & 11 — SVG diagrams: more breathing room, less side padding */
+    .slide[data-slide="11"], .slide[data-slide="12"] { padding: 36px 28px 22px; }
+    .slide[data-slide="11"] .slide-header, .slide[data-slide="12"] .slide-header { margin-bottom: 12px; }
 
     /* ============================================
        SLIDE 4 — Transaction Flow (swim lanes)
@@ -2050,13 +2055,13 @@
          SLIDE 1 (was 11)
          ============================================================ -->
         <!-- SLIDE 1 -->
+        <!-- SLIDE 1 (was 1) -->
     <section class="slide" data-slide="1">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">The Case for a <span class="accent">Unicorn</span> Fund</h1>
           <p class="slide-subtitle">Why late-stage private equity is the right product to build — and why now is the right time</p>
         </div>
-        <div class="slide-brand">Float<span class="x">X</span></div>
       </div>
 
       <div class="slide-body" style="gap: 16px;">
@@ -2103,19 +2108,18 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">01 / 13</span>
+        <span class="page-num">01 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 8%"></div>
+      <div class="slide-progress" style="width: 7%"></div>
     </section>
 
-    <!-- SLIDE 2 -->
+    <!-- SLIDE 2 (was 2) -->
     <section class="slide" data-slide="2">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Unicorn Fund vs <span class="accent">PPP</span> — Key Points</h1>
           <p class="slide-subtitle">Why a unicorn fund addresses the specific weaknesses that constrained the existing pre-IPO product</p>
         </div>
-        <div class="slide-brand">Float<span class="x">X</span></div>
       </div>
 
       <div class="slide-body" style="gap: 14px;">
@@ -2169,19 +2173,18 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">02 / 13</span>
+        <span class="page-num">02 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 15%"></div>
+      <div class="slide-progress" style="width: 14%"></div>
     </section>
 
-    <!-- SLIDE 3 -->
+    <!-- SLIDE 3 (was 3) -->
     <section class="slide biz-split" data-slide="3">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Business <span class="accent">Structure</span> · Fund &amp; Co-Invest</h1>
           <p class="slide-subtitle">Streams 1 &amp; 2 — distribution and direct ownership</p>
         </div>
-        <div class="slide-brand">Float<span class="x">X</span></div>
       </div>
 
       <div class="slide-body" style="gap: 8px;">
@@ -2299,19 +2302,18 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">03 / 13</span>
+        <span class="page-num">03 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 23%"></div>
+      <div class="slide-progress" style="width: 21%"></div>
     </section>
 
-    <!-- SLIDE 4 -->
+    <!-- SLIDE 4 (was 4) -->
     <section class="slide" data-slide="4">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Fund <span class="accent">+</span> Co-Invest</h1>
           <p class="slide-subtitle">Two products from the same distribution engine — fund as the recurring base, deal-by-deal SPVs as the high-conviction upside layer</p>
         </div>
-        <div class="slide-brand">Float<span class="x">X</span></div>
       </div>
 
       <div class="slide-body" style="flex-direction: row; gap: 24px;">
@@ -2388,7 +2390,7 @@
             <div style="display: grid; grid-template-columns: 0.9fr 1.1fr 1.1fr; border-top: 1px solid var(--c-grey-light); background: var(--c-off-white);">
               <div style="padding: 9px 14px; color: var(--c-grey-dark); font-size: 12px; font-weight: 500; border-right: 1px solid var(--c-grey-light);">Business outcome</div>
               <div style="padding: 9px 14px; color: var(--c-navy); font-weight: 500; border-right: 1px solid var(--c-grey-light);">Scalable franchise</div>
-              <div style="padding: 9px 14px; color: var(--c-navy-mid); font-weight: 500;">Premium upside layer</div>
+              <div style="padding: 9px 14px; color: var(--c-navy-mid); font-weight: 500;">Premium upside layer<br><span style="font-size: 10.5px; font-weight: 600; color: #c0392b;">↑ Higher fees per deal — incremental on top of fund 2/20</span></div>
             </div>
           </div>
 
@@ -2402,13 +2404,265 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">04 / 13</span>
+        <span class="page-num">04 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 31%"></div>
+      <div class="slide-progress" style="width: 29%"></div>
     </section>
 
-    <!-- SLIDE 5 -->
+    <!-- SLIDE 5 (was 14) -->
     <section class="slide" data-slide="5">
+      <div class="slide-header">
+        <div>
+          <h1 class="slide-title">Indicative <span class="accent">Pipeline</span></h1>
+          <p class="slide-subtitle">Active deal flow across 11 issuers — illustrative deployment shape for a $300M fund</p>
+        </div>
+      </div>
+
+      <div class="slide-body" style="gap: 10px;">
+
+        <!-- Top metric strip -->
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;">
+          <div style="background: var(--c-off-white); border: 1px solid var(--c-grey-light); border-radius: 8px; padding: 9px 12px;">
+            <div style="font-size: 8.5px; color: var(--c-grey-dark); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2px;">Active positions</div>
+            <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: var(--c-navy); line-height: 1;">20</div>
+          </div>
+          <div style="background: var(--c-off-white); border: 1px solid var(--c-grey-light); border-radius: 8px; padding: 9px 12px;">
+            <div style="font-size: 8.5px; color: var(--c-grey-dark); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2px;">Total commitment</div>
+            <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: var(--c-navy); line-height: 1;">~$1.9B</div>
+          </div>
+          <div style="background: var(--c-off-white); border: 1px solid var(--c-grey-light); border-radius: 8px; padding: 9px 12px;">
+            <div style="font-size: 8.5px; color: var(--c-grey-dark); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2px;">Issuers</div>
+            <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: var(--c-navy); line-height: 1;">11</div>
+          </div>
+          <div style="background: var(--c-off-white); border: 1px solid var(--c-grey-light); border-radius: 8px; padding: 9px 12px;">
+            <div style="font-size: 8.5px; color: var(--c-grey-dark); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2px;">Avg access fee</div>
+            <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: var(--c-navy); line-height: 1;">5%</div>
+          </div>
+          <div style="background: linear-gradient(135deg, var(--c-navy), var(--c-navy-mid)); border-radius: 8px; padding: 9px 12px;">
+            <div style="font-size: 8.5px; color: var(--c-blue-pale); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2px;">ROFA confirmed</div>
+            <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: white; line-height: 1;">8 ✓</div>
+          </div>
+        </div>
+
+        <!-- Two-column: allocation chart + deal table -->
+        <div style="display: grid; grid-template-columns: 0.85fr 1.6fr; gap: 12px; flex: 1; min-height: 0;">
+
+          <!-- Asset allocation -->
+          <div style="background: var(--c-off-white); border: 1px solid var(--c-grey-light); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column;">
+            <div style="font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--c-blue-soft); margin-bottom: 10px;">Asset Allocation · USD M</div>
+
+            <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
+              <!-- Anthropic 644M / 33% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/anthropic.com" alt="Anthropic" style="width:11px;height:11px;border-radius:2px;">Anthropic</span><span style="color: var(--c-grey-dark);">$644M · 33%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 100%; height: 100%; background: var(--c-navy);"></div></div>
+              </div>
+              <!-- Canva 250M / 13% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/canva.com" alt="Canva" style="width:11px;height:11px;border-radius:2px;">Canva</span><span style="color: var(--c-grey-dark);">$250M · 13%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 39%; height: 100%; background: var(--c-navy-mid);"></div></div>
+              </div>
+              <!-- Neuralink 200M / 10% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/neuralink.com" alt="Neuralink" style="width:11px;height:11px;border-radius:2px;">Neuralink</span><span style="color: var(--c-grey-dark);">$200M · 10%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 31%; height: 100%; background: var(--c-blue-soft);"></div></div>
+              </div>
+              <!-- OpenAI 200M / 10% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/openai.com" alt="OpenAI" style="width:11px;height:11px;border-radius:2px;">OpenAI</span><span style="color: var(--c-grey-dark);">$200M · 10%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 31%; height: 100%; background: var(--c-blue-soft);"></div></div>
+              </div>
+              <!-- Anduril 167M / 9% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/anduril.com" alt="Anduril" style="width:11px;height:11px;border-radius:2px;">Anduril</span><span style="color: var(--c-grey-dark);">$167M · 9%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 26%; height: 100%; background: var(--c-blue-soft);"></div></div>
+              </div>
+              <!-- Shield.AI 150M / 8% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/shield.ai" alt="Shield" style="width:11px;height:11px;border-radius:2px;">Shield.AI</span><span style="color: var(--c-grey-dark);">$150M · 8%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 23%; height: 100%; background: var(--c-blue-pale);"></div></div>
+              </div>
+              <!-- Revolut 100M / 5% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/revolut.com" alt="Revolut" style="width:11px;height:11px;border-radius:2px;">Revolut</span><span style="color: var(--c-grey-dark);">$100M · 5%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 16%; height: 100%; background: var(--c-blue-pale);"></div></div>
+              </div>
+              <!-- Lambda 75M / 4% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/lambdalabs.com" alt="Lambda" style="width:11px;height:11px;border-radius:2px;">Lambda</span><span style="color: var(--c-grey-dark);">$75M · 4%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 12%; height: 100%; background: var(--c-blue-pale);"></div></div>
+              </div>
+              <!-- Saronic 50M / 3% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/saronictechnologies.com" alt="Saronic" style="width:11px;height:11px;border-radius:2px;">Saronic</span><span style="color: var(--c-grey-dark);">$50M · 3%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 8%; height: 100%; background: var(--c-blue-pale);"></div></div>
+              </div>
+              <!-- ElevenLabs 50M / 3% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/elevenlabs.io" alt="ElevenLabs" style="width:11px;height:11px;border-radius:2px;">ElevenLabs</span><span style="color: var(--c-grey-dark);">$50M · 3%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 8%; height: 100%; background: var(--c-blue-pale);"></div></div>
+              </div>
+              <!-- Kalshi 50M / 3% -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px;"><span style="font-weight: 600; color: var(--c-navy); display:inline-flex;align-items:center;gap:5px;"><img src="https://logo.clearbit.com/kalshi.com" alt="Kalshi" style="width:11px;height:11px;border-radius:2px;">Kalshi</span><span style="color: var(--c-grey-dark);">$50M · 3%</span></div>
+                <div style="height: 7px; background: rgba(36,62,136,0.10); border-radius: 4px; overflow: hidden;"><div style="width: 8%; height: 100%; background: var(--c-blue-pale);"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deal table -->
+          <div style="background: var(--c-off-white); border: 1px solid var(--c-grey-light); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; min-height: 0;">
+            <div style="font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--c-blue-soft); margin-bottom: 8px;">Active Deal Construction</div>
+
+            <table style="width: 100%; border-collapse: collapse; font-size: 10.5px; flex: 1;">
+              <thead>
+                <tr style="background: var(--c-navy); color: white;">
+                  <th style="padding: 5px 7px; text-align: left; font-weight: 600; font-size: 9px; letter-spacing: 0.5px; border-radius: 4px 0 0 0;">Issuer</th>
+                  <th style="padding: 5px 7px; text-align: left; font-weight: 600; font-size: 9px; letter-spacing: 0.5px;">Structure</th>
+                  <th style="padding: 5px 7px; text-align: right; font-weight: 600; font-size: 9px; letter-spacing: 0.5px;">Commit</th>
+                  <th style="padding: 5px 7px; text-align: center; font-weight: 600; font-size: 9px; letter-spacing: 0.5px;">Fee · %</th>
+                  <th style="padding: 5px 7px; text-align: center; font-weight: 600; font-size: 9px; letter-spacing: 0.5px; border-radius: 0 4px 0 0;">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--c-grey-light);">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Anduril</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1 direct · clean</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$100M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">4 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(15,110,86,0.15); color: #0F6E56; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">ROFA ✓</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light); background: white;">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Anduril</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L2 employee tender</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$30M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">10 / 0 / 2</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(36,62,136,0.10); color: var(--c-navy); padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">Active</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light);">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Anduril</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L2 common · 3× blocks</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$27M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">6.5 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(36,62,136,0.10); color: var(--c-navy); padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">Active</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light); background: white;">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Anduril</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L2 tender · fast close</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$10M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">10 / 0 / 2</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(15,110,86,0.15); color: #0F6E56; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">Ready</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light);">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Anthropic</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L2 FO liquidation</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$300M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">12 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(15,110,86,0.15); color: #0F6E56; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">Approved</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light); background: white;">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Anthropic</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1 early Series A</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$294M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">7.5 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(36,62,136,0.10); color: var(--c-navy); padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">NCNDA</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light);">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Anthropic</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">Dual SPV company tender</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$50M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">12 / 0 / 0 + carry</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(36,62,136,0.10); color: var(--c-navy); padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">Active</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light); background: white;">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Neuralink</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1 direct · co-GP</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$150M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">6 / 0 / 15</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(15,110,86,0.15); color: #0F6E56; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">Confirmed</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light);">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Neuralink</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1.5 side-letter</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$50M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">15 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(36,62,136,0.10); color: var(--c-navy); padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">Active</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light); background: white;">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Canva</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1 direct · proprietary</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$250M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">6 / 0 / 6</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(15,110,86,0.15); color: #0F6E56; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">ROFA ✓</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light);">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Shield.AI</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">Company tender</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$150M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-grey-dark);">TBC</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(36,62,136,0.10); color: var(--c-navy); padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">Secured</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light); background: white;">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Saronic</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1.5 side-letter</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$50M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">10 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(36,62,136,0.10); color: var(--c-navy); padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">Active</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light);">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">ElevenLabs</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1 direct</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$50M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">5 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(15,110,86,0.15); color: #0F6E56; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">ROFA ✓</span></td>
+                </tr>
+                <tr style="background: white; border-bottom: 1px solid var(--c-grey-light);">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">OpenAI</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1 direct</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$200M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">5 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(15,110,86,0.15); color: #0F6E56; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">ROFA ✓</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--c-grey-light);">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Kalshi</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1 direct</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$50M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">5 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(15,110,86,0.15); color: #0F6E56; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">ROFA ✓</span></td>
+                </tr>
+                <tr style="background: white; border-bottom: 1px solid var(--c-grey-light);">
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Lambda</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1 direct</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$75M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">5 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(15,110,86,0.15); color: #0F6E56; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">ROFA ✓</span></td>
+                </tr>
+                <tr>
+                  <td style="padding: 4px 7px; color: var(--c-navy); font-weight: 600;">Revolut</td>
+                  <td style="padding: 4px 7px; color: var(--c-grey-dark);">L1 direct</td>
+                  <td style="padding: 4px 7px; text-align: right; color: var(--c-navy); font-weight: 500;">$100M</td>
+                  <td style="padding: 4px 7px; text-align: center; color: var(--c-navy);">5 / 0 / 0</td>
+                  <td style="padding: 4px 7px; text-align: center;"><span style="background: rgba(15,110,86,0.15); color: #0F6E56; padding: 1px 7px; border-radius: 10px; font-size: 9px; font-weight: 600;">ROFA ✓</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Footer disclaimer -->
+        <p style="font-size: 9px; color: var(--c-grey-mid); text-align: center; margin: 0;">Illustrative pipeline only · Allocations subject to availability and approval · Not an offer to sell securities · Wholesale investors only</p>
+
+      </div>
+
+      <div class="slide-footer">
+        <span>Private and Confidential</span>
+        <span class="page-num">05 / 14</span>
+      </div>
+      <div class="slide-progress" style="width: 36%"></div>
+    </section>
+
+    <!-- SLIDE 6 (was 5) -->
+    <section class="slide" data-slide="6">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Unicorn <span class="accent">Fee</span> structure</h1>
@@ -2490,13 +2744,13 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">05 / 13</span>
+        <span class="page-num">06 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 38%"></div>
+      <div class="slide-progress" style="width: 43%"></div>
     </section>
 
-    <!-- SLIDE 6 -->
-    <section class="slide" data-slide="6">
+    <!-- SLIDE 7 (was 6) -->
+    <section class="slide" data-slide="7">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">SPV share class <span class="accent">structures</span></h1>
@@ -2689,13 +2943,13 @@
 
       <div class="slide-footer">
         <span>No GP lock-up beyond issuer standard (180d) for L1. No voting rights on L1.5.</span>
-        <span class="page-num">06 / 13</span>
+        <span class="page-num">07 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 46%"></div>
+      <div class="slide-progress" style="width: 50%"></div>
     </section>
 
-    <!-- SLIDE 7 -->
-    <section class="slide" data-slide="7" data-spv-variant="simple">
+    <!-- SLIDE 8 (was 7) -->
+    <section class="slide" data-slide="8" data-spv-variant="simple">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">The <span class="accent">SPV</span> Structure · simple view</h1>
@@ -2729,11 +2983,11 @@
 
             <div class="spv-row row-sub">
               <div class="spv-node" data-node="sub-a">
-                <span class="label">FloatX Anduril sub-SPV</span>
+                <span class="label">Anduril sub-SPV</span>
                 <span class="sub">holds Anduril position</span>
               </div>
               <div class="spv-node" data-node="sub-b">
-                <span class="label">FloatX Anthropic sub-SPV</span>
+                <span class="label">Anthropic sub-SPV</span>
                 <span class="sub">holds Anthropic position</span>
               </div>
             </div>
@@ -2768,13 +3022,13 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">07 / 13</span>
+        <span class="page-num">08 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 54%"></div>
+      <div class="slide-progress" style="width: 57%"></div>
     </section>
 
-    <!-- SLIDE 8 -->
-    <section class="slide" data-slide="8">
+    <!-- SLIDE 9 (was 8) -->
+    <section class="slide" data-slide="9">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Transaction <span class="accent">Flow</span> &mdash; Manager Process</h1>
@@ -2868,13 +3122,13 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">08 / 13</span>
+        <span class="page-num">09 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 62%"></div>
+      <div class="slide-progress" style="width: 64%"></div>
     </section>
 
-    <!-- SLIDE 9 -->
-    <section class="slide compact-phases" data-slide="9">
+    <!-- SLIDE 10 (was 9) -->
+    <section class="slide compact-phases" data-slide="10">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Step-by-step: <span class="accent">commitment</span> to exit</h1>
@@ -2998,19 +3252,18 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">09 / 13</span>
+        <span class="page-num">10 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 69%"></div>
+      <div class="slide-progress" style="width: 71%"></div>
     </section>
 
-    <!-- SLIDE 10 -->
-    <section class="slide" data-slide="10">
+    <!-- SLIDE 11 (was 10) -->
+    <section class="slide" data-slide="11">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">End-to-end <span class="accent">Transaction</span> Structure</h1>
           <p class="slide-subtitle">How investors flow through the Australian trust and US holding entity to sit on an issuer's cap table</p>
         </div>
-        <div class="slide-brand">Float<span class="x">X</span></div>
       </div>
 
       <div class="slide-body">
@@ -3103,7 +3356,7 @@
             </g>
             <line x1="320" y1="544" x2="320" y2="584" stroke="rgba(36,62,136,0.28)" stroke-width="1" marker-end="url(#arr-d1)"/>
             <text class="ts" x="420" y="574" text-anchor="middle">ISSUER CAP TABLE</text>
-            <g><rect x="50" y="582" width="140" height="52" rx="8" fill="rgba(59,109,17,0.10)" stroke="#3b6d11" stroke-width="0.5"/><text class="th" x="120" y="602" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">SpaceX</text><text class="ts" x="120" y="618" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">ROFR · workable</text></g>
+            <g><rect x="50" y="582" width="140" height="52" rx="8" fill="rgba(59,109,17,0.10)" stroke="#3b6d11" stroke-width="0.5"/><text class="th" x="120" y="602" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">Stripe</text><text class="ts" x="120" y="618" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">ROFR · workable</text></g>
             <g><rect x="205" y="582" width="140" height="52" rx="8" fill="rgba(59,109,17,0.10)" stroke="#3b6d11" stroke-width="0.5"/><text class="th" x="275" y="602" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">Neuralink</text><text class="ts" x="275" y="618" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">ROFR · workable</text></g>
             <g><rect x="360" y="582" width="140" height="52" rx="8" fill="rgba(186,117,23,0.12)" stroke="#ba7517" stroke-width="0.5"/><text class="th" x="430" y="602" text-anchor="middle" dominant-baseline="central" style="fill:#7a4800">Anduril</text><text class="ts" x="430" y="618" text-anchor="middle" dominant-baseline="central" style="fill:#ba7517">Restricted</text></g>
             <g><rect x="515" y="582" width="140" height="52" rx="8" fill="rgba(163,45,45,0.12)" stroke="#a32d2d" stroke-width="0.5"/><text class="th" x="585" y="602" text-anchor="middle" dominant-baseline="central" style="fill:#a32d2d">OpenAI</text><text class="ts" x="585" y="618" text-anchor="middle" dominant-baseline="central" style="fill:#a32d2d">Board approval only</text></g>
@@ -3119,19 +3372,18 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">10 / 13</span>
+        <span class="page-num">11 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 77%"></div>
+      <div class="slide-progress" style="width: 79%"></div>
     </section>
 
-    <!-- SLIDE 11 -->
-    <section class="slide" data-slide="11">
+    <!-- SLIDE 12 (was 11) -->
+    <section class="slide" data-slide="12">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Series <span class="accent">Trust</span> Structure</h1>
           <p class="slide-subtitle">One trust, multiple ring-fenced deals — infrastructure set up once, each new series costs $2–5k and takes 1–2 weeks</p>
         </div>
-        <div class="slide-brand">Float<span class="x">X</span></div>
       </div>
 
       <div class="slide-body">
@@ -3152,7 +3404,7 @@
             <text class="ts" x="420" y="196" text-anchor="middle" style="fill:#2E55B0">RING-FENCED SERIES (one per deal · $2–5k · 1–2 weeks each)</text>
             <!-- Series 1 -->
             <rect x="50" y="206" width="350" height="172" rx="10" fill="rgba(36,62,136,0.10)" stroke="#2E55B0" stroke-width="0.5"/>
-            <text class="th" x="225" y="228" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Series 1 — SpaceX</text>
+            <text class="th" x="225" y="228" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Series 1 — Stripe</text>
             <rect x="66" y="242" width="148" height="28" rx="6" fill="rgba(91,164,207,0.15)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="140" y="256" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Investor A</text>
             <rect x="226" y="242" width="148" height="28" rx="6" fill="rgba(91,164,207,0.15)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="300" y="256" text-anchor="middle" dominant-baseline="central" style="fill:#2E55B0">Investor B</text>
             <rect x="66" y="278" width="308" height="24" rx="4" fill="rgba(91,164,207,0.12)" stroke="#2E55B0" stroke-width="0.5"/><text class="ts" x="220" y="290" text-anchor="middle" dominant-baseline="central" style="fill:#243E88">Own bank account · unit register · IM</text>
@@ -3185,7 +3437,7 @@
             <text class="ts" x="420" y="612" text-anchor="middle" style="fill:#2E55B0">Each series is legally ring-fenced — investors in one series have no claim on assets in any other series</text>
             <!-- Cap tables -->
             <text class="ts" x="420" y="648" text-anchor="middle" style="fill:rgba(36,62,136,0.55)">ISSUER CAP TABLES</text>
-            <g><rect x="50" y="656" width="160" height="52" rx="8" fill="rgba(59,109,17,0.10)" stroke="#3b6d11" stroke-width="0.5"/><text class="th" x="130" y="676" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">SpaceX</text><text class="ts" x="130" y="694" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">ROFR · workable</text></g>
+            <g><rect x="50" y="656" width="160" height="52" rx="8" fill="rgba(59,109,17,0.10)" stroke="#3b6d11" stroke-width="0.5"/><text class="th" x="130" y="676" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">Stripe</text><text class="ts" x="130" y="694" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">ROFR · workable</text></g>
             <g><rect x="230" y="656" width="160" height="52" rx="8" fill="rgba(59,109,17,0.10)" stroke="#3b6d11" stroke-width="0.5"/><text class="th" x="310" y="676" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">Neuralink</text><text class="ts" x="310" y="694" text-anchor="middle" dominant-baseline="central" style="fill:#3b6d11">ROFR · workable</text></g>
             <g><rect x="410" y="656" width="160" height="52" rx="8" fill="rgba(186,117,23,0.12)" stroke="#ba7517" stroke-width="0.5"/><text class="th" x="490" y="676" text-anchor="middle" dominant-baseline="central" style="fill:#7a4800">Anduril</text><text class="ts" x="490" y="694" text-anchor="middle" dominant-baseline="central" style="fill:#ba7517">Restricted</text></g>
             <g><rect x="590" y="656" width="160" height="52" rx="8" fill="rgba(136,135,128,0.10)" stroke="rgba(36,62,136,0.28)" stroke-width="0.5" stroke-dasharray="5 3"/><text class="th" x="670" y="676" text-anchor="middle" dominant-baseline="central">Future issuer</text><text class="ts" x="670" y="694" text-anchor="middle" dominant-baseline="central">TBD</text></g>
@@ -3199,19 +3451,18 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">11 / 13</span>
+        <span class="page-num">12 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 85%"></div>
+      <div class="slide-progress" style="width: 86%"></div>
     </section>
 
-    <!-- SLIDE 12 -->
-    <section class="slide biz-split" data-slide="12">
+    <!-- SLIDE 13 (was 12) -->
+    <section class="slide biz-split" data-slide="13">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Business <span class="accent">Structure</span> · Trading &amp; Liquidity</h1>
           <p class="slide-subtitle">Stream 3 — secondary market and democratised access</p>
         </div>
-        <div class="slide-brand">Float<span class="x">X</span></div>
       </div>
 
       <!-- Snapshot strip -->
@@ -3268,33 +3519,33 @@
               <div class="depth-header">
                 <span class="depth-title">Market Depth · Trading Platform</span>
                 <div class="depth-tabs">
-                  <button class="depth-tab active" data-company="spacex">SpaceX</button>
+                  <button class="depth-tab active" data-company="stripe">Stripe</button>
                   <button class="depth-tab" data-company="koala">Koala</button>
                 </div>
               </div>
 
-              <!-- SpaceX -->
-              <div class="depth-company" data-company="spacex">
+              <!-- Stripe -->
+              <div class="depth-company" data-company="stripe">
                 <div class="depth-sub-row">
-                  <span class="depth-company-name">SpaceX · Series X</span>
-                  <span class="depth-sub">Cost basis $185 → +5% ask $194 · Valuation ~$350B</span>
+                  <span class="depth-company-name">Stripe · Common</span>
+                  <span class="depth-sub">Cost basis $67 → +4% ask $69.68 · Valuation ~$70B</span>
                 </div>
                 <div class="depth-two-col">
                   <div>
                     <div class="depth-col-label sell">Sellers (ask)</div>
                     <div class="depth-rows">
                       <div class="depth-row best">
-                        <span class="depth-price">$194</span>
+                        <span class="depth-price">$69.68</span>
                         <span class="depth-bar-track"><span class="depth-bar" style="width:88%"></span></span>
-                        <span class="depth-tag">Best ask · +5%</span>
+                        <span class="depth-tag">Best ask · +4%</span>
                       </div>
                       <div class="depth-row">
-                        <span class="depth-price">$196</span>
+                        <span class="depth-price">$71.20</span>
                         <span class="depth-bar-track"><span class="depth-bar" style="width:61%"></span></span>
                         <span class="depth-tag">Resting ask</span>
                       </div>
                       <div class="depth-row">
-                        <span class="depth-price">$199</span>
+                        <span class="depth-price">$73.50</span>
                         <span class="depth-bar-track"><span class="depth-bar" style="width:38%"></span></span>
                         <span class="depth-tag">Resting ask</span>
                       </div>
@@ -3304,24 +3555,24 @@
                     <div class="depth-col-label buy">Buyers (bid)</div>
                     <div class="depth-rows">
                       <div class="depth-row entry">
-                        <span class="depth-price">$185</span>
+                        <span class="depth-price">$67.00</span>
                         <span class="depth-bar-track"><span class="depth-bar" style="width:76%"></span></span>
                         <span class="depth-tag">Best bid · cost</span>
                       </div>
                       <div class="depth-row">
-                        <span class="depth-price">$182</span>
+                        <span class="depth-price">$65.50</span>
                         <span class="depth-bar-track"><span class="depth-bar" style="width:52%"></span></span>
                         <span class="depth-tag">Resting bid</span>
                       </div>
                       <div class="depth-row">
-                        <span class="depth-price">$178</span>
+                        <span class="depth-price">$63.80</span>
                         <span class="depth-bar-track"><span class="depth-bar" style="width:29%"></span></span>
                         <span class="depth-tag">Resting bid</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="depth-spread">spread · ~4.8%</div>
+                <div class="depth-spread">spread · ~4.0%</div>
               </div>
 
               <!-- Koala -->
@@ -3382,13 +3633,13 @@
 
       <div class="slide-footer">
         <span>Private and Confidential</span>
-        <span class="page-num">12 / 13</span>
+        <span class="page-num">13 / 14</span>
       </div>
-      <div class="slide-progress" style="width: 92%"></div>
+      <div class="slide-progress" style="width: 93%"></div>
     </section>
 
-    <!-- SLIDE 13 -->
-    <section class="slide" data-slide="13">
+    <!-- SLIDE 14 (was 13) -->
+    <section class="slide" data-slide="14">
       <div class="slide-header">
         <div>
           <h1 class="slide-title">Unicorn <span class="accent">Sensitivity</span></h1>
@@ -3548,7 +3799,7 @@
 
       <div class="slide-footer">
         <span>Live model · illustrative only</span>
-        <span class="page-num">13 / 13</span>
+        <span class="page-num">14 / 14</span>
       </div>
       <div class="slide-progress" style="width: 100%"></div>
     </section>
@@ -3639,12 +3890,12 @@
 
       // Slide-specific triggers
       const n = Number(slide.dataset.slide);
-      if (n === 7) initSpvDiagram(slide);
-      if (n === 8) initTransactionFlow(slide);
-      if (n === 5) animateFeeBars(slide);
-      if (n === 9) revealPhases(slide);
-      if (n === 3 || n === 12) initBusinessStructure(slide);
-      if (n === 13) runModel();
+      if (n === 8) initSpvDiagram(slide);
+      if (n === 9) initTransactionFlow(slide);
+      if (n === 6) animateFeeBars(slide);
+      if (n === 10) revealPhases(slide);
+      if (n === 3 || n === 13) initBusinessStructure(slide);
+      if (n === 14) runModel();
     }
 
     function go(idx) {
@@ -3730,25 +3981,25 @@
     retained: {
       tag: 'REVENUE STREAM 2',
       title: 'Sponsor retains 10% per deal',
-      body: "FloatX keeps 10% of each A$5M deal on its own balance sheet — A$500K per deal (2,916 Anduril shares illustrative). These quietly appreciate and carry a 1.5–2% annual management fee.",
+      body: "the Sponsor keeps 10% of each A$5M deal on its own balance sheet — A$500K per deal (2,916 Anduril shares illustrative). These quietly appreciate and carry a 1.5–2% annual management fee.",
       pills: ['10% per A$5M deal', 'A$500K retained/deal', '1.5–2% mgmt fee']
     },
     'sub-a': {
       tag: 'SUB-SPV · ANDURIL',
-      title: 'FloatX Anduril sub-SPV · A$5M',
+      title: 'Anduril sub-SPV · A$5M',
       body: 'A A$5M tranche from the Master SPV funds this deal. The democratised 90% (A$4.5M / 26,250 shares) is transferred into the Anduril sub-SPV at cost + 10% margin. Investors buy shares in this sub-SPV directly.',
       pills: ['A$5M deal size', '90% democratised', 'cost + 10% margin']
     },
     'sub-b': {
       tag: 'SUB-SPV · ANTHROPIC',
-      title: 'FloatX Anthropic sub-SPV · A$5M',
-      body: "A separate A$5M tranche funds the Anthropic deal. Same pattern as Anduril: 90% democratised at cost + margin, 10% retained on FloatX's balance sheet.",
+      title: 'Anthropic sub-SPV · A$5M',
+      body: "A separate A$5M tranche funds the Anthropic deal. Same pattern as Anduril: 90% democratised at cost + margin, 10% retained on the Sponsor's balance sheet.",
       pills: ['A$5M deal size', 'Same 90/10 split', 'Independent shares']
     },
     investors: {
       tag: 'END BUYERS · DIRECT ACCESS',
       title: 'Invest directly in any of the three products',
-      body: 'Wholesale investors (s708) can subscribe directly into any or all of the three products — the Sponsor-retained tranche, the FloatX Anduril sub-SPV, or the FloatX Anthropic sub-SPV. Each product is its own unit, so investors choose their exposure per issuer. 5% brokerage is charged on subscription and on every subsequent secondary trade.',
+      body: 'Wholesale investors (s708) can subscribe directly into any or all of the three products — the Sponsor-retained tranche, the Anduril sub-SPV, or the Anthropic sub-SPV. Each product is its own unit, so investors choose their exposure per issuer. 5% brokerage is charged on subscription and on every subsequent secondary trade.',
       pills: ['Direct into any product', 'Wholesale only · s708', 'A$50K–$250K tickets', '5% brokerage']
     }
   };
@@ -3775,13 +4026,13 @@
     },
     'sub-a': {
       tag: 'SUB-SPV · ANDURIL',
-      title: 'FloatX Anduril sub-SPV',
+      title: 'Anduril sub-SPV',
       body: 'An issuer-specific sub-SPV that holds the Anduril position on behalf of investors. Legally separate from the Master SPV and from other issuer sub-SPVs.',
       pills: ['Issuer-specific', 'Holds Anduril shares', 'Independent legal entity']
     },
     'sub-b': {
       tag: 'SUB-SPV · ANTHROPIC',
-      title: 'FloatX Anthropic sub-SPV',
+      title: 'Anthropic sub-SPV',
       body: 'An issuer-specific sub-SPV that holds the Anthropic position on behalf of investors. Independent from other sub-SPVs so issuer-level events are ring-fenced.',
       pills: ['Issuer-specific', 'Holds Anthropic shares', 'Independent legal entity']
     },
@@ -4141,13 +4392,13 @@
 
   // Redraw on resize while slide 3 (transaction flow) or 7 (business structure) is active
   window.addEventListener('resize', () => {
-    const txActive = document.querySelector('.slide.active[data-slide="8"]');
+    const txActive = document.querySelector('.slide.active[data-slide="9"]');
     if (txActive) {
       const canvas = txActive.querySelector('.flow-canvas');
       const svg = txActive.querySelector('.flow-svg');
       if (canvas && svg) drawFlowConnectors(canvas, svg);
     }
-    const bizActive = document.querySelector('.slide.active[data-slide="12"]');
+    const bizActive = document.querySelector('.slide.active[data-slide="13"]');
     if (bizActive) {
       const canvas = bizActive.querySelector('.biz-canvas');
       const svg = bizActive.querySelector('.biz-svg');
